@@ -1,0 +1,33 @@
+
+# Donnees telechargees et generees (trop volumineux, a regenerer)
+data/real/
+data/samples/
+data/reference.fasta
+data/known_mutations.json
+data/cohort_summary.json
+
+# Resultats d'analyse (regeneres a chaque execution)
+output/reports/
+output/plots/
+
+# Cache Python
+__pycache__/
+*.pyc
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Divers
+*.log
+*.tmp
+_debug_*.py
+_stats.py
