@@ -38,6 +38,7 @@ from reporter import (
     generate_cohort_summary_report,
     save_json_results
 )
+from ml_predictor import run_ml_pipeline
 
 
 def analyze_single_patient(patient_id, reference, known_db, verbose=True):
@@ -299,6 +300,10 @@ def run_cohort_analysis(max_patients=None, generate_plots=True, verbose=True):
     else:
         print("\n[6/6] Graphiques ignores (matplotlib non disponible)")
 
+    # ── ML : prediction de cancer ──
+    print("\n[7/7] Machine Learning — Prediction de cancer...")
+    ml_output = run_ml_pipeline(all_results, generate_plots=generate_plots, verbose=verbose)
+
     elapsed = time.time() - start_time
     print("\n" + "=" * 60)
     print(f"  ANALYSE TERMINEE en {elapsed:.1f}s")
@@ -344,7 +349,17 @@ def clean_previous_outputs():
     """Supprime les anciens rapports et graphiques avant une nouvelle analyse."""
     for folder in [REPORTS_DIR, PLOTS_DIR]:
         if os.path.exists(folder):
-            shutil.rmtree(folder)
+            try:
+                shutil.rmtree(folder)
+            except PermissionError:
+                # OneDrive / antivirus lock — delete files individually
+                for f in os.listdir(folder):
+                    try:
+                        fp = os.path.join(folder, f)
+                        if os.path.isfile(fp):
+                            os.remove(fp)
+                    except Exception:
+                        pass
             os.makedirs(folder, exist_ok=True)
             print(f"  Nettoyage: {folder}")
 
@@ -437,6 +452,10 @@ def run_real_data_analysis(max_patients=None, generate_plots=True, verbose=True)
         print("  Graphiques generes")
     else:
         print("\n[6/6] Graphiques ignores (matplotlib non disponible)")
+
+    # ── ML : prediction de cancer ──
+    print("\n[7/7] Machine Learning — Prediction de cancer...")
+    ml_output = run_ml_pipeline(all_results, generate_plots=generate_plots, verbose=verbose)
 
     elapsed = time.time() - start_time
     print("\n" + "=" * 60)

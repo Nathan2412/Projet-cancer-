@@ -10,10 +10,6 @@ data/cohort_summary.json
 output/reports/
 output/plots/
 
-# Cache Python
-__pycache__/
-*.pyc
-
 # IDE
 .vscode/
 .idea/
