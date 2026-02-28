@@ -1,0 +1,42 @@
+[
+  {
+    "position": 193495,
+    "reference": "C",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "KRAS",
+    "patient": "PAT_1558",
+    "impact": "MODERATE",
+    "protein_change": "G12D",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "12",
+    "start_position_abs": 25398284,
+    "end_position_abs": 25398284,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Colon",
+    "frequency": 0.264
+  },
+  {
+    "position": 552565,
+    "reference": "C",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "APC",
+    "patient": "PAT_1558",
+    "impact": "MODERATE",
+    "protein_change": "R402C",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "5",
+    "start_position_abs": 112154933,
+    "end_position_abs": 112154933,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Colon",
+    "frequency": 0.2562
+  }
+]

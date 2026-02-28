@@ -1,0 +1,23 @@
+[
+  {
+    "position": 90844,
+    "reference": "GGAACTGTT",
+    "alternative": "-",
+    "type": "DEL",
+    "gene": "TP53",
+    "patient": "PAT_3553",
+    "impact": "MODERATE",
+    "protein_change": "N239_S241del",
+    "mutation_type_detail": "In_Frame_Del",
+    "chromosome": "17",
+    "start_position_abs": 7577558,
+    "end_position_abs": 7577566,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Glioblastome",
+    "frequency": 0.4186,
+    "length": 8
+  }
+]

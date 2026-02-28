@@ -1,0 +1,23 @@
+[
+  {
+    "position": 91366,
+    "reference": "G",
+    "alternative": "-",
+    "type": "DEL",
+    "gene": "TP53",
+    "patient": "PAT_2788",
+    "impact": "HIGH",
+    "protein_change": "P301Qfs*44",
+    "mutation_type_detail": "Frame_Shift_Del",
+    "chromosome": "17",
+    "start_position_abs": 7577036,
+    "end_position_abs": 7577036,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Vessie",
+    "frequency": 0.3226,
+    "length": 1
+  }
+]

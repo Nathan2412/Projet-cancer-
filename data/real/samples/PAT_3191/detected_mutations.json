@@ -1,0 +1,42 @@
+[
+  {
+    "position": 90864,
+    "reference": "C",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "TP53",
+    "patient": "PAT_3191",
+    "impact": "MODERATE",
+    "protein_change": "R248L",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "17",
+    "start_position_abs": 7577538,
+    "end_position_abs": 7577538,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Rein",
+    "frequency": 0.5469
+  },
+  {
+    "position": 193496,
+    "reference": "C",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "KRAS",
+    "patient": "PAT_3191",
+    "impact": "MODERATE",
+    "protein_change": "G12C",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "12",
+    "start_position_abs": 25398285,
+    "end_position_abs": 25398285,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Rein",
+    "frequency": 0.5849
+  }
+]

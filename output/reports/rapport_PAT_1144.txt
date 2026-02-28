@@ -1,0 +1,49 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_1144
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_1144
+  Age:            75 ans
+  Sexe:           M
+  Severite:       high
+  Cancer connu:   Colon
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       14
+  Charge mutationnelle:    61.77 mut/Mb
+  Risque global:           ELEVE
+
+--- ALERTES ---
+  [!] Charge mutationnelle elevee: 61.77 mut/Mb
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Melanome                0.800 MODERE          KRAS
+  Poumon                  0.800 MODERE          KRAS
+  Vessie                  0.800 MODERE          KRAS
+  Foie                    0.800 MODERE          KRAS
+  Colon                   0.800 MODERE          KRAS
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  KRAS       SNP      193492   0.800 Pathogenic
+  APC        SNP      531985   0.500 VUS
+  APC        SNP      532365   0.500 VUS
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS6 (MMR deficient)                similarite: 0.614
+  SBS2 (APOBEC)                       similarite: 0.543
+  SBS4 (tabac)                        similarite: 0.343
+
+--- RECOMMANDATIONS ---
+  -> Consultation oncogenetique recommandee
+  -> Surveillance renforcee des organes cibles
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

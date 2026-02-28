@@ -1,0 +1,22 @@
+[
+  {
+    "position": 58470,
+    "reference": "C",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "ALK",
+    "patient": "PAT_2108",
+    "impact": "MODERATE",
+    "protein_change": "G689W",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "2",
+    "start_position_abs": 29474110,
+    "end_position_abs": 29474110,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Melanome",
+    "frequency": 0.12
+  }
+]

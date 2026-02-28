@@ -1,0 +1,43 @@
+[
+  {
+    "position": 536717,
+    "reference": "-",
+    "alternative": "A",
+    "type": "INS",
+    "gene": "APC",
+    "patient": "PAT_0892",
+    "impact": "HIGH",
+    "protein_change": "N627Kfs*7",
+    "mutation_type_detail": "Frame_Shift_Ins",
+    "chromosome": "5",
+    "start_position_abs": 112170781,
+    "end_position_abs": 112170782,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Poumon",
+    "frequency": 0.3662,
+    "length": 1
+  },
+  {
+    "position": 34220,
+    "reference": "G",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "ALK",
+    "patient": "PAT_0892",
+    "impact": "MODERATE",
+    "protein_change": "P999T",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "2",
+    "start_position_abs": 29449860,
+    "end_position_abs": 29449860,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Poumon",
+    "frequency": 0.3945
+  }
+]

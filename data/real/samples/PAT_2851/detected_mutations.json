@@ -1,0 +1,22 @@
+[
+  {
+    "position": 205279,
+    "reference": "C",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "EGFR",
+    "patient": "PAT_2851",
+    "impact": "MODERATE",
+    "protein_change": "F359L",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "7",
+    "start_position_abs": 55224296,
+    "end_position_abs": 55224296,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Vessie",
+    "frequency": 0.1831
+  }
+]

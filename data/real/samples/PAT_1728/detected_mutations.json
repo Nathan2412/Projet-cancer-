@@ -1,0 +1,23 @@
+[
+  {
+    "position": 637948,
+    "reference": "-",
+    "alternative": "T",
+    "type": "INS",
+    "gene": "RB1",
+    "patient": "PAT_1728",
+    "impact": "HIGH",
+    "protein_change": "L337Ffs*4",
+    "mutation_type_detail": "Frame_Shift_Ins",
+    "chromosome": "13",
+    "start_position_abs": 48941695,
+    "end_position_abs": 48941696,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Prostate",
+    "frequency": 0.2105,
+    "length": 1
+  }
+]

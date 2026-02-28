@@ -1,0 +1,23 @@
+[
+  {
+    "position": 1827697,
+    "reference": "GAAA",
+    "alternative": "-",
+    "type": "DEL",
+    "gene": "PTEN",
+    "patient": "PAT_0658",
+    "impact": "HIGH",
+    "protein_change": "E73Dfs*25",
+    "mutation_type_detail": "Frame_Shift_Del",
+    "chromosome": "10",
+    "start_position_abs": 89690810,
+    "end_position_abs": 89690813,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Sein",
+    "frequency": 0.6316,
+    "length": 3
+  }
+]

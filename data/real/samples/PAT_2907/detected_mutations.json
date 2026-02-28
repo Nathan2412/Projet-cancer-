@@ -1,0 +1,22 @@
+[
+  {
+    "position": 175487,
+    "reference": "T",
+    "alternative": "C",
+    "type": "SNP",
+    "gene": "KRAS",
+    "patient": "PAT_2907",
+    "impact": "MODERATE",
+    "protein_change": "Q61R",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "12",
+    "start_position_abs": 25380276,
+    "end_position_abs": 25380276,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Thyroide",
+    "frequency": 0.319
+  }
+]

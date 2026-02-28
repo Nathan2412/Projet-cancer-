@@ -1,0 +1,53 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_1740
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_1740
+  Age:            61 ans
+  Sexe:           M
+  Severite:       moderate
+  Cancer connu:   Pancreas
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       3
+  Charge mutationnelle:    13.24 mut/Mb
+  Risque global:           ELEVE
+
+--- ALERTES ---
+  [!] Risque ELEVE pour Poumon (score: 1.6)
+  [!] Risque ELEVE pour Colon (score: 1.6)
+  [!] Risque ELEVE pour Pancreas (score: 1.6)
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Poumon                  1.600 ELEVE           KRAS
+  Colon                   1.600 ELEVE           KRAS
+  Pancreas                1.600 ELEVE           KRAS
+  Vessie                  0.800 MODERE          KRAS
+  Thyroide                0.800 MODERE          KRAS
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  KRAS       SNP      193495   0.800 Pathogenic
+  KRAS       SNP      193496   0.800 Pathogenic
+  TP53       DEL       88899   0.650 Likely_pathogenic
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS1 (age)                          similarite: 0.800
+  SBS4 (tabac)                        similarite: 0.800
+  SBS7 (UV)                           similarite: 0.600
+  SBS6 (MMR deficient)                similarite: 0.500
+  SBS2 (APOBEC)                       similarite: 0.500
+
+--- RECOMMANDATIONS ---
+  -> Consultation oncogenetique recommandee
+  -> Surveillance renforcee des organes cibles
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

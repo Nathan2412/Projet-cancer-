@@ -1,0 +1,22 @@
+[
+  {
+    "position": 1854649,
+    "reference": "A",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "PTEN",
+    "patient": "PAT_3636",
+    "impact": "HIGH",
+    "protein_change": "K263*",
+    "mutation_type_detail": "Nonsense_Mutation",
+    "chromosome": "10",
+    "start_position_abs": 89717762,
+    "end_position_abs": 89717762,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Glioblastome",
+    "frequency": 0.5826
+  }
+]

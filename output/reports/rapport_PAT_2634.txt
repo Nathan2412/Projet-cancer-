@@ -1,0 +1,46 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_2634
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_2634
+  Age:            73 ans
+  Sexe:           M
+  Severite:       moderate
+  Cancer connu:   Vessie
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       4
+  Charge mutationnelle:    17.65 mut/Mb
+  Risque global:           FAIBLE
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Glioblastome            0.900 MODERE          PIK3CA
+  Prostate                0.900 MODERE          PIK3CA
+  Poumon                  0.900 MODERE          PIK3CA
+  Vessie                  0.900 MODERE          PIK3CA
+  Foie                    0.900 MODERE          PIK3CA
+  Colon                   0.900 MODERE          PIK3CA
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  PIK3CA     SNP      212032   0.900 Pathogenic
+  RB1        SNP      577688   0.500 VUS
+  RB1        SNP      650463   0.500 VUS
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS6 (MMR deficient)                similarite: 0.650
+  SBS2 (APOBEC)                       similarite: 0.650
+  SBS1 (age)                          similarite: 0.300
+
+--- RECOMMANDATIONS ---
+  -> Depistage standard selon les recommandations
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

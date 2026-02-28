@@ -1,0 +1,46 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_1197
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_1197
+  Age:            55 ans
+  Sexe:           F
+  Severite:       moderate
+  Cancer connu:   Colon
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       5
+  Charge mutationnelle:    22.06 mut/Mb
+  Risque global:           MODERE
+
+--- ALERTES ---
+  [!] Risque ELEVE pour Colon (score: 1.0)
+  [!] Risque ELEVE pour Pancreas (score: 1.0)
+  [!] Risque ELEVE pour Poumon (score: 1.0)
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Colon                   1.000 ELEVE           KRAS
+  Pancreas                1.000 ELEVE           KRAS
+  Poumon                  1.000 ELEVE           KRAS
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  KRAS       SNP      193496   1.000 Pathogenic
+  APC        DEL      531742   0.550 VUS
+  APC        SNP      533023   0.500 VUS
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS7 (UV)                           similarite: 0.400
+
+--- RECOMMANDATIONS ---
+  -> Suivi regulier avec depistage standard
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

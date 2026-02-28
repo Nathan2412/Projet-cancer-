@@ -1,0 +1,43 @@
+[
+  {
+    "position": 588145,
+    "reference": "A",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "BRCA2",
+    "patient": "PAT_3503",
+    "impact": "MODERATE",
+    "protein_change": "D224V",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "13",
+    "start_position_abs": 32903619,
+    "end_position_abs": 32903619,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Glioblastome",
+    "frequency": 0.1538
+  },
+  {
+    "position": 220006,
+    "reference": "TGGATCAAATCCAAATAAAG",
+    "alternative": "-",
+    "type": "DEL",
+    "gene": "PIK3CA",
+    "patient": "PAT_3503",
+    "impact": "HIGH",
+    "protein_change": "X463_splice",
+    "mutation_type_detail": "Splice_Site",
+    "chromosome": "3",
+    "start_position_abs": 178928108,
+    "end_position_abs": 178928127,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Glioblastome",
+    "frequency": 0.2171,
+    "length": 19
+  }
+]

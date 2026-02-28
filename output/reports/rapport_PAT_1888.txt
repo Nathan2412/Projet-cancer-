@@ -1,0 +1,36 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_1888
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_1888
+  Age:            75 ans
+  Sexe:           M
+  Severite:       moderate
+  Cancer connu:   Melanome
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       5
+  Charge mutationnelle:    22.06 mut/Mb
+  Risque global:           MODERE
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  TP53       SNP       91547   0.600 Likely_pathogenic
+  BRCA2      SNP      597702   0.500 VUS
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS1 (age)                          similarite: 0.600
+  SBS6 (MMR deficient)                similarite: 0.600
+  SBS2 (APOBEC)                       similarite: 0.600
+  SBS7 (UV)                           similarite: 0.400
+
+--- RECOMMANDATIONS ---
+  -> Suivi regulier avec depistage standard
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

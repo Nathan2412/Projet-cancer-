@@ -1,0 +1,51 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_1239
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_1239
+  Age:            77 ans
+  Sexe:           M
+  Severite:       high
+  Cancer connu:   Colon
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       4
+  Charge mutationnelle:    17.65 mut/Mb
+  Risque global:           FAIBLE
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Glioblastome            0.900 MODERE          KRAS
+  Prostate                0.900 MODERE          KRAS
+  Poumon                  0.900 MODERE          KRAS
+  Melanome                0.900 MODERE          KRAS
+  Vessie                  0.900 MODERE          KRAS
+  Foie                    0.900 MODERE          KRAS
+  Colon                   0.900 MODERE          KRAS
+  Pancreas                0.900 MODERE          KRAS
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  KRAS       SNP      193495   0.900 Pathogenic
+  TP53       INS       90208   0.650 Likely_pathogenic
+  APC        SNP      532227   0.500 VUS
+  APC        SNP      543797   0.500 VUS
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS7 (UV)                           similarite: 0.933
+  SBS1 (age)                          similarite: 0.867
+  SBS4 (tabac)                        similarite: 0.867
+  SBS6 (MMR deficient)                similarite: 0.333
+  SBS2 (APOBEC)                       similarite: 0.333
+
+--- RECOMMANDATIONS ---
+  -> Depistage standard selon les recommandations
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

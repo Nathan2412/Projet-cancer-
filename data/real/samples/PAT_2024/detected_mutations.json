@@ -1,0 +1,42 @@
+[
+  {
+    "position": 533484,
+    "reference": "C",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "APC",
+    "patient": "PAT_2024",
+    "impact": "MODERATE",
+    "protein_change": "S908Y",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "5",
+    "start_position_abs": 112174014,
+    "end_position_abs": 112174014,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Melanome",
+    "frequency": 0.0811
+  },
+  {
+    "position": 39614,
+    "reference": "C",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "ALK",
+    "patient": "PAT_2024",
+    "impact": "MODERATE",
+    "protein_change": "G850W",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "2",
+    "start_position_abs": 29455254,
+    "end_position_abs": 29455254,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Melanome",
+    "frequency": 0.1017
+  }
+]

@@ -1,0 +1,51 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_2214
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_2214
+  Age:            38 ans
+  Sexe:           M
+  Severite:       extreme
+  Cancer connu:   Ovaire
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       8
+  Charge mutationnelle:    35.29 mut/Mb
+  Risque global:           MODERE
+
+--- ALERTES ---
+  [!] 8 variants a impact eleve detectes
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Glioblastome            0.900 MODERE          PIK3CA
+  Vessie                  0.900 MODERE          PIK3CA
+  Foie                    0.900 MODERE          PIK3CA
+  Colon                   0.900 MODERE          PIK3CA
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  PIK3CA     SNP      212022   0.900 Pathogenic
+  TP53       INS       91271   0.550 VUS
+  TP53       INS       90899   0.550 VUS
+  BRCA2      INS      615202   0.550 VUS
+  BRCA2      INS      657023   0.550 VUS
+  EGFR       INS      251249   0.550 VUS
+  ALK        INS       34199   0.550 VUS
+  ALK        INS       34213   0.550 VUS
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS6 (MMR deficient)                similarite: 0.400
+  SBS2 (APOBEC)                       similarite: 0.400
+
+--- RECOMMANDATIONS ---
+  -> Suivi regulier avec depistage standard
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

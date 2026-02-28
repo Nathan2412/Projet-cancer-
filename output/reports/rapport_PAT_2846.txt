@@ -1,0 +1,50 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_2846
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_2846
+  Age:            72 ans
+  Sexe:           M
+  Severite:       low
+  Cancer connu:   Vessie
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       1
+  Charge mutationnelle:    4.41 mut/Mb
+  Risque global:           ELEVE
+
+--- ALERTES ---
+  [!] Risque ELEVE pour Poumon (score: 1.0)
+  [!] Risque ELEVE pour Vessie (score: 1.0)
+  [!] Risque ELEVE pour Colon (score: 1.0)
+  [!] Risque ELEVE pour Pancreas (score: 1.0)
+  [!] Risque ELEVE pour Thyroide (score: 1.0)
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Poumon                  1.000 ELEVE           KRAS
+  Vessie                  1.000 ELEVE           KRAS
+  Colon                   1.000 ELEVE           KRAS
+  Pancreas                1.000 ELEVE           KRAS
+  Thyroide                1.000 ELEVE           KRAS
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  KRAS       SNP      193495   1.000 Pathogenic
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS6 (MMR deficient)                similarite: 0.400
+  SBS2 (APOBEC)                       similarite: 0.400
+
+--- RECOMMANDATIONS ---
+  -> Consultation oncogenetique recommandee
+  -> Surveillance renforcee des organes cibles
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

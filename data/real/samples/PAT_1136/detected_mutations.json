@@ -1,0 +1,22 @@
+[
+  {
+    "position": 237916,
+    "reference": "C",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "BRAF",
+    "patient": "PAT_1136",
+    "impact": "MODERATE",
+    "protein_change": "G466V",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "7",
+    "start_position_abs": 140481411,
+    "end_position_abs": 140481411,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Poumon",
+    "frequency": 0.368
+  }
+]

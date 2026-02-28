@@ -1,0 +1,23 @@
+[
+  {
+    "position": 591935,
+    "reference": "ATCTT",
+    "alternative": "-",
+    "type": "DEL",
+    "gene": "BRCA2",
+    "patient": "PAT_0424",
+    "impact": "HIGH",
+    "protein_change": "S599*",
+    "mutation_type_detail": "Frame_Shift_Del",
+    "chromosome": "13",
+    "start_position_abs": 32907409,
+    "end_position_abs": 32907413,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Sein",
+    "frequency": 0.4211,
+    "length": 4
+  }
+]

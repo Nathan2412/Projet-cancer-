@@ -1,0 +1,43 @@
+[
+  {
+    "position": 532317,
+    "reference": "A",
+    "alternative": "G",
+    "type": "SNP",
+    "gene": "APC",
+    "patient": "PAT_3262",
+    "impact": "MODERATE",
+    "protein_change": "D1297G",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "5",
+    "start_position_abs": 112175181,
+    "end_position_abs": 112175181,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Foie",
+    "frequency": 0.0905
+  },
+  {
+    "position": 633241,
+    "reference": "A",
+    "alternative": "-",
+    "type": "DEL",
+    "gene": "RB1",
+    "patient": "PAT_3262",
+    "impact": "HIGH",
+    "protein_change": "R254Gfs*10",
+    "mutation_type_detail": "Frame_Shift_Del",
+    "chromosome": "13",
+    "start_position_abs": 48936988,
+    "end_position_abs": 48936988,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Foie",
+    "frequency": 0.1162,
+    "length": 1
+  }
+]

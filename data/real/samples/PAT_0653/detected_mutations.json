@@ -1,0 +1,23 @@
+[
+  {
+    "position": 1822203,
+    "reference": "T",
+    "alternative": "-",
+    "type": "DEL",
+    "gene": "PTEN",
+    "patient": "PAT_0653",
+    "impact": "HIGH",
+    "protein_change": "X70_splice",
+    "mutation_type_detail": "Splice_Site",
+    "chromosome": "10",
+    "start_position_abs": 89685316,
+    "end_position_abs": 89685316,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Sein",
+    "frequency": 0.2177,
+    "length": 1
+  }
+]

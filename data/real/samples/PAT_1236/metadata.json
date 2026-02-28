@@ -1,0 +1,31 @@
+{
+  "patient_id": "PAT_1236",
+  "severity": "high",
+  "num_mutations": 4,
+  "genes_analyzed": [
+    "TP53",
+    "BRCA1",
+    "BRCA2",
+    "KRAS",
+    "EGFR",
+    "PIK3CA",
+    "APC",
+    "PTEN",
+    "RB1",
+    "MYC",
+    "ALK",
+    "BRAF"
+  ],
+  "genes_with_mutations": [
+    "APC",
+    "RB1",
+    "TP53"
+  ],
+  "cancer_type": "Colon",
+  "age": 68,
+  "sex": "F",
+  "data_source": "TCGA_PanCancer_Atlas",
+  "is_real_data": true,
+  "original_patient_id": "TCGA-AA-A02F",
+  "original_study": "coadread_tcga_pan_can_atlas_2018"
+}

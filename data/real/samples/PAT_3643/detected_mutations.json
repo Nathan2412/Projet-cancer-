@@ -1,0 +1,23 @@
+[
+  {
+    "position": 1854602,
+    "reference": "-",
+    "alternative": "A",
+    "type": "INS",
+    "gene": "PTEN",
+    "patient": "PAT_3643",
+    "impact": "HIGH",
+    "protein_change": "P248Tfs*5",
+    "mutation_type_detail": "Frame_Shift_Ins",
+    "chromosome": "10",
+    "start_position_abs": 89717715,
+    "end_position_abs": 89717716,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Glioblastome",
+    "frequency": 0.5492,
+    "length": 1
+  }
+]

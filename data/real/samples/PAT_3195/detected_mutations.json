@@ -1,0 +1,42 @@
+[
+  {
+    "position": 1800673,
+    "reference": "T",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "BRCA1",
+    "patient": "PAT_3195",
+    "impact": "MODERATE",
+    "protein_change": "N1309I",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "17",
+    "start_position_abs": 41243622,
+    "end_position_abs": 41243622,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Rein",
+    "frequency": 0.3874
+  },
+  {
+    "position": 1800672,
+    "reference": "T",
+    "alternative": "G",
+    "type": "SNP",
+    "gene": "BRCA1",
+    "patient": "PAT_3195",
+    "impact": "MODERATE",
+    "protein_change": "N1309H",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "17",
+    "start_position_abs": 41243623,
+    "end_position_abs": 41243623,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Rein",
+    "frequency": 0.3814
+  }
+]

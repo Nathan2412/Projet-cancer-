@@ -1,0 +1,42 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_1207
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_1207
+  Age:            67 ans
+  Sexe:           F
+  Severite:       moderate
+  Cancer connu:   Colon
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       5
+  Charge mutationnelle:    22.06 mut/Mb
+  Risque global:           MODERE
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Colon                   0.700 MODERE          KRAS
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  KRAS       SNP      173773   0.700 Likely_pathogenic
+  APC        DEL      531968   0.650 Likely_pathogenic
+  APC        INS      533083   0.550 VUS
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS6 (MMR deficient)                similarite: 0.667
+  SBS2 (APOBEC)                       similarite: 0.667
+  SBS22 (aristolochic acid)           similarite: 0.667
+  SBS1 (age)                          similarite: 0.467
+
+--- RECOMMANDATIONS ---
+  -> Suivi regulier avec depistage standard
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

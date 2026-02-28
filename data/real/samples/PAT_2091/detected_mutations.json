@@ -1,0 +1,23 @@
+[
+  {
+    "position": 531547,
+    "reference": "-",
+    "alternative": "A",
+    "type": "INS",
+    "gene": "APC",
+    "patient": "PAT_2091",
+    "impact": "HIGH",
+    "protein_change": "T1556Nfs*3",
+    "mutation_type_detail": "Frame_Shift_Ins",
+    "chromosome": "5",
+    "start_position_abs": 112175951,
+    "end_position_abs": 112175952,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Melanome",
+    "frequency": 0.4906,
+    "length": 1
+  }
+]

@@ -1,0 +1,23 @@
+[
+  {
+    "position": 556247,
+    "reference": "CT",
+    "alternative": "-",
+    "type": "DEL",
+    "gene": "APC",
+    "patient": "PAT_1612",
+    "impact": "HIGH",
+    "protein_change": "S299Cfs*27",
+    "mutation_type_detail": "Frame_Shift_Del",
+    "chromosome": "5",
+    "start_position_abs": 112151251,
+    "end_position_abs": 112151252,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Colon",
+    "frequency": 0.4286,
+    "length": 1
+  }
+]

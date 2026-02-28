@@ -1,0 +1,43 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_3415
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_3415
+  Age:            48 ans
+  Sexe:           F
+  Severite:       high
+  Cancer connu:   Glioblastome
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       4
+  Charge mutationnelle:    17.65 mut/Mb
+  Risque global:           FAIBLE
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Glioblastome            0.900 MODERE          RB1
+  Vessie                  0.900 MODERE          RB1
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  RB1        SNP      649983   0.900 Pathogenic
+  PTEN       DEL     1857699   0.650 Likely_pathogenic
+  TP53       SNP       91475   0.500 VUS
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS7 (UV)                           similarite: 0.933
+  SBS1 (age)                          similarite: 0.867
+  SBS6 (MMR deficient)                similarite: 0.333
+  SBS2 (APOBEC)                       similarite: 0.333
+
+--- RECOMMANDATIONS ---
+  -> Depistage standard selon les recommandations
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

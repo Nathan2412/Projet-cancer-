@@ -1,0 +1,22 @@
+[
+  {
+    "position": 1848800,
+    "reference": "T",
+    "alternative": "G",
+    "type": "SNP",
+    "gene": "PTEN",
+    "patient": "PAT_2876",
+    "impact": "HIGH",
+    "protein_change": "Y177*",
+    "mutation_type_detail": "Nonsense_Mutation",
+    "chromosome": "10",
+    "start_position_abs": 89711913,
+    "end_position_abs": 89711913,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Vessie",
+    "frequency": 0.5145
+  }
+]

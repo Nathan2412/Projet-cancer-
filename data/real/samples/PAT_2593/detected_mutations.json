@@ -1,0 +1,22 @@
+[
+  {
+    "position": 651821,
+    "reference": "G",
+    "alternative": "C",
+    "type": "SNP",
+    "gene": "RB1",
+    "patient": "PAT_2593",
+    "impact": "MODERATE",
+    "protein_change": "A562P",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "13",
+    "start_position_abs": 48955568,
+    "end_position_abs": 48955568,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Ovaire",
+    "frequency": 0.9006
+  }
+]

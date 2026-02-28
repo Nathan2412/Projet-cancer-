@@ -1,0 +1,23 @@
+[
+  {
+    "position": 529436,
+    "reference": "-",
+    "alternative": "CCAGCCTCCAAAAGCCC",
+    "type": "INS",
+    "gene": "APC",
+    "patient": "PAT_0641",
+    "impact": "HIGH",
+    "protein_change": "S2258Pfs*27",
+    "mutation_type_detail": "Frame_Shift_Ins",
+    "chromosome": "5",
+    "start_position_abs": 112178062,
+    "end_position_abs": 112178063,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Sein",
+    "frequency": 0.1429,
+    "length": 16
+  }
+]

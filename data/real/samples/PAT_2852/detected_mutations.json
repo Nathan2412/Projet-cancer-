@@ -1,0 +1,22 @@
+[
+  {
+    "position": 240432,
+    "reference": "G",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "EGFR",
+    "patient": "PAT_2852",
+    "impact": "MODERATE",
+    "protein_change": "R836H",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "7",
+    "start_position_abs": 55259449,
+    "end_position_abs": 55259449,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Vessie",
+    "frequency": 0.0781
+  }
+]

@@ -1,0 +1,29 @@
+{
+  "patient_id": "PAT_3172",
+  "severity": "low",
+  "num_mutations": 1,
+  "genes_analyzed": [
+    "TP53",
+    "BRCA1",
+    "BRCA2",
+    "KRAS",
+    "EGFR",
+    "PIK3CA",
+    "APC",
+    "PTEN",
+    "RB1",
+    "MYC",
+    "ALK",
+    "BRAF"
+  ],
+  "genes_with_mutations": [
+    "BRAF"
+  ],
+  "cancer_type": "Thyroide",
+  "age": 37,
+  "sex": "F",
+  "data_source": "TCGA_PanCancer_Atlas",
+  "is_real_data": true,
+  "original_patient_id": "TCGA-KS-A41F",
+  "original_study": "thca_tcga_pan_can_atlas_2018"
+}

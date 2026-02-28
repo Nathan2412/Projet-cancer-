@@ -1,0 +1,39 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_2103
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_2103
+  Age:            84 ans
+  Sexe:           F
+  Severite:       low
+  Cancer connu:   Melanome
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       1
+  Charge mutationnelle:    4.41 mut/Mb
+  Risque global:           FAIBLE
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Colon                   0.900 MODERE          MYC
+  Melanome                0.900 MODERE          MYC
+  Poumon                  0.900 MODERE          MYC
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  MYC        SNP     1015511   0.900 Pathogenic
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS7 (UV)                           similarite: 0.400
+
+--- RECOMMANDATIONS ---
+  -> Depistage standard selon les recommandations
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

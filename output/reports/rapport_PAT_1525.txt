@@ -1,0 +1,45 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_1525
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_1525
+  Age:            77 ans
+  Sexe:           F
+  Severite:       moderate
+  Cancer connu:   Colon
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       2
+  Charge mutationnelle:    8.82 mut/Mb
+  Risque global:           ELEVE
+
+--- ALERTES ---
+  [!] Risque ELEVE pour Foie (score: 1.0)
+  [!] Risque ELEVE pour Colon (score: 1.0)
+  [!] Risque ELEVE pour Melanome (score: 1.0)
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Foie                    1.000 ELEVE           APC
+  Colon                   1.000 ELEVE           APC
+  Melanome                1.000 ELEVE           APC
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  APC        INS      531547   1.000 Pathogenic
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS7 (UV)                           similarite: 0.400
+
+--- RECOMMANDATIONS ---
+  -> Consultation oncogenetique recommandee
+  -> Surveillance renforcee des organes cibles
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

@@ -1,0 +1,42 @@
+[
+  {
+    "position": 638535,
+    "reference": "C",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "BRCA2",
+    "patient": "PAT_2003",
+    "impact": "HIGH",
+    "protein_change": "Q3026*",
+    "mutation_type_detail": "Nonsense_Mutation",
+    "chromosome": "13",
+    "start_position_abs": 32954009,
+    "end_position_abs": 32954009,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Melanome",
+    "frequency": 0.2105
+  },
+  {
+    "position": 36195,
+    "reference": "C",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "ALK",
+    "patient": "PAT_2003",
+    "impact": "MODERATE",
+    "protein_change": "M910I",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "2",
+    "start_position_abs": 29451835,
+    "end_position_abs": 29451835,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Melanome",
+    "frequency": 0.1765
+  }
+]

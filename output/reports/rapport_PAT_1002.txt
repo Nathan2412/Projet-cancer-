@@ -1,0 +1,28 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_1002
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_1002
+  Age:            69 ans
+  Sexe:           M
+  Severite:       low
+  Cancer connu:   Poumon
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       1
+  Charge mutationnelle:    4.41 mut/Mb
+  Risque global:           FAIBLE
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS6 (MMR deficient)                similarite: 0.400
+  SBS2 (APOBEC)                       similarite: 0.400
+
+--- RECOMMANDATIONS ---
+  -> Depistage standard selon les recommandations
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

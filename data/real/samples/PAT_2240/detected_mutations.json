@@ -1,0 +1,43 @@
+[
+  {
+    "position": 91281,
+    "reference": "G",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "TP53",
+    "patient": "PAT_2240",
+    "impact": "MODERATE",
+    "protein_change": "R273C",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "17",
+    "start_position_abs": 7577121,
+    "end_position_abs": 7577121,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Ovaire",
+    "frequency": 0.0824
+  },
+  {
+    "position": 91313,
+    "reference": "-",
+    "alternative": "A",
+    "type": "INS",
+    "gene": "TP53",
+    "patient": "PAT_2240",
+    "impact": "HIGH",
+    "protein_change": "T284Hfs*22",
+    "mutation_type_detail": "Frame_Shift_Ins",
+    "chromosome": "17",
+    "start_position_abs": 7577089,
+    "end_position_abs": 7577090,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Ovaire",
+    "frequency": 0.5193,
+    "length": 1
+  }
+]

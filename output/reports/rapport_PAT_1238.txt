@@ -1,0 +1,60 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_1238
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_1238
+  Age:            65 ans
+  Sexe:           F
+  Severite:       moderate
+  Cancer connu:   Colon
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       4
+  Charge mutationnelle:    17.65 mut/Mb
+  Risque global:           ELEVE
+
+--- ALERTES ---
+  [!] Risque ELEVE pour Melanome (score: 1.7)
+  [!] Risque ELEVE pour Poumon (score: 1.7)
+  [!] Risque ELEVE pour Vessie (score: 1.7)
+  [!] Risque ELEVE pour Colon (score: 1.7)
+  [!] Risque ELEVE pour Rein (score: 1.7)
+  [!] Risque ELEVE pour Sein (score: 1.7)
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Melanome                1.700 ELEVE           KRAS, PIK3CA
+  Poumon                  1.700 ELEVE           KRAS, PIK3CA
+  Vessie                  1.700 ELEVE           KRAS, PIK3CA
+  Colon                   1.700 ELEVE           KRAS, PIK3CA
+  Rein                    1.700 ELEVE           KRAS, PIK3CA
+  Sein                    1.700 ELEVE           KRAS, PIK3CA
+  Foie                    0.900 MODERE          KRAS
+  Pancreas                0.900 MODERE          KRAS
+  Glioblastome            0.800 MODERE          PIK3CA
+  Ovaire                  0.800 MODERE          PIK3CA
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  KRAS       SNP      193496   0.900 Pathogenic
+  PIK3CA     SNP      212023   0.800 Pathogenic
+  APC        SNP      570523   0.500 VUS
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS4 (tabac)                        similarite: 0.700
+  SBS13 (APOBEC)                      similarite: 0.700
+  SBS2 (APOBEC)                       similarite: 0.650
+  SBS6 (MMR deficient)                similarite: 0.400
+
+--- RECOMMANDATIONS ---
+  -> Consultation oncogenetique recommandee
+  -> Surveillance renforcee des organes cibles
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

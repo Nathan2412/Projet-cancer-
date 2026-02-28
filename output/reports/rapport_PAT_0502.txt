@@ -1,0 +1,54 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_0502
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_0502
+  Age:            68 ans
+  Sexe:           M
+  Severite:       low
+  Cancer connu:   Sein
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       1
+  Charge mutationnelle:    4.41 mut/Mb
+  Risque global:           ELEVE
+
+--- ALERTES ---
+  [!] Risque ELEVE pour Glioblastome (score: 1.0)
+  [!] Risque ELEVE pour Prostate (score: 1.0)
+  [!] Risque ELEVE pour Poumon (score: 1.0)
+  [!] Risque ELEVE pour Vessie (score: 1.0)
+  [!] Risque ELEVE pour Foie (score: 1.0)
+  [!] Risque ELEVE pour Colon (score: 1.0)
+  [!] Risque ELEVE pour Rein (score: 1.0)
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Glioblastome            1.000 ELEVE           PIK3CA
+  Prostate                1.000 ELEVE           PIK3CA
+  Poumon                  1.000 ELEVE           PIK3CA
+  Vessie                  1.000 ELEVE           PIK3CA
+  Foie                    1.000 ELEVE           PIK3CA
+  Colon                   1.000 ELEVE           PIK3CA
+  Rein                    1.000 ELEVE           PIK3CA
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  PIK3CA     SNP      196029   1.000 Pathogenic
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS6 (MMR deficient)                similarite: 0.400
+  SBS2 (APOBEC)                       similarite: 0.400
+
+--- RECOMMANDATIONS ---
+  -> Consultation oncogenetique recommandee
+  -> Surveillance renforcee des organes cibles
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

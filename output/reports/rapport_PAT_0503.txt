@@ -1,0 +1,43 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_0503
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_0503
+  Age:            38 ans
+  Sexe:           F
+  Severite:       low
+  Cancer connu:   Sein
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       1
+  Charge mutationnelle:    4.41 mut/Mb
+  Risque global:           FAIBLE
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Glioblastome            0.900 MODERE          PIK3CA
+  Poumon                  0.900 MODERE          PIK3CA
+  Vessie                  0.900 MODERE          PIK3CA
+  Foie                    0.900 MODERE          PIK3CA
+  Colon                   0.900 MODERE          PIK3CA
+  Sein                    0.900 MODERE          PIK3CA
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  PIK3CA     SNP      212032   0.900 Pathogenic
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS6 (MMR deficient)                similarite: 0.400
+  SBS2 (APOBEC)                       similarite: 0.400
+
+--- RECOMMANDATIONS ---
+  -> Depistage standard selon les recommandations
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

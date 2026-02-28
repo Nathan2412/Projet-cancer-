@@ -1,0 +1,42 @@
+[
+  {
+    "position": 90194,
+    "reference": "T",
+    "alternative": "C",
+    "type": "SNP",
+    "gene": "TP53",
+    "patient": "PAT_2267",
+    "impact": "MODERATE",
+    "protein_change": "H214R",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "17",
+    "start_position_abs": 7578208,
+    "end_position_abs": 7578208,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Ovaire",
+    "frequency": 0.8
+  },
+  {
+    "position": 208897,
+    "reference": "G",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "EGFR",
+    "patient": "PAT_2267",
+    "impact": "MODERATE",
+    "protein_change": "V461M",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "7",
+    "start_position_abs": 55227914,
+    "end_position_abs": 55227914,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Ovaire",
+    "frequency": 0.2083
+  }
+]

@@ -1,0 +1,42 @@
+[
+  {
+    "position": 90031,
+    "reference": "C",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "TP53",
+    "patient": "PAT_1975",
+    "impact": "MODERATE",
+    "protein_change": "G187S",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "17",
+    "start_position_abs": 7578371,
+    "end_position_abs": 7578371,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Melanome",
+    "frequency": 0.34
+  },
+  {
+    "position": 1798564,
+    "reference": "G",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "BRCA1",
+    "patient": "PAT_1975",
+    "impact": "MODERATE",
+    "protein_change": "P606L",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "17",
+    "start_position_abs": 41245731,
+    "end_position_abs": 41245731,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Melanome",
+    "frequency": 0.3551
+  }
+]

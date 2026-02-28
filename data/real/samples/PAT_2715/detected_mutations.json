@@ -1,0 +1,43 @@
+[
+  {
+    "position": 89945,
+    "reference": "C",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "TP53",
+    "patient": "PAT_2715",
+    "impact": "MODERATE",
+    "protein_change": "R158H",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "17",
+    "start_position_abs": 7578457,
+    "end_position_abs": 7578457,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Vessie",
+    "frequency": 0.4048
+  },
+  {
+    "position": 734135,
+    "reference": "ATGTATGGCATATGCA",
+    "alternative": "-",
+    "type": "DEL",
+    "gene": "RB1",
+    "patient": "PAT_2715",
+    "impact": "HIGH",
+    "protein_change": "M708Kfs*2",
+    "mutation_type_detail": "Frame_Shift_Del",
+    "chromosome": "13",
+    "start_position_abs": 49037882,
+    "end_position_abs": 49037897,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Vessie",
+    "frequency": 0.1458,
+    "length": 15
+  }
+]

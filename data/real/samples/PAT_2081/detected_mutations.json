@@ -1,0 +1,22 @@
+[
+  {
+    "position": 599337,
+    "reference": "C",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "BRCA2",
+    "patient": "PAT_2081",
+    "impact": "MODERATE",
+    "protein_change": "P2107S",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "13",
+    "start_position_abs": 32914811,
+    "end_position_abs": 32914811,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Melanome",
+    "frequency": 0.2727
+  }
+]

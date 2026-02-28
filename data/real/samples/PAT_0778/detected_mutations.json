@@ -1,0 +1,42 @@
+[
+  {
+    "position": 91474,
+    "reference": "T",
+    "alternative": "C",
+    "type": "SNP",
+    "gene": "TP53",
+    "patient": "PAT_0778",
+    "impact": "HIGH",
+    "protein_change": "X307_splice",
+    "mutation_type_detail": "Splice_Site",
+    "chromosome": "17",
+    "start_position_abs": 7576928,
+    "end_position_abs": 7576928,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Poumon",
+    "frequency": 0.2917
+  },
+  {
+    "position": 184752,
+    "reference": "C",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "BRAF",
+    "patient": "PAT_0778",
+    "impact": "MODERATE",
+    "protein_change": "S113I",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "7",
+    "start_position_abs": 140534575,
+    "end_position_abs": 140534575,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Poumon",
+    "frequency": 0.1176
+  }
+]

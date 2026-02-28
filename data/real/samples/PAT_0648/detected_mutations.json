@@ -1,0 +1,23 @@
+[
+  {
+    "position": 1829751,
+    "reference": "-",
+    "alternative": "A",
+    "type": "INS",
+    "gene": "PTEN",
+    "patient": "PAT_0648",
+    "impact": "HIGH",
+    "protein_change": "N117Kfs*9",
+    "mutation_type_detail": "Frame_Shift_Ins",
+    "chromosome": "10",
+    "start_position_abs": 89692864,
+    "end_position_abs": 89692865,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Sein",
+    "frequency": 0.3645,
+    "length": 1
+  }
+]

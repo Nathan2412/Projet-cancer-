@@ -1,0 +1,23 @@
+[
+  {
+    "position": 90007,
+    "reference": "GGTGGG",
+    "alternative": "-",
+    "type": "DEL",
+    "gene": "TP53",
+    "patient": "PAT_2316",
+    "impact": "MODERATE",
+    "protein_change": "P177_H178del",
+    "mutation_type_detail": "In_Frame_Del",
+    "chromosome": "17",
+    "start_position_abs": 7578395,
+    "end_position_abs": 7578400,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Ovaire",
+    "frequency": 0.8065,
+    "length": 5
+  }
+]

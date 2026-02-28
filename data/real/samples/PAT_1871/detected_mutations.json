@@ -1,0 +1,23 @@
+[
+  {
+    "position": 241496,
+    "reference": "GAGGTGTAGGTGCTG",
+    "alternative": "-",
+    "type": "DEL",
+    "gene": "BRAF",
+    "patient": "PAT_1871",
+    "impact": "MODERATE",
+    "protein_change": "T488_Q493delinsK",
+    "mutation_type_detail": "In_Frame_Del",
+    "chromosome": "7",
+    "start_position_abs": 140477831,
+    "end_position_abs": 140477845,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Pancreas",
+    "frequency": 0.1228,
+    "length": 14
+  }
+]

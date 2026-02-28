@@ -1,0 +1,60 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_1154
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_1154
+  Age:            68 ans
+  Sexe:           F
+  Severite:       moderate
+  Cancer connu:   Colon
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       7
+  Charge mutationnelle:    30.88 mut/Mb
+  Risque global:           MODERE
+
+--- ALERTES ---
+  [!] Risque TRES ELEVE pour Glioblastome (score: 2.6)
+  [!] Risque TRES ELEVE pour Poumon (score: 2.6)
+  [!] Risque TRES ELEVE pour Vessie (score: 2.6)
+  [!] Risque TRES ELEVE pour Colon (score: 2.6)
+  [!] Risque ELEVE pour Ovaire (score: 1.7)
+  [!] Risque ELEVE pour Sein (score: 1.7)
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Glioblastome            2.600 TRES ELEVE      PIK3CA, TP53, BRAF
+  Poumon                  2.600 TRES ELEVE      PIK3CA, TP53, BRAF
+  Vessie                  2.600 TRES ELEVE      PIK3CA, TP53, BRAF
+  Colon                   2.600 TRES ELEVE      PIK3CA, TP53, BRAF
+  Ovaire                  1.700 ELEVE           PIK3CA, TP53
+  Sein                    1.700 ELEVE           PIK3CA, TP53
+  Foie                    0.900 MODERE          PIK3CA
+  Rein                    0.900 MODERE          PIK3CA
+  Melanome                0.900 MODERE          BRAF
+  Thyroide                0.900 MODERE          BRAF
+  Pancreas                0.800 MODERE          TP53
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  PIK3CA     SNP      196029   0.900 Pathogenic
+  BRAF       SNP      266191   0.900 Pathogenic
+  TP53       SNP       91281   0.800 Pathogenic
+  APC        DEL      531822   0.650 Likely_pathogenic
+  APC        DEL      533808   0.550 VUS
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS6 (MMR deficient)                similarite: 0.600
+  SBS2 (APOBEC)                       similarite: 0.600
+
+--- RECOMMANDATIONS ---
+  -> Suivi regulier avec depistage standard
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

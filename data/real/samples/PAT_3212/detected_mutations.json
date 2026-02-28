@@ -1,0 +1,22 @@
+[
+  {
+    "position": 230099,
+    "reference": "A",
+    "alternative": "G",
+    "type": "SNP",
+    "gene": "EGFR",
+    "patient": "PAT_3212",
+    "impact": "MODERATE",
+    "protein_change": "H805R",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "7",
+    "start_position_abs": 55249116,
+    "end_position_abs": 55249116,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Rein",
+    "frequency": 0.2793
+  }
+]

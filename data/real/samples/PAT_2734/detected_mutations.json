@@ -1,0 +1,42 @@
+[
+  {
+    "position": 91547,
+    "reference": "G",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "TP53",
+    "patient": "PAT_2734",
+    "impact": "HIGH",
+    "protein_change": "Q331*",
+    "mutation_type_detail": "Nonsense_Mutation",
+    "chromosome": "17",
+    "start_position_abs": 7576855,
+    "end_position_abs": 7576855,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Vessie",
+    "frequency": 0.8913
+  },
+  {
+    "position": 212019,
+    "reference": "A",
+    "alternative": "C",
+    "type": "SNP",
+    "gene": "PIK3CA",
+    "patient": "PAT_2734",
+    "impact": "MODERATE",
+    "protein_change": "Q546P",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "3",
+    "start_position_abs": 178936095,
+    "end_position_abs": 178936095,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Vessie",
+    "frequency": 0.68
+  }
+]

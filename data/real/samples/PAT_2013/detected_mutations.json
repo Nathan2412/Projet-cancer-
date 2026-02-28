@@ -1,0 +1,42 @@
+[
+  {
+    "position": 201276,
+    "reference": "C",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "EGFR",
+    "patient": "PAT_2013",
+    "impact": "MODERATE",
+    "protein_change": "P228L",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "7",
+    "start_position_abs": 55220293,
+    "end_position_abs": 55220293,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Melanome",
+    "frequency": 0.2565
+  },
+  {
+    "position": 533892,
+    "reference": "C",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "APC",
+    "patient": "PAT_2013",
+    "impact": "MODERATE",
+    "protein_change": "T772I",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "5",
+    "start_position_abs": 112173606,
+    "end_position_abs": 112173606,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Melanome",
+    "frequency": 0.1652
+  }
+]

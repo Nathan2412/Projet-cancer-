@@ -1,0 +1,22 @@
+[
+  {
+    "position": 531967,
+    "reference": "G",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "APC",
+    "patient": "PAT_1124",
+    "impact": "MODERATE",
+    "protein_change": "V1414I",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "5",
+    "start_position_abs": 112175531,
+    "end_position_abs": 112175531,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Poumon",
+    "frequency": 0.3218
+  }
+]

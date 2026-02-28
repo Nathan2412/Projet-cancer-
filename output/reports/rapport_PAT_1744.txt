@@ -1,0 +1,57 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_1744
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_1744
+  Age:            59 ans
+  Sexe:           F
+  Severite:       low
+  Cancer connu:   Pancreas
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       3
+  Charge mutationnelle:    13.24 mut/Mb
+  Risque global:           ELEVE
+
+--- ALERTES ---
+  [!] Risque ELEVE pour Glioblastome (score: 1.6)
+  [!] Risque ELEVE pour Vessie (score: 1.6)
+  [!] Risque ELEVE pour Colon (score: 1.6)
+  [!] Risque ELEVE pour Pancreas (score: 1.6)
+  [!] Risque ELEVE pour Sein (score: 1.6)
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Glioblastome            1.600 ELEVE           KRAS, PIK3CA
+  Vessie                  1.600 ELEVE           KRAS, PIK3CA
+  Colon                   1.600 ELEVE           KRAS, PIK3CA
+  Pancreas                1.600 ELEVE           KRAS, PIK3CA
+  Sein                    1.600 ELEVE           KRAS, PIK3CA
+  Poumon                  0.800 MODERE          KRAS
+  Melanome                0.800 MODERE          KRAS
+  Foie                    0.800 MODERE          KRAS
+  Thyroide                0.800 MODERE          PIK3CA
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  KRAS       SNP      193495   0.800 Pathogenic
+  PIK3CA     SNP      230636   0.800 Pathogenic
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS2 (APOBEC)                       similarite: 0.933
+  SBS13 (APOBEC)                      similarite: 0.867
+  SBS6 (MMR deficient)                similarite: 0.667
+  SBS1 (age)                          similarite: 0.467
+
+--- RECOMMANDATIONS ---
+  -> Consultation oncogenetique recommandee
+  -> Surveillance renforcee des organes cibles
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

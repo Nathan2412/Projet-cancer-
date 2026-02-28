@@ -1,0 +1,22 @@
+[
+  {
+    "position": 1801285,
+    "reference": "G",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "BRCA1",
+    "patient": "PAT_2076",
+    "impact": "MODERATE",
+    "protein_change": "S1379Y",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "17",
+    "start_position_abs": 41243010,
+    "end_position_abs": 41243010,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Melanome",
+    "frequency": 0.1154
+  }
+]

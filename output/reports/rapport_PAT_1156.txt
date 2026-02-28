@@ -1,0 +1,53 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_1156
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_1156
+  Age:            70 ans
+  Sexe:           M
+  Severite:       high
+  Cancer connu:   Colon
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       7
+  Charge mutationnelle:    30.88 mut/Mb
+  Risque global:           MODERE
+
+--- ALERTES ---
+  [!] Risque TRES ELEVE pour Colon (score: 2.7)
+  [!] Risque ELEVE pour Prostate (score: 1.9)
+  [!] Risque ELEVE pour Glioblastome (score: 1.7)
+  [!] Risque ELEVE pour Melanome (score: 1.0)
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Colon                   2.700 TRES ELEVE      BRCA1, PIK3CA, APC
+  Prostate                1.900 ELEVE           PIK3CA, APC
+  Glioblastome            1.700 ELEVE           BRCA1, PIK3CA
+  Melanome                1.000 ELEVE           APC
+  Vessie                  0.900 MODERE          PIK3CA
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  APC        SNP      532867   1.000 Pathogenic
+  PIK3CA     SNP      231238   0.900 Pathogenic
+  BRCA1      SNP     1800521   0.800 Pathogenic
+  BRCA2      SNP      616582   0.500 VUS
+  ALK        SNP         923   0.500 VUS
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS6 (MMR deficient)                similarite: 0.543
+  SBS2 (APOBEC)                       similarite: 0.543
+  SBS4 (tabac)                        similarite: 0.486
+
+--- RECOMMANDATIONS ---
+  -> Suivi regulier avec depistage standard
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

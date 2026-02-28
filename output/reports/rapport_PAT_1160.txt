@@ -1,0 +1,42 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_1160
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_1160
+  Age:            84 ans
+  Sexe:           F
+  Severite:       moderate
+  Cancer connu:   Colon
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       6
+  Charge mutationnelle:    26.47 mut/Mb
+  Risque global:           MODERE
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Colon                   0.900 MODERE          EGFR
+  Glioblastome            0.900 MODERE          EGFR
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  EGFR       SNP      201257   0.900 Pathogenic
+  TP53       DEL       90004   0.650 Likely_pathogenic
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS6 (MMR deficient)                similarite: 0.800
+  SBS1 (age)                          similarite: 0.600
+  SBS2 (APOBEC)                       similarite: 0.600
+  SBS7 (UV)                           similarite: 0.400
+
+--- RECOMMANDATIONS ---
+  -> Suivi regulier avec depistage standard
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

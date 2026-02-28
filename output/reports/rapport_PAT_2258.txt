@@ -1,0 +1,34 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_2258
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_2258
+  Age:            45 ans
+  Sexe:           F
+  Severite:       moderate
+  Cancer connu:   Ovaire
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       2
+  Charge mutationnelle:    8.82 mut/Mb
+  Risque global:           FAIBLE
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  TP53       INS       89918   0.750 Likely_pathogenic
+  BRCA1      SNP     1800213   0.600 Likely_pathogenic
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS6 (MMR deficient)                similarite: 0.400
+  SBS2 (APOBEC)                       similarite: 0.400
+
+--- RECOMMANDATIONS ---
+  -> Depistage standard selon les recommandations
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

@@ -1,0 +1,22 @@
+[
+  {
+    "position": 91258,
+    "reference": "A",
+    "alternative": "C",
+    "type": "SNP",
+    "gene": "TP53",
+    "patient": "PAT_0269",
+    "impact": "MODERATE",
+    "protein_change": "L265R",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "17",
+    "start_position_abs": 7577144,
+    "end_position_abs": 7577144,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Sein",
+    "frequency": 0.3636
+  }
+]

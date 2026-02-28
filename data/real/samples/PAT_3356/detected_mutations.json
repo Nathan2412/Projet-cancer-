@@ -1,0 +1,22 @@
+[
+  {
+    "position": 1841186,
+    "reference": "C",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "BRCA1",
+    "patient": "PAT_3356",
+    "impact": "MODERATE",
+    "protein_change": "C1768Y",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "17",
+    "start_position_abs": 41203109,
+    "end_position_abs": 41203109,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Foie",
+    "frequency": 0.3333
+  }
+]

@@ -1,0 +1,22 @@
+[
+  {
+    "position": 219879,
+    "reference": "A",
+    "alternative": "C",
+    "type": "SNP",
+    "gene": "PIK3CA",
+    "patient": "PAT_1700",
+    "impact": "MODERATE",
+    "protein_change": "E474A",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "3",
+    "start_position_abs": 178928235,
+    "end_position_abs": 178928235,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Prostate",
+    "frequency": 0.4211
+  }
+]

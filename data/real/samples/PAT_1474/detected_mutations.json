@@ -1,0 +1,43 @@
+[
+  {
+    "position": 89053,
+    "reference": "A",
+    "alternative": "C",
+    "type": "SNP",
+    "gene": "TP53",
+    "patient": "PAT_1474",
+    "impact": "MODERATE",
+    "protein_change": "F113C",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "17",
+    "start_position_abs": 7579349,
+    "end_position_abs": 7579349,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Colon",
+    "frequency": 0.6857
+  },
+  {
+    "position": 556222,
+    "reference": "C",
+    "alternative": "-",
+    "type": "DEL",
+    "gene": "APC",
+    "patient": "PAT_1474",
+    "impact": "HIGH",
+    "protein_change": "H307Ifs*29",
+    "mutation_type_detail": "Frame_Shift_Del",
+    "chromosome": "5",
+    "start_position_abs": 112151276,
+    "end_position_abs": 112151276,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Colon",
+    "frequency": 0.4408,
+    "length": 1
+  }
+]

@@ -1,0 +1,42 @@
+[
+  {
+    "position": 91308,
+    "reference": "G",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "TP53",
+    "patient": "PAT_0151",
+    "impact": "MODERATE",
+    "protein_change": "R282W",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "17",
+    "start_position_abs": 7577094,
+    "end_position_abs": 7577094,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Sein",
+    "frequency": 0.5753
+  },
+  {
+    "position": 542869,
+    "reference": "G",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "APC",
+    "patient": "PAT_0151",
+    "impact": "MODERATE",
+    "protein_change": "S568N",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "5",
+    "start_position_abs": 112164629,
+    "end_position_abs": 112164629,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Sein",
+    "frequency": 0.5514
+  }
+]

@@ -1,0 +1,43 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_3031
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_3031
+  Age:            37 ans
+  Sexe:           F
+  Severite:       low
+  Cancer connu:   Thyroide
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       1
+  Charge mutationnelle:    4.41 mut/Mb
+  Risque global:           FAIBLE
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Glioblastome            0.900 MODERE          BRAF
+  Melanome                0.900 MODERE          BRAF
+  Poumon                  0.900 MODERE          BRAF
+  Vessie                  0.900 MODERE          BRAF
+  Colon                   0.900 MODERE          BRAF
+  Thyroide                0.900 MODERE          BRAF
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  BRAF       SNP      266191   0.900 Pathogenic
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS6 (MMR deficient)                similarite: 0.400
+  SBS2 (APOBEC)                       similarite: 0.400
+
+--- RECOMMANDATIONS ---
+  -> Depistage standard selon les recommandations
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

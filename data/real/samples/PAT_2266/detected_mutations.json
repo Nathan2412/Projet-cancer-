@@ -1,0 +1,43 @@
+[
+  {
+    "position": 89087,
+    "reference": "G",
+    "alternative": "-",
+    "type": "DEL",
+    "gene": "TP53",
+    "patient": "PAT_2266",
+    "impact": "HIGH",
+    "protein_change": "C124*",
+    "mutation_type_detail": "Frame_Shift_Del",
+    "chromosome": "17",
+    "start_position_abs": 7579315,
+    "end_position_abs": 7579315,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Ovaire",
+    "frequency": 0.441,
+    "length": 1
+  },
+  {
+    "position": 638787,
+    "reference": "G",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "BRCA2",
+    "patient": "PAT_2266",
+    "impact": "MODERATE",
+    "protein_change": "V3079I",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "13",
+    "start_position_abs": 32954261,
+    "end_position_abs": 32954261,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Ovaire",
+    "frequency": 0.21
+  }
+]

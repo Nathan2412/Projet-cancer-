@@ -1,0 +1,35 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_1186
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_1186
+  Age:            58 ans
+  Sexe:           M
+  Severite:       high
+  Cancer connu:   Colon
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       5
+  Charge mutationnelle:    22.06 mut/Mb
+  Risque global:           MODERE
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  APC        DEL      531822   0.500 VUS
+  APC        SNP      543854   0.500 VUS
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS4 (tabac)                        similarite: 0.700
+  SBS6 (MMR deficient)                similarite: 0.650
+  SBS2 (APOBEC)                       similarite: 0.400
+
+--- RECOMMANDATIONS ---
+  -> Suivi regulier avec depistage standard
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

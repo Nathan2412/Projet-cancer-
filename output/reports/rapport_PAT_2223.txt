@@ -1,0 +1,34 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_2223
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_2223
+  Age:            67 ans
+  Sexe:           F
+  Severite:       moderate
+  Cancer connu:   Ovaire
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       3
+  Charge mutationnelle:    13.24 mut/Mb
+  Risque global:           FAIBLE
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  APC        SNP      530193   0.500 VUS
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS13 (APOBEC)                      similarite: 0.867
+  SBS6 (MMR deficient)                similarite: 0.667
+  SBS2 (APOBEC)                       similarite: 0.667
+
+--- RECOMMANDATIONS ---
+  -> Depistage standard selon les recommandations
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

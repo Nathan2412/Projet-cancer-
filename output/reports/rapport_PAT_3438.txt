@@ -1,0 +1,36 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_3438
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_3438
+  Age:            62 ans
+  Sexe:           M
+  Severite:       moderate
+  Cancer connu:   Glioblastome
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       3
+  Charge mutationnelle:    13.24 mut/Mb
+  Risque global:           FAIBLE
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  TP53       DEL       89081   0.650 Likely_pathogenic
+  RB1        SNP      633281   0.600 Likely_pathogenic
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS1 (age)                          similarite: 0.800
+  SBS7 (UV)                           similarite: 0.600
+  SBS6 (MMR deficient)                similarite: 0.500
+  SBS2 (APOBEC)                       similarite: 0.500
+
+--- RECOMMANDATIONS ---
+  -> Depistage standard selon les recommandations
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

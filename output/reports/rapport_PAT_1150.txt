@@ -1,0 +1,61 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_1150
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_1150
+  Age:            59 ans
+  Sexe:           M
+  Severite:       high
+  Cancer connu:   Colon
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       9
+  Charge mutationnelle:    39.71 mut/Mb
+  Risque global:           MODERE
+
+--- ALERTES ---
+  [!] Risque TRES ELEVE pour Colon (score: 2.8)
+  [!] Risque ELEVE pour Glioblastome (score: 1.9)
+  [!] Risque ELEVE pour Prostate (score: 1.9)
+  [!] Risque ELEVE pour Vessie (score: 1.9)
+  [!] Risque ELEVE pour Foie (score: 1.9)
+  [!] Risque ELEVE pour Pancreas (score: 1.9)
+  [!] Risque ELEVE pour Poumon (score: 1.0)
+  [!] Risque ELEVE pour Melanome (score: 1.0)
+  [!] 6 variants a impact eleve detectes
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Colon                   2.800 TRES ELEVE      KRAS, TP53, APC
+  Glioblastome            1.900 ELEVE           KRAS, TP53
+  Prostate                1.900 ELEVE           KRAS, TP53
+  Vessie                  1.900 ELEVE           KRAS, TP53
+  Foie                    1.900 ELEVE           KRAS, TP53
+  Pancreas                1.900 ELEVE           KRAS, TP53
+  Poumon                  1.000 ELEVE           KRAS
+  Melanome                1.000 ELEVE           KRAS
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  KRAS       SNP      193495   1.000 Pathogenic
+  TP53       SNP       90864   0.900 Pathogenic
+  APC        SNP      533581   0.900 Pathogenic
+  APC        INS      531738   0.650 Likely_pathogenic
+  BRCA2      INS      597181   0.550 VUS
+  BRAF       SNP      218117   0.500 VUS
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS7 (UV)                           similarite: 0.733
+  SBS1 (age)                          similarite: 0.533
+
+--- RECOMMANDATIONS ---
+  -> Suivi regulier avec depistage standard
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

@@ -1,0 +1,40 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_1875
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_1875
+  Age:            90 ans
+  Sexe:           M
+  Severite:       high
+  Cancer connu:   Melanome
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       8
+  Charge mutationnelle:    35.29 mut/Mb
+  Risque global:           MODERE
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Melanome                0.800 MODERE          ALK
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  ALK        SNP      502142   0.800 Pathogenic
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS1 (age)                          similarite: 0.950
+  SBS7 (UV)                           similarite: 0.850
+  SBS6 (MMR deficient)                similarite: 0.375
+  SBS2 (APOBEC)                       similarite: 0.375
+
+--- RECOMMANDATIONS ---
+  -> Suivi regulier avec depistage standard
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

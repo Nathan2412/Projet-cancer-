@@ -1,0 +1,51 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_1205
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_1205
+  Age:            47 ans
+  Sexe:           M
+  Severite:       high
+  Cancer connu:   Colon
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       5
+  Charge mutationnelle:    22.06 mut/Mb
+  Risque global:           MODERE
+
+--- ALERTES ---
+  [!] Risque TRES ELEVE pour Colon (score: 3.7)
+  [!] Risque ELEVE pour Poumon (score: 1.9)
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Colon                   3.700 TRES ELEVE      KRAS, ALK, APC
+  Poumon                  1.900 ELEVE           KRAS, ALK
+  Melanome                0.900 MODERE          KRAS
+  Vessie                  0.900 MODERE          KRAS
+  Foie                    0.900 MODERE          KRAS
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  ALK        SNP      191039   1.000 Pathogenic
+  KRAS       SNP      193492   0.900 Pathogenic
+  APC        SNP      531859   0.900 Pathogenic
+  APC        SNP      533581   0.900 Pathogenic
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS1 (age)                          similarite: 1.000
+  SBS7 (UV)                           similarite: 0.800
+  SBS6 (MMR deficient)                similarite: 0.400
+  SBS2 (APOBEC)                       similarite: 0.400
+
+--- RECOMMANDATIONS ---
+  -> Suivi regulier avec depistage standard
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

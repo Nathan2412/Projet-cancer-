@@ -1,0 +1,22 @@
+[
+  {
+    "position": 247474,
+    "reference": "A",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "EGFR",
+    "patient": "PAT_0430",
+    "impact": "MODERATE",
+    "protein_change": "E928V",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "7",
+    "start_position_abs": 55266491,
+    "end_position_abs": 55266491,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Sein",
+    "frequency": 0.28
+  }
+]

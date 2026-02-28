@@ -1,0 +1,46 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_1157
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_1157
+  Age:            61 ans
+  Sexe:           F
+  Severite:       high
+  Cancer connu:   Colon
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       7
+  Charge mutationnelle:    30.88 mut/Mb
+  Risque global:           MODERE
+
+--- ALERTES ---
+  [!] Risque ELEVE pour Melanome (score: 1.0)
+  [!] Risque ELEVE pour Colon (score: 1.0)
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Melanome                1.000 ELEVE           APC
+  Colon                   1.000 ELEVE           APC
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  APC        SNP      532867   1.000 Pathogenic
+  BRCA1      SNP     1817780   0.500 VUS
+  APC        SNP      529498   0.500 VUS
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS6 (MMR deficient)                similarite: 0.686
+  SBS2 (APOBEC)                       similarite: 0.686
+  SBS1 (age)                          similarite: 0.371
+
+--- RECOMMANDATIONS ---
+  -> Suivi regulier avec depistage standard
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

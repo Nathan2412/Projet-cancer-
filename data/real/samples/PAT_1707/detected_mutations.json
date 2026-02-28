@@ -1,0 +1,23 @@
+[
+  {
+    "position": 531737,
+    "reference": "TT",
+    "alternative": "-",
+    "type": "DEL",
+    "gene": "APC",
+    "patient": "PAT_1707",
+    "impact": "HIGH",
+    "protein_change": "F1491Cfs*22",
+    "mutation_type_detail": "Frame_Shift_Del",
+    "chromosome": "5",
+    "start_position_abs": 112175761,
+    "end_position_abs": 112175762,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Prostate",
+    "frequency": 0.1,
+    "length": 1
+  }
+]

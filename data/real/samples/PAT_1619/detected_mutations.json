@@ -1,0 +1,22 @@
+[
+  {
+    "position": 1822185,
+    "reference": "T",
+    "alternative": "G",
+    "type": "SNP",
+    "gene": "PTEN",
+    "patient": "PAT_1619",
+    "impact": "MODERATE",
+    "protein_change": "Y65D",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "10",
+    "start_position_abs": 89685298,
+    "end_position_abs": 89685298,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Colon",
+    "frequency": 0.2632
+  }
+]

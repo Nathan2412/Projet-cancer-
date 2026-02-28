@@ -1,0 +1,42 @@
+[
+  {
+    "position": 90196,
+    "reference": "T",
+    "alternative": "C",
+    "type": "SNP",
+    "gene": "TP53",
+    "patient": "PAT_1806",
+    "impact": "MODERATE",
+    "protein_change": "S215G",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "17",
+    "start_position_abs": 7578206,
+    "end_position_abs": 7578206,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Pancreas",
+    "frequency": 0.1461
+  },
+  {
+    "position": 193496,
+    "reference": "C",
+    "alternative": "G",
+    "type": "SNP",
+    "gene": "KRAS",
+    "patient": "PAT_1806",
+    "impact": "MODERATE",
+    "protein_change": "G12R",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "12",
+    "start_position_abs": 25398285,
+    "end_position_abs": 25398285,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Pancreas",
+    "frequency": 0.1258
+  }
+]

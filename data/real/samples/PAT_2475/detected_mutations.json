@@ -1,0 +1,22 @@
+[
+  {
+    "position": 90225,
+    "reference": "C",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "TP53",
+    "patient": "PAT_2475",
+    "impact": "MODIFIER",
+    "protein_change": "X224_splice",
+    "mutation_type_detail": "Splice_Region",
+    "chromosome": "17",
+    "start_position_abs": 7578177,
+    "end_position_abs": 7578177,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Ovaire",
+    "frequency": 0.2456
+  }
+]

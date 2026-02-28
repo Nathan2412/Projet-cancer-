@@ -1,0 +1,47 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_0028
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_0028
+  Age:            34 ans
+  Sexe:           F
+  Severite:       moderate
+  Cancer connu:   Sein
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       3
+  Charge mutationnelle:    13.24 mut/Mb
+  Risque global:           FAIBLE
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Glioblastome            0.900 MODERE          TP53
+  Poumon                  0.900 MODERE          TP53
+  Melanome                0.900 MODERE          TP53
+  Ovaire                  0.900 MODERE          TP53
+  Vessie                  0.900 MODERE          TP53
+  Foie                    0.900 MODERE          TP53
+  Colon                   0.900 MODERE          TP53
+  Pancreas                0.900 MODERE          TP53
+  Sein                    0.900 MODERE          TP53
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  TP53       SNP       90863   0.900 Pathogenic
+  BRCA2      DEL      597954   0.750 Likely_pathogenic
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS6 (MMR deficient)                similarite: 0.500
+  SBS2 (APOBEC)                       similarite: 0.400
+
+--- RECOMMANDATIONS ---
+  -> Depistage standard selon les recommandations
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

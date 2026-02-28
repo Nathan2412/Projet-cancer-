@@ -1,0 +1,22 @@
+[
+  {
+    "position": 524892,
+    "reference": "C",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "ALK",
+    "patient": "PAT_3400",
+    "impact": "MODERATE",
+    "protein_change": "M233I",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "2",
+    "start_position_abs": 29940532,
+    "end_position_abs": 29940532,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Foie",
+    "frequency": 0.2778
+  }
+]

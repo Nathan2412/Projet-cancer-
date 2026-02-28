@@ -1,0 +1,41 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_0732
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_0732
+  Age:            56 ans
+  Sexe:           M
+  Severite:       moderate
+  Cancer connu:   Poumon
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       3
+  Charge mutationnelle:    13.24 mut/Mb
+  Risque global:           FAIBLE
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Poumon                  0.600 MODERE          BRAF
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  BRAF       SNP      237925   0.600 Likely_pathogenic
+  TP53       SNP       89971   0.500 VUS
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS4 (tabac)                        similarite: 0.867
+  SBS6 (MMR deficient)                similarite: 0.667
+  SBS2 (APOBEC)                       similarite: 0.667
+  SBS1 (age)                          similarite: 0.467
+
+--- RECOMMANDATIONS ---
+  -> Depistage standard selon les recommandations
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

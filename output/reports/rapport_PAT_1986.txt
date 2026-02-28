@@ -1,0 +1,29 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_1986
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_1986
+  Age:            43 ans
+  Sexe:           F
+  Severite:       low
+  Cancer connu:   Melanome
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       2
+  Charge mutationnelle:    8.82 mut/Mb
+  Risque global:           FAIBLE
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS22 (aristolochic acid)           similarite: 1.000
+  SBS6 (MMR deficient)                similarite: 0.400
+  SBS2 (APOBEC)                       similarite: 0.400
+
+--- RECOMMANDATIONS ---
+  -> Depistage standard selon les recommandations
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

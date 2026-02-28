@@ -1,0 +1,23 @@
+[
+  {
+    "position": 90857,
+    "reference": "TGCCGC",
+    "alternative": "-",
+    "type": "DEL",
+    "gene": "TP53",
+    "patient": "PAT_2328",
+    "impact": "MODERATE",
+    "protein_change": "G244_M246delinsV",
+    "mutation_type_detail": "In_Frame_Del",
+    "chromosome": "17",
+    "start_position_abs": 7577545,
+    "end_position_abs": 7577550,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Ovaire",
+    "frequency": 0.9831,
+    "length": 5
+  }
+]

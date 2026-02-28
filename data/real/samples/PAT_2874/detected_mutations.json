@@ -1,0 +1,22 @@
+[
+  {
+    "position": 529972,
+    "reference": "G",
+    "alternative": "C",
+    "type": "SNP",
+    "gene": "APC",
+    "patient": "PAT_2874",
+    "impact": "MODERATE",
+    "protein_change": "D2079H",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "5",
+    "start_position_abs": 112177526,
+    "end_position_abs": 112177526,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Vessie",
+    "frequency": 0.2133
+  }
+]

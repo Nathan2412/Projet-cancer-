@@ -1,0 +1,52 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_1737
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_1737
+  Age:            64 ans
+  Sexe:           F
+  Severite:       extreme
+  Cancer connu:   Pancreas
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       17
+  Charge mutationnelle:    75.0 mut/Mb
+  Risque global:           ELEVE
+
+--- ALERTES ---
+  [!] Charge mutationnelle elevee: 75.0 mut/Mb
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Glioblastome            0.800 MODERE          KRAS
+  Poumon                  0.800 MODERE          KRAS
+  Melanome                0.800 MODERE          KRAS
+  Vessie                  0.800 MODERE          KRAS
+  Foie                    0.800 MODERE          KRAS
+  Colon                   0.800 MODERE          KRAS
+  Pancreas                0.800 MODERE          KRAS
+  Sein                    0.800 MODERE          KRAS
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  KRAS       SNP      193495   0.800 Pathogenic
+  BRCA2      INS      598362   0.550 VUS
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS6 (MMR deficient)                similarite: 0.750
+  SBS2 (APOBEC)                       similarite: 0.688
+  SBS4 (tabac)                        similarite: 0.575
+  SBS1 (age)                          similarite: 0.425
+
+--- RECOMMANDATIONS ---
+  -> Consultation oncogenetique recommandee
+  -> Surveillance renforcee des organes cibles
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

@@ -1,0 +1,52 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_0001
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_0001
+  Age:            68 ans
+  Sexe:           F
+  Severite:       extreme
+  Cancer connu:   Sein
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       17
+  Charge mutationnelle:    75.0 mut/Mb
+  Risque global:           ELEVE
+
+--- ALERTES ---
+  [!] Charge mutationnelle elevee: 75.0 mut/Mb
+  [!] Risque ELEVE pour Colon (score: 1.6)
+  [!] Risque ELEVE pour Sein (score: 1.6)
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Colon                   1.600 ELEVE           ALK, PTEN
+  Sein                    1.600 ELEVE           ALK, PTEN
+  Glioblastome            0.900 MODERE          PTEN
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  PTEN       SNP     1829792   0.900 Pathogenic
+  ALK        SNP       29831   0.700 Likely_pathogenic
+  APC        SNP      529539   0.500 VUS
+  PTEN       SNP     1822168   0.500 VUS
+  RB1        SNP      635361   0.500 VUS
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS4 (tabac)                        similarite: 0.788
+  SBS6 (MMR deficient)                similarite: 0.694
+  SBS2 (APOBEC)                       similarite: 0.694
+  SBS1 (age)                          similarite: 0.388
+
+--- RECOMMANDATIONS ---
+  -> Consultation oncogenetique recommandee
+  -> Surveillance renforcee des organes cibles
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

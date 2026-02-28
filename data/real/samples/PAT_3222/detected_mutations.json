@@ -1,0 +1,22 @@
+[
+  {
+    "position": 528586,
+    "reference": "A",
+    "alternative": "G",
+    "type": "SNP",
+    "gene": "APC",
+    "patient": "PAT_3222",
+    "impact": "MODERATE",
+    "protein_change": "I2541V",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "5",
+    "start_position_abs": 112178912,
+    "end_position_abs": 112178912,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Rein",
+    "frequency": 0.1532
+  }
+]

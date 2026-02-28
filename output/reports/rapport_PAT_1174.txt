@@ -1,0 +1,60 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_1174
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_1174
+  Age:            82 ans
+  Sexe:           F
+  Severite:       moderate
+  Cancer connu:   Colon
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       5
+  Charge mutationnelle:    22.06 mut/Mb
+  Risque global:           MODERE
+
+--- ALERTES ---
+  [!] Risque ELEVE pour Poumon (score: 1.9)
+  [!] Risque ELEVE pour Ovaire (score: 1.9)
+  [!] Risque ELEVE pour Vessie (score: 1.9)
+  [!] Risque ELEVE pour Colon (score: 1.9)
+  [!] Risque ELEVE pour Sein (score: 1.9)
+  [!] Risque ELEVE pour Pancreas (score: 1.0)
+  [!] Risque ELEVE pour Thyroide (score: 1.0)
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Poumon                  1.900 ELEVE           KRAS, PIK3CA
+  Ovaire                  1.900 ELEVE           KRAS, PIK3CA
+  Vessie                  1.900 ELEVE           KRAS, PIK3CA
+  Colon                   1.900 ELEVE           KRAS, PIK3CA
+  Sein                    1.900 ELEVE           KRAS, PIK3CA
+  Pancreas                1.000 ELEVE           KRAS
+  Thyroide                1.000 ELEVE           KRAS
+  Glioblastome            0.900 MODERE          PIK3CA
+  Melanome                0.900 MODERE          PIK3CA
+  Rein                    0.900 MODERE          PIK3CA
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  KRAS       SNP      193495   1.000 Pathogenic
+  PIK3CA     SNP      212023   0.900 Pathogenic
+  APC        DEL      531822   0.650 Likely_pathogenic
+  APC        DEL      533661   0.650 Likely_pathogenic
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS4 (tabac)                        similarite: 0.867
+  SBS6 (MMR deficient)                similarite: 0.667
+  SBS2 (APOBEC)                       similarite: 0.400
+
+--- RECOMMANDATIONS ---
+  -> Suivi regulier avec depistage standard
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

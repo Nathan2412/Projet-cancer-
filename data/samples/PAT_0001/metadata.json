@@ -1,0 +1,22 @@
+{
+  "patient_id": "PAT_0001",
+  "severity": "low",
+  "num_mutations": 145,
+  "genes_analyzed": [
+    "TP53",
+    "BRCA1",
+    "BRCA2",
+    "KRAS",
+    "EGFR",
+    "PIK3CA",
+    "APC",
+    "PTEN",
+    "RB1",
+    "MYC",
+    "ALK",
+    "BRAF"
+  ],
+  "cancer_type": null,
+  "age": 49,
+  "sex": "M"
+}

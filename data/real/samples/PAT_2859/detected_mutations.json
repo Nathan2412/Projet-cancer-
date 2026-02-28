@@ -1,0 +1,22 @@
+[
+  {
+    "position": 199954,
+    "reference": "G",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "PIK3CA",
+    "patient": "PAT_2859",
+    "impact": "MODERATE",
+    "protein_change": "E978K",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "3",
+    "start_position_abs": 178948160,
+    "end_position_abs": 178948160,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Vessie",
+    "frequency": 0.6355
+  }
+]

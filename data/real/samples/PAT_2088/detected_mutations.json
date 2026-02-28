@@ -1,0 +1,22 @@
+[
+  {
+    "position": 552832,
+    "reference": "G",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "APC",
+    "patient": "PAT_2088",
+    "impact": "MODERATE",
+    "protein_change": "E313K",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "5",
+    "start_position_abs": 112154666,
+    "end_position_abs": 112154666,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Melanome",
+    "frequency": 0.1429
+  }
+]

@@ -1,0 +1,39 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_1217
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_1217
+  Age:            78 ans
+  Sexe:           M
+  Severite:       high
+  Cancer connu:   Colon
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       4
+  Charge mutationnelle:    17.65 mut/Mb
+  Risque global:           FAIBLE
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  APC        INS      590939   0.650 Likely_pathogenic
+  APC        DEL      531822   0.550 VUS
+  TP53       SNP       90145   0.500 VUS
+  APC        SNP      552556   0.500 VUS
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS1 (age)                          similarite: 0.800
+  SBS4 (tabac)                        similarite: 0.800
+  SBS7 (UV)                           similarite: 0.600
+  SBS6 (MMR deficient)                similarite: 0.500
+  SBS2 (APOBEC)                       similarite: 0.500
+
+--- RECOMMANDATIONS ---
+  -> Depistage standard selon les recommandations
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

@@ -1,0 +1,22 @@
+{
+  "patient_id": "PAT_0016",
+  "severity": "high",
+  "num_mutations": 1437,
+  "genes_analyzed": [
+    "TP53",
+    "BRCA1",
+    "BRCA2",
+    "KRAS",
+    "EGFR",
+    "PIK3CA",
+    "APC",
+    "PTEN",
+    "RB1",
+    "MYC",
+    "ALK",
+    "BRAF"
+  ],
+  "cancer_type": "Ovaire",
+  "age": 60,
+  "sex": "F"
+}

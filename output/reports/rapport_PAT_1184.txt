@@ -1,0 +1,54 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_1184
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_1184
+  Age:            53 ans
+  Sexe:           F
+  Severite:       moderate
+  Cancer connu:   Colon
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       5
+  Charge mutationnelle:    22.06 mut/Mb
+  Risque global:           MODERE
+
+--- ALERTES ---
+  [!] Risque TRES ELEVE pour Colon (score: 2.7)
+  [!] Risque ELEVE pour Melanome (score: 1.9)
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Colon                   2.700 TRES ELEVE      TP53, APC
+  Melanome                1.900 ELEVE           TP53, APC
+  Glioblastome            0.900 MODERE          TP53
+  Poumon                  0.900 MODERE          TP53
+  Ovaire                  0.900 MODERE          TP53
+  Vessie                  0.900 MODERE          TP53
+  Foie                    0.900 MODERE          TP53
+  Pancreas                0.900 MODERE          TP53
+  Sein                    0.900 MODERE          TP53
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  APC        SNP      532867   1.000 Pathogenic
+  TP53       SNP       89996   0.900 Pathogenic
+  APC        SNP      532018   0.800 Pathogenic
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS1 (age)                          similarite: 0.600
+  SBS6 (MMR deficient)                similarite: 0.600
+  SBS2 (APOBEC)                       similarite: 0.600
+  SBS7 (UV)                           similarite: 0.400
+
+--- RECOMMANDATIONS ---
+  -> Suivi regulier avec depistage standard
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

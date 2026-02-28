@@ -1,0 +1,42 @@
+[
+  {
+    "position": 221690,
+    "reference": "G",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "EGFR",
+    "patient": "PAT_3510",
+    "impact": "MODERATE",
+    "protein_change": "V651M",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "7",
+    "start_position_abs": 55240707,
+    "end_position_abs": 55240707,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Glioblastome",
+    "frequency": 0.2363
+  },
+  {
+    "position": 266179,
+    "reference": "C",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "BRAF",
+    "patient": "PAT_3510",
+    "impact": "MODERATE",
+    "protein_change": "G596D",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "7",
+    "start_position_abs": 140453148,
+    "end_position_abs": 140453148,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Glioblastome",
+    "frequency": 0.0995
+  }
+]

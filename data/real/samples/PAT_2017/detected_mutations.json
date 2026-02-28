@@ -1,0 +1,42 @@
+[
+  {
+    "position": 209308,
+    "reference": "G",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "PIK3CA",
+    "patient": "PAT_2017",
+    "impact": "MODERATE",
+    "protein_change": "R683M",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "3",
+    "start_position_abs": 178938806,
+    "end_position_abs": 178938806,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Melanome",
+    "frequency": 0.0926
+  },
+  {
+    "position": 21229,
+    "reference": "C",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "ALK",
+    "patient": "PAT_2017",
+    "impact": "MODERATE",
+    "protein_change": "E1242K",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "2",
+    "start_position_abs": 29436869,
+    "end_position_abs": 29436869,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Melanome",
+    "frequency": 0.1216
+  }
+]

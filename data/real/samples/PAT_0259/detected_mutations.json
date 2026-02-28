@@ -1,0 +1,23 @@
+[
+  {
+    "position": 89986,
+    "reference": "CCTC",
+    "alternative": "-",
+    "type": "DEL",
+    "gene": "TP53",
+    "patient": "PAT_0259",
+    "impact": "HIGH",
+    "protein_change": "E171Lfs*2",
+    "mutation_type_detail": "Frame_Shift_Del",
+    "chromosome": "17",
+    "start_position_abs": 7578416,
+    "end_position_abs": 7578419,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Sein",
+    "frequency": 0.9697,
+    "length": 3
+  }
+]

@@ -1,0 +1,47 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_3410
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_3410
+  Age:            42 ans
+  Sexe:           F
+  Severite:       moderate
+  Cancer connu:   Glioblastome
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       5
+  Charge mutationnelle:    22.06 mut/Mb
+  Risque global:           MODERE
+
+--- ALERTES ---
+  [!] Risque ELEVE pour Glioblastome (score: 2.0)
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Glioblastome            2.000 ELEVE           EGFR
+  Sein                    0.700 MODERE          EGFR
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  EGFR       SNP      230005   0.700 Likely_pathogenic
+  EGFR       SNP      202805   0.700 Likely_pathogenic
+  EGFR       SNP      202804   0.600 Likely_pathogenic
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS1 (age)                          similarite: 0.600
+  SBS4 (tabac)                        similarite: 0.600
+  SBS6 (MMR deficient)                similarite: 0.600
+  SBS2 (APOBEC)                       similarite: 0.600
+  SBS7 (UV)                           similarite: 0.400
+
+--- RECOMMANDATIONS ---
+  -> Suivi regulier avec depistage standard
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

@@ -1,0 +1,42 @@
+[
+  {
+    "position": 90864,
+    "reference": "C",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "TP53",
+    "patient": "PAT_3259",
+    "impact": "MODERATE",
+    "protein_change": "R248Q",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "17",
+    "start_position_abs": 7577538,
+    "end_position_abs": 7577538,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Foie",
+    "frequency": 0.2045
+  },
+  {
+    "position": 94369,
+    "reference": "T",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "TP53",
+    "patient": "PAT_3259",
+    "impact": "MODERATE",
+    "protein_change": "I332F",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "17",
+    "start_position_abs": 7574033,
+    "end_position_abs": 7574033,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Foie",
+    "frequency": 0.2535
+  }
+]

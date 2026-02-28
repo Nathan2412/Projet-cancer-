@@ -1,0 +1,22 @@
+[
+  {
+    "position": 91297,
+    "reference": "G",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "TP53",
+    "patient": "PAT_2442",
+    "impact": "MODERATE",
+    "protein_change": "P278H",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "17",
+    "start_position_abs": 7577105,
+    "end_position_abs": 7577105,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Ovaire",
+    "frequency": 0.9207
+  }
+]

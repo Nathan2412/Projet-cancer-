@@ -1,0 +1,43 @@
+[
+  {
+    "position": 231473,
+    "reference": "CTGTGGGGCATCCACTTGATG",
+    "alternative": "-",
+    "type": "DEL",
+    "gene": "PIK3CA",
+    "patient": "PAT_3538",
+    "impact": "MODERATE",
+    "protein_change": "L10_M16del",
+    "mutation_type_detail": "In_Frame_Del",
+    "chromosome": "3",
+    "start_position_abs": 178916641,
+    "end_position_abs": 178916661,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Glioblastome",
+    "frequency": 0.2232,
+    "length": 20
+  },
+  {
+    "position": 1848769,
+    "reference": "C",
+    "alternative": "G",
+    "type": "SNP",
+    "gene": "PTEN",
+    "patient": "PAT_3538",
+    "impact": "MODERATE",
+    "protein_change": "T167S",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "10",
+    "start_position_abs": 89711882,
+    "end_position_abs": 89711882,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Glioblastome",
+    "frequency": 0.3226
+  }
+]

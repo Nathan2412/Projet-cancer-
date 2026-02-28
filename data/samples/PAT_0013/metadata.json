@@ -1,0 +1,22 @@
+{
+  "patient_id": "PAT_0013",
+  "severity": "high",
+  "num_mutations": 1420,
+  "genes_analyzed": [
+    "TP53",
+    "BRCA1",
+    "BRCA2",
+    "KRAS",
+    "EGFR",
+    "PIK3CA",
+    "APC",
+    "PTEN",
+    "RB1",
+    "MYC",
+    "ALK",
+    "BRAF"
+  ],
+  "cancer_type": "Glioblastome",
+  "age": 36,
+  "sex": "M"
+}

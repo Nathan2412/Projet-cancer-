@@ -1,0 +1,22 @@
+[
+  {
+    "position": 1798084,
+    "reference": "C",
+    "alternative": "G",
+    "type": "SNP",
+    "gene": "BRCA1",
+    "patient": "PAT_2836",
+    "impact": "MODERATE",
+    "protein_change": "R446T",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "17",
+    "start_position_abs": 41246211,
+    "end_position_abs": 41246211,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Vessie",
+    "frequency": 0.4017
+  }
+]

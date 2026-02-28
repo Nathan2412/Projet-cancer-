@@ -1,0 +1,22 @@
+[
+  {
+    "position": 89878,
+    "reference": "G",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "TP53",
+    "patient": "PAT_0346",
+    "impact": "HIGH",
+    "protein_change": "Q136*",
+    "mutation_type_detail": "Nonsense_Mutation",
+    "chromosome": "17",
+    "start_position_abs": 7578524,
+    "end_position_abs": 7578524,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Sein",
+    "frequency": 0.1071
+  }
+]

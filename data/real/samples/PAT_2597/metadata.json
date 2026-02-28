@@ -1,0 +1,36 @@
+{
+  "patient_id": "PAT_2597",
+  "severity": "high",
+  "num_mutations": 11,
+  "genes_analyzed": [
+    "TP53",
+    "BRCA1",
+    "BRCA2",
+    "KRAS",
+    "EGFR",
+    "PIK3CA",
+    "APC",
+    "PTEN",
+    "RB1",
+    "MYC",
+    "ALK",
+    "BRAF"
+  ],
+  "genes_with_mutations": [
+    "RB1",
+    "BRAF",
+    "BRCA2",
+    "MYC",
+    "TP53",
+    "BRCA1",
+    "PIK3CA",
+    "APC"
+  ],
+  "cancer_type": "Vessie",
+  "age": 73,
+  "sex": "M",
+  "data_source": "TCGA_PanCancer_Atlas",
+  "is_real_data": true,
+  "original_patient_id": "TCGA-KQ-A41N",
+  "original_study": "blca_tcga_pan_can_atlas_2018"
+}

@@ -1,0 +1,22 @@
+[
+  {
+    "position": 89848,
+    "reference": "A",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "TP53",
+    "patient": "PAT_3303",
+    "impact": "MODERATE",
+    "protein_change": "Y126N",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "17",
+    "start_position_abs": 7578554,
+    "end_position_abs": 7578554,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Foie",
+    "frequency": 0.9184
+  }
+]

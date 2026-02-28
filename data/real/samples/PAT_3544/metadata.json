@@ -1,0 +1,30 @@
+{
+  "patient_id": "PAT_3544",
+  "severity": "moderate",
+  "num_mutations": 2,
+  "genes_analyzed": [
+    "TP53",
+    "BRCA1",
+    "BRCA2",
+    "KRAS",
+    "EGFR",
+    "PIK3CA",
+    "APC",
+    "PTEN",
+    "RB1",
+    "MYC",
+    "ALK",
+    "BRAF"
+  ],
+  "genes_with_mutations": [
+    "PTEN",
+    "RB1"
+  ],
+  "cancer_type": "Glioblastome",
+  "age": 35,
+  "sex": "F",
+  "data_source": "TCGA_PanCancer_Atlas",
+  "is_real_data": true,
+  "original_patient_id": "TCGA-06-0213",
+  "original_study": "gbm_tcga_pan_can_atlas_2018"
+}

@@ -1,0 +1,43 @@
+[
+  {
+    "position": 91308,
+    "reference": "G",
+    "alternative": "-",
+    "type": "DEL",
+    "gene": "TP53",
+    "patient": "PAT_3489",
+    "impact": "HIGH",
+    "protein_change": "R282Gfs*63",
+    "mutation_type_detail": "Frame_Shift_Del",
+    "chromosome": "17",
+    "start_position_abs": 7577094,
+    "end_position_abs": 7577094,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Glioblastome",
+    "frequency": 0.3953,
+    "length": 1
+  },
+  {
+    "position": 1848786,
+    "reference": "C",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "PTEN",
+    "patient": "PAT_3489",
+    "impact": "MODERATE",
+    "protein_change": "R173C",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "10",
+    "start_position_abs": 89711899,
+    "end_position_abs": 89711899,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Glioblastome",
+    "frequency": 0.4762
+  }
+]

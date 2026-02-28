@@ -1,0 +1,22 @@
+[
+  {
+    "position": 585210,
+    "reference": "G",
+    "alternative": "C",
+    "type": "SNP",
+    "gene": "BRCA2",
+    "patient": "PAT_3207",
+    "impact": "MODERATE",
+    "protein_change": "D189H",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "13",
+    "start_position_abs": 32900684,
+    "end_position_abs": 32900684,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Rein",
+    "frequency": 0.2024
+  }
+]

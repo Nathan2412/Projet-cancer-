@@ -1,0 +1,42 @@
+[
+  {
+    "position": 210276,
+    "reference": "A",
+    "alternative": "G",
+    "type": "SNP",
+    "gene": "PIK3CA",
+    "patient": "PAT_2758",
+    "impact": "MODIFIER",
+    "protein_change": "X671_splice",
+    "mutation_type_detail": "Splice_Region",
+    "chromosome": "3",
+    "start_position_abs": 178937838,
+    "end_position_abs": 178937838,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Vessie",
+    "frequency": 0.3152
+  },
+  {
+    "position": 650022,
+    "reference": "G",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "RB1",
+    "patient": "PAT_2758",
+    "impact": "HIGH",
+    "protein_change": "E458*",
+    "mutation_type_detail": "Nonsense_Mutation",
+    "chromosome": "13",
+    "start_position_abs": 48953769,
+    "end_position_abs": 48953769,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Vessie",
+    "frequency": 0.5263
+  }
+]

@@ -1,0 +1,22 @@
+[
+  {
+    "position": 196039,
+    "reference": "A",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "PIK3CA",
+    "patient": "PAT_0615",
+    "impact": "MODERATE",
+    "protein_change": "N1044Y",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "3",
+    "start_position_abs": 178952075,
+    "end_position_abs": 178952075,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Sein",
+    "frequency": 0.3261
+  }
+]

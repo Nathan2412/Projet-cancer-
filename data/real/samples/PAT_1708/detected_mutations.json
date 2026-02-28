@@ -1,0 +1,22 @@
+[
+  {
+    "position": 532008,
+    "reference": "C",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "APC",
+    "patient": "PAT_1708",
+    "impact": "HIGH",
+    "protein_change": "S1400*",
+    "mutation_type_detail": "Nonsense_Mutation",
+    "chromosome": "5",
+    "start_position_abs": 112175490,
+    "end_position_abs": 112175490,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Prostate",
+    "frequency": 0.1273
+  }
+]

@@ -1,0 +1,46 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_3465
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_3465
+  Age:            75 ans
+  Sexe:           M
+  Severite:       moderate
+  Cancer connu:   Glioblastome
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       2
+  Charge mutationnelle:    8.82 mut/Mb
+  Risque global:           FAIBLE
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Glioblastome            0.900 MODERE          TP53
+  Melanome                0.900 MODERE          TP53
+  Poumon                  0.900 MODERE          TP53
+  Vessie                  0.900 MODERE          TP53
+  Foie                    0.900 MODERE          TP53
+  Colon                   0.900 MODERE          TP53
+  Pancreas                0.900 MODERE          TP53
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  TP53       SNP       90212   0.900 Pathogenic
+  RB1        SNP      735481   0.600 Likely_pathogenic
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS22 (aristolochic acid)           similarite: 1.000
+  SBS6 (MMR deficient)                similarite: 0.500
+  SBS2 (APOBEC)                       similarite: 0.400
+
+--- RECOMMANDATIONS ---
+  -> Depistage standard selon les recommandations
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

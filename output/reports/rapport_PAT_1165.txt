@@ -1,0 +1,36 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_1165
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_1165
+  Age:            70 ans
+  Sexe:           F
+  Severite:       high
+  Cancer connu:   Colon
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       6
+  Charge mutationnelle:    26.47 mut/Mb
+  Risque global:           MODERE
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  TP53       DEL       89931   0.650 Likely_pathogenic
+  APC        INS      542872   0.650 Likely_pathogenic
+  APC        DEL      531822   0.500 VUS
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS13 (APOBEC)                      similarite: 0.467
+  SBS6 (MMR deficient)                similarite: 0.400
+  SBS2 (APOBEC)                       similarite: 0.333
+
+--- RECOMMANDATIONS ---
+  -> Suivi regulier avec depistage standard
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

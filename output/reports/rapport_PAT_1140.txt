@@ -1,0 +1,64 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_1140
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_1140
+  Age:            57 ans
+  Sexe:           M
+  Severite:       extreme
+  Cancer connu:   Colon
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       28
+  Charge mutationnelle:    123.53 mut/Mb
+  Risque global:           TRES ELEVE
+
+--- ALERTES ---
+  [!] Charge mutationnelle tres elevee: 123.53 mut/Mb
+  [!] Risque TRES ELEVE pour Colon (score: 4.0)
+  [!] Risque TRES ELEVE pour Glioblastome (score: 2.0)
+  [!] Risque TRES ELEVE pour Melanome (score: 2.0)
+  [!] Risque TRES ELEVE pour Poumon (score: 2.0)
+  [!] Risque ELEVE pour Pancreas (score: 1.0)
+  [!] Risque ELEVE pour Rein (score: 1.0)
+  [!] Risque ELEVE pour Prostate (score: 1.0)
+  [!] 8 variants a impact eleve detectes
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Colon                   4.000 TRES ELEVE      ALK, PTEN, TP53
+  Glioblastome            2.000 TRES ELEVE      TP53, PTEN
+  Melanome                2.000 TRES ELEVE      TP53, APC
+  Poumon                  2.000 TRES ELEVE      ALK, TP53
+  Pancreas                1.000 ELEVE           TP53
+  Rein                    1.000 ELEVE           TP53
+  Prostate                1.000 ELEVE           APC
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  TP53       SNP       90190   1.000 Pathogenic
+  APC        SNP      532867   1.000 Pathogenic
+  PTEN       SNP     1857631   1.000 Pathogenic
+  ALK        SNP      191039   1.000 Pathogenic
+  BRCA1      SNP     1798461   0.500 VUS
+  APC        SNP      529498   0.500 VUS
+  APC        SNP      532008   0.500 VUS
+  PTEN       SNP     1761132   0.500 VUS
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS4 (tabac)                        similarite: 0.629
+  SBS6 (MMR deficient)                similarite: 0.614
+  SBS2 (APOBEC)                       similarite: 0.614
+
+--- RECOMMANDATIONS ---
+  -> Consultation oncogenetique recommandee
+  -> Surveillance renforcee des organes cibles
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

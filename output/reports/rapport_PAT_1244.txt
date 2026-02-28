@@ -1,0 +1,55 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_1244
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_1244
+  Age:            61 ans
+  Sexe:           M
+  Severite:       moderate
+  Cancer connu:   Colon
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       4
+  Charge mutationnelle:    17.65 mut/Mb
+  Risque global:           ELEVE
+
+--- ALERTES ---
+  [!] Risque ELEVE pour Poumon (score: 1.7)
+  [!] Risque ELEVE pour Foie (score: 1.7)
+  [!] Risque ELEVE pour Colon (score: 1.7)
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Poumon                  1.700 ELEVE           KRAS, TP53
+  Foie                    1.700 ELEVE           KRAS, TP53
+  Colon                   1.700 ELEVE           KRAS, TP53
+  Glioblastome            0.900 MODERE          TP53
+  Pancreas                0.900 MODERE          TP53
+  Melanome                0.800 MODERE          KRAS
+  Vessie                  0.800 MODERE          KRAS
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  TP53       SNP       91282   0.900 Pathogenic
+  KRAS       SNP      193492   0.800 Pathogenic
+  APC        SNP      532345   0.500 VUS
+  APC        SNP      536851   0.500 VUS
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS1 (age)                          similarite: 0.800
+  SBS7 (UV)                           similarite: 0.600
+  SBS6 (MMR deficient)                similarite: 0.500
+  SBS2 (APOBEC)                       similarite: 0.500
+
+--- RECOMMANDATIONS ---
+  -> Consultation oncogenetique recommandee
+  -> Surveillance renforcee des organes cibles
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

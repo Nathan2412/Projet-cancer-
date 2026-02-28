@@ -1,0 +1,52 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_0753
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_0753
+  Age:            64 ans
+  Sexe:           F
+  Severite:       moderate
+  Cancer connu:   Poumon
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       3
+  Charge mutationnelle:    13.24 mut/Mb
+  Risque global:           ELEVE
+
+--- ALERTES ---
+  [!] Risque ELEVE pour Poumon (score: 1.8)
+  [!] Risque ELEVE pour Colon (score: 1.8)
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Poumon                  1.800 ELEVE           KRAS, ALK
+  Colon                   1.800 ELEVE           KRAS, ALK
+  Ovaire                  0.900 MODERE          KRAS
+  Vessie                  0.900 MODERE          KRAS
+  Pancreas                0.900 MODERE          KRAS
+  Thyroide                0.900 MODERE          KRAS
+  Sein                    0.900 MODERE          KRAS
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  KRAS       SNP      193495   0.900 Pathogenic
+  ALK        SNP      191039   0.900 Pathogenic
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS4 (tabac)                        similarite: 0.867
+  SBS6 (MMR deficient)                similarite: 0.667
+  SBS2 (APOBEC)                       similarite: 0.667
+  SBS1 (age)                          similarite: 0.467
+
+--- RECOMMANDATIONS ---
+  -> Consultation oncogenetique recommandee
+  -> Surveillance renforcee des organes cibles
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

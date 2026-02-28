@@ -1,0 +1,22 @@
+[
+  {
+    "position": 590982,
+    "reference": "G",
+    "alternative": "C",
+    "type": "SNP",
+    "gene": "BRCA2",
+    "patient": "PAT_1692",
+    "impact": "MODERATE",
+    "protein_change": "D281H",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "13",
+    "start_position_abs": 32906456,
+    "end_position_abs": 32906456,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Prostate",
+    "frequency": 0.4615
+  }
+]

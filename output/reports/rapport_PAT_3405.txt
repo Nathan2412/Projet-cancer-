@@ -1,0 +1,55 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_3405
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_3405
+  Age:            53 ans
+  Sexe:           F
+  Severite:       extreme
+  Cancer connu:   Glioblastome
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       21
+  Charge mutationnelle:    92.65 mut/Mb
+  Risque global:           ELEVE
+
+--- ALERTES ---
+  [!] Charge mutationnelle elevee: 92.65 mut/Mb
+  [!] Risque TRES ELEVE pour Colon (score: 2.6)
+  [!] Risque TRES ELEVE pour Glioblastome (score: 2.6)
+  [!] 7 variants a impact eleve detectes
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Colon                   2.600 TRES ELEVE      BRCA2, PTEN
+  Glioblastome            2.600 TRES ELEVE      BRCA2, PTEN
+  Sein                    0.900 MODERE          PTEN
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  PTEN       SNP     1857631   1.000 Pathogenic
+  PTEN       SNP     1829792   0.900 Pathogenic
+  BRCA2      SNP      657378   0.700 Likely_pathogenic
+  APC        SNP      529597   0.600 Likely_pathogenic
+  TP53       SNP       91537   0.500 VUS
+  TP53       SNP       90127   0.500 VUS
+  BRCA1      SNP     1799844   0.500 VUS
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS6 (MMR deficient)                similarite: 0.781
+  SBS2 (APOBEC)                       similarite: 0.686
+  SBS4 (tabac)                        similarite: 0.390
+  SBS1 (age)                          similarite: 0.371
+
+--- RECOMMANDATIONS ---
+  -> Consultation oncogenetique recommandee
+  -> Surveillance renforcee des organes cibles
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

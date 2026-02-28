@@ -1,0 +1,63 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_1196
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_1196
+  Age:            51 ans
+  Sexe:           F
+  Severite:       moderate
+  Cancer connu:   Colon
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       5
+  Charge mutationnelle:    22.06 mut/Mb
+  Risque global:           MODERE
+
+--- ALERTES ---
+  [!] Risque TRES ELEVE pour Colon (score: 2.8)
+  [!] Risque TRES ELEVE pour Sein (score: 2.8)
+  [!] Risque ELEVE pour Ovaire (score: 1.9)
+  [!] Risque ELEVE pour Vessie (score: 1.8)
+  [!] Risque ELEVE pour Thyroide (score: 1.8)
+  [!] Risque ELEVE pour Glioblastome (score: 1.0)
+  [!] Risque ELEVE pour Melanome (score: 1.0)
+  [!] Risque ELEVE pour Foie (score: 1.0)
+  [!] Risque ELEVE pour Rein (score: 1.0)
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Colon                   2.800 TRES ELEVE      KRAS, PIK3CA, PTEN
+  Sein                    2.800 TRES ELEVE      KRAS, PIK3CA, PTEN
+  Ovaire                  1.900 ELEVE           KRAS, PTEN
+  Vessie                  1.800 ELEVE           KRAS, PIK3CA
+  Thyroide                1.800 ELEVE           KRAS, PIK3CA
+  Glioblastome            1.000 ELEVE           PTEN
+  Melanome                1.000 ELEVE           PTEN
+  Foie                    1.000 ELEVE           PTEN
+  Rein                    1.000 ELEVE           PTEN
+  Poumon                  0.900 MODERE          KRAS
+  Pancreas                0.900 MODERE          KRAS
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  PTEN       SNP     1854496   1.000 Pathogenic
+  KRAS       SNP      193495   0.900 Pathogenic
+  PIK3CA     SNP      196040   0.900 Pathogenic
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS4 (tabac)                        similarite: 0.600
+  SBS2 (APOBEC)                       similarite: 0.600
+  SBS13 (APOBEC)                      similarite: 0.600
+  SBS6 (MMR deficient)                similarite: 0.400
+
+--- RECOMMANDATIONS ---
+  -> Suivi regulier avec depistage standard
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

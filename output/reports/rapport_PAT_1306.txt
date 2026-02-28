@@ -1,0 +1,57 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_1306
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_1306
+  Age:            84 ans
+  Sexe:           M
+  Severite:       moderate
+  Cancer connu:   Colon
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       4
+  Charge mutationnelle:    17.65 mut/Mb
+  Risque global:           TRES ELEVE
+
+--- ALERTES ---
+  [!] Risque TRES ELEVE pour Colon (score: 2.5)
+  [!] Risque ELEVE pour Thyroide (score: 1.7)
+  [!] Risque ELEVE pour Poumon (score: 1.6)
+  [!] Risque ELEVE pour Vessie (score: 1.6)
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Colon                   2.500 TRES ELEVE      KRAS, PIK3CA, APC
+  Thyroide                1.700 ELEVE           KRAS, APC
+  Poumon                  1.600 ELEVE           KRAS, PIK3CA
+  Vessie                  1.600 ELEVE           KRAS, PIK3CA
+  Pancreas                0.800 MODERE          KRAS
+  Glioblastome            0.800 MODERE          PIK3CA
+  Melanome                0.800 MODERE          PIK3CA
+  Rein                    0.800 MODERE          PIK3CA
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  APC        SNP      590906   0.900 Pathogenic
+  KRAS       SNP      193495   0.800 Pathogenic
+  PIK3CA     SNP      212023   0.800 Pathogenic
+  APC        INS      532243   0.550 VUS
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS4 (tabac)                        similarite: 0.867
+  SBS6 (MMR deficient)                similarite: 0.667
+  SBS2 (APOBEC)                       similarite: 0.667
+  SBS1 (age)                          similarite: 0.467
+
+--- RECOMMANDATIONS ---
+  -> Consultation oncogenetique recommandee
+  -> Surveillance renforcee des organes cibles
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

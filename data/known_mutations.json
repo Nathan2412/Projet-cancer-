@@ -1,0 +1,297 @@
+{
+  "TP53": {
+    "info": {
+      "chromosome": "chr17",
+      "start": 7668402,
+      "end": 7687550,
+      "description": "Suppresseur de tumeur, mute dans plus de 50% des cancers"
+    },
+    "hotspots": [
+      {
+        "codon": 175,
+        "change": "R175H",
+        "cancers": [
+          "Sein",
+          "Colon",
+          "Poumon",
+          "Ovaire"
+        ],
+        "frequency": 0.06
+      },
+      {
+        "codon": 248,
+        "change": "R248W",
+        "cancers": [
+          "Colon",
+          "Poumon",
+          "Vessie"
+        ],
+        "frequency": 0.05
+      },
+      {
+        "codon": 273,
+        "change": "R273H",
+        "cancers": [
+          "Sein",
+          "Colon",
+          "Poumon"
+        ],
+        "frequency": 0.04
+      },
+      {
+        "codon": 249,
+        "change": "R249S",
+        "cancers": [
+          "Foie"
+        ],
+        "frequency": 0.03
+      },
+      {
+        "codon": 220,
+        "change": "Y220C",
+        "cancers": [
+          "Sein",
+          "Poumon"
+        ],
+        "frequency": 0.02
+      }
+    ]
+  },
+  "KRAS": {
+    "info": {
+      "chromosome": "chr12",
+      "start": 25204789,
+      "end": 25250936,
+      "description": "Oncogene, cancer du poumon, colon, pancreas"
+    },
+    "hotspots": [
+      {
+        "codon": 12,
+        "change": "G12D",
+        "cancers": [
+          "Pancreas",
+          "Colon",
+          "Poumon"
+        ],
+        "frequency": 0.12
+      },
+      {
+        "codon": 12,
+        "change": "G12V",
+        "cancers": [
+          "Pancreas",
+          "Poumon"
+        ],
+        "frequency": 0.08
+      },
+      {
+        "codon": 13,
+        "change": "G13D",
+        "cancers": [
+          "Colon"
+        ],
+        "frequency": 0.04
+      },
+      {
+        "codon": 61,
+        "change": "Q61H",
+        "cancers": [
+          "Poumon"
+        ],
+        "frequency": 0.02
+      }
+    ]
+  },
+  "BRCA1": {
+    "info": {
+      "chromosome": "chr17",
+      "start": 43044295,
+      "end": 43125364,
+      "description": "Reparation ADN, cancer du sein et ovaire"
+    },
+    "hotspots": [
+      {
+        "codon": 185,
+        "change": "185delAG",
+        "cancers": [
+          "Sein",
+          "Ovaire"
+        ],
+        "frequency": 0.01
+      },
+      {
+        "codon": 5382,
+        "change": "5382insC",
+        "cancers": [
+          "Sein",
+          "Ovaire"
+        ],
+        "frequency": 0.008
+      }
+    ]
+  },
+  "BRCA2": {
+    "info": {
+      "chromosome": "chr13",
+      "start": 32315474,
+      "end": 32399672,
+      "description": "Reparation ADN, cancer du sein et pancreas"
+    },
+    "hotspots": [
+      {
+        "codon": 6174,
+        "change": "6174delT",
+        "cancers": [
+          "Sein",
+          "Pancreas",
+          "Prostate"
+        ],
+        "frequency": 0.01
+      }
+    ]
+  },
+  "EGFR": {
+    "info": {
+      "chromosome": "chr7",
+      "start": 55019017,
+      "end": 55211628,
+      "description": "Recepteur de croissance, cancer du poumon"
+    },
+    "hotspots": [
+      {
+        "codon": 858,
+        "change": "L858R",
+        "cancers": [
+          "Poumon"
+        ],
+        "frequency": 0.04
+      },
+      {
+        "codon": 790,
+        "change": "T790M",
+        "cancers": [
+          "Poumon"
+        ],
+        "frequency": 0.03
+      },
+      {
+        "codon": 746,
+        "change": "delE746-A750",
+        "cancers": [
+          "Poumon"
+        ],
+        "frequency": 0.05
+      }
+    ]
+  },
+  "PIK3CA": {
+    "info": {
+      "chromosome": "chr3",
+      "start": 179148114,
+      "end": 179240093,
+      "description": "Voie PI3K, cancer du sein, colon, endometre"
+    },
+    "hotspots": [
+      {
+        "codon": 545,
+        "change": "E545K",
+        "cancers": [
+          "Sein",
+          "Colon"
+        ],
+        "frequency": 0.05
+      },
+      {
+        "codon": 1047,
+        "change": "H1047R",
+        "cancers": [
+          "Sein",
+          "Colon",
+          "Endometre"
+        ],
+        "frequency": 0.06
+      }
+    ]
+  },
+  "BRAF": {
+    "info": {
+      "chromosome": "chr7",
+      "start": 140719327,
+      "end": 140924929,
+      "description": "Kinase MAPK, melanome, cancer de la thyroide"
+    },
+    "hotspots": [
+      {
+        "codon": 600,
+        "change": "V600E",
+        "cancers": [
+          "Melanome",
+          "Thyroide",
+          "Colon"
+        ],
+        "frequency": 0.08
+      },
+      {
+        "codon": 600,
+        "change": "V600K",
+        "cancers": [
+          "Melanome"
+        ],
+        "frequency": 0.02
+      }
+    ]
+  },
+  "APC": {
+    "info": {
+      "chromosome": "chr5",
+      "start": 112707498,
+      "end": 112846239,
+      "description": "Suppresseur de tumeur, cancer colorectal"
+    },
+    "hotspots": [
+      {
+        "codon": 1309,
+        "change": "E1309fs",
+        "cancers": [
+          "Colon"
+        ],
+        "frequency": 0.03
+      },
+      {
+        "codon": 1061,
+        "change": "S1061*",
+        "cancers": [
+          "Colon"
+        ],
+        "frequency": 0.02
+      }
+    ]
+  },
+  "PTEN": {
+    "info": {
+      "chromosome": "chr10",
+      "start": 87863113,
+      "end": 87971930,
+      "description": "Suppresseur de tumeur, glioblastome, prostate"
+    },
+    "hotspots": [
+      {
+        "codon": 130,
+        "change": "R130*",
+        "cancers": [
+          "Glioblastome",
+          "Prostate"
+        ],
+        "frequency": 0.03
+      },
+      {
+        "codon": 233,
+        "change": "K233fs",
+        "cancers": [
+          "Glioblastome"
+        ],
+        "frequency": 0.02
+      }
+    ]
+  }
+}

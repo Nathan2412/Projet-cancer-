@@ -1,0 +1,51 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_3406
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_3406
+  Age:            59 ans
+  Sexe:           F
+  Severite:       moderate
+  Cancer connu:   Glioblastome
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       6
+  Charge mutationnelle:    26.47 mut/Mb
+  Risque global:           MODERE
+
+--- ALERTES ---
+  [!] Risque ELEVE pour Glioblastome (score: 1.6)
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Glioblastome            1.600 ELEVE           PIK3CA, EGFR
+  Melanome                0.800 MODERE          PIK3CA
+  Poumon                  0.800 MODERE          PIK3CA
+  Ovaire                  0.800 MODERE          PIK3CA
+  Vessie                  0.800 MODERE          PIK3CA
+  Colon                   0.800 MODERE          PIK3CA
+  Rein                    0.800 MODERE          PIK3CA
+  Sein                    0.800 MODERE          PIK3CA
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  EGFR       SNP      202805   0.800 Pathogenic
+  PIK3CA     SNP      212023   0.800 Pathogenic
+  TP53       SNP       90792   0.500 VUS
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS6 (MMR deficient)                similarite: 0.733
+  SBS2 (APOBEC)                       similarite: 0.567
+  SBS4 (tabac)                        similarite: 0.533
+
+--- RECOMMANDATIONS ---
+  -> Suivi regulier avec depistage standard
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

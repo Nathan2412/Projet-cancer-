@@ -1,0 +1,42 @@
+[
+  {
+    "position": 89847,
+    "reference": "C",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "TP53",
+    "patient": "PAT_3495",
+    "impact": "HIGH",
+    "protein_change": "X126_splice",
+    "mutation_type_detail": "Splice_Site",
+    "chromosome": "17",
+    "start_position_abs": 7578555,
+    "end_position_abs": 7578555,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Glioblastome",
+    "frequency": 0.9286
+  },
+  {
+    "position": 231233,
+    "reference": "T",
+    "alternative": "G",
+    "type": "SNP",
+    "gene": "PIK3CA",
+    "patient": "PAT_3495",
+    "impact": "MODERATE",
+    "protein_change": "C90G",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "3",
+    "start_position_abs": 178916881,
+    "end_position_abs": 178916881,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Glioblastome",
+    "frequency": 0.3551
+  }
+]

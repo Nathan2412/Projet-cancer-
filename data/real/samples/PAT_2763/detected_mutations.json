@@ -1,0 +1,42 @@
+[
+  {
+    "position": 527739,
+    "reference": "C",
+    "alternative": "G",
+    "type": "SNP",
+    "gene": "APC",
+    "patient": "PAT_2763",
+    "impact": "MODERATE",
+    "protein_change": "T2823R",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "5",
+    "start_position_abs": 112179759,
+    "end_position_abs": 112179759,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Vessie",
+    "frequency": 0.4651
+  },
+  {
+    "position": 1854502,
+    "reference": "C",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "PTEN",
+    "patient": "PAT_2763",
+    "impact": "HIGH",
+    "protein_change": "Q214*",
+    "mutation_type_detail": "Nonsense_Mutation",
+    "chromosome": "10",
+    "start_position_abs": 89717615,
+    "end_position_abs": 89717615,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Vessie",
+    "frequency": 0.5612
+  }
+]

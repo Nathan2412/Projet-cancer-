@@ -1,21 +1,24 @@
 # DNA Cancer Analysis Pipeline
 
-Pipeline d'analyse genomique complet : detection de mutations dans l'ADN et correlation avec les cancers, utilisant de **vraies donnees cliniques** issues du projet TCGA (The Cancer Genome Atlas).
+Pipeline d'analyse génomique complet : détection de mutations dans l'ADN et corrélation avec les cancers, utilisant des **vraies données cliniques** issues du projet TCGA (The Cancer Genome Atlas).
 
 ---
 
 ## Contexte du projet
 
-Ce projet a ete developpe dans le cadre d'un projet ING2. L'objectif est de construire un pipeline bioinformatique capable d'analyser des mutations somatiques reelles et d'evaluer leur correlation avec differents types de cancers.
+Ce projet a été développé dans le cadre d'un projet ING2. L'objectif est de construire un pipeline bioinformatique capable d'analyser des mutations somatiques réelles et d'évaluer leur corrélation avec différents types de cancers.
 
-### Ce qui a ete realise
+### Ce qui a été réalisé
 
-- **Integration de donnees reelles TCGA** : le dataset initial etait entierement synthetique (genere par `generate_data.py` avec des mutations aleatoires). Nous l'avons remplace par de vraies mutations somatiques telechargees depuis l'API publique cBioPortal.
-- **3 674 patients reels** provenant de **12 etudes TCGA PanCancer Atlas** couvrant 12 types de cancers differents.
-- **104 hotspots mutationnels** identifies automatiquement a partir des mutations recurrentes dans la cohorte.
-- **Pipeline complet d'analyse** : telechargement -> annotation -> scoring de pathogenicite -> correlation gene-cancer -> rapports.
-- **Nettoyage automatique** : les anciens resultats sont supprimes a chaque nouvelle execution pour eviter les confusions.
-- Le mode synthetique est conserve comme fallback pour fonctionner sans internet.
+- **Intégration de données réelles TCGA** : 3 674 patients provenant de 12 études TCGA PanCancer Atlas
+- **Pipeline d'analyse complet** : téléchargement → détection → annotation → scoring → corrélation → ML → rapports
+- **Machine Learning** : prédiction du type de cancer basée sur le profil mutationnel (Random Forest, Gradient Boosting, SVM)
+- **Signatures alléliques discriminantes** : identification des mutations caractéristiques de chaque cancer
+- **104 hotspots mutationnels** identifiés automatiquement
+- **Correction du bug de détection des mutations** : évite l'explosion de faux positifs
+- Le mode synthétique est conservé comme fallback pour fonctionner sans internet
+
+> 📋 Voir [INFORMATION.md](INFORMATION.md) pour le détail complet de ce qui a été fait et ce qui reste à faire.
 
 ---
 
@@ -61,32 +64,36 @@ Source : **TCGA PanCancer Atlas** via l'API publique **cBioPortal** (https://www
 
 ```
 dna-cancer-analysis/
-|-- config.py               # Configuration, genes cibles, seuils
-|-- download_real_data.py    # Telechargement donnees TCGA (cBioPortal API)
-|-- generate_data.py         # Generateur de donnees synthetiques (fallback)
-|-- loader.py                # Chargement des fichiers (FASTA, FASTQ, JSON)
-|-- sequencer.py             # Analyse qualite et couverture des reads
-|-- mutations.py             # Detection et classification des mutations
-|-- annotator.py             # Annotation et scoring de pathogenicite
-|-- correlator.py            # Correlation mutations <-> cancers
-|-- visualizer.py            # Graphiques et visualisations
-|-- reporter.py              # Rapports texte et HTML
-|-- main.py                  # Pipeline principal (orchestre tout)
-|-- requirements.txt         # Dependances Python
-|-- INSTRUCTIONS.md          # Guide d'utilisation detaille
-|-- .gitignore               # Fichiers exclus du depot
-|
-|-- data/                    # Donnees (generees localement, non versionnees)
-|   |-- real/                #   Donnees TCGA telechargees
-|   +-- samples/             #   Donnees synthetiques
-|
-+-- output/                  # Resultats (regeneres, non versionnes)
-    |-- reports/             #   Rapports .txt et .html
-    +-- plots/               #   Graphiques .png
+├── config.py               # Configuration, gènes cibles, seuils
+├── download_real_data.py   # Téléchargement données TCGA (cBioPortal API)
+├── generate_data.py        # Générateur de données synthétiques (fallback)
+├── loader.py               # Chargement des fichiers (FASTA, FASTQ, JSON)
+├── sequencer.py            # Analyse qualité et couverture des reads
+├── mutations.py            # Détection et classification des mutations
+├── annotator.py            # Annotation et scoring de pathogénicité
+├── correlator.py           # Corrélation mutations <-> cancers
+├── visualizer.py           # Graphiques et visualisations
+├── reporter.py             # Rapports texte et HTML
+├── ml_predictor.py         # Pipeline Machine Learning principal
+├── ml_model_selection.py   # Comparaison et sélection de modèles
+├── ml_sectorization.py     # Clustering des profils patients
+├── allele_analyzer.py      # Signatures alléliques discriminantes
+├── main.py                 # Pipeline principal (orchestre tout)
+├── requirements.txt        # Dépendances Python
+├── INSTRUCTIONS.md         # Guide d'utilisation détaillé
+├── INFORMATION.md          # État du projet et documentation technique
+├── .gitignore              # Fichiers exclus du dépôt
+│
+├── data/                   # Données
+│   ├── real/               #   Données TCGA téléchargées
+│   └── samples/            #   Données synthétiques
+│
+└── output/                 # Résultats
+    ├── reports/            #   Rapports .txt et .html
+    └── plots/              #   Graphiques .png
 ```
 
-> Les dossiers `data/` et `output/` sont exclus du depot git (`.gitignore`).
-> Ils sont regeneres par `download_real_data.py` et `main.py`.
+> 📋 Voir [INFORMATION.md](INFORMATION.md) pour la documentation détaillée.
 
 ---
 

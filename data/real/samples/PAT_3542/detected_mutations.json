@@ -1,0 +1,42 @@
+[
+  {
+    "position": 231500,
+    "reference": "A",
+    "alternative": "G",
+    "type": "SNP",
+    "gene": "PIK3CA",
+    "patient": "PAT_3542",
+    "impact": "MODIFIER",
+    "protein_change": "M1?",
+    "mutation_type_detail": "Translation_Start_Site",
+    "chromosome": "3",
+    "start_position_abs": 178916614,
+    "end_position_abs": 178916614,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Glioblastome",
+    "frequency": 0.3521
+  },
+  {
+    "position": 1854551,
+    "reference": "G",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "PTEN",
+    "patient": "PAT_3542",
+    "impact": "MODERATE",
+    "protein_change": "G230E",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "10",
+    "start_position_abs": 89717664,
+    "end_position_abs": 89717664,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Glioblastome",
+    "frequency": 0.7063
+  }
+]

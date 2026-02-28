@@ -1,0 +1,42 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_1751
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_1751
+  Age:            72 ans
+  Sexe:           F
+  Severite:       moderate
+  Cancer connu:   Pancreas
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       2
+  Charge mutationnelle:    8.82 mut/Mb
+  Risque global:           FAIBLE
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Melanome                0.800 MODERE          KRAS
+  Ovaire                  0.800 MODERE          KRAS
+  Vessie                  0.800 MODERE          KRAS
+  Colon                   0.800 MODERE          KRAS
+  Pancreas                0.800 MODERE          KRAS
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  KRAS       SNP      193496   0.800 Pathogenic
+  TP53       DEL       90189   0.550 VUS
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS6 (MMR deficient)                similarite: 0.400
+
+--- RECOMMANDATIONS ---
+  -> Depistage standard selon les recommandations
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

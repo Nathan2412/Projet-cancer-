@@ -1,0 +1,23 @@
+[
+  {
+    "position": 89956,
+    "reference": "-",
+    "alternative": "GGCCA",
+    "type": "INS",
+    "gene": "TP53",
+    "patient": "PAT_0296",
+    "impact": "HIGH",
+    "protein_change": "I162Wfs*10",
+    "mutation_type_detail": "Frame_Shift_Ins",
+    "chromosome": "17",
+    "start_position_abs": 7578446,
+    "end_position_abs": 7578447,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Sein",
+    "frequency": 0.4458,
+    "length": 4
+  }
+]

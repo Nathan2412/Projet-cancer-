@@ -1,0 +1,53 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_1329
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_1329
+  Age:            75 ans
+  Sexe:           M
+  Severite:       moderate
+  Cancer connu:   Colon
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       3
+  Charge mutationnelle:    13.24 mut/Mb
+  Risque global:           ELEVE
+
+--- ALERTES ---
+  [!] Risque ELEVE pour Colon (score: 1.8)
+  [!] Risque ELEVE pour Thyroide (score: 1.0)
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Colon                   1.800 ELEVE           PIK3CA, APC
+  Thyroide                1.000 ELEVE           APC
+  Glioblastome            0.800 MODERE          PIK3CA
+  Melanome                0.800 MODERE          PIK3CA
+  Poumon                  0.800 MODERE          PIK3CA
+  Vessie                  0.800 MODERE          PIK3CA
+  Rein                    0.800 MODERE          PIK3CA
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  APC        SNP      590906   1.000 Pathogenic
+  PIK3CA     SNP      212023   0.800 Pathogenic
+  TP53       DEL       89085   0.750 Likely_pathogenic
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS1 (age)                          similarite: 0.800
+  SBS7 (UV)                           similarite: 0.600
+  SBS6 (MMR deficient)                similarite: 0.500
+  SBS2 (APOBEC)                       similarite: 0.500
+
+--- RECOMMANDATIONS ---
+  -> Consultation oncogenetique recommandee
+  -> Surveillance renforcee des organes cibles
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

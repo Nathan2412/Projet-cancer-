@@ -1,0 +1,23 @@
+[
+  {
+    "position": 1854556,
+    "reference": "ACACGA",
+    "alternative": "-",
+    "type": "DEL",
+    "gene": "PTEN",
+    "patient": "PAT_3390",
+    "impact": "MODERATE",
+    "protein_change": "T232_R233del",
+    "mutation_type_detail": "In_Frame_Del",
+    "chromosome": "10",
+    "start_position_abs": 89717669,
+    "end_position_abs": 89717674,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Foie",
+    "frequency": 0.3824,
+    "length": 5
+  }
+]

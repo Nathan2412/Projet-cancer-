@@ -1,0 +1,22 @@
+[
+  {
+    "position": 633248,
+    "reference": "C",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "RB1",
+    "patient": "PAT_2878",
+    "impact": "HIGH",
+    "protein_change": "R255*",
+    "mutation_type_detail": "Nonsense_Mutation",
+    "chromosome": "13",
+    "start_position_abs": 48936995,
+    "end_position_abs": 48936995,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Vessie",
+    "frequency": 0.7241
+  }
+]

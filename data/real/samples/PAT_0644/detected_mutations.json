@@ -1,0 +1,22 @@
+[
+  {
+    "position": 1854512,
+    "reference": "T",
+    "alternative": "C",
+    "type": "SNP",
+    "gene": "PTEN",
+    "patient": "PAT_0644",
+    "impact": "MODERATE",
+    "protein_change": "V217A",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "10",
+    "start_position_abs": 89717625,
+    "end_position_abs": 89717625,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Sein",
+    "frequency": 0.1025
+  }
+]

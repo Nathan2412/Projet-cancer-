@@ -1,0 +1,22 @@
+[
+  {
+    "position": 39569,
+    "reference": "A",
+    "alternative": "G",
+    "type": "SNP",
+    "gene": "ALK",
+    "patient": "PAT_3237",
+    "impact": "MODERATE",
+    "protein_change": "S865P",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "2",
+    "start_position_abs": 29455209,
+    "end_position_abs": 29455209,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Rein",
+    "frequency": 0.378
+  }
+]

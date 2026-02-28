@@ -1,0 +1,23 @@
+[
+  {
+    "position": 1829697,
+    "reference": "A",
+    "alternative": "-",
+    "type": "DEL",
+    "gene": "PTEN",
+    "patient": "PAT_3650",
+    "impact": "HIGH",
+    "protein_change": "E99Nfs*14",
+    "mutation_type_detail": "Frame_Shift_Del",
+    "chromosome": "10",
+    "start_position_abs": 89692810,
+    "end_position_abs": 89692810,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Glioblastome",
+    "frequency": 0.3932,
+    "length": 1
+  }
+]

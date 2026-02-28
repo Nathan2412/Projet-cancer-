@@ -1,14 +1,13 @@
 
-# Donnees telechargees et generees (trop volumineux, a regenerer)
-data/real/
-data/samples/
-data/reference.fasta
-data/known_mutations.json
-data/cohort_summary.json
-
-# Resultats d'analyse (regeneres a chaque execution)
-output/reports/
-output/plots/
+# NOTE: data/ et output/ ne sont plus exclus pour conserver les résultats sur git
+# Décommenter les lignes ci-dessous pour les exclure à nouveau:
+# data/real/
+# data/samples/
+# data/reference.fasta
+# data/known_mutations.json
+# data/cohort_summary.json
+# output/reports/
+# output/plots/
 
 # Python cache
 __pycache__/

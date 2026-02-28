@@ -1,0 +1,23 @@
+[
+  {
+    "position": 1848856,
+    "reference": "-",
+    "alternative": "C",
+    "type": "INS",
+    "gene": "PTEN",
+    "patient": "PAT_3230",
+    "impact": "HIGH",
+    "protein_change": "K197Qfs*5",
+    "mutation_type_detail": "Frame_Shift_Ins",
+    "chromosome": "10",
+    "start_position_abs": 89711969,
+    "end_position_abs": 89711970,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Rein",
+    "frequency": 0.2068,
+    "length": 1
+  }
+]

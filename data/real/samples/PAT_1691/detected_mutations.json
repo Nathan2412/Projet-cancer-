@@ -1,0 +1,23 @@
+[
+  {
+    "position": 657263,
+    "reference": "-",
+    "alternative": "T",
+    "type": "INS",
+    "gene": "BRCA2",
+    "patient": "PAT_1691",
+    "impact": "HIGH",
+    "protein_change": "S3364Ifs*4",
+    "mutation_type_detail": "Frame_Shift_Ins",
+    "chromosome": "13",
+    "start_position_abs": 32972737,
+    "end_position_abs": 32972738,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Prostate",
+    "frequency": 0.1358,
+    "length": 1
+  }
+]

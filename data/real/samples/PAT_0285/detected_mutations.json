@@ -1,0 +1,23 @@
+[
+  {
+    "position": 89038,
+    "reference": "CC",
+    "alternative": "-",
+    "type": "DEL",
+    "gene": "TP53",
+    "patient": "PAT_0285",
+    "impact": "HIGH",
+    "protein_change": "G108Ffs*40",
+    "mutation_type_detail": "Frame_Shift_Del",
+    "chromosome": "17",
+    "start_position_abs": 7579364,
+    "end_position_abs": 7579365,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Sein",
+    "frequency": 0.6774,
+    "length": 1
+  }
+]

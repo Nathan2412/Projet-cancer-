@@ -1,0 +1,22 @@
+{
+  "patient_id": "PAT_0019",
+  "severity": "extreme",
+  "num_mutations": 2895,
+  "genes_analyzed": [
+    "TP53",
+    "BRCA1",
+    "BRCA2",
+    "KRAS",
+    "EGFR",
+    "PIK3CA",
+    "APC",
+    "PTEN",
+    "RB1",
+    "MYC",
+    "ALK",
+    "BRAF"
+  ],
+  "cancer_type": "Thyroide",
+  "age": 57,
+  "sex": "F"
+}

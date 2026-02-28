@@ -1,0 +1,30 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_0674
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_0674
+  Age:            47 ans
+  Sexe:           M
+  Severite:       moderate
+  Cancer connu:   Poumon
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       6
+  Charge mutationnelle:    26.47 mut/Mb
+  Risque global:           MODERE
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS4 (tabac)                        similarite: 0.800
+  SBS2 (APOBEC)                       similarite: 0.733
+  SBS6 (MMR deficient)                similarite: 0.567
+  SBS13 (APOBEC)                      similarite: 0.533
+
+--- RECOMMANDATIONS ---
+  -> Suivi regulier avec depistage standard
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

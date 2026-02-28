@@ -1,0 +1,22 @@
+[
+  {
+    "position": 650462,
+    "reference": "T",
+    "alternative": "G",
+    "type": "SNP",
+    "gene": "RB1",
+    "patient": "PAT_3233",
+    "impact": "MODERATE",
+    "protein_change": "I470M",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "13",
+    "start_position_abs": 48954209,
+    "end_position_abs": 48954209,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Rein",
+    "frequency": 0.0714
+  }
+]

@@ -1,0 +1,23 @@
+[
+  {
+    "position": 1829897,
+    "reference": "T",
+    "alternative": "-",
+    "type": "DEL",
+    "gene": "PTEN",
+    "patient": "PAT_3641",
+    "impact": "HIGH",
+    "protein_change": "X164_splice",
+    "mutation_type_detail": "Splice_Site",
+    "chromosome": "10",
+    "start_position_abs": 89693010,
+    "end_position_abs": 89693010,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Glioblastome",
+    "frequency": 0.2051,
+    "length": 1
+  }
+]

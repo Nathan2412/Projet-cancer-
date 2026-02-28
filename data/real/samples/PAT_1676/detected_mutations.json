@@ -1,0 +1,23 @@
+[
+  {
+    "position": 88994,
+    "reference": "CAGGGGCCAGGAGGGGGCTGGTG",
+    "alternative": "-",
+    "type": "DEL",
+    "gene": "TP53",
+    "patient": "PAT_1676",
+    "impact": "HIGH",
+    "protein_change": "A86Vfs*55",
+    "mutation_type_detail": "Frame_Shift_Del",
+    "chromosome": "17",
+    "start_position_abs": 7579408,
+    "end_position_abs": 7579430,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Prostate",
+    "frequency": 0.2222,
+    "length": 22
+  }
+]

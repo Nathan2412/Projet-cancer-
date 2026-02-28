@@ -1,0 +1,43 @@
+[
+  {
+    "position": 90001,
+    "reference": "G",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "TP53",
+    "patient": "PAT_0823",
+    "impact": "MODERATE",
+    "protein_change": "P177T",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "17",
+    "start_position_abs": 7578401,
+    "end_position_abs": 7578401,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Poumon",
+    "frequency": 0.7647
+  },
+  {
+    "position": 223448,
+    "reference": "GGAATTAAGAGAAGC",
+    "alternative": "-",
+    "type": "DEL",
+    "gene": "EGFR",
+    "patient": "PAT_0823",
+    "impact": "MODERATE",
+    "protein_change": "E746_A750del",
+    "mutation_type_detail": "In_Frame_Del",
+    "chromosome": "7",
+    "start_position_abs": 55242465,
+    "end_position_abs": 55242479,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Poumon",
+    "frequency": 0.3934,
+    "length": 14
+  }
+]

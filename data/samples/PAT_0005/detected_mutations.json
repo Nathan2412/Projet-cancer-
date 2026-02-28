@@ -1,0 +1,1406 @@
+[
+  {
+    "position": 301,
+    "reference": "A",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "TP53",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 397,
+    "reference": "G",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "TP53",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 1538,
+    "reference": "A",
+    "alternative": "G",
+    "type": "SNP",
+    "gene": "TP53",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 1645,
+    "reference": "C",
+    "alternative": "G",
+    "type": "SNP",
+    "gene": "TP53",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 2065,
+    "reference": "T",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "TP53",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 2188,
+    "reference": "C",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "TP53",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 2488,
+    "reference": "G",
+    "alternative": "C",
+    "type": "SNP",
+    "gene": "TP53",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 2797,
+    "reference": "T",
+    "alternative": "G",
+    "type": "SNP",
+    "gene": "TP53",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 2870,
+    "reference": "C",
+    "alternative": "G",
+    "type": "SNP",
+    "gene": "TP53",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 3159,
+    "reference": "T",
+    "alternative": "C",
+    "type": "SNP",
+    "gene": "TP53",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 3313,
+    "reference": "A",
+    "alternative": "G",
+    "type": "SNP",
+    "gene": "TP53",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 3594,
+    "reference": "T",
+    "alternative": "G",
+    "type": "SNP",
+    "gene": "TP53",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 317,
+    "reference": "-",
+    "alternative": "G",
+    "type": "INS",
+    "gene": "BRCA1",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 331,
+    "reference": "A",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "BRCA1",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 487,
+    "reference": "C",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "BRCA1",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 850,
+    "reference": "T",
+    "alternative": "G",
+    "type": "SNP",
+    "gene": "BRCA1",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 1115,
+    "reference": "A",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "BRCA1",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 1205,
+    "reference": "C",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "BRCA1",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 1271,
+    "reference": "C",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "BRCA1",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 1306,
+    "reference": "T",
+    "alternative": "G",
+    "type": "SNP",
+    "gene": "BRCA1",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 1700,
+    "reference": "T",
+    "alternative": "C",
+    "type": "SNP",
+    "gene": "BRCA1",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 1812,
+    "reference": "T",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "BRCA1",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 1951,
+    "reference": "G",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "BRCA1",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 2308,
+    "reference": "G",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "BRCA1",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 2886,
+    "reference": "T",
+    "alternative": "G",
+    "type": "SNP",
+    "gene": "BRCA1",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 3044,
+    "reference": "A",
+    "alternative": "C",
+    "type": "SNP",
+    "gene": "BRCA1",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 3253,
+    "reference": "T",
+    "alternative": "C",
+    "type": "SNP",
+    "gene": "BRCA1",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 456,
+    "reference": "-",
+    "alternative": "CT",
+    "type": "INS",
+    "gene": "BRCA2",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 598,
+    "reference": "C",
+    "alternative": "G",
+    "type": "SNP",
+    "gene": "BRCA2",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 1405,
+    "reference": "G",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "BRCA2",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 1737,
+    "reference": "T",
+    "alternative": "G",
+    "type": "SNP",
+    "gene": "BRCA2",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 1771,
+    "reference": "G",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "BRCA2",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 1774,
+    "reference": "A",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "BRCA2",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 2221,
+    "reference": "G",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "BRCA2",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 2613,
+    "reference": "C",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "BRCA2",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 25,
+    "reference": "T",
+    "alternative": "-",
+    "type": "DEL",
+    "gene": "KRAS",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 579,
+    "reference": "C",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "KRAS",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 1771,
+    "reference": "T",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "KRAS",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 2227,
+    "reference": "C",
+    "alternative": "G",
+    "type": "SNP",
+    "gene": "KRAS",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 3094,
+    "reference": "C",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "KRAS",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 3778,
+    "reference": "-",
+    "alternative": "GAT",
+    "type": "INS",
+    "gene": "KRAS",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 4775,
+    "reference": "A",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "KRAS",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 51,
+    "reference": "C",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "EGFR",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 275,
+    "reference": "T",
+    "alternative": "G",
+    "type": "SNP",
+    "gene": "EGFR",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 748,
+    "reference": "T",
+    "alternative": "C",
+    "type": "SNP",
+    "gene": "EGFR",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 982,
+    "reference": "G",
+    "alternative": "C",
+    "type": "SNP",
+    "gene": "EGFR",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 1220,
+    "reference": "C",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "EGFR",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 1268,
+    "reference": "A",
+    "alternative": "G",
+    "type": "SNP",
+    "gene": "EGFR",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 1700,
+    "reference": "T",
+    "alternative": "G",
+    "type": "SNP",
+    "gene": "EGFR",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 2073,
+    "reference": "T",
+    "alternative": "C",
+    "type": "SNP",
+    "gene": "EGFR",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 2154,
+    "reference": "A",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "EGFR",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 2303,
+    "reference": "T",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "EGFR",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 2457,
+    "reference": "T",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "EGFR",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 204,
+    "reference": "G",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "PIK3CA",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 517,
+    "reference": "T",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "PIK3CA",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 1044,
+    "reference": "C",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "PIK3CA",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 1990,
+    "reference": "A",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "PIK3CA",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 2266,
+    "reference": "G",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "PIK3CA",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 2419,
+    "reference": "G",
+    "alternative": "-",
+    "type": "DEL",
+    "gene": "PIK3CA",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 2740,
+    "reference": "A",
+    "alternative": "C",
+    "type": "SNP",
+    "gene": "PIK3CA",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 2793,
+    "reference": "C",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "PIK3CA",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 2868,
+    "reference": "G",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "PIK3CA",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 3630,
+    "reference": "G",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "PIK3CA",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 4088,
+    "reference": "G",
+    "alternative": "C",
+    "type": "SNP",
+    "gene": "PIK3CA",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 4178,
+    "reference": "T",
+    "alternative": "-",
+    "type": "DEL",
+    "gene": "PIK3CA",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 5302,
+    "reference": "G",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "PIK3CA",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 5424,
+    "reference": "A",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "PIK3CA",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 5734,
+    "reference": "G",
+    "alternative": "C",
+    "type": "SNP",
+    "gene": "PIK3CA",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 5867,
+    "reference": "A",
+    "alternative": "C",
+    "type": "SNP",
+    "gene": "PIK3CA",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 5919,
+    "reference": "G",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "PIK3CA",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 6062,
+    "reference": "G",
+    "alternative": "C",
+    "type": "SNP",
+    "gene": "PIK3CA",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 6074,
+    "reference": "G",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "PIK3CA",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 6267,
+    "reference": "T",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "PIK3CA",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 6568,
+    "reference": "C",
+    "alternative": "G",
+    "type": "SNP",
+    "gene": "PIK3CA",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 7216,
+    "reference": "T",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "PIK3CA",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 7416,
+    "reference": "T",
+    "alternative": "C",
+    "type": "SNP",
+    "gene": "PIK3CA",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 267,
+    "reference": "G",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "APC",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 737,
+    "reference": "A",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "APC",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 1534,
+    "reference": "C",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "APC",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 2110,
+    "reference": "G",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "APC",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 3172,
+    "reference": "-",
+    "alternative": "ACAGA",
+    "type": "INS",
+    "gene": "APC",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 3751,
+    "reference": "A",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "APC",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 3856,
+    "reference": "G",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "APC",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 3944,
+    "reference": "-",
+    "alternative": "A",
+    "type": "INS",
+    "gene": "APC",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 4310,
+    "reference": "A",
+    "alternative": "G",
+    "type": "SNP",
+    "gene": "APC",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 4412,
+    "reference": "G",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "APC",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 4606,
+    "reference": "C",
+    "alternative": "G",
+    "type": "SNP",
+    "gene": "APC",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 5254,
+    "reference": "C",
+    "alternative": "G",
+    "type": "SNP",
+    "gene": "APC",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 5398,
+    "reference": "G",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "APC",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 6573,
+    "reference": "C",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "APC",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 284,
+    "reference": "T",
+    "alternative": "C",
+    "type": "SNP",
+    "gene": "PTEN",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 540,
+    "reference": "-",
+    "alternative": "T",
+    "type": "INS",
+    "gene": "PTEN",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 1570,
+    "reference": "T",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "PTEN",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 1875,
+    "reference": "A",
+    "alternative": "-",
+    "type": "DEL",
+    "gene": "PTEN",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 2643,
+    "reference": "C",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "PTEN",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 3449,
+    "reference": "-",
+    "alternative": "GTTC",
+    "type": "INS",
+    "gene": "PTEN",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 4845,
+    "reference": "G",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "PTEN",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 836,
+    "reference": "-",
+    "alternative": "GG",
+    "type": "INS",
+    "gene": "RB1",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 867,
+    "reference": "G",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "RB1",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 1576,
+    "reference": "G",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "RB1",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 1699,
+    "reference": "T",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "RB1",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 1908,
+    "reference": "C",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "RB1",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 2042,
+    "reference": "A",
+    "alternative": "C",
+    "type": "SNP",
+    "gene": "RB1",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 3368,
+    "reference": "A",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "RB1",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 3445,
+    "reference": "A",
+    "alternative": "G",
+    "type": "SNP",
+    "gene": "RB1",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 3482,
+    "reference": "A",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "RB1",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 4058,
+    "reference": "A",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "RB1",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 4378,
+    "reference": "T",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "RB1",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 4955,
+    "reference": "C",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "RB1",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 5956,
+    "reference": "-",
+    "alternative": "ATAA",
+    "type": "INS",
+    "gene": "RB1",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 6093,
+    "reference": "T",
+    "alternative": "C",
+    "type": "SNP",
+    "gene": "RB1",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 6097,
+    "reference": "C",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "RB1",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 39,
+    "reference": "C",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "MYC",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 1091,
+    "reference": "G",
+    "alternative": "C",
+    "type": "SNP",
+    "gene": "MYC",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 1253,
+    "reference": "T",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "MYC",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 2105,
+    "reference": "A",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "MYC",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 2623,
+    "reference": "C",
+    "alternative": "G",
+    "type": "SNP",
+    "gene": "MYC",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 2708,
+    "reference": "-",
+    "alternative": "C",
+    "type": "INS",
+    "gene": "MYC",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 2718,
+    "reference": "-",
+    "alternative": "ATG",
+    "type": "INS",
+    "gene": "MYC",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 3100,
+    "reference": "T",
+    "alternative": "G",
+    "type": "SNP",
+    "gene": "MYC",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 3158,
+    "reference": "T",
+    "alternative": "C",
+    "type": "SNP",
+    "gene": "MYC",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 3392,
+    "reference": "A",
+    "alternative": "C",
+    "type": "SNP",
+    "gene": "MYC",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 4053,
+    "reference": "-",
+    "alternative": "A",
+    "type": "INS",
+    "gene": "MYC",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 4401,
+    "reference": "G",
+    "alternative": "C",
+    "type": "SNP",
+    "gene": "MYC",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 4906,
+    "reference": "G",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "MYC",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 5216,
+    "reference": "A",
+    "alternative": "G",
+    "type": "SNP",
+    "gene": "MYC",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 5331,
+    "reference": "T",
+    "alternative": "C",
+    "type": "SNP",
+    "gene": "MYC",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 5469,
+    "reference": "-",
+    "alternative": "ACTG",
+    "type": "INS",
+    "gene": "MYC",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 5734,
+    "reference": "T",
+    "alternative": "C",
+    "type": "SNP",
+    "gene": "MYC",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 5775,
+    "reference": "C",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "MYC",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 5990,
+    "reference": "-",
+    "alternative": "TGCC",
+    "type": "INS",
+    "gene": "MYC",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 6913,
+    "reference": "T",
+    "alternative": "C",
+    "type": "SNP",
+    "gene": "MYC",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 7780,
+    "reference": "G",
+    "alternative": "C",
+    "type": "SNP",
+    "gene": "MYC",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 664,
+    "reference": "A",
+    "alternative": "G",
+    "type": "SNP",
+    "gene": "ALK",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 800,
+    "reference": "G",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "ALK",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 1023,
+    "reference": "T",
+    "alternative": "C",
+    "type": "SNP",
+    "gene": "ALK",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 1060,
+    "reference": "C",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "ALK",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 1158,
+    "reference": "G",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "ALK",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 1614,
+    "reference": "C",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "ALK",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 1990,
+    "reference": "T",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "ALK",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 2694,
+    "reference": "A",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "ALK",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 2965,
+    "reference": "A",
+    "alternative": "C",
+    "type": "SNP",
+    "gene": "ALK",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 33,
+    "reference": "T",
+    "alternative": "C",
+    "type": "SNP",
+    "gene": "BRAF",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 350,
+    "reference": "T",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "BRAF",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 508,
+    "reference": "C",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "BRAF",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 653,
+    "reference": "-",
+    "alternative": "CCA",
+    "type": "INS",
+    "gene": "BRAF",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 687,
+    "reference": "A",
+    "alternative": "G",
+    "type": "SNP",
+    "gene": "BRAF",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 691,
+    "reference": "G",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "BRAF",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 1272,
+    "reference": "A",
+    "alternative": "C",
+    "type": "SNP",
+    "gene": "BRAF",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 1570,
+    "reference": "A",
+    "alternative": "G",
+    "type": "SNP",
+    "gene": "BRAF",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 1822,
+    "reference": "T",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "BRAF",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 3145,
+    "reference": "C",
+    "alternative": "G",
+    "type": "SNP",
+    "gene": "BRAF",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 3833,
+    "reference": "C",
+    "alternative": "-",
+    "type": "DEL",
+    "gene": "BRAF",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 3841,
+    "reference": "A",
+    "alternative": "G",
+    "type": "SNP",
+    "gene": "BRAF",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 4150,
+    "reference": "A",
+    "alternative": "G",
+    "type": "SNP",
+    "gene": "BRAF",
+    "patient": "PAT_0005",
+    "severity": "low"
+  },
+  {
+    "position": 4836,
+    "reference": "A",
+    "alternative": "C",
+    "type": "SNP",
+    "gene": "BRAF",
+    "patient": "PAT_0005",
+    "severity": "low"
+  }
+]

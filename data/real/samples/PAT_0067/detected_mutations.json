@@ -1,0 +1,43 @@
+[
+  {
+    "position": 90180,
+    "reference": "TC",
+    "alternative": "-",
+    "type": "DEL",
+    "gene": "TP53",
+    "patient": "PAT_0067",
+    "impact": "HIGH",
+    "protein_change": "R209Kfs*6",
+    "mutation_type_detail": "Frame_Shift_Del",
+    "chromosome": "17",
+    "start_position_abs": 7578222,
+    "end_position_abs": 7578223,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Sein",
+    "frequency": 0.4754,
+    "length": 1
+  },
+  {
+    "position": 196029,
+    "reference": "A",
+    "alternative": "G",
+    "type": "SNP",
+    "gene": "PIK3CA",
+    "patient": "PAT_0067",
+    "impact": "MODERATE",
+    "protein_change": "H1047R",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "3",
+    "start_position_abs": 178952085,
+    "end_position_abs": 178952085,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Sein",
+    "frequency": 0.8967
+  }
+]

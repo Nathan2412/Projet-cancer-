@@ -1,0 +1,29 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_3409
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_3409
+  Age:            60 ans
+  Sexe:           F
+  Severite:       moderate
+  Cancer connu:   Glioblastome
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       5
+  Charge mutationnelle:    22.06 mut/Mb
+  Risque global:           MODERE
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS2 (APOBEC)                       similarite: 0.600
+  SBS13 (APOBEC)                      similarite: 0.600
+  SBS6 (MMR deficient)                similarite: 0.400
+
+--- RECOMMANDATIONS ---
+  -> Suivi regulier avec depistage standard
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

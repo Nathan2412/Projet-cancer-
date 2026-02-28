@@ -1,0 +1,31 @@
+{
+  "patient_id": "PAT_0048",
+  "severity": "moderate",
+  "num_mutations": 3,
+  "genes_analyzed": [
+    "TP53",
+    "BRCA1",
+    "BRCA2",
+    "KRAS",
+    "EGFR",
+    "PIK3CA",
+    "APC",
+    "PTEN",
+    "RB1",
+    "MYC",
+    "ALK",
+    "BRAF"
+  ],
+  "genes_with_mutations": [
+    "BRAF",
+    "PIK3CA",
+    "PTEN"
+  ],
+  "cancer_type": "Sein",
+  "age": 39,
+  "sex": "F",
+  "data_source": "TCGA_PanCancer_Atlas",
+  "is_real_data": true,
+  "original_patient_id": "TCGA-EW-A2FV",
+  "original_study": "brca_tcga_pan_can_atlas_2018"
+}

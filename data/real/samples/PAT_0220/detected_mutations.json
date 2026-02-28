@@ -1,0 +1,22 @@
+[
+  {
+    "position": 89091,
+    "reference": "C",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "TP53",
+    "patient": "PAT_0220",
+    "impact": "HIGH",
+    "protein_change": "X125_splice",
+    "mutation_type_detail": "Splice_Site",
+    "chromosome": "17",
+    "start_position_abs": 7579311,
+    "end_position_abs": 7579311,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Sein",
+    "frequency": 0.6
+  }
+]

@@ -1,0 +1,43 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_1167
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_1167
+  Age:            48 ans
+  Sexe:           F
+  Severite:       moderate
+  Cancer connu:   Colon
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       6
+  Charge mutationnelle:    26.47 mut/Mb
+  Risque global:           MODERE
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Glioblastome            0.800 MODERE          PIK3CA
+  Vessie                  0.800 MODERE          PIK3CA
+  Colon                   0.800 MODERE          PIK3CA
+  Sein                    0.800 MODERE          PIK3CA
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  PIK3CA     SNP      231238   0.800 Pathogenic
+  BRCA2      DEL      591092   0.550 VUS
+  ALK        SNP      135633   0.500 VUS
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS6 (MMR deficient)                similarite: 0.600
+  SBS2 (APOBEC)                       similarite: 0.600
+
+--- RECOMMANDATIONS ---
+  -> Suivi regulier avec depistage standard
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

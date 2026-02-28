@@ -1,0 +1,22 @@
+[
+  {
+    "position": 747186,
+    "reference": "A",
+    "alternative": "G",
+    "type": "SNP",
+    "gene": "RB1",
+    "patient": "PAT_0664",
+    "impact": "MODERATE",
+    "protein_change": "K873E",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "13",
+    "start_position_abs": 49050933,
+    "end_position_abs": 49050933,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Sein",
+    "frequency": 0.3178
+  }
+]

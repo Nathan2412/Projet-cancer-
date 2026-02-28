@@ -1,0 +1,22 @@
+[
+  {
+    "position": 629652,
+    "reference": "T",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "BRCA2",
+    "patient": "PAT_3209",
+    "impact": "MODERATE",
+    "protein_change": "F2841I",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "13",
+    "start_position_abs": 32945126,
+    "end_position_abs": 32945126,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Rein",
+    "frequency": 0.3922
+  }
+]

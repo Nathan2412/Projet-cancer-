@@ -1,0 +1,47 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_3492
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_3492
+  Age:            77 ans
+  Sexe:           F
+  Severite:       low
+  Cancer connu:   Glioblastome
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       2
+  Charge mutationnelle:    8.82 mut/Mb
+  Risque global:           FAIBLE
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Glioblastome            0.800 MODERE          PTEN
+  Melanome                0.800 MODERE          PTEN
+  Ovaire                  0.800 MODERE          PTEN
+  Foie                    0.800 MODERE          PTEN
+  Colon                   0.800 MODERE          PTEN
+  Rein                    0.800 MODERE          PTEN
+  Sein                    0.800 MODERE          PTEN
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  PTEN       SNP     1854494   0.800 Pathogenic
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS1 (age)                          similarite: 0.800
+  SBS4 (tabac)                        similarite: 0.800
+  SBS7 (UV)                           similarite: 0.600
+  SBS6 (MMR deficient)                similarite: 0.500
+  SBS2 (APOBEC)                       similarite: 0.500
+
+--- RECOMMANDATIONS ---
+  -> Depistage standard selon les recommandations
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

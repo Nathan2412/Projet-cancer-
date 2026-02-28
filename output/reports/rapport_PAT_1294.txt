@@ -1,0 +1,49 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_1294
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_1294
+  Age:            64 ans
+  Sexe:           M
+  Severite:       moderate
+  Cancer connu:   Colon
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       4
+  Charge mutationnelle:    17.65 mut/Mb
+  Risque global:           FAIBLE
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Glioblastome            0.800 MODERE          KRAS
+  Prostate                0.800 MODERE          KRAS
+  Poumon                  0.800 MODERE          KRAS
+  Melanome                0.800 MODERE          KRAS
+  Vessie                  0.800 MODERE          KRAS
+  Foie                    0.800 MODERE          KRAS
+  Colon                   0.800 MODERE          KRAS
+  Pancreas                0.800 MODERE          KRAS
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  KRAS       SNP      193495   0.800 Pathogenic
+  APC        SNP      532225   0.500 VUS
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS1 (age)                          similarite: 0.800
+  SBS2 (APOBEC)                       similarite: 0.750
+  SBS13 (APOBEC)                      similarite: 0.700
+  SBS7 (UV)                           similarite: 0.600
+  SBS6 (MMR deficient)                similarite: 0.500
+
+--- RECOMMANDATIONS ---
+  -> Depistage standard selon les recommandations
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

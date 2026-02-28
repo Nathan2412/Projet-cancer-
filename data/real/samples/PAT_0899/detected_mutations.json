@@ -1,0 +1,22 @@
+[
+  {
+    "position": 88917,
+    "reference": "C",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "TP53",
+    "patient": "PAT_0899",
+    "impact": "HIGH",
+    "protein_change": "E68*",
+    "mutation_type_detail": "Nonsense_Mutation",
+    "chromosome": "17",
+    "start_position_abs": 7579485,
+    "end_position_abs": 7579485,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Poumon",
+    "frequency": 0.3361
+  }
+]

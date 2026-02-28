@@ -1,0 +1,23 @@
+[
+  {
+    "position": 88970,
+    "reference": "-",
+    "alternative": "G",
+    "type": "INS",
+    "gene": "TP53",
+    "patient": "PAT_0376",
+    "impact": "HIGH",
+    "protein_change": "A86Cfs*63",
+    "mutation_type_detail": "Frame_Shift_Ins",
+    "chromosome": "17",
+    "start_position_abs": 7579432,
+    "end_position_abs": 7579433,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Sein",
+    "frequency": 0.5536,
+    "length": 1
+  }
+]

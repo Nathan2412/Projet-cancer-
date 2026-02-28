@@ -1,0 +1,22 @@
+[
+  {
+    "position": 266203,
+    "reference": "C",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "BRAF",
+    "patient": "PAT_1138",
+    "impact": "MODERATE",
+    "protein_change": "W604L",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "7",
+    "start_position_abs": 140453124,
+    "end_position_abs": 140453124,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Poumon",
+    "frequency": 0.0909
+  }
+]

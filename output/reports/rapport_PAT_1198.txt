@@ -1,0 +1,55 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_1198
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_1198
+  Age:            73 ans
+  Sexe:           M
+  Severite:       moderate
+  Cancer connu:   Colon
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       5
+  Charge mutationnelle:    22.06 mut/Mb
+  Risque global:           MODERE
+
+--- ALERTES ---
+  [!] Risque TRES ELEVE pour Melanome (score: 2.7)
+  [!] Risque TRES ELEVE pour Colon (score: 2.7)
+  [!] Risque ELEVE pour Prostate (score: 1.9)
+  [!] Risque ELEVE pour Poumon (score: 1.7)
+  [!] Risque ELEVE pour Vessie (score: 1.7)
+  [!] Risque ELEVE pour Foie (score: 1.7)
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Melanome                2.700 TRES ELEVE      KRAS, APC
+  Colon                   2.700 TRES ELEVE      KRAS, APC
+  Prostate                1.900 ELEVE           KRAS, APC
+  Poumon                  1.700 ELEVE           KRAS
+  Vessie                  1.700 ELEVE           KRAS
+  Foie                    1.700 ELEVE           KRAS
+  Glioblastome            0.900 MODERE          KRAS
+  Pancreas                0.900 MODERE          KRAS
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  APC        SNP      532867   1.000 Pathogenic
+  KRAS       SNP      193495   0.900 Pathogenic
+  KRAS       SNP      193492   0.800 Pathogenic
+  APC        DEL      531902   0.650 Likely_pathogenic
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS7 (UV)                           similarite: 0.400
+
+--- RECOMMANDATIONS ---
+  -> Suivi regulier avec depistage standard
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

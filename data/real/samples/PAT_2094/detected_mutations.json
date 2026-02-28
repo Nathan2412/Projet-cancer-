@@ -1,0 +1,22 @@
+[
+  {
+    "position": 1829716,
+    "reference": "T",
+    "alternative": "G",
+    "type": "SNP",
+    "gene": "PTEN",
+    "patient": "PAT_2094",
+    "impact": "MODERATE",
+    "protein_change": "C105G",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "10",
+    "start_position_abs": 89692829,
+    "end_position_abs": 89692829,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Melanome",
+    "frequency": 0.1571
+  }
+]

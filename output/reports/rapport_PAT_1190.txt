@@ -1,0 +1,57 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_1190
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_1190
+  Age:            88 ans
+  Sexe:           M
+  Severite:       moderate
+  Cancer connu:   Colon
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       5
+  Charge mutationnelle:    22.06 mut/Mb
+  Risque global:           MODERE
+
+--- ALERTES ---
+  [!] Risque TRES ELEVE pour Vessie (score: 2.5)
+  [!] Risque TRES ELEVE pour Colon (score: 2.5)
+  [!] Risque ELEVE pour Poumon (score: 1.8)
+  [!] Risque ELEVE pour Pancreas (score: 1.8)
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Vessie                  2.500 TRES ELEVE      KRAS, ALK, TP53
+  Colon                   2.500 TRES ELEVE      KRAS, ALK, TP53
+  Poumon                  1.800 ELEVE           KRAS, TP53
+  Pancreas                1.800 ELEVE           KRAS, TP53
+  Glioblastome            0.900 MODERE          TP53
+  Prostate                0.900 MODERE          TP53
+  Melanome                0.900 MODERE          KRAS
+  Foie                    0.900 MODERE          KRAS
+  Rein                    0.900 MODERE          KRAS
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  TP53       SNP       91308   0.900 Pathogenic
+  KRAS       SNP      193496   0.900 Pathogenic
+  ALK        SNP       29572   0.700 Likely_pathogenic
+  APC        SNP      532263   0.600 Likely_pathogenic
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS4 (tabac)                        similarite: 0.600
+  SBS2 (APOBEC)                       similarite: 0.600
+  SBS13 (APOBEC)                      similarite: 0.600
+  SBS6 (MMR deficient)                similarite: 0.400
+
+--- RECOMMANDATIONS ---
+  -> Suivi regulier avec depistage standard
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

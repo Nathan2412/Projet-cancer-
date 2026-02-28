@@ -1,0 +1,62 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_1887
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_1887
+  Age:            36 ans
+  Sexe:           F
+  Severite:       moderate
+  Cancer connu:   Melanome
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       5
+  Charge mutationnelle:    22.06 mut/Mb
+  Risque global:           MODERE
+
+--- ALERTES ---
+  [!] Risque TRES ELEVE pour Melanome (score: 2.8)
+  [!] Risque TRES ELEVE pour Glioblastome (score: 2.0)
+  [!] Risque TRES ELEVE pour Poumon (score: 2.0)
+  [!] Risque TRES ELEVE pour Vessie (score: 2.0)
+  [!] Risque TRES ELEVE pour Colon (score: 2.0)
+  [!] Risque ELEVE pour Sein (score: 1.8)
+  [!] Risque ELEVE pour Ovaire (score: 1.0)
+  [!] Risque ELEVE pour Rein (score: 1.0)
+  [!] Risque ELEVE pour Thyroide (score: 1.0)
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Melanome                2.800 TRES ELEVE      ALK, PIK3CA, BRAF
+  Glioblastome            2.000 TRES ELEVE      PIK3CA, BRAF
+  Poumon                  2.000 TRES ELEVE      PIK3CA, BRAF
+  Vessie                  2.000 TRES ELEVE      PIK3CA, BRAF
+  Colon                   2.000 TRES ELEVE      PIK3CA, BRAF
+  Sein                    1.800 ELEVE           ALK, PIK3CA
+  Ovaire                  1.000 ELEVE           PIK3CA
+  Rein                    1.000 ELEVE           PIK3CA
+  Thyroide                1.000 ELEVE           BRAF
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  PIK3CA     SNP      212023   1.000 Pathogenic
+  BRAF       SNP      266191   1.000 Pathogenic
+  ALK        SNP      502142   0.800 Pathogenic
+  TP53       SNP       90226   0.600 Likely_pathogenic
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS1 (age)                          similarite: 0.600
+  SBS6 (MMR deficient)                similarite: 0.600
+  SBS2 (APOBEC)                       similarite: 0.600
+  SBS7 (UV)                           similarite: 0.400
+
+--- RECOMMANDATIONS ---
+  -> Suivi regulier avec depistage standard
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

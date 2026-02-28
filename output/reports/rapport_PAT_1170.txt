@@ -1,0 +1,58 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_1170
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_1170
+  Age:            82 ans
+  Sexe:           M
+  Severite:       moderate
+  Cancer connu:   Colon
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       5
+  Charge mutationnelle:    22.06 mut/Mb
+  Risque global:           MODERE
+
+--- ALERTES ---
+  [!] Risque TRES ELEVE pour Colon (score: 2.8)
+  [!] Risque ELEVE pour Vessie (score: 1.9)
+  [!] Risque ELEVE pour Poumon (score: 1.8)
+  [!] Risque ELEVE pour Glioblastome (score: 1.0)
+  [!] Risque ELEVE pour Prostate (score: 1.0)
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Colon                   2.800 TRES ELEVE      KRAS, MYC, PIK3CA
+  Vessie                  1.900 ELEVE           KRAS, PIK3CA
+  Poumon                  1.800 ELEVE           KRAS, MYC
+  Glioblastome            1.000 ELEVE           PIK3CA
+  Prostate                1.000 ELEVE           PIK3CA
+  Pancreas                0.900 MODERE          KRAS
+  Thyroide                0.900 MODERE          KRAS
+  Melanome                0.900 MODERE          MYC
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  PIK3CA     SNP      231238   1.000 Pathogenic
+  KRAS       SNP      193495   0.900 Pathogenic
+  MYC        SNP     1015511   0.900 Pathogenic
+  APC        SNP      534110   0.600 Likely_pathogenic
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS1 (age)                          similarite: 0.600
+  SBS4 (tabac)                        similarite: 0.600
+  SBS6 (MMR deficient)                similarite: 0.600
+  SBS2 (APOBEC)                       similarite: 0.600
+  SBS7 (UV)                           similarite: 0.400
+
+--- RECOMMANDATIONS ---
+  -> Suivi regulier avec depistage standard
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

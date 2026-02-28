@@ -1,0 +1,22 @@
+[
+  {
+    "position": 225121,
+    "reference": "G",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "BRAF",
+    "patient": "PAT_2174",
+    "impact": "MODERATE",
+    "protein_change": "P348T",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "7",
+    "start_position_abs": 140494206,
+    "end_position_abs": 140494206,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Melanome",
+    "frequency": 0.3952
+  }
+]

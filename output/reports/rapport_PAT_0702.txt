@@ -1,0 +1,48 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_0702
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_0702
+  Age:            75 ans
+  Sexe:           F
+  Severite:       moderate
+  Cancer connu:   Poumon
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       4
+  Charge mutationnelle:    17.65 mut/Mb
+  Risque global:           FAIBLE
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Glioblastome            0.600 MODERE          TP53
+  Melanome                0.600 MODERE          TP53
+  Poumon                  0.600 MODERE          TP53
+  Ovaire                  0.600 MODERE          TP53
+  Vessie                  0.600 MODERE          TP53
+  Foie                    0.600 MODERE          TP53
+  Colon                   0.600 MODERE          TP53
+  Pancreas                0.600 MODERE          TP53
+  Sein                    0.600 MODERE          TP53
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  TP53       SNP       89090   0.600 Likely_pathogenic
+  BRCA2      SNP      596376   0.500 VUS
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS6 (MMR deficient)                similarite: 0.650
+  SBS2 (APOBEC)                       similarite: 0.650
+  SBS1 (age)                          similarite: 0.300
+
+--- RECOMMANDATIONS ---
+  -> Depistage standard selon les recommandations
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

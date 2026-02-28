@@ -1,0 +1,53 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_0176
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_0176
+  Age:            69 ans
+  Sexe:           F
+  Severite:       moderate
+  Cancer connu:   Sein
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       2
+  Charge mutationnelle:    8.82 mut/Mb
+  Risque global:           ELEVE
+
+--- ALERTES ---
+  [!] Risque ELEVE pour Glioblastome (score: 1.9)
+  [!] Risque ELEVE pour Colon (score: 1.9)
+  [!] Risque ELEVE pour Rein (score: 1.9)
+  [!] Risque ELEVE pour Sein (score: 1.9)
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Glioblastome            1.900 ELEVE           PIK3CA, PTEN
+  Colon                   1.900 ELEVE           PIK3CA, PTEN
+  Rein                    1.900 ELEVE           PIK3CA, PTEN
+  Sein                    1.900 ELEVE           PIK3CA, PTEN
+  Melanome                0.900 MODERE          PIK3CA
+  Poumon                  0.900 MODERE          PIK3CA
+  Ovaire                  0.900 MODERE          PIK3CA
+  Vessie                  0.900 MODERE          PIK3CA
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  PTEN       DEL     1857686   1.000 Pathogenic
+  PIK3CA     SNP      212023   0.900 Pathogenic
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS6 (MMR deficient)                similarite: 0.400
+  SBS2 (APOBEC)                       similarite: 0.400
+
+--- RECOMMANDATIONS ---
+  -> Consultation oncogenetique recommandee
+  -> Surveillance renforcee des organes cibles
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

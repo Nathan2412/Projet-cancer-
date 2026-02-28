@@ -1,0 +1,22 @@
+[
+  {
+    "position": 502125,
+    "reference": "C",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "ALK",
+    "patient": "PAT_0667",
+    "impact": "MODERATE",
+    "protein_change": "M301I",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "2",
+    "start_position_abs": 29917765,
+    "end_position_abs": 29917765,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Sein",
+    "frequency": 0.071
+  }
+]

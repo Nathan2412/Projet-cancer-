@@ -1,0 +1,42 @@
+[
+  {
+    "position": 90822,
+    "reference": "T",
+    "alternative": "C",
+    "type": "SNP",
+    "gene": "TP53",
+    "patient": "PAT_3192",
+    "impact": "MODERATE",
+    "protein_change": "Y234C",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "17",
+    "start_position_abs": 7577580,
+    "end_position_abs": 7577580,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Rein",
+    "frequency": 0.0577
+  },
+  {
+    "position": 1861930,
+    "reference": "G",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "PTEN",
+    "patient": "PAT_3192",
+    "impact": "HIGH",
+    "protein_change": "X343_splice",
+    "mutation_type_detail": "Splice_Site",
+    "chromosome": "10",
+    "start_position_abs": 89725043,
+    "end_position_abs": 89725043,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Rein",
+    "frequency": 0.0456
+  }
+]

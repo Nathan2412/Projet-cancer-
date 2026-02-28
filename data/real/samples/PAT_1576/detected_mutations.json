@@ -1,0 +1,43 @@
+[
+  {
+    "position": 544664,
+    "reference": "C",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "APC",
+    "patient": "PAT_1576",
+    "impact": "HIGH",
+    "protein_change": "Q480*",
+    "mutation_type_detail": "Nonsense_Mutation",
+    "chromosome": "5",
+    "start_position_abs": 112162834,
+    "end_position_abs": 112162834,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Colon",
+    "frequency": 0.4769
+  },
+  {
+    "position": 531746,
+    "reference": "T",
+    "alternative": "-",
+    "type": "DEL",
+    "gene": "APC",
+    "patient": "PAT_1576",
+    "impact": "HIGH",
+    "protein_change": "L1488Yfs*19",
+    "mutation_type_detail": "Frame_Shift_Del",
+    "chromosome": "5",
+    "start_position_abs": 112175752,
+    "end_position_abs": 112175752,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Colon",
+    "frequency": 0.2778,
+    "length": 1
+  }
+]

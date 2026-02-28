@@ -1,0 +1,22 @@
+[
+  {
+    "position": 91356,
+    "reference": "C",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "TP53",
+    "patient": "PAT_2789",
+    "impact": "HIGH",
+    "protein_change": "E298*",
+    "mutation_type_detail": "Nonsense_Mutation",
+    "chromosome": "17",
+    "start_position_abs": 7577046,
+    "end_position_abs": 7577046,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Vessie",
+    "frequency": 0.1129
+  }
+]

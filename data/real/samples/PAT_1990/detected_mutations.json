@@ -1,0 +1,42 @@
+[
+  {
+    "position": 1768165,
+    "reference": "G",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "BRCA1",
+    "patient": "PAT_1990",
+    "impact": "MODIFIER",
+    "protein_change": "X6_splice",
+    "mutation_type_detail": "Splice_Region",
+    "chromosome": "17",
+    "start_position_abs": 41276130,
+    "end_position_abs": 41276130,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Melanome",
+    "frequency": 0.4091
+  },
+  {
+    "position": 638928,
+    "reference": "G",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "RB1",
+    "patient": "PAT_1990",
+    "impact": "MODERATE",
+    "protein_change": "Q354H",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "13",
+    "start_position_abs": 48942675,
+    "end_position_abs": 48942675,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Melanome",
+    "frequency": 0.1111
+  }
+]

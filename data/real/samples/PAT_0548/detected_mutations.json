@@ -1,0 +1,23 @@
+[
+  {
+    "position": 220042,
+    "reference": "TGGATTAGAAGATTTGCTGAACCCTAT",
+    "alternative": "-",
+    "type": "DEL",
+    "gene": "PIK3CA",
+    "patient": "PAT_0548",
+    "impact": "MODERATE",
+    "protein_change": "L452_G460del",
+    "mutation_type_detail": "In_Frame_Del",
+    "chromosome": "3",
+    "start_position_abs": 178928072,
+    "end_position_abs": 178928098,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Sein",
+    "frequency": 0.331,
+    "length": 26
+  }
+]

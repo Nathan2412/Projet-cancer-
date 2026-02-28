@@ -1,0 +1,43 @@
+[
+  {
+    "position": 231176,
+    "reference": "GAA",
+    "alternative": "-",
+    "type": "DEL",
+    "gene": "PIK3CA",
+    "patient": "PAT_0184",
+    "impact": "MODERATE",
+    "protein_change": "E110del",
+    "mutation_type_detail": "In_Frame_Del",
+    "chromosome": "3",
+    "start_position_abs": 178916938,
+    "end_position_abs": 178916940,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Sein",
+    "frequency": 0.3657,
+    "length": 2
+  },
+  {
+    "position": 532457,
+    "reference": "A",
+    "alternative": "C",
+    "type": "SNP",
+    "gene": "APC",
+    "patient": "PAT_0184",
+    "impact": "MODERATE",
+    "protein_change": "K1250N",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "5",
+    "start_position_abs": 112175041,
+    "end_position_abs": 112175041,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Sein",
+    "frequency": 0.4103
+  }
+]

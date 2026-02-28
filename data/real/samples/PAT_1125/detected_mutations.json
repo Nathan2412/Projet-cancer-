@@ -1,0 +1,23 @@
+[
+  {
+    "position": 1761133,
+    "reference": "-",
+    "alternative": "G",
+    "type": "INS",
+    "gene": "PTEN",
+    "patient": "PAT_1125",
+    "impact": "HIGH",
+    "protein_change": "I8Dfs*3",
+    "mutation_type_detail": "Frame_Shift_Ins",
+    "chromosome": "10",
+    "start_position_abs": 89624246,
+    "end_position_abs": 89624247,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Poumon",
+    "frequency": 0.1835,
+    "length": 1
+  }
+]

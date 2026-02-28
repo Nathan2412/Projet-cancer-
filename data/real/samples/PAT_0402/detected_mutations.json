@@ -1,0 +1,23 @@
+[
+  {
+    "position": 89940,
+    "reference": "GCG",
+    "alternative": "-",
+    "type": "DEL",
+    "gene": "TP53",
+    "patient": "PAT_0402",
+    "impact": "MODERATE",
+    "protein_change": "R156del",
+    "mutation_type_detail": "In_Frame_Del",
+    "chromosome": "17",
+    "start_position_abs": 7578462,
+    "end_position_abs": 7578464,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Sein",
+    "frequency": 0.4828,
+    "length": 2
+  }
+]

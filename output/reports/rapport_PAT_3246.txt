@@ -1,0 +1,57 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_3246
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_3246
+  Age:            60 ans
+  Sexe:           F
+  Severite:       low
+  Cancer connu:   Foie
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       2
+  Charge mutationnelle:    8.82 mut/Mb
+  Risque global:           ELEVE
+
+--- ALERTES ---
+  [!] Risque ELEVE pour Glioblastome (score: 1.7)
+  [!] Risque ELEVE pour Poumon (score: 1.7)
+  [!] Risque ELEVE pour Vessie (score: 1.7)
+  [!] Risque ELEVE pour Foie (score: 1.7)
+  [!] Risque ELEVE pour Colon (score: 1.7)
+  [!] Risque ELEVE pour Sein (score: 1.7)
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Glioblastome            1.700 ELEVE           PIK3CA, TP53
+  Poumon                  1.700 ELEVE           PIK3CA, TP53
+  Vessie                  1.700 ELEVE           PIK3CA, TP53
+  Foie                    1.700 ELEVE           PIK3CA, TP53
+  Colon                   1.700 ELEVE           PIK3CA, TP53
+  Sein                    1.700 ELEVE           PIK3CA, TP53
+  Melanome                0.800 MODERE          TP53
+  Ovaire                  0.800 MODERE          TP53
+  Pancreas                0.800 MODERE          TP53
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  PIK3CA     SNP      212032   0.900 Pathogenic
+  TP53       SNP       89090   0.800 Pathogenic
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS4 (tabac)                        similarite: 0.800
+  SBS6 (MMR deficient)                similarite: 0.400
+  SBS2 (APOBEC)                       similarite: 0.400
+
+--- RECOMMANDATIONS ---
+  -> Consultation oncogenetique recommandee
+  -> Surveillance renforcee des organes cibles
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

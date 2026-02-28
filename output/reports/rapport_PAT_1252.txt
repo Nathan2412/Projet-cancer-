@@ -1,0 +1,35 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_1252
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_1252
+  Age:            56 ans
+  Sexe:           M
+  Severite:       moderate
+  Cancer connu:   Colon
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       4
+  Charge mutationnelle:    17.65 mut/Mb
+  Risque global:           FAIBLE
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  APC        INS      532148   0.650 Likely_pathogenic
+  APC        SNP      552500   0.500 VUS
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS13 (APOBEC)                      similarite: 0.867
+  SBS2 (APOBEC)                       similarite: 0.667
+  SBS6 (MMR deficient)                similarite: 0.400
+
+--- RECOMMANDATIONS ---
+  -> Depistage standard selon les recommandations
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

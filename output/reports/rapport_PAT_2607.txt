@@ -1,0 +1,42 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_2607
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_2607
+  Age:            78 ans
+  Sexe:           F
+  Severite:       moderate
+  Cancer connu:   Vessie
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       5
+  Charge mutationnelle:    22.06 mut/Mb
+  Risque global:           MODERE
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Thyroide                0.800 MODERE          PIK3CA
+  Colon                   0.800 MODERE          PIK3CA
+  Sein                    0.800 MODERE          PIK3CA
+  Vessie                  0.800 MODERE          PIK3CA
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  PIK3CA     SNP      196040   0.800 Pathogenic
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS13 (APOBEC)                      similarite: 1.000
+  SBS2 (APOBEC)                       similarite: 0.800
+  SBS6 (MMR deficient)                similarite: 0.600
+
+--- RECOMMANDATIONS ---
+  -> Suivi regulier avec depistage standard
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

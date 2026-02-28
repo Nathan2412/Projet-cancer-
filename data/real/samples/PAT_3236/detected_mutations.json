@@ -1,0 +1,22 @@
+[
+  {
+    "position": 127976,
+    "reference": "C",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "ALK",
+    "patient": "PAT_3236",
+    "impact": "HIGH",
+    "protein_change": "X516_splice",
+    "mutation_type_detail": "Splice_Site",
+    "chromosome": "2",
+    "start_position_abs": 29543616,
+    "end_position_abs": 29543616,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Rein",
+    "frequency": 0.3394
+  }
+]

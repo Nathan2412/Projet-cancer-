@@ -1,0 +1,43 @@
+[
+  {
+    "position": 90864,
+    "reference": "C",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "TP53",
+    "patient": "PAT_0145",
+    "impact": "MODERATE",
+    "protein_change": "R248Q",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "17",
+    "start_position_abs": 7577538,
+    "end_position_abs": 7577538,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Sein",
+    "frequency": 0.5946
+  },
+  {
+    "position": 91250,
+    "reference": "ACCACTA",
+    "alternative": "-",
+    "type": "DEL",
+    "gene": "TP53",
+    "patient": "PAT_0145",
+    "impact": "HIGH",
+    "protein_change": "X261_splice",
+    "mutation_type_detail": "Splice_Site",
+    "chromosome": "17",
+    "start_position_abs": 7577152,
+    "end_position_abs": 7577158,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Sein",
+    "frequency": 0.4062,
+    "length": 6
+  }
+]

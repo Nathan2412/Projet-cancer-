@@ -1,0 +1,55 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_0890
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_0890
+  Age:            57 ans
+  Sexe:           F
+  Severite:       low
+  Cancer connu:   Poumon
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       2
+  Charge mutationnelle:    8.82 mut/Mb
+  Risque global:           ELEVE
+
+--- ALERTES ---
+  [!] Risque ELEVE pour Glioblastome (score: 1.8)
+  [!] Risque ELEVE pour Melanome (score: 1.8)
+  [!] Risque ELEVE pour Poumon (score: 1.8)
+  [!] Risque ELEVE pour Vessie (score: 1.8)
+  [!] Risque ELEVE pour Colon (score: 1.8)
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Glioblastome            1.800 ELEVE           PIK3CA, BRAF
+  Melanome                1.800 ELEVE           PIK3CA, BRAF
+  Poumon                  1.800 ELEVE           PIK3CA, BRAF
+  Vessie                  1.800 ELEVE           PIK3CA, BRAF
+  Colon                   1.800 ELEVE           PIK3CA, BRAF
+  Ovaire                  0.900 MODERE          PIK3CA
+  Rein                    0.900 MODERE          PIK3CA
+  Sein                    0.900 MODERE          PIK3CA
+  Thyroide                0.900 MODERE          BRAF
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  PIK3CA     SNP      212023   0.900 Pathogenic
+  BRAF       SNP      266191   0.900 Pathogenic
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS6 (MMR deficient)                similarite: 0.400
+  SBS2 (APOBEC)                       similarite: 0.400
+
+--- RECOMMANDATIONS ---
+  -> Consultation oncogenetique recommandee
+  -> Surveillance renforcee des organes cibles
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

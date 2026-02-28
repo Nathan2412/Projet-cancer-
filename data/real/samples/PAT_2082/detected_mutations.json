@@ -1,0 +1,22 @@
+[
+  {
+    "position": 605489,
+    "reference": "G",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "BRCA2",
+    "patient": "PAT_2082",
+    "impact": "HIGH",
+    "protein_change": "X2313_splice",
+    "mutation_type_detail": "Splice_Site",
+    "chromosome": "13",
+    "start_position_abs": 32920963,
+    "end_position_abs": 32920963,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Melanome",
+    "frequency": 0.1364
+  }
+]

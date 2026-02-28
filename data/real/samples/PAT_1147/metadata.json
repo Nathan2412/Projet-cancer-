@@ -1,0 +1,33 @@
+{
+  "patient_id": "PAT_1147",
+  "severity": "high",
+  "num_mutations": 12,
+  "genes_analyzed": [
+    "TP53",
+    "BRCA1",
+    "BRCA2",
+    "KRAS",
+    "EGFR",
+    "PIK3CA",
+    "APC",
+    "PTEN",
+    "RB1",
+    "MYC",
+    "ALK",
+    "BRAF"
+  ],
+  "genes_with_mutations": [
+    "BRAF",
+    "PTEN",
+    "TP53",
+    "PIK3CA",
+    "APC"
+  ],
+  "cancer_type": "Colon",
+  "age": 33,
+  "sex": "M",
+  "data_source": "TCGA_PanCancer_Atlas",
+  "is_real_data": true,
+  "original_patient_id": "TCGA-EI-6917",
+  "original_study": "coadread_tcga_pan_can_atlas_2018"
+}

@@ -1,0 +1,45 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_1628
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_1628
+  Age:            78 ans
+  Sexe:           M
+  Severite:       moderate
+  Cancer connu:   Prostate
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       6
+  Charge mutationnelle:    26.47 mut/Mb
+  Risque global:           MODERE
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Melanome                0.900 MODERE          KRAS
+  Prostate                0.900 MODERE          KRAS
+  Vessie                  0.900 MODERE          KRAS
+  Colon                   0.900 MODERE          KRAS
+  Pancreas                0.900 MODERE          KRAS
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  KRAS       SNP      193496   0.900 Pathogenic
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS2 (APOBEC)                       similarite: 0.833
+  SBS6 (MMR deficient)                similarite: 0.667
+  SBS4 (tabac)                        similarite: 0.533
+  SBS13 (APOBEC)                      similarite: 0.533
+  SBS1 (age)                          similarite: 0.467
+
+--- RECOMMANDATIONS ---
+  -> Suivi regulier avec depistage standard
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

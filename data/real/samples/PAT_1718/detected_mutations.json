@@ -1,0 +1,23 @@
+[
+  {
+    "position": 1854600,
+    "reference": "GTT",
+    "alternative": "-",
+    "type": "DEL",
+    "gene": "PTEN",
+    "patient": "PAT_1718",
+    "impact": "MODERATE",
+    "protein_change": "L247del",
+    "mutation_type_detail": "In_Frame_Del",
+    "chromosome": "10",
+    "start_position_abs": 89717713,
+    "end_position_abs": 89717715,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Prostate",
+    "frequency": 0.2547,
+    "length": 2
+  }
+]

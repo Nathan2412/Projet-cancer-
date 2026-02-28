@@ -1,0 +1,22 @@
+[
+  {
+    "position": 226780,
+    "reference": "T",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "PIK3CA",
+    "patient": "PAT_3216",
+    "impact": "HIGH",
+    "protein_change": "Y272*",
+    "mutation_type_detail": "Nonsense_Mutation",
+    "chromosome": "3",
+    "start_position_abs": 178921334,
+    "end_position_abs": 178921334,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Rein",
+    "frequency": 0.4035
+  }
+]

@@ -1,0 +1,22 @@
+[
+  {
+    "position": 727413,
+    "reference": "G",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "ALK",
+    "patient": "PAT_1131",
+    "impact": "MODERATE",
+    "protein_change": "P158H",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "2",
+    "start_position_abs": 30143053,
+    "end_position_abs": 30143053,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Poumon",
+    "frequency": 0.087
+  }
+]

@@ -1,0 +1,43 @@
+[
+  {
+    "position": 90864,
+    "reference": "C",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "TP53",
+    "patient": "PAT_1483",
+    "impact": "MODERATE",
+    "protein_change": "R248Q",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "17",
+    "start_position_abs": 7577538,
+    "end_position_abs": 7577538,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Colon",
+    "frequency": 0.6522
+  },
+  {
+    "position": 533701,
+    "reference": "-",
+    "alternative": "C",
+    "type": "INS",
+    "gene": "APC",
+    "patient": "PAT_1483",
+    "impact": "HIGH",
+    "protein_change": "S837Ifs*7",
+    "mutation_type_detail": "Frame_Shift_Ins",
+    "chromosome": "5",
+    "start_position_abs": 112173797,
+    "end_position_abs": 112173798,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Colon",
+    "frequency": 0.4,
+    "length": 1
+  }
+]

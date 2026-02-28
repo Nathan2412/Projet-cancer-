@@ -1,0 +1,23 @@
+[
+  {
+    "position": 231170,
+    "reference": "AAG",
+    "alternative": "-",
+    "type": "DEL",
+    "gene": "PIK3CA",
+    "patient": "PAT_0573",
+    "impact": "MODERATE",
+    "protein_change": "K111del",
+    "mutation_type_detail": "In_Frame_Del",
+    "chromosome": "3",
+    "start_position_abs": 178916944,
+    "end_position_abs": 178916946,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Sein",
+    "frequency": 0.2917,
+    "length": 2
+  }
+]

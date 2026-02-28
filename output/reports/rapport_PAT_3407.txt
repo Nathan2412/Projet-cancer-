@@ -1,0 +1,59 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_3407
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_3407
+  Age:            40 ans
+  Sexe:           M
+  Severite:       moderate
+  Cancer connu:   Glioblastome
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       5
+  Charge mutationnelle:    22.06 mut/Mb
+  Risque global:           MODERE
+
+--- ALERTES ---
+  [!] Risque TRES ELEVE pour Glioblastome (score: 2.6)
+  [!] Risque TRES ELEVE pour Vessie (score: 2.6)
+  [!] Risque TRES ELEVE pour Colon (score: 2.6)
+  [!] Risque ELEVE pour Prostate (score: 1.8)
+  [!] Risque ELEVE pour Foie (score: 1.8)
+  [!] Risque ELEVE pour Pancreas (score: 1.8)
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Glioblastome            2.600 TRES ELEVE      PIK3CA, TP53
+  Vessie                  2.600 TRES ELEVE      PIK3CA, TP53
+  Colon                   2.600 TRES ELEVE      PIK3CA, TP53
+  Prostate                1.800 ELEVE           TP53
+  Foie                    1.800 ELEVE           TP53
+  Pancreas                1.800 ELEVE           TP53
+  Melanome                0.800 MODERE          PIK3CA
+  Poumon                  0.800 MODERE          PIK3CA
+  Rein                    0.800 MODERE          PIK3CA
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  TP53       SNP       90864   1.000 Pathogenic
+  TP53       SNP       90864   0.800 Pathogenic
+  PIK3CA     SNP      212023   0.800 Pathogenic
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS2 (APOBEC)                       similarite: 0.800
+  SBS1 (age)                          similarite: 0.600
+  SBS6 (MMR deficient)                similarite: 0.600
+  SBS13 (APOBEC)                      similarite: 0.600
+  SBS7 (UV)                           similarite: 0.400
+
+--- RECOMMANDATIONS ---
+  -> Suivi regulier avec depistage standard
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

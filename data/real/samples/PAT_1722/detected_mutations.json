@@ -1,0 +1,23 @@
+[
+  {
+    "position": 1829846,
+    "reference": "-",
+    "alternative": "A",
+    "type": "INS",
+    "gene": "PTEN",
+    "patient": "PAT_1722",
+    "impact": "HIGH",
+    "protein_change": "Q149Tfs*31",
+    "mutation_type_detail": "Frame_Shift_Ins",
+    "chromosome": "10",
+    "start_position_abs": 89692959,
+    "end_position_abs": 89692960,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Prostate",
+    "frequency": 0.3483,
+    "length": 1
+  }
+]

@@ -1,0 +1,43 @@
+[
+  {
+    "position": 89847,
+    "reference": "C",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "TP53",
+    "patient": "PAT_3251",
+    "impact": "HIGH",
+    "protein_change": "X126_splice",
+    "mutation_type_detail": "Splice_Site",
+    "chromosome": "17",
+    "start_position_abs": 7578555,
+    "end_position_abs": 7578555,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Foie",
+    "frequency": 0.5185
+  },
+  {
+    "position": 531547,
+    "reference": "-",
+    "alternative": "A",
+    "type": "INS",
+    "gene": "APC",
+    "patient": "PAT_3251",
+    "impact": "HIGH",
+    "protein_change": "T1556Nfs*3",
+    "mutation_type_detail": "Frame_Shift_Ins",
+    "chromosome": "5",
+    "start_position_abs": 112175951,
+    "end_position_abs": 112175952,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Foie",
+    "frequency": 0.271,
+    "length": 1
+  }
+]

@@ -1,0 +1,51 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_1257
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_1257
+  Age:            70 ans
+  Sexe:           F
+  Severite:       high
+  Cancer connu:   Colon
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       4
+  Charge mutationnelle:    17.65 mut/Mb
+  Risque global:           TRES ELEVE
+
+--- ALERTES ---
+  [!] Risque TRES ELEVE pour Colon (score: 2.6)
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Colon                   2.600 TRES ELEVE      TP53, APC
+  Glioblastome            0.800 MODERE          TP53
+  Ovaire                  0.800 MODERE          TP53
+  Vessie                  0.800 MODERE          TP53
+  Foie                    0.800 MODERE          TP53
+  Pancreas                0.800 MODERE          TP53
+  Sein                    0.800 MODERE          TP53
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  APC        SNP      532075   0.900 Pathogenic
+  APC        SNP      579355   0.900 Pathogenic
+  TP53       SNP       90864   0.800 Pathogenic
+  TP53       SNP       89013   0.600 Likely_pathogenic
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS7 (UV)                           similarite: 0.900
+  SBS1 (age)                          similarite: 0.700
+
+--- RECOMMANDATIONS ---
+  -> Consultation oncogenetique recommandee
+  -> Surveillance renforcee des organes cibles
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

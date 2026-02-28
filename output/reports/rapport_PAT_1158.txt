@@ -1,0 +1,54 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_1158
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_1158
+  Age:            40 ans
+  Sexe:           F
+  Severite:       high
+  Cancer connu:   Colon
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       7
+  Charge mutationnelle:    30.88 mut/Mb
+  Risque global:           MODERE
+
+--- ALERTES ---
+  [!] Risque ELEVE pour Colon (score: 1.6)
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Colon                   1.600 ELEVE           KRAS, APC
+  Glioblastome            0.800 MODERE          KRAS
+  Poumon                  0.800 MODERE          KRAS
+  Melanome                0.800 MODERE          KRAS
+  Vessie                  0.800 MODERE          KRAS
+  Foie                    0.800 MODERE          KRAS
+  Pancreas                0.800 MODERE          KRAS
+  Sein                    0.800 MODERE          KRAS
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  KRAS       SNP      193495   0.800 Pathogenic
+  APC        SNP      533581   0.800 Pathogenic
+  BRCA2      DEL      575164   0.550 VUS
+  APC        DEL      531847   0.550 VUS
+  MYC        INS     1017644   0.550 VUS
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS1 (age)                          similarite: 0.800
+  SBS6 (MMR deficient)                similarite: 0.750
+  SBS7 (UV)                           similarite: 0.600
+  SBS2 (APOBEC)                       similarite: 0.500
+
+--- RECOMMANDATIONS ---
+  -> Suivi regulier avec depistage standard
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

@@ -1,0 +1,22 @@
+[
+  {
+    "position": 90897,
+    "reference": "T",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "TP53",
+    "patient": "PAT_2777",
+    "impact": "MODERATE",
+    "protein_change": "D259V",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "17",
+    "start_position_abs": 7577505,
+    "end_position_abs": 7577505,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Vessie",
+    "frequency": 0.3704
+  }
+]

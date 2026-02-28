@@ -1,0 +1,23 @@
+[
+  {
+    "position": 91292,
+    "reference": "G",
+    "alternative": "-",
+    "type": "DEL",
+    "gene": "TP53",
+    "patient": "PAT_2500",
+    "impact": "HIGH",
+    "protein_change": "C277Vfs*68",
+    "mutation_type_detail": "Frame_Shift_Del",
+    "chromosome": "17",
+    "start_position_abs": 7577110,
+    "end_position_abs": 7577110,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Ovaire",
+    "frequency": 0.4748,
+    "length": 1
+  }
+]

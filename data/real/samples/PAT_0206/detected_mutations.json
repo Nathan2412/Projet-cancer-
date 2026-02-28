@@ -1,0 +1,22 @@
+[
+  {
+    "position": 89870,
+    "reference": "A",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "TP53",
+    "patient": "PAT_0206",
+    "impact": "MODERATE",
+    "protein_change": "M133K",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "17",
+    "start_position_abs": 7578532,
+    "end_position_abs": 7578532,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Sein",
+    "frequency": 0.9828
+  }
+]

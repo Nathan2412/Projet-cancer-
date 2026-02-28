@@ -1,0 +1,23 @@
+[
+  {
+    "position": 653364,
+    "reference": "TCGTCTATTTGTCAGACGAATGTTACA",
+    "alternative": "-",
+    "type": "DEL",
+    "gene": "BRCA2",
+    "patient": "PAT_0427",
+    "impact": "MODERATE",
+    "protein_change": "F3090_N3099delinsY",
+    "mutation_type_detail": "In_Frame_Del",
+    "chromosome": "13",
+    "start_position_abs": 32968838,
+    "end_position_abs": 32968864,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Sein",
+    "frequency": 0.268,
+    "length": 26
+  }
+]

@@ -1,0 +1,62 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_1376
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_1376
+  Age:            80 ans
+  Sexe:           F
+  Severite:       moderate
+  Cancer connu:   Colon
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       3
+  Charge mutationnelle:    13.24 mut/Mb
+  Risque global:           TRES ELEVE
+
+--- ALERTES ---
+  [!] Risque TRES ELEVE pour Colon (score: 3.0)
+  [!] Risque TRES ELEVE pour Glioblastome (score: 2.0)
+  [!] Risque TRES ELEVE pour Poumon (score: 2.0)
+  [!] Risque TRES ELEVE pour Vessie (score: 2.0)
+  [!] Risque TRES ELEVE pour Pancreas (score: 2.0)
+  [!] Risque TRES ELEVE pour Sein (score: 2.0)
+  [!] Risque ELEVE pour Ovaire (score: 1.0)
+  [!] Risque ELEVE pour Melanome (score: 1.0)
+  [!] Risque ELEVE pour Foie (score: 1.0)
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Colon                   3.000 TRES ELEVE      KRAS, TP53, APC
+  Glioblastome            2.000 TRES ELEVE      KRAS, TP53
+  Poumon                  2.000 TRES ELEVE      KRAS, TP53
+  Vessie                  2.000 TRES ELEVE      KRAS, TP53
+  Pancreas                2.000 TRES ELEVE      KRAS, TP53
+  Sein                    2.000 TRES ELEVE      KRAS, TP53
+  Ovaire                  1.000 ELEVE           TP53
+  Melanome                1.000 ELEVE           KRAS
+  Foie                    1.000 ELEVE           KRAS
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  TP53       SNP       91308   1.000 Pathogenic
+  KRAS       SNP      193495   1.000 Pathogenic
+  APC        SNP      531859   1.000 Pathogenic
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS7 (UV)                           similarite: 0.933
+  SBS1 (age)                          similarite: 0.867
+  SBS6 (MMR deficient)                similarite: 0.333
+  SBS2 (APOBEC)                       similarite: 0.333
+
+--- RECOMMANDATIONS ---
+  -> Consultation oncogenetique recommandee
+  -> Surveillance renforcee des organes cibles
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

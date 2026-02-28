@@ -1,0 +1,43 @@
+[
+  {
+    "position": 89853,
+    "reference": "GG",
+    "alternative": "T",
+    "type": "DEL",
+    "gene": "TP53",
+    "patient": "PAT_2295",
+    "impact": "HIGH",
+    "protein_change": "S127Yfs*43",
+    "mutation_type_detail": "Frame_Shift_Del",
+    "chromosome": "17",
+    "start_position_abs": 7578549,
+    "end_position_abs": 7578550,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Ovaire",
+    "frequency": 0.5,
+    "length": 1
+  },
+  {
+    "position": 89960,
+    "reference": "T",
+    "alternative": "C",
+    "type": "SNP",
+    "gene": "TP53",
+    "patient": "PAT_2295",
+    "impact": "MODERATE",
+    "protein_change": "Y163C",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "17",
+    "start_position_abs": 7578442,
+    "end_position_abs": 7578442,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Ovaire",
+    "frequency": 0.25
+  }
+]

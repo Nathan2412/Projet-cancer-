@@ -1,0 +1,22 @@
+[
+  {
+    "position": 621250,
+    "reference": "T",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "BRCA2",
+    "patient": "PAT_3364",
+    "impact": "MODERATE",
+    "protein_change": "Y2624N",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "13",
+    "start_position_abs": 32936724,
+    "end_position_abs": 32936724,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Foie",
+    "frequency": 0.1916
+  }
+]

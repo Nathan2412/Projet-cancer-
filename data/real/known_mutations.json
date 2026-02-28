@@ -1,0 +1,1445 @@
+{
+  "TP53": {
+    "info": {
+      "chromosome": "chr17",
+      "start": 7668402,
+      "end": 7687550,
+      "description": "Suppresseur de tumeur, mute dans plus de 50% des cancers"
+    },
+    "hotspots": [
+      {
+        "codon": 175,
+        "change": "R175H",
+        "cancers": [
+          "Glioblastome",
+          "Prostate",
+          "Poumon",
+          "Melanome",
+          "Ovaire",
+          "Vessie",
+          "Foie",
+          "Colon",
+          "Pancreas",
+          "Sein"
+        ],
+        "frequency": 0.0425,
+        "occurrences": 91,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 248,
+        "change": "R248Q",
+        "cancers": [
+          "Glioblastome",
+          "Prostate",
+          "Ovaire",
+          "Vessie",
+          "Foie",
+          "Colon",
+          "Pancreas",
+          "Sein"
+        ],
+        "frequency": 0.0317,
+        "occurrences": 68,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 273,
+        "change": "R273H",
+        "cancers": [
+          "Glioblastome",
+          "Poumon",
+          "Ovaire",
+          "Foie",
+          "Colon",
+          "Pancreas",
+          "Sein"
+        ],
+        "frequency": 0.0224,
+        "occurrences": 48,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 248,
+        "change": "R248W",
+        "cancers": [
+          "Glioblastome",
+          "Prostate",
+          "Poumon",
+          "Melanome",
+          "Ovaire",
+          "Vessie",
+          "Foie",
+          "Colon",
+          "Pancreas",
+          "Sein"
+        ],
+        "frequency": 0.0219,
+        "occurrences": 47,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 282,
+        "change": "R282W",
+        "cancers": [
+          "Glioblastome",
+          "Prostate",
+          "Poumon",
+          "Ovaire",
+          "Vessie",
+          "Colon",
+          "Pancreas",
+          "Sein"
+        ],
+        "frequency": 0.0196,
+        "occurrences": 42,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 213,
+        "change": "R213*",
+        "cancers": [
+          "Glioblastome",
+          "Melanome",
+          "Poumon",
+          "Ovaire",
+          "Colon",
+          "Pancreas",
+          "Rein",
+          "Sein"
+        ],
+        "frequency": 0.0173,
+        "occurrences": 37,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 273,
+        "change": "R273C",
+        "cancers": [
+          "Glioblastome",
+          "Prostate",
+          "Poumon",
+          "Ovaire",
+          "Vessie",
+          "Colon",
+          "Pancreas",
+          "Sein"
+        ],
+        "frequency": 0.0168,
+        "occurrences": 36,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 220,
+        "change": "Y220C",
+        "cancers": [
+          "Glioblastome",
+          "Melanome",
+          "Poumon",
+          "Ovaire",
+          "Vessie",
+          "Foie",
+          "Colon",
+          "Pancreas",
+          "Sein"
+        ],
+        "frequency": 0.0145,
+        "occurrences": 31,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 196,
+        "change": "R196*",
+        "cancers": [
+          "Glioblastome",
+          "Melanome",
+          "Poumon",
+          "Ovaire",
+          "Colon",
+          "Pancreas",
+          "Sein"
+        ],
+        "frequency": 0.014,
+        "occurrences": 30,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 125,
+        "change": "X125_splice",
+        "cancers": [
+          "Glioblastome",
+          "Melanome",
+          "Poumon",
+          "Ovaire",
+          "Vessie",
+          "Foie",
+          "Colon",
+          "Pancreas",
+          "Sein"
+        ],
+        "frequency": 0.0121,
+        "occurrences": 26,
+        "source": "TCGA_PanCancer_Atlas"
+      }
+    ],
+    "total_mutations_observed": 2142,
+    "unique_patients": 2011
+  },
+  "BRCA1": {
+    "info": {
+      "chromosome": "chr17",
+      "start": 43044295,
+      "end": 43125364,
+      "description": "Reparation ADN, cancer du sein et ovaire"
+    },
+    "hotspots": [
+      {
+        "codon": 1749,
+        "change": "P1749S",
+        "cancers": [
+          "Melanome",
+          "Poumon"
+        ],
+        "frequency": 0.0123,
+        "occurrences": 2,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 6,
+        "change": "X6_splice",
+        "cancers": [
+          "Melanome",
+          "Poumon"
+        ],
+        "frequency": 0.0123,
+        "occurrences": 2,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 1258,
+        "change": "E1258D",
+        "cancers": [
+          "Colon",
+          "Glioblastome"
+        ],
+        "frequency": 0.0123,
+        "occurrences": 2,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 1699,
+        "change": "R1699L",
+        "cancers": [
+          "Melanome"
+        ],
+        "frequency": 0.0123,
+        "occurrences": 2,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 30,
+        "change": "L30F",
+        "cancers": [
+          "Vessie"
+        ],
+        "frequency": 0.0123,
+        "occurrences": 2,
+        "source": "TCGA_PanCancer_Atlas"
+      }
+    ],
+    "total_mutations_observed": 162,
+    "unique_patients": 149
+  },
+  "BRCA2": {
+    "info": {
+      "chromosome": "chr13",
+      "start": 32315474,
+      "end": 32399672,
+      "description": "Reparation ADN, cancer du sein et pancreas"
+    },
+    "hotspots": [
+      {
+        "codon": 599,
+        "change": "S599*",
+        "cancers": [
+          "Sein",
+          "Glioblastome"
+        ],
+        "frequency": 0.0064,
+        "occurrences": 2,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 265,
+        "change": "X265_splice",
+        "cancers": [
+          "Colon",
+          "Glioblastome"
+        ],
+        "frequency": 0.0064,
+        "occurrences": 2,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 3401,
+        "change": "T3401M",
+        "cancers": [
+          "Colon",
+          "Glioblastome"
+        ],
+        "frequency": 0.0064,
+        "occurrences": 2,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 334,
+        "change": "H334Y",
+        "cancers": [
+          "Melanome"
+        ],
+        "frequency": 0.0064,
+        "occurrences": 2,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 2870,
+        "change": "Q2870*",
+        "cancers": [
+          "Melanome",
+          "Vessie"
+        ],
+        "frequency": 0.0064,
+        "occurrences": 2,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 1882,
+        "change": "S1882*",
+        "cancers": [
+          "Vessie",
+          "Ovaire"
+        ],
+        "frequency": 0.0064,
+        "occurrences": 2,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 832,
+        "change": "E832K",
+        "cancers": [
+          "Rein",
+          "Vessie"
+        ],
+        "frequency": 0.0064,
+        "occurrences": 2,
+        "source": "TCGA_PanCancer_Atlas"
+      }
+    ],
+    "total_mutations_observed": 312,
+    "unique_patients": 237
+  },
+  "KRAS": {
+    "info": {
+      "chromosome": "chr12",
+      "start": 25204789,
+      "end": 25250936,
+      "description": "Oncogene, cancer du poumon, colon, pancreas"
+    },
+    "hotspots": [
+      {
+        "codon": 12,
+        "change": "G12D",
+        "cancers": [
+          "Glioblastome",
+          "Prostate",
+          "Poumon",
+          "Melanome",
+          "Vessie",
+          "Foie",
+          "Colon",
+          "Pancreas",
+          "Sein"
+        ],
+        "frequency": 0.2487,
+        "occurrences": 141,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 12,
+        "change": "G12V",
+        "cancers": [
+          "Poumon",
+          "Ovaire",
+          "Vessie",
+          "Colon",
+          "Pancreas",
+          "Thyroide",
+          "Sein"
+        ],
+        "frequency": 0.2328,
+        "occurrences": 132,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 12,
+        "change": "G12C",
+        "cancers": [
+          "Melanome",
+          "Poumon",
+          "Vessie",
+          "Foie",
+          "Colon",
+          "Pancreas",
+          "Rein",
+          "Sein"
+        ],
+        "frequency": 0.1623,
+        "occurrences": 92,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 13,
+        "change": "G13D",
+        "cancers": [
+          "Melanome",
+          "Poumon",
+          "Vessie",
+          "Foie",
+          "Colon"
+        ],
+        "frequency": 0.0758,
+        "occurrences": 43,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 12,
+        "change": "G12R",
+        "cancers": [
+          "Melanome",
+          "Prostate",
+          "Ovaire",
+          "Vessie",
+          "Colon",
+          "Pancreas"
+        ],
+        "frequency": 0.0547,
+        "occurrences": 31,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 12,
+        "change": "G12A",
+        "cancers": [
+          "Colon",
+          "Pancreas",
+          "Poumon"
+        ],
+        "frequency": 0.0494,
+        "occurrences": 28,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 146,
+        "change": "A146T",
+        "cancers": [
+          "Colon"
+        ],
+        "frequency": 0.0282,
+        "occurrences": 16,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 12,
+        "change": "G12S",
+        "cancers": [
+          "Colon",
+          "Pancreas",
+          "Poumon"
+        ],
+        "frequency": 0.0247,
+        "occurrences": 14,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 61,
+        "change": "Q61H",
+        "cancers": [
+          "Colon",
+          "Pancreas",
+          "Poumon",
+          "Vessie"
+        ],
+        "frequency": 0.0212,
+        "occurrences": 12,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 13,
+        "change": "G13C",
+        "cancers": [
+          "Colon",
+          "Pancreas",
+          "Poumon"
+        ],
+        "frequency": 0.0176,
+        "occurrences": 10,
+        "source": "TCGA_PanCancer_Atlas"
+      }
+    ],
+    "total_mutations_observed": 567,
+    "unique_patients": 555
+  },
+  "PIK3CA": {
+    "info": {
+      "chromosome": "chr3",
+      "start": 179148114,
+      "end": 179240093,
+      "description": "Voie PI3K, cancer du sein, colon, endometre"
+    },
+    "hotspots": [
+      {
+        "codon": 1047,
+        "change": "H1047R",
+        "cancers": [
+          "Glioblastome",
+          "Prostate",
+          "Poumon",
+          "Ovaire",
+          "Vessie",
+          "Foie",
+          "Colon",
+          "Rein",
+          "Sein"
+        ],
+        "frequency": 0.2035,
+        "occurrences": 164,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 545,
+        "change": "E545K",
+        "cancers": [
+          "Glioblastome",
+          "Melanome",
+          "Poumon",
+          "Ovaire",
+          "Vessie",
+          "Colon",
+          "Rein",
+          "Sein"
+        ],
+        "frequency": 0.1762,
+        "occurrences": 142,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 542,
+        "change": "E542K",
+        "cancers": [
+          "Glioblastome",
+          "Prostate",
+          "Poumon",
+          "Vessie",
+          "Foie",
+          "Colon",
+          "Sein"
+        ],
+        "frequency": 0.1017,
+        "occurrences": 82,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 345,
+        "change": "N345K",
+        "cancers": [
+          "Glioblastome",
+          "Prostate",
+          "Poumon",
+          "Vessie",
+          "Colon",
+          "Sein"
+        ],
+        "frequency": 0.0298,
+        "occurrences": 24,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 88,
+        "change": "R88Q",
+        "cancers": [
+          "Glioblastome",
+          "Prostate",
+          "Vessie",
+          "Colon",
+          "Sein"
+        ],
+        "frequency": 0.0261,
+        "occurrences": 21,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 1047,
+        "change": "H1047L",
+        "cancers": [
+          "Melanome",
+          "Vessie",
+          "Foie",
+          "Colon",
+          "Rein",
+          "Sein"
+        ],
+        "frequency": 0.0248,
+        "occurrences": 20,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 726,
+        "change": "E726K",
+        "cancers": [
+          "Poumon",
+          "Vessie",
+          "Foie",
+          "Colon",
+          "Sein"
+        ],
+        "frequency": 0.0223,
+        "occurrences": 18,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 545,
+        "change": "E545A",
+        "cancers": [
+          "Glioblastome",
+          "Vessie",
+          "Ovaire",
+          "Foie",
+          "Colon",
+          "Sein"
+        ],
+        "frequency": 0.0161,
+        "occurrences": 13,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 118,
+        "change": "G118D",
+        "cancers": [
+          "Glioblastome",
+          "Vessie",
+          "Colon",
+          "Pancreas",
+          "Thyroide",
+          "Sein"
+        ],
+        "frequency": 0.0136,
+        "occurrences": 11,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 1043,
+        "change": "M1043I",
+        "cancers": [
+          "Thyroide",
+          "Colon",
+          "Sein",
+          "Vessie"
+        ],
+        "frequency": 0.0124,
+        "occurrences": 10,
+        "source": "TCGA_PanCancer_Atlas"
+      }
+    ],
+    "total_mutations_observed": 806,
+    "unique_patients": 716
+  },
+  "APC": {
+    "info": {
+      "chromosome": "chr5",
+      "start": 112707498,
+      "end": 112846239,
+      "description": "Suppresseur de tumeur, cancer colorectal"
+    },
+    "hotspots": [
+      {
+        "codon": 1450,
+        "change": "R1450*",
+        "cancers": [
+          "Colon"
+        ],
+        "frequency": 0.0393,
+        "occurrences": 34,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 876,
+        "change": "R876*",
+        "cancers": [
+          "Colon"
+        ],
+        "frequency": 0.0266,
+        "occurrences": 23,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 1114,
+        "change": "R1114*",
+        "cancers": [
+          "Melanome",
+          "Colon",
+          "Prostate"
+        ],
+        "frequency": 0.0242,
+        "occurrences": 21,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 213,
+        "change": "R213*",
+        "cancers": [
+          "Thyroide",
+          "Colon"
+        ],
+        "frequency": 0.0219,
+        "occurrences": 19,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 216,
+        "change": "R216*",
+        "cancers": [
+          "Colon"
+        ],
+        "frequency": 0.0162,
+        "occurrences": 14,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 1556,
+        "change": "T1556Nfs*3",
+        "cancers": [
+          "Foie",
+          "Colon",
+          "Melanome"
+        ],
+        "frequency": 0.015,
+        "occurrences": 13,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 499,
+        "change": "R499*",
+        "cancers": [
+          "Colon",
+          "Pancreas"
+        ],
+        "frequency": 0.0127,
+        "occurrences": 11,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 1378,
+        "change": "Q1378*",
+        "cancers": [
+          "Colon"
+        ],
+        "frequency": 0.0127,
+        "occurrences": 11,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 564,
+        "change": "R564*",
+        "cancers": [
+          "Colon"
+        ],
+        "frequency": 0.0115,
+        "occurrences": 10,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 1397,
+        "change": "E1397*",
+        "cancers": [
+          "Colon"
+        ],
+        "frequency": 0.0104,
+        "occurrences": 9,
+        "source": "TCGA_PanCancer_Atlas"
+      }
+    ],
+    "total_mutations_observed": 866,
+    "unique_patients": 573
+  },
+  "PTEN": {
+    "info": {
+      "chromosome": "chr10",
+      "start": 87863113,
+      "end": 87971930,
+      "description": "Suppresseur de tumeur, glioblastome, prostate"
+    },
+    "hotspots": [
+      {
+        "codon": 130,
+        "change": "R130Q",
+        "cancers": [
+          "Colon",
+          "Sein",
+          "Glioblastome"
+        ],
+        "frequency": 0.0321,
+        "occurrences": 12,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 319,
+        "change": "T319*",
+        "cancers": [
+          "Colon",
+          "Rein",
+          "Sein",
+          "Glioblastome"
+        ],
+        "frequency": 0.0241,
+        "occurrences": 9,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 212,
+        "change": "X212_splice",
+        "cancers": [
+          "Glioblastome",
+          "Melanome",
+          "Ovaire",
+          "Foie",
+          "Colon",
+          "Rein",
+          "Sein"
+        ],
+        "frequency": 0.0214,
+        "occurrences": 8,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 130,
+        "change": "R130*",
+        "cancers": [
+          "Colon",
+          "Melanome",
+          "Sein",
+          "Glioblastome"
+        ],
+        "frequency": 0.0187,
+        "occurrences": 7,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 267,
+        "change": "K267Rfs*9",
+        "cancers": [
+          "Colon",
+          "Sein"
+        ],
+        "frequency": 0.0187,
+        "occurrences": 7,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 233,
+        "change": "R233*",
+        "cancers": [
+          "Colon",
+          "Glioblastome"
+        ],
+        "frequency": 0.016,
+        "occurrences": 6,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 343,
+        "change": "X343_splice",
+        "cancers": [
+          "Rein",
+          "Sein",
+          "Glioblastome",
+          "Vessie"
+        ],
+        "frequency": 0.0134,
+        "occurrences": 5,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 299,
+        "change": "E299*",
+        "cancers": [
+          "Colon",
+          "Glioblastome"
+        ],
+        "frequency": 0.0134,
+        "occurrences": 5,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 166,
+        "change": "V166Sfs*14",
+        "cancers": [
+          "Melanome",
+          "Sein"
+        ],
+        "frequency": 0.0107,
+        "occurrences": 4,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 70,
+        "change": "X70_splice",
+        "cancers": [
+          "Melanome",
+          "Prostate",
+          "Sein",
+          "Glioblastome"
+        ],
+        "frequency": 0.0107,
+        "occurrences": 4,
+        "source": "TCGA_PanCancer_Atlas"
+      }
+    ],
+    "total_mutations_observed": 374,
+    "unique_patients": 339
+  },
+  "RB1": {
+    "info": {
+      "chromosome": "chr13",
+      "start": 48303747,
+      "end": 48481890,
+      "description": "Suppresseur de tumeur, retinoblastome, vessie"
+    },
+    "hotspots": [
+      {
+        "codon": 405,
+        "change": "X405_splice",
+        "cancers": [
+          "Glioblastome",
+          "Prostate",
+          "Poumon",
+          "Vessie",
+          "Ovaire"
+        ],
+        "frequency": 0.0279,
+        "occurrences": 8,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 552,
+        "change": "R552*",
+        "cancers": [
+          "Glioblastome",
+          "Sein",
+          "Poumon",
+          "Vessie"
+        ],
+        "frequency": 0.0139,
+        "occurrences": 4,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 445,
+        "change": "R445*",
+        "cancers": [
+          "Glioblastome",
+          "Vessie"
+        ],
+        "frequency": 0.0139,
+        "occurrences": 4,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 406,
+        "change": "X406_splice",
+        "cancers": [
+          "Foie",
+          "Glioblastome",
+          "Vessie"
+        ],
+        "frequency": 0.0139,
+        "occurrences": 4,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 829,
+        "change": "S829*",
+        "cancers": [
+          "Sein",
+          "Vessie"
+        ],
+        "frequency": 0.0105,
+        "occurrences": 3,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 455,
+        "change": "R455*",
+        "cancers": [
+          "Melanome",
+          "Sein",
+          "Vessie"
+        ],
+        "frequency": 0.0105,
+        "occurrences": 3,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 605,
+        "change": "X605_splice",
+        "cancers": [
+          "Poumon",
+          "Vessie"
+        ],
+        "frequency": 0.0105,
+        "occurrences": 3,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 320,
+        "change": "R320*",
+        "cancers": [
+          "Vessie",
+          "Poumon",
+          "Ovaire"
+        ],
+        "frequency": 0.0105,
+        "occurrences": 3,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 556,
+        "change": "R556*",
+        "cancers": [
+          "Colon",
+          "Melanome",
+          "Glioblastome"
+        ],
+        "frequency": 0.0105,
+        "occurrences": 3,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 180,
+        "change": "X180_splice",
+        "cancers": [
+          "Foie",
+          "Colon",
+          "Melanome"
+        ],
+        "frequency": 0.0105,
+        "occurrences": 3,
+        "source": "TCGA_PanCancer_Atlas"
+      }
+    ],
+    "total_mutations_observed": 287,
+    "unique_patients": 254
+  },
+  "ALK": {
+    "info": {
+      "chromosome": "chr2",
+      "start": 29415640,
+      "end": 30144477,
+      "description": "Kinase, lymphome anaplasique, cancer du poumon"
+    },
+    "hotspots": [
+      {
+        "codon": 401,
+        "change": "R401*",
+        "cancers": [
+          "Colon",
+          "Poumon"
+        ],
+        "frequency": 0.0179,
+        "occurrences": 4,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 296,
+        "change": "E296K",
+        "cancers": [
+          "Melanome",
+          "Sein"
+        ],
+        "frequency": 0.0134,
+        "occurrences": 3,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 452,
+        "change": "G452W",
+        "cancers": [
+          "Foie",
+          "Melanome",
+          "Poumon"
+        ],
+        "frequency": 0.0134,
+        "occurrences": 3,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 292,
+        "change": "R292C",
+        "cancers": [
+          "Colon",
+          "Glioblastome",
+          "Vessie"
+        ],
+        "frequency": 0.0134,
+        "occurrences": 3,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 1121,
+        "change": "G1121D",
+        "cancers": [
+          "Colon",
+          "Sein"
+        ],
+        "frequency": 0.0089,
+        "occurrences": 2,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 1171,
+        "change": "X1171_splice",
+        "cancers": [
+          "Colon",
+          "Vessie"
+        ],
+        "frequency": 0.0089,
+        "occurrences": 2,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 1494,
+        "change": "G1494E",
+        "cancers": [
+          "Melanome"
+        ],
+        "frequency": 0.0089,
+        "occurrences": 2,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 1313,
+        "change": "W1313L",
+        "cancers": [
+          "Melanome"
+        ],
+        "frequency": 0.0089,
+        "occurrences": 2,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 401,
+        "change": "R401Q",
+        "cancers": [
+          "Melanome",
+          "Vessie"
+        ],
+        "frequency": 0.0089,
+        "occurrences": 2,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 1242,
+        "change": "E1242K",
+        "cancers": [
+          "Melanome"
+        ],
+        "frequency": 0.0089,
+        "occurrences": 2,
+        "source": "TCGA_PanCancer_Atlas"
+      }
+    ],
+    "total_mutations_observed": 224,
+    "unique_patients": 188
+  },
+  "EGFR": {
+    "info": {
+      "chromosome": "chr7",
+      "start": 55019017,
+      "end": 55211628,
+      "description": "Recepteur de croissance, cancer du poumon"
+    },
+    "hotspots": [
+      {
+        "codon": 858,
+        "change": "L858R",
+        "cancers": [
+          "Poumon"
+        ],
+        "frequency": 0.0735,
+        "occurrences": 23,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 289,
+        "change": "A289V",
+        "cancers": [
+          "Sein",
+          "Glioblastome"
+        ],
+        "frequency": 0.0543,
+        "occurrences": 17,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 746,
+        "change": "E746_A750del",
+        "cancers": [
+          "Poumon"
+        ],
+        "frequency": 0.0511,
+        "occurrences": 16,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 598,
+        "change": "G598V",
+        "cancers": [
+          "Glioblastome"
+        ],
+        "frequency": 0.0479,
+        "occurrences": 15,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 222,
+        "change": "R222C",
+        "cancers": [
+          "Colon",
+          "Glioblastome"
+        ],
+        "frequency": 0.0224,
+        "occurrences": 7,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 289,
+        "change": "A289T",
+        "cancers": [
+          "Glioblastome"
+        ],
+        "frequency": 0.0192,
+        "occurrences": 6,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 289,
+        "change": "A289D",
+        "cancers": [
+          "Glioblastome"
+        ],
+        "frequency": 0.016,
+        "occurrences": 5,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 774,
+        "change": "V774M",
+        "cancers": [
+          "Glioblastome"
+        ],
+        "frequency": 0.016,
+        "occurrences": 5,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 114,
+        "change": "E114K",
+        "cancers": [
+          "Colon",
+          "Melanome",
+          "Sein",
+          "Ovaire"
+        ],
+        "frequency": 0.0128,
+        "occurrences": 4,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 861,
+        "change": "L861Q",
+        "cancers": [
+          "Poumon",
+          "Glioblastome"
+        ],
+        "frequency": 0.0128,
+        "occurrences": 4,
+        "source": "TCGA_PanCancer_Atlas"
+      }
+    ],
+    "total_mutations_observed": 313,
+    "unique_patients": 252
+  },
+  "BRAF": {
+    "info": {
+      "chromosome": "chr7",
+      "start": 140719327,
+      "end": 140924929,
+      "description": "Kinase MAPK, melanome, cancer de la thyroide"
+    },
+    "hotspots": [
+      {
+        "codon": 600,
+        "change": "V600E",
+        "cancers": [
+          "Glioblastome",
+          "Melanome",
+          "Poumon",
+          "Vessie",
+          "Colon",
+          "Thyroide"
+        ],
+        "frequency": 0.7383,
+        "occurrences": 505,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 600,
+        "change": "V600K",
+        "cancers": [
+          "Melanome"
+        ],
+        "frequency": 0.0512,
+        "occurrences": 35,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 601,
+        "change": "K601E",
+        "cancers": [
+          "Melanome",
+          "Thyroide",
+          "Prostate"
+        ],
+        "frequency": 0.0117,
+        "occurrences": 8,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 466,
+        "change": "G466V",
+        "cancers": [
+          "Colon",
+          "Melanome",
+          "Poumon"
+        ],
+        "frequency": 0.0102,
+        "occurrences": 7,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 469,
+        "change": "G469A",
+        "cancers": [
+          "Melanome",
+          "Prostate",
+          "Poumon",
+          "Vessie",
+          "Colon"
+        ],
+        "frequency": 0.0102,
+        "occurrences": 7,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 469,
+        "change": "G469V",
+        "cancers": [
+          "Poumon"
+        ],
+        "frequency": 0.0073,
+        "occurrences": 5,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 581,
+        "change": "N581S",
+        "cancers": [
+          "Melanome",
+          "Poumon",
+          "Ovaire"
+        ],
+        "frequency": 0.0073,
+        "occurrences": 5,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 594,
+        "change": "D594N",
+        "cancers": [
+          "Colon",
+          "Melanome",
+          "Poumon"
+        ],
+        "frequency": 0.0073,
+        "occurrences": 5,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 467,
+        "change": "S467L",
+        "cancers": [
+          "Melanome"
+        ],
+        "frequency": 0.0058,
+        "occurrences": 4,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 466,
+        "change": "G466E",
+        "cancers": [
+          "Melanome"
+        ],
+        "frequency": 0.0058,
+        "occurrences": 4,
+        "source": "TCGA_PanCancer_Atlas"
+      }
+    ],
+    "total_mutations_observed": 684,
+    "unique_patients": 662
+  },
+  "MYC": {
+    "info": {
+      "chromosome": "chr8",
+      "start": 127735434,
+      "end": 127742951,
+      "description": "Oncogene, lymphome de Burkitt, nombreux cancers"
+    },
+    "hotspots": [
+      {
+        "codon": 161,
+        "change": "S161L",
+        "cancers": [
+          "Colon",
+          "Melanome",
+          "Poumon"
+        ],
+        "frequency": 0.1111,
+        "occurrences": 4,
+        "source": "TCGA_PanCancer_Atlas"
+      },
+      {
+        "codon": 74,
+        "change": "P74L",
+        "cancers": [
+          "Colon",
+          "Melanome"
+        ],
+        "frequency": 0.0556,
+        "occurrences": 2,
+        "source": "TCGA_PanCancer_Atlas"
+      }
+    ],
+    "total_mutations_observed": 36,
+    "unique_patients": 36
+  }
+}

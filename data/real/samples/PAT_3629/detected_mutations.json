@@ -1,0 +1,22 @@
+[
+  {
+    "position": 1790723,
+    "reference": "T",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "PTEN",
+    "patient": "PAT_3629",
+    "impact": "MODERATE",
+    "protein_change": "V45E",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "10",
+    "start_position_abs": 89653836,
+    "end_position_abs": 89653836,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Glioblastome",
+    "frequency": 0.175
+  }
+]

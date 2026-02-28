@@ -1,0 +1,22 @@
+[
+  {
+    "position": 651710,
+    "reference": "G",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "RB1",
+    "patient": "PAT_2100",
+    "impact": "MODERATE",
+    "protein_change": "A525T",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "13",
+    "start_position_abs": 48955457,
+    "end_position_abs": 48955457,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Melanome",
+    "frequency": 0.2083
+  }
+]

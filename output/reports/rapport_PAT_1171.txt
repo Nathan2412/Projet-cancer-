@@ -1,0 +1,61 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_1171
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_1171
+  Age:            53 ans
+  Sexe:           F
+  Severite:       moderate
+  Cancer connu:   Colon
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       5
+  Charge mutationnelle:    22.06 mut/Mb
+  Risque global:           MODERE
+
+--- ALERTES ---
+  [!] Risque ELEVE pour Glioblastome (score: 1.8)
+  [!] Risque ELEVE pour Melanome (score: 1.8)
+  [!] Risque ELEVE pour Poumon (score: 1.8)
+  [!] Risque ELEVE pour Vessie (score: 1.8)
+  [!] Risque ELEVE pour Foie (score: 1.8)
+  [!] Risque ELEVE pour Colon (score: 1.8)
+  [!] Risque ELEVE pour Pancreas (score: 1.8)
+  [!] Risque ELEVE pour Sein (score: 1.8)
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Glioblastome            1.800 ELEVE           KRAS, TP53
+  Melanome                1.800 ELEVE           KRAS, TP53
+  Poumon                  1.800 ELEVE           KRAS, TP53
+  Vessie                  1.800 ELEVE           KRAS, TP53
+  Foie                    1.800 ELEVE           KRAS, TP53
+  Colon                   1.800 ELEVE           KRAS, TP53
+  Pancreas                1.800 ELEVE           KRAS, TP53
+  Sein                    1.800 ELEVE           KRAS, TP53
+  Ovaire                  0.800 MODERE          TP53
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  KRAS       SNP      193495   1.000 Pathogenic
+  TP53       SNP       89090   0.800 Pathogenic
+  APC        DEL      531744   0.500 VUS
+  APC        SNP      533230   0.500 VUS
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS1 (age)                          similarite: 0.800
+  SBS6 (MMR deficient)                similarite: 0.750
+  SBS7 (UV)                           similarite: 0.600
+  SBS2 (APOBEC)                       similarite: 0.500
+
+--- RECOMMANDATIONS ---
+  -> Suivi regulier avec depistage standard
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

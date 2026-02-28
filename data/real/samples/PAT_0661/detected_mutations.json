@@ -1,0 +1,22 @@
+[
+  {
+    "position": 1829848,
+    "reference": "C",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "PTEN",
+    "patient": "PAT_0661",
+    "impact": "HIGH",
+    "protein_change": "Q149*",
+    "mutation_type_detail": "Nonsense_Mutation",
+    "chromosome": "10",
+    "start_position_abs": 89692961,
+    "end_position_abs": 89692961,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Sein",
+    "frequency": 0.6769
+  }
+]

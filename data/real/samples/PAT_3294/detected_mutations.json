@@ -1,0 +1,22 @@
+[
+  {
+    "position": 89983,
+    "reference": "C",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "TP53",
+    "patient": "PAT_3294",
+    "impact": "HIGH",
+    "protein_change": "E171*",
+    "mutation_type_detail": "Nonsense_Mutation",
+    "chromosome": "17",
+    "start_position_abs": 7578419,
+    "end_position_abs": 7578419,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Foie",
+    "frequency": 0.3519
+  }
+]

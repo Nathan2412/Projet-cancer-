@@ -1,0 +1,43 @@
+[
+  {
+    "position": 598363,
+    "reference": "A",
+    "alternative": "-",
+    "type": "DEL",
+    "gene": "BRCA2",
+    "patient": "PAT_1539",
+    "impact": "HIGH",
+    "protein_change": "N1784Tfs*7",
+    "mutation_type_detail": "Frame_Shift_Del",
+    "chromosome": "13",
+    "start_position_abs": 32913837,
+    "end_position_abs": 32913837,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Colon",
+    "frequency": 0.2829,
+    "length": 1
+  },
+  {
+    "position": 727372,
+    "reference": "C",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "ALK",
+    "patient": "PAT_1539",
+    "impact": "MODERATE",
+    "protein_change": "E172K",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "2",
+    "start_position_abs": 30143012,
+    "end_position_abs": 30143012,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Colon",
+    "frequency": 0.3213
+  }
+]

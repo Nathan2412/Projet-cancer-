@@ -1,0 +1,23 @@
+[
+  {
+    "position": 89918,
+    "reference": "-",
+    "alternative": "A",
+    "type": "INS",
+    "gene": "TP53",
+    "patient": "PAT_1842",
+    "impact": "HIGH",
+    "protein_change": "S149Ffs*32",
+    "mutation_type_detail": "Frame_Shift_Ins",
+    "chromosome": "17",
+    "start_position_abs": 7578484,
+    "end_position_abs": 7578485,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Pancreas",
+    "frequency": 0.1295,
+    "length": 1
+  }
+]

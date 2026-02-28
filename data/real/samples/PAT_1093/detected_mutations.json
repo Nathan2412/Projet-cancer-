@@ -1,0 +1,22 @@
+[
+  {
+    "position": 193473,
+    "reference": "C",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "KRAS",
+    "patient": "PAT_1093",
+    "impact": "MODERATE",
+    "protein_change": "L19F",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "12",
+    "start_position_abs": 25398262,
+    "end_position_abs": 25398262,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Poumon",
+    "frequency": 0.2571
+  }
+]

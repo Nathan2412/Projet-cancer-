@@ -1,0 +1,50 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_2598
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_2598
+  Age:            55 ans
+  Sexe:           M
+  Severite:       high
+  Cancer connu:   Vessie
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       8
+  Charge mutationnelle:    35.29 mut/Mb
+  Risque global:           MODERE
+
+--- ALERTES ---
+  [!] Risque ELEVE pour Rein (score: 1.5)
+  [!] Risque ELEVE pour Vessie (score: 1.5)
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Rein                    1.500 ELEVE           BRCA2, PIK3CA
+  Vessie                  1.500 ELEVE           BRCA2, PIK3CA
+  Glioblastome            0.800 MODERE          PIK3CA
+  Prostate                0.800 MODERE          PIK3CA
+  Poumon                  0.800 MODERE          PIK3CA
+  Foie                    0.800 MODERE          PIK3CA
+  Colon                   0.800 MODERE          PIK3CA
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  PIK3CA     SNP      196029   0.800 Pathogenic
+  BRCA2      SNP      595512   0.700 Likely_pathogenic
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS6 (MMR deficient)                similarite: 0.650
+  SBS2 (APOBEC)                       similarite: 0.650
+  SBS1 (age)                          similarite: 0.300
+
+--- RECOMMANDATIONS ---
+  -> Suivi regulier avec depistage standard
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

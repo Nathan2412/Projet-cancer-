@@ -1,0 +1,23 @@
+[
+  {
+    "position": 90808,
+    "reference": "AC",
+    "alternative": "-",
+    "type": "DEL",
+    "gene": "TP53",
+    "patient": "PAT_0953",
+    "impact": "HIGH",
+    "protein_change": "C229Yfs*10",
+    "mutation_type_detail": "Frame_Shift_Del",
+    "chromosome": "17",
+    "start_position_abs": 7577594,
+    "end_position_abs": 7577595,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Poumon",
+    "frequency": 0.3176,
+    "length": 1
+  }
+]

@@ -1,0 +1,55 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_3427
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_3427
+  Age:            56 ans
+  Sexe:           M
+  Severite:       moderate
+  Cancer connu:   Glioblastome
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       3
+  Charge mutationnelle:    13.24 mut/Mb
+  Risque global:           ELEVE
+
+--- ALERTES ---
+  [!] Risque ELEVE pour Glioblastome (score: 1.7)
+  [!] Risque ELEVE pour Melanome (score: 1.7)
+  [!] Risque ELEVE pour Poumon (score: 1.7)
+  [!] Risque ELEVE pour Vessie (score: 1.7)
+  [!] Risque ELEVE pour Colon (score: 1.7)
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Glioblastome            1.700 ELEVE           TP53, BRAF
+  Melanome                1.700 ELEVE           TP53, BRAF
+  Poumon                  1.700 ELEVE           TP53, BRAF
+  Vessie                  1.700 ELEVE           TP53, BRAF
+  Colon                   1.700 ELEVE           TP53, BRAF
+  Foie                    0.900 MODERE          TP53
+  Pancreas                0.900 MODERE          TP53
+  Thyroide                0.800 MODERE          BRAF
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  TP53       SNP       90212   0.900 Pathogenic
+  BRAF       SNP      266191   0.800 Pathogenic
+  PTEN       DEL     1848875   0.650 Likely_pathogenic
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS6 (MMR deficient)                similarite: 0.500
+  SBS2 (APOBEC)                       similarite: 0.400
+
+--- RECOMMANDATIONS ---
+  -> Consultation oncogenetique recommandee
+  -> Surveillance renforcee des organes cibles
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

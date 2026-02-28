@@ -1,0 +1,23 @@
+[
+  {
+    "position": 89037,
+    "reference": "CGT",
+    "alternative": "GC",
+    "type": "DEL",
+    "gene": "TP53",
+    "patient": "PAT_0208",
+    "impact": "HIGH",
+    "protein_change": "Y107Cfs*16",
+    "mutation_type_detail": "Frame_Shift_Del",
+    "chromosome": "17",
+    "start_position_abs": 7579365,
+    "end_position_abs": 7579367,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Sein",
+    "frequency": 0.5,
+    "length": 1
+  }
+]

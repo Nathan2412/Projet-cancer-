@@ -1,0 +1,43 @@
+[
+  {
+    "position": 89939,
+    "reference": "CGGG",
+    "alternative": "T",
+    "type": "DEL",
+    "gene": "TP53",
+    "patient": "PAT_0859",
+    "impact": "MODERATE",
+    "protein_change": "T155_R156delinsN",
+    "mutation_type_detail": "In_Frame_Del",
+    "chromosome": "17",
+    "start_position_abs": 7578463,
+    "end_position_abs": 7578466,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Poumon",
+    "frequency": 0.3462,
+    "length": 3
+  },
+  {
+    "position": 240498,
+    "reference": "T",
+    "alternative": "G",
+    "type": "SNP",
+    "gene": "EGFR",
+    "patient": "PAT_0859",
+    "impact": "MODERATE",
+    "protein_change": "L858R",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "7",
+    "start_position_abs": 55259515,
+    "end_position_abs": 55259515,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Poumon",
+    "frequency": 0.1159
+  }
+]

@@ -1,0 +1,23 @@
+[
+  {
+    "position": 1829811,
+    "reference": "TGCATATTTAT",
+    "alternative": "-",
+    "type": "DEL",
+    "gene": "PTEN",
+    "patient": "PAT_0656",
+    "impact": "HIGH",
+    "protein_change": "A137Tfs*39",
+    "mutation_type_detail": "Frame_Shift_Del",
+    "chromosome": "10",
+    "start_position_abs": 89692924,
+    "end_position_abs": 89692934,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Sein",
+    "frequency": 0.1667,
+    "length": 10
+  }
+]

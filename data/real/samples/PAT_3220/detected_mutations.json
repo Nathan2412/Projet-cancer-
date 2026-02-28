@@ -1,0 +1,23 @@
+[
+  {
+    "position": 532301,
+    "reference": "GCAAATA",
+    "alternative": "-",
+    "type": "DEL",
+    "gene": "APC",
+    "patient": "PAT_3220",
+    "impact": "HIGH",
+    "protein_change": "I1304Kfs*2",
+    "mutation_type_detail": "Frame_Shift_Del",
+    "chromosome": "5",
+    "start_position_abs": 112175197,
+    "end_position_abs": 112175203,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Rein",
+    "frequency": 0.1888,
+    "length": 6
+  }
+]

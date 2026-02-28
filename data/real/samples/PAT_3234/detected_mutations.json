@@ -1,0 +1,22 @@
+[
+  {
+    "position": 502182,
+    "reference": "G",
+    "alternative": "C",
+    "type": "SNP",
+    "gene": "ALK",
+    "patient": "PAT_3234",
+    "impact": "MODERATE",
+    "protein_change": "D282E",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "2",
+    "start_position_abs": 29917822,
+    "end_position_abs": 29917822,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Rein",
+    "frequency": 0.2222
+  }
+]

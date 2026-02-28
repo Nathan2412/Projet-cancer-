@@ -1,0 +1,43 @@
+[
+  {
+    "position": 595187,
+    "reference": "-",
+    "alternative": "A",
+    "type": "INS",
+    "gene": "BRCA2",
+    "patient": "PAT_1640",
+    "impact": "HIGH",
+    "protein_change": "V726Sfs*25",
+    "mutation_type_detail": "Frame_Shift_Ins",
+    "chromosome": "13",
+    "start_position_abs": 32910661,
+    "end_position_abs": 32910662,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Prostate",
+    "frequency": 0.2171,
+    "length": 1
+  },
+  {
+    "position": 254214,
+    "reference": "G",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "EGFR",
+    "patient": "PAT_1640",
+    "impact": "MODERATE",
+    "protein_change": "G1185V",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "7",
+    "start_position_abs": 55273231,
+    "end_position_abs": 55273231,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Prostate",
+    "frequency": 0.1071
+  }
+]

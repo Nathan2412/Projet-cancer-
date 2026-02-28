@@ -1,0 +1,50 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_1432
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_1432
+  Age:            68 ans
+  Sexe:           F
+  Severite:       moderate
+  Cancer connu:   Colon
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       3
+  Charge mutationnelle:    13.24 mut/Mb
+  Risque global:           ELEVE
+
+--- ALERTES ---
+  [!] Risque ELEVE pour Colon (score: 1.8)
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Colon                   1.800 ELEVE           KRAS, APC
+  Glioblastome            0.900 MODERE          KRAS
+  Poumon                  0.900 MODERE          KRAS
+  Melanome                0.900 MODERE          KRAS
+  Vessie                  0.900 MODERE          KRAS
+  Foie                    0.900 MODERE          KRAS
+  Pancreas                0.900 MODERE          KRAS
+  Sein                    0.900 MODERE          KRAS
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  KRAS       SNP      193495   0.900 Pathogenic
+  APC        SNP      531859   0.900 Pathogenic
+  APC        INS      533938   0.550 VUS
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS7 (UV)                           similarite: 0.400
+
+--- RECOMMANDATIONS ---
+  -> Consultation oncogenetique recommandee
+  -> Surveillance renforcee des organes cibles
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

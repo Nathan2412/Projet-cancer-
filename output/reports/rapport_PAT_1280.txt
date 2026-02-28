@@ -1,0 +1,64 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_1280
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_1280
+  Age:            73 ans
+  Sexe:           F
+  Severite:       moderate
+  Cancer connu:   Colon
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       4
+  Charge mutationnelle:    17.65 mut/Mb
+  Risque global:           TRES ELEVE
+
+--- ALERTES ---
+  [!] Risque TRES ELEVE pour Colon (score: 3.8)
+  [!] Risque TRES ELEVE pour Melanome (score: 2.9)
+  [!] Risque TRES ELEVE pour Glioblastome (score: 2.8)
+  [!] Risque TRES ELEVE pour Poumon (score: 2.8)
+  [!] Risque ELEVE pour Ovaire (score: 1.9)
+  [!] Risque ELEVE pour Rein (score: 1.9)
+  [!] Risque ELEVE pour Sein (score: 1.9)
+  [!] Risque ELEVE pour Foie (score: 1.9)
+  [!] Risque ELEVE pour Vessie (score: 1.8)
+  [!] Risque ELEVE pour Pancreas (score: 1.0)
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Colon                   3.800 TRES ELEVE      RB1, PIK3CA, TP53
+  Melanome                2.900 TRES ELEVE      RB1, TP53, BRAF
+  Glioblastome            2.800 TRES ELEVE      PIK3CA, TP53, BRAF
+  Poumon                  2.800 TRES ELEVE      PIK3CA, TP53, BRAF
+  Ovaire                  1.900 ELEVE           PIK3CA, TP53
+  Rein                    1.900 ELEVE           PIK3CA, TP53
+  Sein                    1.900 ELEVE           PIK3CA, TP53
+  Foie                    1.900 ELEVE           RB1, PIK3CA
+  Vessie                  1.800 ELEVE           PIK3CA, BRAF
+  Pancreas                1.000 ELEVE           TP53
+  Thyroide                0.900 MODERE          BRAF
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  TP53       SNP       90190   1.000 Pathogenic
+  RB1        SNP      618253   1.000 Pathogenic
+  PIK3CA     SNP      196029   0.900 Pathogenic
+  BRAF       SNP      266191   0.900 Pathogenic
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS6 (MMR deficient)                similarite: 0.400
+  SBS2 (APOBEC)                       similarite: 0.400
+
+--- RECOMMANDATIONS ---
+  -> Consultation oncogenetique recommandee
+  -> Surveillance renforcee des organes cibles
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

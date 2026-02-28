@@ -1,0 +1,47 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_2636
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_2636
+  Age:            79 ans
+  Sexe:           F
+  Severite:       moderate
+  Cancer connu:   Vessie
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       3
+  Charge mutationnelle:    13.24 mut/Mb
+  Risque global:           FAIBLE
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Glioblastome            0.800 MODERE          PIK3CA
+  Melanome                0.800 MODERE          PIK3CA
+  Poumon                  0.800 MODERE          PIK3CA
+  Ovaire                  0.800 MODERE          PIK3CA
+  Vessie                  0.800 MODERE          PIK3CA
+  Colon                   0.800 MODERE          PIK3CA
+  Rein                    0.800 MODERE          PIK3CA
+  Sein                    0.800 MODERE          PIK3CA
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  PIK3CA     SNP      212023   0.800 Pathogenic
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS2 (APOBEC)                       similarite: 0.933
+  SBS13 (APOBEC)                      similarite: 0.867
+  SBS6 (MMR deficient)                similarite: 0.667
+  SBS1 (age)                          similarite: 0.467
+
+--- RECOMMANDATIONS ---
+  -> Depistage standard selon les recommandations
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

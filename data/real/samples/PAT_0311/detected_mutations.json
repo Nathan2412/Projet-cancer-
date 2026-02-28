@@ -1,0 +1,23 @@
+[
+  {
+    "position": 90156,
+    "reference": "-",
+    "alternative": "A",
+    "type": "INS",
+    "gene": "TP53",
+    "patient": "PAT_0311",
+    "impact": "HIGH",
+    "protein_change": "L201Ffs*8",
+    "mutation_type_detail": "Frame_Shift_Ins",
+    "chromosome": "17",
+    "start_position_abs": 7578246,
+    "end_position_abs": 7578247,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Sein",
+    "frequency": 0.4968,
+    "length": 1
+  }
+]

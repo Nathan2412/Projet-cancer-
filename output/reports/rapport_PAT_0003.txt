@@ -1,0 +1,60 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_0003
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_0003
+  Age:            52 ans
+  Sexe:           F
+  Severite:       moderate
+  Cancer connu:   Sein
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       6
+  Charge mutationnelle:    26.47 mut/Mb
+  Risque global:           MODERE
+
+--- ALERTES ---
+  [!] Risque TRES ELEVE pour Vessie (score: 3.7)
+  [!] Risque TRES ELEVE pour Sein (score: 3.7)
+  [!] Risque TRES ELEVE pour Poumon (score: 2.7)
+  [!] Risque TRES ELEVE pour Foie (score: 2.7)
+  [!] Risque TRES ELEVE pour Colon (score: 2.7)
+  [!] Risque ELEVE pour Glioblastome (score: 1.8)
+  [!] Risque ELEVE pour Ovaire (score: 1.8)
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Vessie                  3.700 TRES ELEVE      RB1, PIK3CA, TP53
+  Sein                    3.700 TRES ELEVE      RB1, PIK3CA, TP53
+  Poumon                  2.700 TRES ELEVE      PIK3CA, TP53
+  Foie                    2.700 TRES ELEVE      PIK3CA, TP53
+  Colon                   2.700 TRES ELEVE      PIK3CA, TP53
+  Glioblastome            1.800 ELEVE           PIK3CA, TP53
+  Ovaire                  1.800 ELEVE           PIK3CA, TP53
+  Melanome                0.900 MODERE          TP53
+  Pancreas                0.900 MODERE          TP53
+  Rein                    0.900 MODERE          PIK3CA
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  RB1        SNP      735754   1.000 Pathogenic
+  TP53       SNP       89996   0.900 Pathogenic
+  PIK3CA     SNP      196029   0.900 Pathogenic
+  PIK3CA     SNP      209180   0.900 Pathogenic
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS13 (APOBEC)                      similarite: 0.867
+  SBS2 (APOBEC)                       similarite: 0.833
+  SBS6 (MMR deficient)                similarite: 0.567
+
+--- RECOMMANDATIONS ---
+  -> Suivi regulier avec depistage standard
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

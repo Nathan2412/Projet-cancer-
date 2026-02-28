@@ -1,0 +1,23 @@
+[
+  {
+    "position": 89911,
+    "reference": "C",
+    "alternative": "-",
+    "type": "DEL",
+    "gene": "TP53",
+    "patient": "PAT_0327",
+    "impact": "HIGH",
+    "protein_change": "V147Lfs*23",
+    "mutation_type_detail": "Frame_Shift_Del",
+    "chromosome": "17",
+    "start_position_abs": 7578491,
+    "end_position_abs": 7578491,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Sein",
+    "frequency": 0.3516,
+    "length": 1
+  }
+]

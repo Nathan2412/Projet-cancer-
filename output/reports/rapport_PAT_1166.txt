@@ -1,0 +1,51 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_1166
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_1166
+  Age:            44 ans
+  Sexe:           F
+  Severite:       moderate
+  Cancer connu:   Colon
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       6
+  Charge mutationnelle:    26.47 mut/Mb
+  Risque global:           MODERE
+
+--- ALERTES ---
+  [!] Risque ELEVE pour Colon (score: 1.8)
+  [!] Risque ELEVE pour Poumon (score: 1.8)
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Colon                   1.800 ELEVE           KRAS, MYC
+  Poumon                  1.800 ELEVE           KRAS, MYC
+  Pancreas                0.900 MODERE          KRAS
+  Melanome                0.900 MODERE          MYC
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  KRAS       SNP      193495   0.900 Pathogenic
+  MYC        SNP     1015511   0.900 Pathogenic
+  APC        SNP      531562   0.600 Likely_pathogenic
+  APC        SNP      552775   0.600 Likely_pathogenic
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS1 (age)                          similarite: 0.800
+  SBS2 (APOBEC)                       similarite: 0.667
+  SBS7 (UV)                           similarite: 0.600
+  SBS4 (tabac)                        similarite: 0.533
+  SBS13 (APOBEC)                      similarite: 0.533
+
+--- RECOMMANDATIONS ---
+  -> Suivi regulier avec depistage standard
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

@@ -1,0 +1,22 @@
+[
+  {
+    "position": 231190,
+    "reference": "C",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "PIK3CA",
+    "patient": "PAT_0605",
+    "impact": "MODERATE",
+    "protein_change": "P104L",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "3",
+    "start_position_abs": 178916924,
+    "end_position_abs": 178916924,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Sein",
+    "frequency": 0.625
+  }
+]

@@ -1,0 +1,22 @@
+[
+  {
+    "position": 599463,
+    "reference": "A",
+    "alternative": "G",
+    "type": "SNP",
+    "gene": "BRCA2",
+    "patient": "PAT_1003",
+    "impact": "MODERATE",
+    "protein_change": "I2149V",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "13",
+    "start_position_abs": 32914937,
+    "end_position_abs": 32914937,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Poumon",
+    "frequency": 0.1724
+  }
+]

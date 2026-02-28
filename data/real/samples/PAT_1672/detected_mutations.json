@@ -1,0 +1,23 @@
+[
+  {
+    "position": 90904,
+    "reference": "CCTGGAGTCTT",
+    "alternative": "-",
+    "type": "DEL",
+    "gene": "TP53",
+    "patient": "PAT_1672",
+    "impact": "HIGH",
+    "protein_change": "X258_splice",
+    "mutation_type_detail": "Splice_Site",
+    "chromosome": "17",
+    "start_position_abs": 7577498,
+    "end_position_abs": 7577508,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Prostate",
+    "frequency": 0.3939,
+    "length": 10
+  }
+]

@@ -1,0 +1,59 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_1199
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_1199
+  Age:            84 ans
+  Sexe:           F
+  Severite:       moderate
+  Cancer connu:   Colon
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       5
+  Charge mutationnelle:    22.06 mut/Mb
+  Risque global:           MODERE
+
+--- ALERTES ---
+  [!] Risque ELEVE pour Glioblastome (score: 1.9)
+  [!] Risque ELEVE pour Poumon (score: 1.9)
+  [!] Risque ELEVE pour Vessie (score: 1.9)
+  [!] Risque ELEVE pour Colon (score: 1.9)
+  [!] Risque ELEVE pour Pancreas (score: 1.9)
+  [!] Risque ELEVE pour Sein (score: 1.9)
+  [!] Risque ELEVE pour Ovaire (score: 1.0)
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Glioblastome            1.900 ELEVE           KRAS, TP53
+  Poumon                  1.900 ELEVE           KRAS, TP53
+  Vessie                  1.900 ELEVE           KRAS, TP53
+  Colon                   1.900 ELEVE           KRAS, TP53
+  Pancreas                1.900 ELEVE           KRAS, TP53
+  Sein                    1.900 ELEVE           KRAS, TP53
+  Ovaire                  1.000 ELEVE           TP53
+  Melanome                0.900 MODERE          KRAS
+  Foie                    0.900 MODERE          KRAS
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  TP53       SNP       91308   1.000 Pathogenic
+  KRAS       SNP      193495   0.900 Pathogenic
+  APC        DEL      533880   0.650 Likely_pathogenic
+  APC        DEL      531968   0.550 VUS
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS6 (MMR deficient)                similarite: 0.667
+  SBS2 (APOBEC)                       similarite: 0.667
+  SBS1 (age)                          similarite: 0.467
+
+--- RECOMMANDATIONS ---
+  -> Suivi regulier avec depistage standard
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

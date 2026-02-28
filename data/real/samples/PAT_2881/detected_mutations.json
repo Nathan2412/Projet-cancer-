@@ -1,0 +1,23 @@
+[
+  {
+    "position": 643848,
+    "reference": "-",
+    "alternative": "A",
+    "type": "INS",
+    "gene": "RB1",
+    "patient": "PAT_2881",
+    "impact": "HIGH",
+    "protein_change": "Q395Tfs*11",
+    "mutation_type_detail": "Frame_Shift_Ins",
+    "chromosome": "13",
+    "start_position_abs": 48947595,
+    "end_position_abs": 48947596,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Vessie",
+    "frequency": 0.2297,
+    "length": 1
+  }
+]

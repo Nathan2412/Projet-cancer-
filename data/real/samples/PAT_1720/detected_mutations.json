@@ -1,0 +1,23 @@
+[
+  {
+    "position": 1829855,
+    "reference": "C",
+    "alternative": "-",
+    "type": "DEL",
+    "gene": "PTEN",
+    "patient": "PAT_1720",
+    "impact": "HIGH",
+    "protein_change": "L152*",
+    "mutation_type_detail": "Frame_Shift_Del",
+    "chromosome": "10",
+    "start_position_abs": 89692968,
+    "end_position_abs": 89692968,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Prostate",
+    "frequency": 0.129,
+    "length": 1
+  }
+]

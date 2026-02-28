@@ -265,17 +265,17 @@ def run_cohort_analysis(max_patients=None, generate_plots=True, verbose=True):
         if verbose:
             print(f"  {result['patient_id']}: rapport texte OK")
 
-        plots = []
-        if generate_plots and check_matplotlib():
-            plots = generate_all_patient_plots(
-                report,
-                result["sequencing"],
-                result["coverage_data"]
-            )
+        # plots = []
+        # if generate_plots and check_matplotlib():
+        #     plots = generate_all_patient_plots(
+        #         report,
+        #         result["sequencing"],
+        #         result["coverage_data"]
+        #     )
 
-        html_path = generate_patient_html_report(report, plots)
-        if verbose:
-            print(f"  {result['patient_id']}: rapport HTML OK")
+        # html_path = generate_patient_html_report(report, plots)
+        # if verbose:
+        #     print(f"  {result['patient_id']}: rapport HTML OK")
 
     cohort_path = generate_cohort_summary_report(all_results)
     print(f"  Rapport de cohorte: {cohort_path}")
@@ -336,14 +336,14 @@ def run_single_patient_analysis(patient_id, generate_plots=True):
     print(f"\nRapport: {txt_path}")
     print(report_text)
 
-    plots = []
-    if generate_plots and check_matplotlib():
-        plots = generate_all_patient_plots(
-            report, result["sequencing"], result["coverage_data"]
-        )
+    # plots = []
+    # if generate_plots and check_matplotlib():
+    #     plots = generate_all_patient_plots(
+    #         report, result["sequencing"], result["coverage_data"]
+    #     )
 
-    html_path = generate_patient_html_report(report, plots)
-    print(f"Rapport HTML: {html_path}")
+    # html_path = generate_patient_html_report(report, plots)
+    # print(f"Rapport HTML: {html_path}")
 
     return result
 
@@ -427,17 +427,17 @@ def run_real_data_analysis(max_patients=None, generate_plots=True, verbose=True)
         if verbose:
             print(f"  {result['patient_id']}: rapport texte OK")
 
-        plots = []
-        if generate_plots and check_matplotlib():
-            plots = generate_all_patient_plots(
-                report,
-                result["sequencing"],
-                result["coverage_data"]
-            )
+        # plots = []
+        # if generate_plots and check_matplotlib():
+        #     plots = generate_all_patient_plots(
+        #         report,
+        #         result["sequencing"],
+        #         result["coverage_data"]
+        #     )
 
-        html_path = generate_patient_html_report(report, plots)
-        if verbose:
-            print(f"  {result['patient_id']}: rapport HTML OK")
+        # html_path = generate_patient_html_report(report, plots)
+        # if verbose:
+        #     print(f"  {result['patient_id']}: rapport HTML OK")
 
     cohort_path = generate_cohort_summary_report(all_results)
     print(f"  Rapport de cohorte: {cohort_path}")

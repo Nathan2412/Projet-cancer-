@@ -1,0 +1,32 @@
+{
+  "patient_id": "PAT_0684",
+  "severity": "moderate",
+  "num_mutations": 4,
+  "genes_analyzed": [
+    "TP53",
+    "BRCA1",
+    "BRCA2",
+    "KRAS",
+    "EGFR",
+    "PIK3CA",
+    "APC",
+    "PTEN",
+    "RB1",
+    "MYC",
+    "ALK",
+    "BRAF"
+  ],
+  "genes_with_mutations": [
+    "APC",
+    "KRAS",
+    "PTEN",
+    "TP53"
+  ],
+  "cancer_type": "Poumon",
+  "age": 69,
+  "sex": "F",
+  "data_source": "TCGA_PanCancer_Atlas",
+  "is_real_data": true,
+  "original_patient_id": "TCGA-44-7661",
+  "original_study": "luad_tcga_pan_can_atlas_2018"
+}

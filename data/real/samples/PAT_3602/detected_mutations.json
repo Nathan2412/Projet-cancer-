@@ -1,0 +1,22 @@
+[
+  {
+    "position": 204616,
+    "reference": "C",
+    "alternative": "T",
+    "type": "SNP",
+    "gene": "EGFR",
+    "patient": "PAT_3602",
+    "impact": "MODERATE",
+    "protein_change": "R334C",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "7",
+    "start_position_abs": 55223633,
+    "end_position_abs": 55223633,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Glioblastome",
+    "frequency": 0.7403
+  }
+]

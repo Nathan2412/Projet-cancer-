@@ -1,0 +1,22 @@
+[
+  {
+    "position": 502154,
+    "reference": "G",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "ALK",
+    "patient": "PAT_2887",
+    "impact": "MODERATE",
+    "protein_change": "R292C",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "2",
+    "start_position_abs": 29917794,
+    "end_position_abs": 29917794,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Vessie",
+    "frequency": 0.3478
+  }
+]

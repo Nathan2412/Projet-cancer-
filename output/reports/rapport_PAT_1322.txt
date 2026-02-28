@@ -1,0 +1,57 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_1322
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_1322
+  Age:            68 ans
+  Sexe:           M
+  Severite:       moderate
+  Cancer connu:   Colon
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       3
+  Charge mutationnelle:    13.24 mut/Mb
+  Risque global:           TRES ELEVE
+
+--- ALERTES ---
+  [!] Risque TRES ELEVE pour Glioblastome (score: 2.0)
+  [!] Risque TRES ELEVE pour Poumon (score: 2.0)
+  [!] Risque TRES ELEVE pour Foie (score: 2.0)
+  [!] Risque TRES ELEVE pour Colon (score: 2.0)
+  [!] Risque TRES ELEVE pour Pancreas (score: 2.0)
+  [!] Risque ELEVE pour Prostate (score: 1.0)
+  [!] Risque ELEVE pour Melanome (score: 1.0)
+  [!] Risque ELEVE pour Vessie (score: 1.0)
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Glioblastome            2.000 TRES ELEVE      KRAS, TP53
+  Poumon                  2.000 TRES ELEVE      KRAS, TP53
+  Foie                    2.000 TRES ELEVE      KRAS, TP53
+  Colon                   2.000 TRES ELEVE      KRAS, TP53
+  Pancreas                2.000 TRES ELEVE      KRAS, TP53
+  Prostate                1.000 ELEVE           KRAS
+  Melanome                1.000 ELEVE           KRAS
+  Vessie                  1.000 ELEVE           KRAS
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  TP53       SNP       91282   1.000 Pathogenic
+  KRAS       SNP      193495   1.000 Pathogenic
+  APC        SNP      531877   0.600 Likely_pathogenic
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS7 (UV)                           similarite: 0.400
+
+--- RECOMMANDATIONS ---
+  -> Consultation oncogenetique recommandee
+  -> Surveillance renforcee des organes cibles
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

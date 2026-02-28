@@ -1,0 +1,23 @@
+[
+  {
+    "position": 88686,
+    "reference": "G",
+    "alternative": "-",
+    "type": "DEL",
+    "gene": "TP53",
+    "patient": "PAT_1587",
+    "impact": "HIGH",
+    "protein_change": "P27Lfs*17",
+    "mutation_type_detail": "Frame_Shift_Del",
+    "chromosome": "17",
+    "start_position_abs": 7579716,
+    "end_position_abs": 7579716,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Colon",
+    "frequency": 0.3585,
+    "length": 1
+  }
+]

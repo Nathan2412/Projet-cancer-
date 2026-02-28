@@ -1,0 +1,22 @@
+[
+  {
+    "position": 90836,
+    "reference": "T",
+    "alternative": "C",
+    "type": "SNP",
+    "gene": "TP53",
+    "patient": "PAT_1849",
+    "impact": "MODERATE",
+    "protein_change": "N239D",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "17",
+    "start_position_abs": 7577566,
+    "end_position_abs": 7577566,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Pancreas",
+    "frequency": 0.0396
+  }
+]

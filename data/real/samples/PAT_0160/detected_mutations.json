@@ -1,0 +1,43 @@
+[
+  {
+    "position": 638002,
+    "reference": "T",
+    "alternative": "G",
+    "type": "SNP",
+    "gene": "BRCA2",
+    "patient": "PAT_0160",
+    "impact": "HIGH",
+    "protein_change": "L2926*",
+    "mutation_type_detail": "Nonsense_Mutation",
+    "chromosome": "13",
+    "start_position_abs": 32953476,
+    "end_position_abs": 32953476,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Sein",
+    "frequency": 0.3483
+  },
+  {
+    "position": 17030,
+    "reference": "ATCCCG",
+    "alternative": "-",
+    "type": "DEL",
+    "gene": "ALK",
+    "patient": "PAT_0160",
+    "impact": "MODERATE",
+    "protein_change": "F1271_M1273delinsL",
+    "mutation_type_detail": "In_Frame_Del",
+    "chromosome": "2",
+    "start_position_abs": 29432670,
+    "end_position_abs": 29432675,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Sein",
+    "frequency": 0.2039,
+    "length": 5
+  }
+]

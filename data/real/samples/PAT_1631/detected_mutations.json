@@ -1,0 +1,43 @@
+[
+  {
+    "position": 90160,
+    "reference": "C",
+    "alternative": "-",
+    "type": "DEL",
+    "gene": "TP53",
+    "patient": "PAT_1631",
+    "impact": "HIGH",
+    "protein_change": "V203Wfs*44",
+    "mutation_type_detail": "Frame_Shift_Del",
+    "chromosome": "17",
+    "start_position_abs": 7578242,
+    "end_position_abs": 7578242,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Prostate",
+    "frequency": 0.4444,
+    "length": 1
+  },
+  {
+    "position": 212032,
+    "reference": "G",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "PIK3CA",
+    "patient": "PAT_1631",
+    "impact": "MODERATE",
+    "protein_change": "E542K",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "3",
+    "start_position_abs": 178936082,
+    "end_position_abs": 178936082,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Prostate",
+    "frequency": 0.4803
+  }
+]

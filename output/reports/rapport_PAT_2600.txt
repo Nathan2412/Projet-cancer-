@@ -1,0 +1,53 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_2600
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_2600
+  Age:            78 ans
+  Sexe:           F
+  Severite:       moderate
+  Cancer connu:   Vessie
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       6
+  Charge mutationnelle:    26.47 mut/Mb
+  Risque global:           MODERE
+
+--- ALERTES ---
+  [!] Risque TRES ELEVE pour Vessie (score: 2.4)
+  [!] Risque TRES ELEVE pour Colon (score: 2.4)
+  [!] Risque ELEVE pour Poumon (score: 1.8)
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Vessie                  2.400 TRES ELEVE      ALK, PIK3CA, BRAF
+  Colon                   2.400 TRES ELEVE      ALK, PIK3CA, BRAF
+  Poumon                  1.800 ELEVE           PIK3CA, BRAF
+  Glioblastome            0.900 MODERE          PIK3CA
+  Foie                    0.900 MODERE          PIK3CA
+  Sein                    0.900 MODERE          PIK3CA
+  Melanome                0.900 MODERE          BRAF
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  PIK3CA     SNP      212032   0.900 Pathogenic
+  BRAF       SNP      237925   0.900 Pathogenic
+  APC        DEL      529859   0.600 Likely_pathogenic
+  ALK        SNP       29572   0.600 Likely_pathogenic
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS2 (APOBEC)                       similarite: 0.600
+  SBS13 (APOBEC)                      similarite: 0.600
+  SBS6 (MMR deficient)                similarite: 0.400
+
+--- RECOMMANDATIONS ---
+  -> Suivi regulier avec depistage standard
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

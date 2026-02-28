@@ -1,0 +1,23 @@
+[
+  {
+    "position": 1829790,
+    "reference": "ACGA",
+    "alternative": "-",
+    "type": "DEL",
+    "gene": "PTEN",
+    "patient": "PAT_3226",
+    "impact": "HIGH",
+    "protein_change": "R130Lfs*3",
+    "mutation_type_detail": "Frame_Shift_Del",
+    "chromosome": "10",
+    "start_position_abs": 89692903,
+    "end_position_abs": 89692906,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Rein",
+    "frequency": 0.2452,
+    "length": 3
+  }
+]

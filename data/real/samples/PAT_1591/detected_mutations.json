@@ -1,0 +1,23 @@
+[
+  {
+    "position": 89966,
+    "reference": "TGCT",
+    "alternative": "-",
+    "type": "DEL",
+    "gene": "TP53",
+    "patient": "PAT_1591",
+    "impact": "HIGH",
+    "protein_change": "K164Sfs*5",
+    "mutation_type_detail": "Frame_Shift_Del",
+    "chromosome": "17",
+    "start_position_abs": 7578436,
+    "end_position_abs": 7578439,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Colon",
+    "frequency": 0.7619,
+    "length": 3
+  }
+]

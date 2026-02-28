@@ -1,0 +1,65 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_1146
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_1146
+  Age:            65 ans
+  Sexe:           M
+  Severite:       high
+  Cancer connu:   Colon
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       12
+  Charge mutationnelle:    52.94 mut/Mb
+  Risque global:           ELEVE
+
+--- ALERTES ---
+  [!] Charge mutationnelle elevee: 52.94 mut/Mb
+  [!] Risque TRES ELEVE pour Colon (score: 5.6)
+  [!] Risque TRES ELEVE pour Glioblastome (score: 3.7)
+  [!] Risque TRES ELEVE pour Melanome (score: 2.0)
+  [!] Risque ELEVE pour Prostate (score: 1.9)
+  [!] Risque ELEVE pour Vessie (score: 1.8)
+  [!] Risque ELEVE pour Poumon (score: 1.0)
+  [!] Risque ELEVE pour Pancreas (score: 1.0)
+  [!] Risque ELEVE pour Rein (score: 1.0)
+  [!] 6 variants a impact eleve detectes
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Colon                   5.600 TRES ELEVE      PIK3CA, PTEN, TP53
+  Glioblastome            3.700 TRES ELEVE      PIK3CA, TP53, PTEN
+  Melanome                2.000 TRES ELEVE      TP53, APC
+  Prostate                1.900 ELEVE           PIK3CA, APC
+  Vessie                  1.800 ELEVE           PIK3CA
+  Poumon                  1.000 ELEVE           TP53
+  Pancreas                1.000 ELEVE           TP53
+  Rein                    1.000 ELEVE           TP53
+  Thyroide                0.900 MODERE          PIK3CA
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  TP53       SNP       90190   1.000 Pathogenic
+  APC        SNP      532867   1.000 Pathogenic
+  PTEN       SNP     1857631   1.000 Pathogenic
+  PIK3CA     SNP      196040   0.900 Pathogenic
+  PIK3CA     SNP      231238   0.900 Pathogenic
+  PTEN       SNP     1829792   0.800 Pathogenic
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS6 (MMR deficient)                similarite: 0.567
+  SBS2 (APOBEC)                       similarite: 0.567
+  SBS4 (tabac)                        similarite: 0.367
+
+--- RECOMMANDATIONS ---
+  -> Consultation oncogenetique recommandee
+  -> Surveillance renforcee des organes cibles
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

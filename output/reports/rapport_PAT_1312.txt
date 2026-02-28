@@ -1,0 +1,56 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_1312
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_1312
+  Age:            48 ans
+  Sexe:           F
+  Severite:       moderate
+  Cancer connu:   Colon
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       3
+  Charge mutationnelle:    13.24 mut/Mb
+  Risque global:           ELEVE
+
+--- ALERTES ---
+  [!] Risque ELEVE pour Glioblastome (score: 1.8)
+  [!] Risque ELEVE pour Ovaire (score: 1.8)
+  [!] Risque ELEVE pour Vessie (score: 1.8)
+  [!] Risque ELEVE pour Colon (score: 1.8)
+  [!] Risque ELEVE pour Sein (score: 1.8)
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Glioblastome            1.800 ELEVE           PIK3CA, TP53
+  Ovaire                  1.800 ELEVE           PIK3CA, TP53
+  Vessie                  1.800 ELEVE           PIK3CA, TP53
+  Colon                   1.800 ELEVE           PIK3CA, TP53
+  Sein                    1.800 ELEVE           PIK3CA, TP53
+  Poumon                  0.900 MODERE          TP53
+  Pancreas                0.900 MODERE          TP53
+  Foie                    0.900 MODERE          PIK3CA
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  TP53       SNP       91281   0.900 Pathogenic
+  PIK3CA     SNP      212022   0.900 Pathogenic
+  APC        SNP      579334   0.500 VUS
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS6 (MMR deficient)                similarite: 0.667
+  SBS2 (APOBEC)                       similarite: 0.667
+  SBS1 (age)                          similarite: 0.467
+
+--- RECOMMANDATIONS ---
+  -> Consultation oncogenetique recommandee
+  -> Surveillance renforcee des organes cibles
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

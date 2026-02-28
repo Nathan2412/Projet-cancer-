@@ -1,0 +1,22 @@
+[
+  {
+    "position": 597040,
+    "reference": "C",
+    "alternative": "G",
+    "type": "SNP",
+    "gene": "BRCA2",
+    "patient": "PAT_2844",
+    "impact": "HIGH",
+    "protein_change": "S1341*",
+    "mutation_type_detail": "Nonsense_Mutation",
+    "chromosome": "13",
+    "start_position_abs": 32912514,
+    "end_position_abs": 32912514,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Vessie",
+    "frequency": 0.3521
+  }
+]

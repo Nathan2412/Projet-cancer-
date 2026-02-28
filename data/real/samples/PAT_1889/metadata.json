@@ -1,0 +1,33 @@
+{
+  "patient_id": "PAT_1889",
+  "severity": "moderate",
+  "num_mutations": 5,
+  "genes_analyzed": [
+    "TP53",
+    "BRCA1",
+    "BRCA2",
+    "KRAS",
+    "EGFR",
+    "PIK3CA",
+    "APC",
+    "PTEN",
+    "RB1",
+    "MYC",
+    "ALK",
+    "BRAF"
+  ],
+  "genes_with_mutations": [
+    "ALK",
+    "BRAF",
+    "MYC",
+    "BRCA1",
+    "APC"
+  ],
+  "cancer_type": "Melanome",
+  "age": 53,
+  "sex": "M",
+  "data_source": "TCGA_PanCancer_Atlas",
+  "is_real_data": true,
+  "original_patient_id": "TCGA-GN-A265",
+  "original_study": "skcm_tcga_pan_can_atlas_2018"
+}

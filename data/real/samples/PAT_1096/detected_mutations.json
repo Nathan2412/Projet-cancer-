@@ -1,0 +1,23 @@
+[
+  {
+    "position": 229995,
+    "reference": "-",
+    "alternative": "GGGTTA",
+    "type": "INS",
+    "gene": "EGFR",
+    "patient": "PAT_1096",
+    "impact": "MODERATE",
+    "protein_change": "D770_N771insGL",
+    "mutation_type_detail": "In_Frame_Ins",
+    "chromosome": "7",
+    "start_position_abs": 55249012,
+    "end_position_abs": 55249013,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Poumon",
+    "frequency": 0.5683,
+    "length": 5
+  }
+]

@@ -1,0 +1,43 @@
+[
+  {
+    "position": 223449,
+    "reference": "GAATTAAGAGAAGCA",
+    "alternative": "-",
+    "type": "DEL",
+    "gene": "EGFR",
+    "patient": "PAT_0887",
+    "impact": "MODERATE",
+    "protein_change": "E746_A750del",
+    "mutation_type_detail": "In_Frame_Del",
+    "chromosome": "7",
+    "start_position_abs": 55242466,
+    "end_position_abs": 55242480,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Poumon",
+    "frequency": 0.2024,
+    "length": 14
+  },
+  {
+    "position": 231181,
+    "reference": "A",
+    "alternative": "G",
+    "type": "SNP",
+    "gene": "PIK3CA",
+    "patient": "PAT_0887",
+    "impact": "MODERATE",
+    "protein_change": "N107S",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "3",
+    "start_position_abs": 178916933,
+    "end_position_abs": 178916933,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Poumon",
+    "frequency": 0.1034
+  }
+]

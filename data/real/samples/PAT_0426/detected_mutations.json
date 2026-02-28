@@ -1,0 +1,22 @@
+[
+  {
+    "position": 622093,
+    "reference": "G",
+    "alternative": "A",
+    "type": "SNP",
+    "gene": "BRCA2",
+    "patient": "PAT_0426",
+    "impact": "MODERATE",
+    "protein_change": "G2743D",
+    "mutation_type_detail": "Missense_Mutation",
+    "chromosome": "13",
+    "start_position_abs": 32937567,
+    "end_position_abs": 32937567,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Sein",
+    "frequency": 0.1154
+  }
+]

@@ -1,0 +1,51 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_3423
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_3423
+  Age:            72 ans
+  Sexe:           F
+  Severite:       moderate
+  Cancer connu:   Glioblastome
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       4
+  Charge mutationnelle:    17.65 mut/Mb
+  Risque global:           TRES ELEVE
+
+--- ALERTES ---
+  [!] Risque TRES ELEVE pour Glioblastome (score: 3.6)
+  [!] Risque TRES ELEVE pour Colon (score: 2.0)
+  [!] Risque TRES ELEVE pour Rein (score: 2.0)
+  [!] Risque TRES ELEVE pour Sein (score: 2.0)
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Glioblastome            3.600 TRES ELEVE      EGFR, PTEN
+  Colon                   2.000 TRES ELEVE      PTEN
+  Rein                    2.000 TRES ELEVE      PTEN
+  Sein                    2.000 TRES ELEVE      PTEN
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  PTEN       DEL     1857686   1.000 Pathogenic
+  PTEN       DEL     1857686   1.000 Pathogenic
+  EGFR       SNP      214026   0.800 Pathogenic
+  EGFR       SNP      214026   0.800 Pathogenic
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS6 (MMR deficient)                similarite: 0.400
+  SBS2 (APOBEC)                       similarite: 0.400
+
+--- RECOMMANDATIONS ---
+  -> Consultation oncogenetique recommandee
+  -> Surveillance renforcee des organes cibles
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

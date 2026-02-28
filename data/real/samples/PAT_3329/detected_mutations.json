@@ -1,0 +1,23 @@
+[
+  {
+    "position": 89022,
+    "reference": "A",
+    "alternative": "-",
+    "type": "DEL",
+    "gene": "TP53",
+    "patient": "PAT_3329",
+    "impact": "HIGH",
+    "protein_change": "Y103Tfs*20",
+    "mutation_type_detail": "Frame_Shift_Del",
+    "chromosome": "17",
+    "start_position_abs": 7579380,
+    "end_position_abs": 7579380,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Foie",
+    "frequency": 0.4683,
+    "length": 1
+  }
+]

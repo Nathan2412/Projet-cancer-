@@ -1,0 +1,54 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_2235
+  Date: 28/02/2026 22:30
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_2235
+  Age:            68 ans
+  Sexe:           F
+  Severite:       low
+  Cancer connu:   Ovaire
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       2
+  Charge mutationnelle:    8.82 mut/Mb
+  Risque global:           ELEVE
+
+--- ALERTES ---
+  [!] Risque ELEVE pour Glioblastome (score: 1.8)
+  [!] Risque ELEVE pour Ovaire (score: 1.8)
+  [!] Risque ELEVE pour Foie (score: 1.8)
+  [!] Risque ELEVE pour Colon (score: 1.8)
+  [!] Risque ELEVE pour Pancreas (score: 1.8)
+  [!] Risque ELEVE pour Sein (score: 1.8)
+
+--- PROFIL DE RISQUE CANCER ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Glioblastome            1.800 ELEVE           TP53
+  Ovaire                  1.800 ELEVE           TP53
+  Foie                    1.800 ELEVE           TP53
+  Colon                   1.800 ELEVE           TP53
+  Pancreas                1.800 ELEVE           TP53
+  Sein                    1.800 ELEVE           TP53
+  Poumon                  0.900 MODERE          TP53
+  Vessie                  0.900 MODERE          TP53
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Type        Pos   Score Classification
+  -------------------------------------------------------
+  TP53       SNP       91282   0.900 Pathogenic
+  TP53       SNP       90864   0.900 Pathogenic
+
+--- SIGNATURES MUTATIONNELLES ---
+  SBS7 (UV)                           similarite: 0.400
+
+--- RECOMMANDATIONS ---
+  -> Consultation oncogenetique recommandee
+  -> Surveillance renforcee des organes cibles
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

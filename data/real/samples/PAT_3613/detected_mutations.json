@@ -1,0 +1,23 @@
+[
+  {
+    "position": 220029,
+    "reference": "TTGCTGAACCCTATTGGTGTTACTGGA",
+    "alternative": "-",
+    "type": "DEL",
+    "gene": "PIK3CA",
+    "patient": "PAT_3613",
+    "impact": "MODERATE",
+    "protein_change": "L455_G463del",
+    "mutation_type_detail": "In_Frame_Del",
+    "chromosome": "3",
+    "start_position_abs": 178928085,
+    "end_position_abs": 178928111,
+    "mutation_status": ".",
+    "validation_status": ".",
+    "ncbi_build": "GRCh37",
+    "functional_impact": "",
+    "cancer_type": "Glioblastome",
+    "frequency": 0.197,
+    "length": 26
+  }
+]

@@ -1,0 +1,446 @@
+{
+  "TP53": {
+    "total_mutations_cohort": 2142,
+    "cancer_associations": {
+      "Sein": {
+        "mutation_count": 2,
+        "proportion_in_cancer": 0.069
+      },
+      "Poumon": {
+        "mutation_count": 1,
+        "proportion_in_cancer": 0.125
+      },
+      "Colon": {
+        "mutation_count": 42,
+        "proportion_in_cancer": 0.109
+      },
+      "Pancreas": {
+        "mutation_count": 0,
+        "proportion_in_cancer": 0.0
+      },
+      "Melanome": {
+        "mutation_count": 5,
+        "proportion_in_cancer": 0.091
+      },
+      "Ovaire": {
+        "mutation_count": 3,
+        "proportion_in_cancer": 0.273
+      },
+      "Vessie": {
+        "mutation_count": 7,
+        "proportion_in_cancer": 0.219
+      },
+      "Glioblastome": {
+        "mutation_count": 7,
+        "proportion_in_cancer": 0.13
+      }
+    }
+  },
+  "BRCA1": {
+    "total_mutations_cohort": 162,
+    "cancer_associations": {
+      "Sein": {
+        "mutation_count": 1,
+        "proportion_in_cancer": 0.034
+      },
+      "Poumon": {
+        "mutation_count": 1,
+        "proportion_in_cancer": 0.125
+      },
+      "Colon": {
+        "mutation_count": 12,
+        "proportion_in_cancer": 0.031
+      },
+      "Pancreas": {
+        "mutation_count": 2,
+        "proportion_in_cancer": 0.118
+      },
+      "Melanome": {
+        "mutation_count": 4,
+        "proportion_in_cancer": 0.073
+      },
+      "Ovaire": {
+        "mutation_count": 0,
+        "proportion_in_cancer": 0.0
+      },
+      "Vessie": {
+        "mutation_count": 2,
+        "proportion_in_cancer": 0.062
+      },
+      "Glioblastome": {
+        "mutation_count": 6,
+        "proportion_in_cancer": 0.111
+      }
+    }
+  },
+  "BRCA2": {
+    "total_mutations_cohort": 312,
+    "cancer_associations": {
+      "Sein": {
+        "mutation_count": 4,
+        "proportion_in_cancer": 0.138
+      },
+      "Poumon": {
+        "mutation_count": 1,
+        "proportion_in_cancer": 0.125
+      },
+      "Colon": {
+        "mutation_count": 44,
+        "proportion_in_cancer": 0.114
+      },
+      "Pancreas": {
+        "mutation_count": 6,
+        "proportion_in_cancer": 0.353
+      },
+      "Melanome": {
+        "mutation_count": 4,
+        "proportion_in_cancer": 0.073
+      },
+      "Ovaire": {
+        "mutation_count": 2,
+        "proportion_in_cancer": 0.182
+      },
+      "Vessie": {
+        "mutation_count": 6,
+        "proportion_in_cancer": 0.188
+      },
+      "Glioblastome": {
+        "mutation_count": 12,
+        "proportion_in_cancer": 0.222
+      }
+    }
+  },
+  "KRAS": {
+    "total_mutations_cohort": 567,
+    "cancer_associations": {
+      "Sein": {
+        "mutation_count": 1,
+        "proportion_in_cancer": 0.034
+      },
+      "Poumon": {
+        "mutation_count": 0,
+        "proportion_in_cancer": 0.0
+      },
+      "Colon": {
+        "mutation_count": 22,
+        "proportion_in_cancer": 0.057
+      },
+      "Pancreas": {
+        "mutation_count": 1,
+        "proportion_in_cancer": 0.059
+      },
+      "Melanome": {
+        "mutation_count": 0,
+        "proportion_in_cancer": 0.0
+      },
+      "Ovaire": {
+        "mutation_count": 0,
+        "proportion_in_cancer": 0.0
+      },
+      "Vessie": {
+        "mutation_count": 0,
+        "proportion_in_cancer": 0.0
+      },
+      "Glioblastome": {
+        "mutation_count": 0,
+        "proportion_in_cancer": 0.0
+      }
+    }
+  },
+  "EGFR": {
+    "total_mutations_cohort": 313,
+    "cancer_associations": {
+      "Sein": {
+        "mutation_count": 1,
+        "proportion_in_cancer": 0.034
+      },
+      "Poumon": {
+        "mutation_count": 2,
+        "proportion_in_cancer": 0.25
+      },
+      "Colon": {
+        "mutation_count": 5,
+        "proportion_in_cancer": 0.013
+      },
+      "Pancreas": {
+        "mutation_count": 2,
+        "proportion_in_cancer": 0.118
+      },
+      "Melanome": {
+        "mutation_count": 14,
+        "proportion_in_cancer": 0.255
+      },
+      "Ovaire": {
+        "mutation_count": 1,
+        "proportion_in_cancer": 0.091
+      },
+      "Vessie": {
+        "mutation_count": 0,
+        "proportion_in_cancer": 0.0
+      },
+      "Glioblastome": {
+        "mutation_count": 5,
+        "proportion_in_cancer": 0.093
+      }
+    }
+  },
+  "PIK3CA": {
+    "total_mutations_cohort": 806,
+    "cancer_associations": {
+      "Sein": {
+        "mutation_count": 3,
+        "proportion_in_cancer": 0.103
+      },
+      "Poumon": {
+        "mutation_count": 0,
+        "proportion_in_cancer": 0.0
+      },
+      "Colon": {
+        "mutation_count": 36,
+        "proportion_in_cancer": 0.093
+      },
+      "Pancreas": {
+        "mutation_count": 0,
+        "proportion_in_cancer": 0.0
+      },
+      "Melanome": {
+        "mutation_count": 1,
+        "proportion_in_cancer": 0.018
+      },
+      "Ovaire": {
+        "mutation_count": 1,
+        "proportion_in_cancer": 0.091
+      },
+      "Vessie": {
+        "mutation_count": 3,
+        "proportion_in_cancer": 0.094
+      },
+      "Glioblastome": {
+        "mutation_count": 3,
+        "proportion_in_cancer": 0.056
+      }
+    }
+  },
+  "APC": {
+    "total_mutations_cohort": 866,
+    "cancer_associations": {
+      "Sein": {
+        "mutation_count": 9,
+        "proportion_in_cancer": 0.31
+      },
+      "Poumon": {
+        "mutation_count": 1,
+        "proportion_in_cancer": 0.125
+      },
+      "Colon": {
+        "mutation_count": 146,
+        "proportion_in_cancer": 0.378
+      },
+      "Pancreas": {
+        "mutation_count": 3,
+        "proportion_in_cancer": 0.176
+      },
+      "Melanome": {
+        "mutation_count": 6,
+        "proportion_in_cancer": 0.109
+      },
+      "Ovaire": {
+        "mutation_count": 0,
+        "proportion_in_cancer": 0.0
+      },
+      "Vessie": {
+        "mutation_count": 4,
+        "proportion_in_cancer": 0.125
+      },
+      "Glioblastome": {
+        "mutation_count": 7,
+        "proportion_in_cancer": 0.13
+      }
+    }
+  },
+  "PTEN": {
+    "total_mutations_cohort": 374,
+    "cancer_associations": {
+      "Sein": {
+        "mutation_count": 4,
+        "proportion_in_cancer": 0.138
+      },
+      "Poumon": {
+        "mutation_count": 0,
+        "proportion_in_cancer": 0.0
+      },
+      "Colon": {
+        "mutation_count": 26,
+        "proportion_in_cancer": 0.067
+      },
+      "Pancreas": {
+        "mutation_count": 0,
+        "proportion_in_cancer": 0.0
+      },
+      "Melanome": {
+        "mutation_count": 1,
+        "proportion_in_cancer": 0.018
+      },
+      "Ovaire": {
+        "mutation_count": 1,
+        "proportion_in_cancer": 0.091
+      },
+      "Vessie": {
+        "mutation_count": 1,
+        "proportion_in_cancer": 0.031
+      },
+      "Glioblastome": {
+        "mutation_count": 4,
+        "proportion_in_cancer": 0.074
+      }
+    }
+  },
+  "RB1": {
+    "total_mutations_cohort": 287,
+    "cancer_associations": {
+      "Sein": {
+        "mutation_count": 1,
+        "proportion_in_cancer": 0.034
+      },
+      "Poumon": {
+        "mutation_count": 0,
+        "proportion_in_cancer": 0.0
+      },
+      "Colon": {
+        "mutation_count": 14,
+        "proportion_in_cancer": 0.036
+      },
+      "Pancreas": {
+        "mutation_count": 2,
+        "proportion_in_cancer": 0.118
+      },
+      "Melanome": {
+        "mutation_count": 1,
+        "proportion_in_cancer": 0.018
+      },
+      "Ovaire": {
+        "mutation_count": 1,
+        "proportion_in_cancer": 0.091
+      },
+      "Vessie": {
+        "mutation_count": 5,
+        "proportion_in_cancer": 0.156
+      },
+      "Glioblastome": {
+        "mutation_count": 4,
+        "proportion_in_cancer": 0.074
+      }
+    }
+  },
+  "MYC": {
+    "total_mutations_cohort": 36,
+    "cancer_associations": {
+      "Sein": {
+        "mutation_count": 0,
+        "proportion_in_cancer": 0.0
+      },
+      "Poumon": {
+        "mutation_count": 0,
+        "proportion_in_cancer": 0.0
+      },
+      "Colon": {
+        "mutation_count": 4,
+        "proportion_in_cancer": 0.01
+      },
+      "Pancreas": {
+        "mutation_count": 0,
+        "proportion_in_cancer": 0.0
+      },
+      "Melanome": {
+        "mutation_count": 2,
+        "proportion_in_cancer": 0.036
+      },
+      "Ovaire": {
+        "mutation_count": 0,
+        "proportion_in_cancer": 0.0
+      },
+      "Vessie": {
+        "mutation_count": 1,
+        "proportion_in_cancer": 0.031
+      },
+      "Glioblastome": {
+        "mutation_count": 0,
+        "proportion_in_cancer": 0.0
+      }
+    }
+  },
+  "ALK": {
+    "total_mutations_cohort": 224,
+    "cancer_associations": {
+      "Sein": {
+        "mutation_count": 2,
+        "proportion_in_cancer": 0.069
+      },
+      "Poumon": {
+        "mutation_count": 1,
+        "proportion_in_cancer": 0.125
+      },
+      "Colon": {
+        "mutation_count": 20,
+        "proportion_in_cancer": 0.052
+      },
+      "Pancreas": {
+        "mutation_count": 1,
+        "proportion_in_cancer": 0.059
+      },
+      "Melanome": {
+        "mutation_count": 11,
+        "proportion_in_cancer": 0.2
+      },
+      "Ovaire": {
+        "mutation_count": 2,
+        "proportion_in_cancer": 0.182
+      },
+      "Vessie": {
+        "mutation_count": 1,
+        "proportion_in_cancer": 0.031
+      },
+      "Glioblastome": {
+        "mutation_count": 4,
+        "proportion_in_cancer": 0.074
+      }
+    }
+  },
+  "BRAF": {
+    "total_mutations_cohort": 684,
+    "cancer_associations": {
+      "Sein": {
+        "mutation_count": 1,
+        "proportion_in_cancer": 0.034
+      },
+      "Poumon": {
+        "mutation_count": 1,
+        "proportion_in_cancer": 0.125
+      },
+      "Colon": {
+        "mutation_count": 15,
+        "proportion_in_cancer": 0.039
+      },
+      "Pancreas": {
+        "mutation_count": 0,
+        "proportion_in_cancer": 0.0
+      },
+      "Melanome": {
+        "mutation_count": 6,
+        "proportion_in_cancer": 0.109
+      },
+      "Ovaire": {
+        "mutation_count": 0,
+        "proportion_in_cancer": 0.0
+      },
+      "Vessie": {
+        "mutation_count": 2,
+        "proportion_in_cancer": 0.062
+      },
+      "Glioblastome": {
+        "mutation_count": 2,
+        "proportion_in_cancer": 0.037
+      }
+    }
+  }
+}
