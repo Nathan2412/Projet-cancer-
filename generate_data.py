@@ -9,7 +9,7 @@ import os
 import random
 from config import (
     DATA_DIR, SAMPLES_DIR, REFERENCE_GENOME_FILE, KNOWN_MUTATIONS_FILE,
-    NUCLEOTIDES, CANCER_GENES, CANCER_TYPES
+    NUCLEOTIDES, CANCER_GENES, CANCER_TYPES, ALLOW_SYNTHETIC_INDELS
 )
 
 
@@ -43,11 +43,29 @@ def write_fastq(filepath, reads):
             f.write(f"{qual}\n")
 
 
-def introduce_mutations(sequence, mutation_rate=0.01, gene_name=""):
+def introduce_mutations(sequence, mutation_rate=0.01, gene_name="", allow_indels=None):
+    """
+    Introduit des mutations dans une séquence.
+    
+    Args:
+        sequence: Séquence ADN de référence
+        mutation_rate: Taux de mutation pour les SNPs
+        gene_name: Nom du gène (pour le tracking)
+        allow_indels: Si True, génère aussi insertions/délétions.
+                      Par défaut, utilise ALLOW_SYNTHETIC_INDELS (False).
+                      
+    Note: Les indels sont désactivés par défaut car sans alignement propre,
+    ils décalent les positions et produisent des milliers de faux SNPs
+    lors de la détection par comparaison directe position par position.
+    """
+    if allow_indels is None:
+        allow_indels = ALLOW_SYNTHETIC_INDELS
+        
     mutated = list(sequence)
     mutations = []
 
     for i in range(len(mutated)):
+        # SNPs - toujours supportés
         if random.random() < mutation_rate:
             original = mutated[i]
             choices = [n for n in NUCLEOTIDES if n != original]
@@ -60,7 +78,8 @@ def introduce_mutations(sequence, mutation_rate=0.01, gene_name=""):
                 "gene": gene_name
             })
 
-        if random.random() < mutation_rate * 0.1:
+        # Insertions - seulement si allow_indels=True
+        if allow_indels and random.random() < mutation_rate * 0.1:
             insert = generate_sequence(random.randint(1, 5))
             mutated[i] = mutated[i] + insert
             mutations.append({
@@ -71,7 +90,8 @@ def introduce_mutations(sequence, mutation_rate=0.01, gene_name=""):
                 "gene": gene_name
             })
 
-        if random.random() < mutation_rate * 0.08:
+        # Délétions - seulement si allow_indels=True
+        if allow_indels and random.random() < mutation_rate * 0.08:
             mutated[i] = ""
             mutations.append({
                 "position": i,
@@ -164,6 +184,8 @@ def generate_patient_sample(patient_id, reference_sequences, severity="moderate"
     os.makedirs(patient_dir, exist_ok=True)
 
     all_mutations = []
+    # Ground truth: mutations réellement injectées par gène
+    ground_truth = {"patient_id": patient_id, "severity": severity, "genes": {}}
 
     for gene_name, ref_seq in reference_sequences.items():
         mutated_seq, mutations = introduce_mutations(ref_seq, mutation_rate, gene_name)
@@ -173,12 +195,30 @@ def generate_patient_sample(patient_id, reference_sequences, severity="moderate"
             m["severity"] = severity
 
         all_mutations.extend(mutations)
+        
+        # Enregistrer la vérité terrain pour ce gène
+        ground_truth["genes"][gene_name] = {
+            "snps": [m for m in mutations if m.get("type") == "SNP"],
+            "insertions": [m for m in mutations if m.get("type") == "INS"],
+            "deletions": [m for m in mutations if m.get("type") == "DEL"],
+            "total": len(mutations)
+        }
 
         reads = simulate_reads(mutated_seq, coverage=random.randint(15, 50))
         write_fastq(
             os.path.join(patient_dir, f"{gene_name}_reads.fastq"),
             reads
         )
+
+    # Sauvegarder le fichier de vérité terrain
+    ground_truth["total_mutations"] = len(all_mutations)
+    ground_truth["total_snps"] = sum(1 for m in all_mutations if m.get("type") == "SNP")
+    ground_truth["total_insertions"] = sum(1 for m in all_mutations if m.get("type") == "INS")
+    ground_truth["total_deletions"] = sum(1 for m in all_mutations if m.get("type") == "DEL")
+    
+    ground_truth_file = os.path.join(patient_dir, "ground_truth_mutations.json")
+    with open(ground_truth_file, "w") as f:
+        json.dump(ground_truth, f, indent=2)
 
     mutations_file = os.path.join(patient_dir, "detected_mutations.json")
     with open(mutations_file, "w") as f:

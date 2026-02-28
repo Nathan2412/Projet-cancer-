@@ -37,11 +37,40 @@ def annotate_with_known_db(mutations, known_db, gene_name):
 
 
 def _matches_hotspot(mutation, hotspot):
-    mut_pos = mutation.get("position", -1)
-    codon = hotspot.get("codon", -1)
-    codon_pos = codon * 3
-
-    return abs(mut_pos - codon_pos) < 10
+    """
+    Détermine si une mutation correspond à un hotspot connu.
+    
+    Logique de matching (par priorité):
+    1. Si mutation.protein_change existe et hotspot.change existe,
+       comparaison exacte normalisée (trim + uppercase)
+    2. Si mutation.hotspot_change existe, comparaison avec hotspot.change
+    3. Sinon, retourne False
+    
+    Note: L'ancienne logique basée sur abs(mut_pos - codon*3) < 10 était
+    biologiquement incorrecte car elle mélangeait positions génomiques
+    et positions de codons sans mapping transcript propre.
+    """
+    # Priorité 1: Matching sur protein_change
+    mut_protein = mutation.get("protein_change", "")
+    hotspot_change = hotspot.get("change", "")
+    
+    if mut_protein and hotspot_change:
+        # Normalisation: trim et uppercase pour comparaison robuste
+        mut_norm = str(mut_protein).strip().upper()
+        hot_norm = str(hotspot_change).strip().upper()
+        if mut_norm == hot_norm:
+            return True
+    
+    # Priorité 2: Matching sur hotspot_change déjà annoté
+    mut_hotspot = mutation.get("hotspot_change", "")
+    if mut_hotspot and hotspot_change:
+        mut_norm = str(mut_hotspot).strip().upper()
+        hot_norm = str(hotspot_change).strip().upper()
+        if mut_norm == hot_norm:
+            return True
+    
+    # Pas de matching fiable possible sans protein_change
+    return False
 
 
 def _infer_significance(mutation):

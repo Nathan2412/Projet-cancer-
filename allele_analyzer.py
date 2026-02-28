@@ -4,7 +4,8 @@ Analyse des alleles communs par type de cancer.
 Principe :
   1. Pour chaque cancer connu, on recense les mutations (gene+position+type)
      presentes chez les patients diagnostiques.
-  2. On ne retient que les alleles recurents (>= min_patients).
+  2. On ne retient que les alleles recurents (>= min_patients) et discriminants
+     (enrichis dans ce cancer par rapport aux autres).
   3. Pour les patients dont le cancer est inconnu, on compare leur profil
      mutationnel aux signatures et on calcule un score de ressemblance.
   4. On fournit une matrice binaire allele-presence pour le clustering.
@@ -15,18 +16,43 @@ from typing import Any
 
 import numpy as np
 
+from config import (
+    ALLELE_MIN_PATIENTS, ALLELE_MIN_FREQUENCY, 
+    ALLELE_MAX_OUTSIDE_FREQUENCY, ALLELE_MIN_ENRICHMENT, ALLELE_MAX_PER_CANCER
+)
+
 
 # ════════════════════════════════════════════════════════════════════════
 #  1. Construction de la signature d'alleles par cancer
 # ════════════════════════════════════════════════════════════════════════
 
 def _mutation_key(mut: dict) -> str:
-    """Clé unique pour un allèle : gene|position|type|alt."""
+    """
+    Clé unique pour un allèle avec priorité :
+    1. gene|PROT|protein_change si protein_change existe et non vide
+    2. gene|HOTSPOT|hotspot_change si hotspot_change existe et non vide
+    3. gene|type|position|alternative (fallback)
+    
+    Cette hiérarchie produit des clés plus stables et biologiquement 
+    significatives que la position brute.
+    """
     gene = mut.get("gene", "?")
+    
+    # Priorité 1: protein_change (le plus stable et significatif)
+    protein_change = mut.get("protein_change", "")
+    if protein_change and str(protein_change).strip():
+        return f"{gene}|PROT|{str(protein_change).strip()}"
+    
+    # Priorité 2: hotspot_change (annotation connue)
+    hotspot_change = mut.get("hotspot_change", "")
+    if hotspot_change and str(hotspot_change).strip():
+        return f"{gene}|HOTSPOT|{str(hotspot_change).strip()}"
+    
+    # Fallback: position brute (moins stable mais nécessaire pour données sans annotation)
     pos = mut.get("position", 0)
     mtype = mut.get("type", "?")
     alt = mut.get("alternative", "?")
-    return f"{gene}|{pos}|{mtype}|{alt}"
+    return f"{gene}|{mtype}|{pos}|{alt}"
 
 
 def _collect_patient_alleles(patient_result: dict) -> set[str]:
@@ -42,36 +68,88 @@ def _collect_patient_alleles(patient_result: dict) -> set[str]:
 
 def build_cancer_allele_signatures(
     all_results: list[dict],
-    min_patients: int = 2,
-    min_frequency: float = 0.5,
+    min_patients: int = None,
+    min_frequency: float = None,
+    max_outside_frequency: float = None,
+    min_enrichment: float = None,
+    max_alleles_per_cancer: int = None,
 ) -> dict[str, dict]:
     """
-    Pour chaque type de cancer, identifie les alleles partagés par
-    au moins *min_patients* et présents chez >= *min_frequency* des patients
-    de ce cancer.
+    Pour chaque type de cancer, identifie les alleles partagés, discriminants
+    et enrichis dans ce cancer par rapport aux autres.
+
+    Critères de sélection (tous doivent être satisfaits):
+    - count_in_cancer >= min_patients
+    - freq_in_cancer >= min_frequency
+    - freq_outside_cancer <= max_outside_frequency
+    - enrichment >= min_enrichment
+    
+    Les allèles sont ensuite triés par enrichissement décroissant et
+    seuls les max_alleles_per_cancer meilleurs sont conservés.
 
     Retourne :
         {cancer_type: {
-            "alleles": {allele_key: {"count": int, "freq": float, ...}},
+            "alleles": {allele_key: {
+                "count": int, 
+                "freq_in_cancer": float, 
+                "freq_outside_cancer": float,
+                "enrichment": float,
+                ...
+            }},
             "n_patients": int,
         }}
     """
+    # Valeurs par défaut depuis config
+    if min_patients is None:
+        min_patients = ALLELE_MIN_PATIENTS
+    if min_frequency is None:
+        min_frequency = ALLELE_MIN_FREQUENCY
+    if max_outside_frequency is None:
+        max_outside_frequency = ALLELE_MAX_OUTSIDE_FREQUENCY
+    if min_enrichment is None:
+        min_enrichment = ALLELE_MIN_ENRICHMENT
+    if max_alleles_per_cancer is None:
+        max_alleles_per_cancer = ALLELE_MAX_PER_CANCER
+        
     # Grouper les patients par cancer connu
     cancer_patients: dict[str, list[dict]] = defaultdict(list)
+    all_patients_with_cancer: list[dict] = []
+    
     for r in all_results:
         ct = r.get("metadata", {}).get("cancer_type")
         if ct:
             cancer_patients[ct].append(r)
+            all_patients_with_cancer.append(r)
+    
+    total_patients_with_cancer = len(all_patients_with_cancer)
+    
+    # Collecter tous les allèles par patient (pour calculer freq hors cancer)
+    _SIG_IMPACTS = {"HIGH", "MODERATE"}
+    patient_alleles_map: dict[str, set[str]] = {}
+    
+    for r in all_patients_with_cancer:
+        pid = r.get("patient_id", "")
+        patient_alleles_map[pid] = set()
+        for gene_name, ga in r.get("gene_analyses", {}).items():
+            for mut in ga.get("mutations", []):
+                if mut.get("impact", "MODIFIER") in _SIG_IMPACTS:
+                    patient_alleles_map[pid].add(_mutation_key(mut))
 
     signatures: dict[str, dict] = {}
+    
     for cancer, patients in cancer_patients.items():
-        n = len(patients)
-        allele_counts: dict[str, int] = defaultdict(int)
+        n_in_cancer = len(patients)
+        n_outside_cancer = total_patients_with_cancer - n_in_cancer
+        
+        # Patients dans ce cancer
+        pids_in_cancer = {p.get("patient_id", "") for p in patients}
+        
+        # Comptage des allèles dans ce cancer
+        allele_counts_in: dict[str, int] = defaultdict(int)
         allele_info: dict[str, dict] = {}
 
-        # Ne retenir que les mutations à impact significatif
-        _SIG_IMPACTS = {"HIGH", "MODERATE"}
         for pat in patients:
+            pid = pat.get("patient_id", "")
             seen_this_patient: set[str] = set()
             for gene_name, ga in pat.get("gene_analyses", {}).items():
                 for mut in ga.get("mutations", []):
@@ -80,7 +158,7 @@ def build_cancer_allele_signatures(
                         continue
                     key = _mutation_key(mut)
                     if key not in seen_this_patient:
-                        allele_counts[key] += 1
+                        allele_counts_in[key] += 1
                         seen_this_patient.add(key)
                         # Garder les métadonnées de la première occurrence
                         if key not in allele_info:
@@ -89,24 +167,58 @@ def build_cancer_allele_signatures(
                                 "position": mut.get("position", 0),
                                 "type": mut.get("type", ""),
                                 "alternative": mut.get("alternative", ""),
+                                "protein_change": mut.get("protein_change", ""),
+                                "hotspot_change": mut.get("hotspot_change", ""),
                                 "impact": impact,
                             }
 
-        # Filtrer : garder seulement les alleles récurrents
+        # Comptage des allèles hors de ce cancer
+        allele_counts_outside: dict[str, int] = defaultdict(int)
+        for pid, alleles in patient_alleles_map.items():
+            if pid not in pids_in_cancer:
+                for key in alleles:
+                    allele_counts_outside[key] += 1
+
+        # Filtrer et scorer les allèles discriminants
+        candidate_alleles: list[tuple[str, dict]] = []
+        
+        for key, count_in in allele_counts_in.items():
+            freq_in = count_in / max(n_in_cancer, 1)
+            count_out = allele_counts_outside.get(key, 0)
+            freq_out = count_out / max(n_outside_cancer, 1) if n_outside_cancer > 0 else 0.0
+            
+            # Enrichissement (éviter division par zéro)
+            enrichment = freq_in / max(freq_out, 1e-6)
+            
+            # Appliquer tous les filtres
+            if count_in < min_patients:
+                continue
+            if freq_in < min_frequency:
+                continue
+            if freq_out > max_outside_frequency:
+                continue
+            if enrichment < min_enrichment:
+                continue
+            
+            info = allele_info[key].copy()
+            info["count"] = count_in
+            info["freq_in_cancer"] = round(freq_in, 4)
+            info["freq_outside_cancer"] = round(freq_out, 4)
+            info["enrichment"] = round(enrichment, 2)
+            
+            candidate_alleles.append((key, info))
+        
+        # Trier par enrichissement décroissant et garder les meilleurs
+        candidate_alleles.sort(key=lambda x: x[1]["enrichment"], reverse=True)
+        selected = candidate_alleles[:max_alleles_per_cancer]
+        
         sig_alleles: dict[str, dict[str, Any]] = {}
-        for key, count in allele_counts.items():
-            freq = count / max(n, 1)
-            if count >= min_patients and freq >= min_frequency:
-                info = allele_info[key].copy()
-                info["count"] = count
-                info["freq"] = round(freq, 4)
-                sig_alleles[key] = info
+        for key, info in selected:
+            sig_alleles[key] = info
 
         signatures[cancer] = {
-            "alleles": dict(
-                sorted(sig_alleles.items(), key=lambda x: x[1]["count"], reverse=True)
-            ),
-            "n_patients": n,
+            "alleles": sig_alleles,
+            "n_patients": n_in_cancer,
         }
 
     return signatures
@@ -209,17 +321,31 @@ def build_allele_matrix(
 
 def format_signatures_summary(signatures: dict[str, dict]) -> str:
     """Résumé lisible des signatures d'alleles par cancer."""
-    lines = ["  SIGNATURES D'ALLELES PAR CANCER"]
+    lines = ["  SIGNATURES D'ALLELES PAR CANCER (discriminantes)"]
     lines.append("  " + "-" * 50)
     for cancer, sig in signatures.items():
         n_alleles = len(sig["alleles"])
         n_pat = sig["n_patients"]
-        lines.append(f"  {cancer}: {n_alleles} alleles recurents "
+        lines.append(f"  {cancer}: {n_alleles} alleles discriminants "
                      f"(sur {n_pat} patients)")
         for key, info in list(sig["alleles"].items())[:5]:
-            lines.append(f"    - {info['gene']} pos={info['position']} "
-                         f"{info['type']} alt={info['alternative']} "
-                         f"(freq={info['freq']}, impact={info['impact']})")
+            gene = info.get('gene', '?')
+            prot = info.get('protein_change', '')
+            hotspot = info.get('hotspot_change', '')
+            enrich = info.get('enrichment', 0)
+            freq_in = info.get('freq_in_cancer', 0)
+            freq_out = info.get('freq_outside_cancer', 0)
+            
+            # Affichage condensé avec protein_change si disponible
+            if prot:
+                desc = f"{gene} {prot}"
+            elif hotspot:
+                desc = f"{gene} {hotspot}"
+            else:
+                desc = f"{gene} pos={info.get('position', '?')} {info.get('type', '?')}"
+            
+            lines.append(f"    - {desc} "
+                         f"(enrich={enrich}x, freq_in={freq_in}, freq_out={freq_out})")
         if n_alleles > 5:
             lines.append(f"    ... +{n_alleles - 5} autres")
     return "\n".join(lines)
