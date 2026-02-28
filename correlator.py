@@ -7,6 +7,29 @@ import math
 from collections import defaultdict, Counter
 
 
+_MALE_EXCLUDED_CANCERS = {
+    "sein", "ovaire", "uterus", "utérus", "endometre", "endomètre", "col_uterin", "col utérin", "cervix"
+}
+_FEMALE_EXCLUDED_CANCERS = {
+    "prostate", "testicule", "testicular"
+}
+
+
+def _normalize_cancer_name(name):
+    return str(name or "").strip().lower().replace("-", " ")
+
+
+def _is_cancer_compatible_with_sex(cancer_name, sex):
+    sx = str(sex or "").strip().upper()
+    if sx not in {"M", "F"}:
+        return True
+
+    normalized = _normalize_cancer_name(cancer_name)
+    if sx == "M":
+        return normalized not in _MALE_EXCLUDED_CANCERS
+    return normalized not in _FEMALE_EXCLUDED_CANCERS
+
+
 def compute_mutation_burden(patient_analysis):
     total_mutations = 0
     total_bases = 0
@@ -22,7 +45,7 @@ def compute_mutation_burden(patient_analysis):
     return round(total_mutations / total_bases * 1e6, 2)
 
 
-def compute_cancer_risk_profile(all_annotations):
+def compute_cancer_risk_profile(all_annotations, sex=None):
     risk_profile = defaultdict(lambda: {
         "score": 0.0,
         "contributing_mutations": [],
@@ -32,6 +55,8 @@ def compute_cancer_risk_profile(all_annotations):
     for gene_annotations in all_annotations:
         for mut in gene_annotations:
             for cancer in mut.get("associated_cancers", []):
+                if not _is_cancer_compatible_with_sex(cancer, sex):
+                    continue
                 profile = risk_profile[cancer]
                 profile["score"] += mut.get("pathogenicity_score", 0)
                 profile["genes_involved"].add(mut.get("gene", ""))
@@ -191,7 +216,7 @@ def identify_cosmic_signature(spectrum):
 
 def generate_patient_risk_report(patient_id, gene_analyses, annotations, metadata):
     burden = compute_mutation_burden(gene_analyses)
-    risk_profile = compute_cancer_risk_profile(annotations)
+    risk_profile = compute_cancer_risk_profile(annotations, sex=metadata.get("sex"))
     signature = compute_mutation_signature(annotations)
 
     high_impact = []

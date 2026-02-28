@@ -189,10 +189,21 @@ def generate_patient_sample(patient_id, reference_sequences, severity="moderate"
         "severity": severity,
         "num_mutations": len(all_mutations),
         "genes_analyzed": list(reference_sequences.keys()),
-        "cancer_type": random.choice(CANCER_TYPES) if severity in ["high", "extreme"] else None,
         "age": random.randint(25, 85),
         "sex": random.choice(["M", "F"])
     }
+
+    # Assigner un cancer compatible avec le sexe
+    if severity in ["high", "extreme"]:
+        sex = metadata["sex"]
+        male_excluded = {"Sein", "Ovaire"}
+        female_excluded = {"Prostate"}
+        valid = [c for c in CANCER_TYPES
+                 if not (sex == "M" and c in male_excluded)
+                 and not (sex == "F" and c in female_excluded)]
+        metadata["cancer_type"] = random.choice(valid) if valid else random.choice(CANCER_TYPES)
+    else:
+        metadata["cancer_type"] = None
 
     with open(os.path.join(patient_dir, "metadata.json"), "w") as f:
         json.dump(metadata, f, indent=2)

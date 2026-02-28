@@ -92,7 +92,11 @@ def plot_coverage_profile(coverage_data, gene_name, output_dir=PLOTS_DIR):
 
     plt.tight_layout()
     filepath = os.path.join(output_dir, f"coverage_{gene_name}.png")
-    plt.savefig(filepath, dpi=150)
+    try:
+        plt.savefig(filepath, dpi=150)
+    except Exception:
+        plt.close()
+        return None
     plt.close()
     return filepath
 
@@ -291,8 +295,11 @@ def generate_all_patient_plots(patient_report, sequencing_results, coverage_data
             plots.append(p)
 
     for gene_name, cov_data in coverage_data.items():
-        p = plot_coverage_profile(cov_data, gene_name)
-        if p:
-            plots.append(p)
+        try:
+            p = plot_coverage_profile(cov_data, gene_name)
+            if p:
+                plots.append(p)
+        except Exception:
+            pass
 
     return plots

@@ -7,14 +7,18 @@ import os, json, time
 import numpy as np
 from collections import Counter, defaultdict
 from config import CANCER_GENES, REPORTS_DIR, PLOTS_DIR
+from ml_model_selection import evaluate_models_nested_cv
+from ml_sectorization import run_sectorization
+from allele_analyzer import (
+    build_cancer_allele_signatures,
+    score_patient_against_signatures,
+    build_allele_matrix,
+    format_signatures_summary,
+)
 
-from sklearn.model_selection import StratifiedKFold, cross_val_predict
-from sklearn.preprocessing import LabelEncoder, StandardScaler, label_binarize
-from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
-from sklearn.svm import SVC
+from sklearn.preprocessing import LabelEncoder, label_binarize
 from sklearn.metrics import (
-    accuracy_score, precision_score, recall_score, f1_score,
-    classification_report, confusion_matrix, roc_auc_score, roc_curve, auc,
+    roc_curve, auc,
 )
 
 GENE_LIST = sorted(CANCER_GENES.keys())
@@ -45,162 +49,90 @@ def _save(fig, name, out=PLOTS_DIR):
 #  1. EXTRACTION DE FEATURES
 # ═══════════════════════════════════════════════════════════════════════════
 
-def extract_features(all_results):
-    """Transforme les resultats patients en (X, y, patient_ids, feature_names)."""
+def _extract_row(r):
+    """Extrait un vecteur de features pour un patient."""
+    meta = r.get("metadata", {})
+    ga = r.get("gene_analyses", {})
+
+    mpg = [ga.get(g, {}).get("total_mutations", 0) for g in GENE_LIST]
+    total = sum(mpg)
+
+    snp = sum(ga.get(g, {}).get("snps", 0) for g in GENE_LIST)
+    ins = sum(ga.get(g, {}).get("insertions", 0) for g in GENE_LIST)
+    dl  = sum(ga.get(g, {}).get("deletions", 0) for g in GENE_LIST)
+
+    impacts = {k: 0 for k in ("HIGH", "MODERATE", "LOW", "MODIFIER")}
+    for g in GENE_LIST:
+        for k in impacts:
+            impacts[k] += ga.get(g, {}).get("impact_distribution", {}).get(k, 0)
+
+    age = meta.get("age", 50)
+    sex = 1 if meta.get("sex", "M") == "F" else 0
+    n_genes = sum(1 for g in GENE_LIST if ga.get(g, {}).get("total_mutations", 0) > 0)
+    burden = r.get("risk_report", {}).get("mutation_burden_per_mb", 0)
+
+    return (
+        mpg
+        + [total, snp, ins, dl]
+        + [impacts["HIGH"], impacts["MODERATE"], impacts["LOW"], impacts["MODIFIER"]]
+        + [age, sex, n_genes, burden, int(impacts["HIGH"] > 0), snp / max(total, 1)]
+    )
+
+
+FEATURE_NAMES = (
+    [f"mut_{g}" for g in GENE_LIST]
+    + ["total_mut", "SNP", "INS", "DEL"]
+    + ["imp_HIGH", "imp_MOD", "imp_LOW", "imp_MODIFIER"]
+    + ["age", "sex_F", "n_genes", "burden", "has_HIGH", "snp_ratio"]
+)
+
+
+def extract_features(all_results, labeled_only=True):
+    """Transforme les resultats patients en (X, y, patient_ids, feature_names).
+    Si labeled_only=True, ne garde que les patients avec cancer_type connu.
+    Si labeled_only=False, garde tous ; y contient '' pour les inconnus.
+    """
     rows, labels, ids = [], [], []
 
     for r in all_results:
         meta = r.get("metadata", {})
         cancer = meta.get("cancer_type")
-        if not cancer:
+        if labeled_only and not cancer:
             continue
 
-        ga = r.get("gene_analyses", {})
-
-        # mutations par gene
-        mpg = [ga.get(g, {}).get("total_mutations", 0) for g in GENE_LIST]
-        total = sum(mpg)
-
-        # types
-        snp = sum(ga.get(g, {}).get("snps", 0) for g in GENE_LIST)
-        ins = sum(ga.get(g, {}).get("insertions", 0) for g in GENE_LIST)
-        dl  = sum(ga.get(g, {}).get("deletions", 0) for g in GENE_LIST)
-
-        # impacts
-        impacts = {k: 0 for k in ("HIGH", "MODERATE", "LOW", "MODIFIER")}
-        for g in GENE_LIST:
-            for k in impacts:
-                impacts[k] += ga.get(g, {}).get("impact_distribution", {}).get(k, 0)
-
-        age = meta.get("age", 50)
-        sex = 1 if meta.get("sex", "M") == "F" else 0
-        n_genes = sum(1 for g in GENE_LIST if ga.get(g, {}).get("total_mutations", 0) > 0)
-        burden = r.get("risk_report", {}).get("mutation_burden_per_mb", 0)
-
-        rows.append(
-            mpg
-            + [total, snp, ins, dl]
-            + [impacts["HIGH"], impacts["MODERATE"], impacts["LOW"], impacts["MODIFIER"]]
-            + [age, sex, n_genes, burden, int(impacts["HIGH"] > 0), snp / max(total, 1)]
-        )
-        labels.append(cancer)
+        rows.append(_extract_row(r))
+        labels.append(cancer or "")
         ids.append(r.get("patient_id", ""))
 
-    feat_names = (
-        [f"mut_{g}" for g in GENE_LIST]
-        + ["total_mut", "SNP", "INS", "DEL"]
-        + ["imp_HIGH", "imp_MOD", "imp_LOW", "imp_MODIFIER"]
-        + ["age", "sex_F", "n_genes", "burden", "has_HIGH", "snp_ratio"]
-    )
-    return np.array(rows, dtype=np.float64), np.array(labels), ids, feat_names
-
-
-# ═══════════════════════════════════════════════════════════════════════════
-#  2. ENTRAINEMENT + EVALUATION
-# ═══════════════════════════════════════════════════════════════════════════
-
-_MODELS = {
-    "Random Forest": lambda: RandomForestClassifier(
-        n_estimators=200, max_depth=15, min_samples_split=5,
-        class_weight="balanced", random_state=42, n_jobs=-1),
-    "Gradient Boosting": lambda: GradientBoostingClassifier(
-        n_estimators=150, max_depth=5, learning_rate=0.1,
-        subsample=0.8, random_state=42),
-    "SVM (RBF)": lambda: SVC(
-        kernel="rbf", C=10, gamma="scale",
-        class_weight="balanced", probability=True, random_state=42),
-}
+    return np.array(rows, dtype=np.float64), np.array(labels), ids, list(FEATURE_NAMES)
 
 
 def train_and_evaluate(X, y, feature_names, n_splits=5, verbose=True):
-    """Cross-validation stratifiee, retourne metriques completes."""
+    """Nested CV + tuning hyperparametres, retourne metriques completes."""
     t0 = time.time()
     le = LabelEncoder()
     y_enc = le.fit_transform(y)
     classes = list(le.classes_)
-    n_cls = len(classes)
-
-    scaler = StandardScaler()
-    Xs = scaler.fit_transform(X)
-    cv = StratifiedKFold(n_splits=n_splits, shuffle=True, random_state=42)
 
     res = dict(class_names=classes, n_samples=len(y), n_features=X.shape[1],
                feature_names=feature_names, class_distribution=dict(Counter(y)),
                models={}, best_model_name=None, best_accuracy=0.0,
-               _scaler=scaler, _label_encoder=le, _y_encoded=y_enc.tolist())
+               _label_encoder=le, _y_encoded=y_enc.tolist())
 
-    for name, factory in _MODELS.items():
-        model = factory()
-        if verbose:
-            print(f"    [{name}] ...", end=" ", flush=True)
+    eval_out = evaluate_models_nested_cv(
+        X=X,
+        y_enc=y_enc,
+        class_names=classes,
+        feature_names=feature_names,
+        n_splits=n_splits,
+        random_state=42,
+        verbose=verbose,
+    )
 
-        yp = cross_val_predict(model, Xs, y_enc, cv=cv)
-        try:
-            yprob = cross_val_predict(model, Xs, y_enc, cv=cv, method="predict_proba")
-        except Exception:
-            yprob = None
-
-        acc  = accuracy_score(y_enc, yp)
-        prec = precision_score(y_enc, yp, average="weighted", zero_division=0)
-        rec  = recall_score(y_enc, yp, average="weighted", zero_division=0)
-        f1w  = f1_score(y_enc, yp, average="weighted", zero_division=0)
-        cm   = confusion_matrix(y_enc, yp)
-
-        # ROC AUC
-        roc_w, roc_cls = None, {}
-        if yprob is not None and n_cls > 2:
-            ybin = label_binarize(y_enc, classes=list(range(n_cls)))
-            try:
-                roc_w = roc_auc_score(ybin, yprob, multi_class="ovr", average="weighted")
-            except Exception:
-                pass
-            for i, c in enumerate(classes):
-                try:
-                    roc_cls[c] = round(roc_auc_score(ybin[:, i], yprob[:, i]), 4)
-                except Exception:
-                    roc_cls[c] = None
-
-        model.fit(Xs, y_enc)
-
-        # feature importance
-        fi = {}
-        if hasattr(model, "feature_importances_"):
-            for i, fn in enumerate(feature_names):
-                fi[fn] = round(float(model.feature_importances_[i]), 5)
-            fi = dict(sorted(fi.items(), key=lambda x: x[1], reverse=True))
-
-        # per-class
-        pc_p = precision_score(y_enc, yp, average=None, zero_division=0)
-        pc_r = recall_score(y_enc, yp, average=None, zero_division=0)
-        pc_f = f1_score(y_enc, yp, average=None, zero_division=0)
-        per_class = {}
-        for i, c in enumerate(classes):
-            per_class[c] = dict(precision=round(float(pc_p[i]), 4),
-                                recall=round(float(pc_r[i]), 4),
-                                f1=round(float(pc_f[i]), 4),
-                                support=int(np.sum(y_enc == i)),
-                                roc_auc=roc_cls.get(c))
-
-        res["models"][name] = dict(
-            accuracy=round(acc, 4), precision_weighted=round(prec, 4),
-            recall_weighted=round(rec, 4), f1_weighted=round(f1w, 4),
-            roc_auc_weighted=round(roc_w, 4) if roc_w else None,
-            roc_auc_per_class=roc_cls, confusion_matrix=cm.tolist(),
-            per_class_metrics=per_class, feature_importance=fi,
-            classification_report=classification_report(
-                y_enc, yp, target_names=classes, zero_division=0),
-            y_pred=yp.tolist(),
-            y_proba=yprob.tolist() if yprob is not None else None,
-            _model=model,
-        )
-
-        if verbose:
-            print(f"acc={acc:.3f}  f1={f1w:.3f}" + (f"  auc={roc_w:.3f}" if roc_w else ""))
-
-        if acc > res["best_accuracy"]:
-            res["best_accuracy"] = round(acc, 4)
-            res["best_model_name"] = name
-            res["_best_model"] = model
+    res["models"] = eval_out["models"]
+    res["best_model_name"] = eval_out["best_model_name"]
+    res["best_accuracy"] = eval_out["best_accuracy"]
+    res["_best_model"] = res["models"][res["best_model_name"]]["_model"]
 
     res["training_time_seconds"] = round(time.time() - t0, 2)
     return res
@@ -210,29 +142,50 @@ def train_and_evaluate(X, y, feature_names, n_splits=5, verbose=True):
 #  3. PREDICTION
 # ═══════════════════════════════════════════════════════════════════════════
 
+def _add_allele_score_features(X, all_results, signatures, feature_names):
+    """Ajoute les scores de correspondance allele par cancer comme features."""
+    if not signatures:
+        return X, feature_names
+    cancer_types_sorted = sorted(signatures.keys())
+    extra_cols = []
+    for r in all_results:
+        scores = score_patient_against_signatures(r, signatures)
+        extra_cols.append([scores.get(ct, {}).get("score", 0.0) for ct in cancer_types_sorted])
+    extra = np.array(extra_cols, dtype=np.float64)
+    new_names = feature_names + [f"allele_score_{ct}" for ct in cancer_types_sorted]
+    return np.hstack([X, extra]), new_names
+
+
 def predict_patient(patient_result, ml):
-    """Prediction pour un patient unique."""
-    X1, _, _, _ = extract_features([patient_result])
+    """Prediction pour un patient unique (connu ou inconnu)."""
+    X1, _, _, f1 = extract_features([patient_result], labeled_only=False)
     if X1.shape[0] == 0:
         return None
-    Xs = ml["_scaler"].transform(X1)
+    # Ajouter les allele-score features si des signatures existent
+    signatures = ml.get("_signatures")
+    if signatures:
+        X1, _ = _add_allele_score_features(X1, [patient_result], signatures, f1)
+
     model = ml["_best_model"]
     le = ml["_label_encoder"]
-    pred = le.inverse_transform(model.predict(Xs))[0]
+    pred = le.inverse_transform(model.predict(X1))[0]
 
     probas = {}
     if hasattr(model, "predict_proba"):
         for i, c in enumerate(ml["class_names"]):
-            probas[c] = round(float(model.predict_proba(Xs)[0][i]), 4)
+            probas[c] = round(float(model.predict_proba(X1)[0][i]), 4)
 
-    actual = patient_result.get("metadata", {}).get("cancer_type", "Inconnu")
+    actual = patient_result.get("metadata", {}).get("cancer_type")
+    is_known = actual is not None
     return dict(
         patient_id=patient_result.get("patient_id"),
-        predicted_cancer=pred, actual_cancer=actual,
-        correct=(pred == actual),
+        predicted_cancer=pred,
+        actual_cancer=actual or "Inconnu",
+        correct=(pred == actual) if is_known else None,
         confidence=probas.get(pred, 0),
         probabilities=dict(sorted(probas.items(), key=lambda x: x[1], reverse=True)),
         model_used=ml["best_model_name"],
+        is_known=is_known,
     )
 
 
@@ -376,15 +329,21 @@ def generate_ml_plots(ml, predictions):
 #  5. RAPPORTS
 # ═══════════════════════════════════════════════════════════════════════════
 
-def _report_text(ml, predictions):
+def _report_text(ml, predictions_known, predictions_unknown=None, signatures=None):
     """Rapport texte concis."""
+    predictions_unknown = predictions_unknown or []
     L = []
     sep = "=" * 64
     L.append(sep)
     L.append("  RAPPORT ML — PREDICTION DE CANCER")
     L.append(f"  {time.strftime('%d/%m/%Y %H:%M')}  |  "
-             f"{ml['n_samples']} patients  |  {len(ml['class_names'])} classes")
+             f"{ml['n_samples']} patients labellises  |  {len(ml['class_names'])} classes")
     L.append(sep)
+
+    # Signatures d'alleles
+    if signatures:
+        L.append("")
+        L.append(format_signatures_summary(signatures))
 
     L.append(f"\n  Entrainement : {ml['training_time_seconds']}s")
     L.append(f"  {'Modele':<22} {'Acc':>7} {'Prec':>7} {'Rec':>7} "
@@ -395,6 +354,9 @@ def _report_text(ml, predictions):
         roc = f"{d['roc_auc_weighted']:.4f}" if d["roc_auc_weighted"] else "  N/A"
         L.append(f"  {n:<22} {d['accuracy']:>7.4f} {d['precision_weighted']:>7.4f} "
                  f"{d['recall_weighted']:>7.4f} {d['f1_weighted']:>7.4f} {roc:>7}{tag}")
+        L.append(f"    params={d.get('best_params', {})} | "
+                 f"train-cv gap acc={d.get('overfit_gap_accuracy', 0):+.4f} "
+                 f"f1={d.get('overfit_gap_f1', 0):+.4f}")
 
     best = ml["models"][ml["best_model_name"]]
     L.append(f"\n  Meilleur : {ml['best_model_name']} "
@@ -405,12 +367,40 @@ def _report_text(ml, predictions):
         L.append(f"  {c:<18} {m['precision']:>7.4f} {m['recall']:>7.4f} "
                  f"{m['f1']:>7.4f} {m['support']:>5}")
 
-    if predictions:
-        ok = sum(1 for p in predictions if p["correct"])
-        L.append(f"\n  Predictions : {ok}/{len(predictions)} correctes "
-                 f"({ok / len(predictions) * 100:.1f}%)")
+    if predictions_known:
+        ok = sum(1 for p in predictions_known if p["correct"])
+        L.append(f"\n  Predictions (patients connus) : {ok}/{len(predictions_known)} correctes "
+                 f"({ok / len(predictions_known) * 100:.1f}%)")
         L.append(f"  Confiance moy : "
-                 f"{np.mean([p['confidence'] for p in predictions]):.3f}")
+                 f"{np.mean([p['confidence'] for p in predictions_known]):.3f}")
+
+    if predictions_unknown:
+        L.append(f"\n  PREDICTIONS PATIENTS INCONNUS ({len(predictions_unknown)}):")
+        L.append(f"  {'Patient':<12} {'Cancer predit':<18} {'Conf':>6} {'Cluster':<12} {'Top allele score'}")
+        L.append("  " + "-" * 70)
+        for p in predictions_unknown:
+            cluster = p.get("cluster", "?")
+            ascores = p.get("allele_scores", {})
+            top_as = ""
+            if ascores:
+                top_ct = max(ascores, key=lambda c: ascores[c]["score"])
+                top_as = f"{top_ct}={ascores[top_ct]['score']:.2f}"
+            L.append(f"  {p['patient_id']:<12} {p['predicted_cancer']:<18} "
+                     f"{p['confidence']:>6.3f} {cluster:<12} {top_as}")
+
+    sector = ml.get("sectorization")
+    if sector:
+        coh = sector.get("coherence_with_cancer_labels", {})
+        L.append("\n  Sectorisation (clustering)")
+        L.append(f"  - k optimal: {sector.get('best_k')} "
+                 f"| silhouette: {sector.get('best_silhouette')}")
+        L.append(f"  - Coherence labels cancer: "
+                 f"ARI={coh.get('adjusted_rand_index')} "
+                 f"NMI={coh.get('normalized_mutual_info')}")
+        for sec_name, sec_data in sector.get("clusters", {}).items():
+            top_cancer = next(iter(sec_data.get("cancer_types", {}) or {"N/A": 0}))
+            L.append(f"    {sec_name}: n={sec_data.get('size', 0)} "
+                     f"dominant={top_cancer}")
 
     L.append(sep)
     txt = "\n".join(L)
@@ -420,8 +410,9 @@ def _report_text(ml, predictions):
     return path, txt
 
 
-def _report_html(ml, predictions, plot_paths):
+def _report_html(ml, predictions_known, predictions_unknown=None, signatures=None, plot_paths=None):
     """Rapport HTML compact."""
+    predictions_unknown = predictions_unknown or []
     best_n = ml["best_model_name"]
     bd = ml["models"][best_n]
 
@@ -431,11 +422,12 @@ def _report_html(ml, predictions, plot_paths):
                  'border-radius:8px;font-size:11px">BEST</span>'
                  if n == best_n else "")
         roc = f"{d['roc_auc_weighted']:.4f}" if d["roc_auc_weighted"] else "N/A"
+        overfit = f"{d.get('overfit_gap_f1', 0):+.3f}"
         model_rows += (f"<tr><td><b>{n}</b></td><td>{d['accuracy']:.4f}</td>"
                        f"<td>{d['precision_weighted']:.4f}</td>"
                        f"<td>{d['recall_weighted']:.4f}</td>"
                        f"<td>{d['f1_weighted']:.4f}</td>"
-                       f"<td>{roc}</td><td>{badge}</td></tr>\n")
+                       f"<td>{roc}</td><td>{overfit}</td><td>{badge}</td></tr>\n")
 
     class_rows = ""
     for c, m in bd["per_class_metrics"].items():
@@ -445,15 +437,54 @@ def _report_html(ml, predictions, plot_paths):
                        f"<td>{m['support']}</td><td>{roc}</td></tr>\n")
 
     pred_rows, ok_n = "", 0
-    if predictions:
-        ok_n = sum(1 for p in predictions if p["correct"])
-        for p in predictions[:30]:
+    if predictions_known:
+        ok_n = sum(1 for p in predictions_known if p["correct"])
+        for p in predictions_known[:30]:
             css = "color:#27ae60" if p["correct"] else "color:#e74c3c"
             sym = "&#10003;" if p["correct"] else "&#10007;"
             pred_rows += (
                 f'<tr><td>{p["patient_id"]}</td><td>{p["actual_cancer"]}</td>'
                 f'<td>{p["predicted_cancer"]}</td><td>{p["confidence"]:.3f}</td>'
                 f'<td style="{css};font-weight:bold">{sym}</td></tr>\n')
+
+    # Unknown predictions
+    unknown_rows = ""
+    for p in predictions_unknown:
+        ascores = p.get("allele_scores", {})
+        top_as = ""
+        if ascores:
+            top_ct = max(ascores, key=lambda c: ascores[c]["score"])
+            top_as = f"{top_ct} ({ascores[top_ct]['score']:.2f})"
+        cluster = p.get("cluster", "?")
+        unknown_rows += (
+            f'<tr><td>{p["patient_id"]}</td>'
+            f'<td><b>{p["predicted_cancer"]}</b></td>'
+            f'<td>{p["confidence"]:.3f}</td>'
+            f'<td>{cluster}</td>'
+            f'<td>{top_as}</td></tr>\n')
+
+    sector_rows = ""
+    sector = ml.get("sectorization")
+    if sector:
+        for sec_name, sec_data in sector.get("clusters", {}).items():
+            top = ", ".join(
+                [f"{k}:{v}" for k, v in list(sec_data.get("cancer_types", {}).items())[:3]]
+            )
+            sector_rows += (f"<tr><td>{sec_name}</td><td>{sec_data.get('size', 0)}</td>"
+                            f"<td>{top}</td></tr>\n")
+
+    # Signatures alleles
+    sig_rows = ""
+    if signatures:
+        for cancer, sig in signatures.items():
+            n_alleles = len(sig["alleles"])
+            top_alleles = ", ".join(
+                f"{info['gene']}:{info['position']} ({info['impact']})"
+                for _, info in list(sig["alleles"].items())[:4]
+            )
+            sig_rows += (f"<tr><td>{cancer}</td><td>{n_alleles}</td>"
+                         f"<td>{sig['n_patients']}</td>"
+                         f"<td style='font-size:11px'>{top_alleles}</td></tr>\n")
 
     imgs = ""
     for pp in (plot_paths or []):
@@ -463,7 +494,7 @@ def _report_html(ml, predictions, plot_paths):
                      f'<img src="{rel}" style="max-width:100%;border-radius:4px;'
                      f'box-shadow:0 2px 6px rgba(0,0,0,.1)"></div>\n')
 
-    n_pred = len(predictions) if predictions else 0
+    n_pred = len(predictions_known)
     pct = f"{ok_n / n_pred * 100:.1f}" if n_pred else "0"
 
     html = f"""<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8">
@@ -481,23 +512,27 @@ tr:hover{{background:#f8f9fa}}
 .c{{background:#f8f9fa;padding:14px;border-radius:8px;text-align:center;border-left:4px solid #3498db}}
 .c .v{{font-size:28px;font-weight:bold}} .c .l{{color:#7f8c8d;font-size:11px;margin-top:4px}}
 .ft{{text-align:center;color:#95a5a6;margin-top:30px;font-size:11px}}
+.warn{{background:#fff3cd;border-left:4px solid #ffc107;padding:12px;border-radius:4px;margin:10px 0;font-size:13px}}
 </style></head><body>
 <div class="hdr"><h1>Rapport ML — Prediction de Cancer</h1>
-<p>{time.strftime('%d/%m/%Y %H:%M')} | {ml['n_samples']} patients | {len(ml['class_names'])} types</p></div>
+<p>{time.strftime('%d/%m/%Y %H:%M')} | {ml['n_samples']} patients labellises | {len(ml['class_names'])} types</p></div>
 <div class="sec"><h2>Resume</h2><div class="g">
-<div class="c"><div class="v">{ml['n_samples']}</div><div class="l">Patients</div></div>
+<div class="c"><div class="v">{ml['n_samples']}</div><div class="l">Patients (train)</div></div>
 <div class="c"><div class="v">{ml['n_features']}</div><div class="l">Features</div></div>
 <div class="c"><div class="v">{len(ml['class_names'])}</div><div class="l">Classes</div></div>
 <div class="c"><div class="v">{bd['accuracy']:.1%}</div><div class="l">Best Accuracy</div></div>
 </div></div>
+{f'<div class="sec"><h2>Signatures alleles</h2><table><tr><th>Cancer</th><th>Alleles</th><th>Patients</th><th>Top alleles</th></tr>{sig_rows}</table></div>' if sig_rows else ''}
 <div class="sec"><h2>Comparaison des modeles</h2>
-<table><tr><th>Modele</th><th>Accuracy</th><th>Precision</th><th>Recall</th><th>F1</th><th>AUC</th><th></th></tr>
+<table><tr><th>Modele</th><th>Accuracy</th><th>Precision</th><th>Recall</th><th>F1</th><th>AUC</th><th>Gap F1(train-cv)</th><th></th></tr>
 {model_rows}</table></div>
 <div class="sec"><h2>Metriques par classe ({best_n})</h2>
 <table><tr><th>Cancer</th><th>Precision</th><th>Recall</th><th>F1</th><th>Support</th><th>AUC</th></tr>
 {class_rows}</table></div>
+{f'<div class="sec"><h2>Sectorisation (tous patients)</h2><p>k={sector.get("best_k")}, silhouette={sector.get("best_silhouette")}, ARI={sector.get("coherence_with_cancer_labels", dict()).get("adjusted_rand_index")}, NMI={sector.get("coherence_with_cancer_labels", dict()).get("normalized_mutual_info")}</p><table><tr><th>Secteur</th><th>Taille</th><th>Cancers dominants</th></tr>{sector_rows}</table></div>' if sector else ''}
+{f'<div class="sec"><h2>Predictions patients connus ({ok_n}/{n_pred} — {pct}%)</h2><table><tr><th>Patient</th><th>Reel</th><th>Predit</th><th>Confiance</th><th></th></tr>{pred_rows}</table></div>' if predictions_known else ''}
+{f'<div class="sec"><h2>Predictions patients inconnus ({len(predictions_unknown)})</h2><div class="warn">Ces patients n ont pas de diagnostic connu. La prediction est basee sur les signatures alleles et le modele ML.</div><table><tr><th>Patient</th><th>Cancer predit</th><th>Confiance</th><th>Cluster</th><th>Meilleur score allele</th></tr>{unknown_rows}</table></div>' if predictions_unknown else ''}
 {f'<div class="sec"><h2>Visualisations</h2>{imgs}</div>' if imgs else ''}
-{f'<div class="sec"><h2>Predictions ({ok_n}/{n_pred} — {pct}%)</h2><table><tr><th>Patient</th><th>Reel</th><th>Predit</th><th>Confiance</th><th></th></tr>{pred_rows}</table></div>' if predictions else ''}
 <div class="ft">Rapport auto — Module ML genomique. Ne constitue pas un diagnostic.</div>
 </body></html>"""
 
@@ -512,84 +547,204 @@ tr:hover{{background:#f8f9fa}}
 # ═══════════════════════════════════════════════════════════════════════════
 
 def run_ml_pipeline(all_results, generate_plots=True, verbose=True):
-    """Point d'entree ML : features -> train -> predict -> plots -> reports."""
+    """Pipeline ML complet :
+    1. Signatures d'alleles (patients connus)
+    2. Features pour TOUS les patients + allele scores
+    3. Sectorisation (clustering) sur TOUS les patients
+    4. Entrainement supervisé sur patients labellisés
+    5. Prédiction des patients inconnus
+    6. Graphiques + rapports
+    """
     if verbose:
         print("\n" + "=" * 60)
         print("  MODULE ML — PREDICTION DE CANCER")
         print("=" * 60)
 
-    # 1. Features
+    # ── 1. Signatures d'alleles ─────────────────────────────────
     if verbose:
-        print("\n  [1/5] Extraction des features...")
-    X, y, pids, fnames = extract_features(all_results)
+        print("\n  [1/7] Signatures d'alleles (patients connus)...")
+    signatures = build_cancer_allele_signatures(all_results,
+                                                 min_patients=2,
+                                                 min_frequency=0.5)
     if verbose:
-        print(f"    {X.shape[0]} patients x {X.shape[1]} features, "
-              f"{len(set(y))} classes")
-    if X.shape[0] < 20:
-        print("    WARN: pas assez de patients (<20)")
+        total_sig = sum(len(s["alleles"]) for s in signatures.values())
+        print(f"    {len(signatures)} types de cancer, {total_sig} alleles-signature")
+        print(format_signatures_summary(signatures))
+
+    # ── 2. Features (tous les patients) ─────────────────────────
+    if verbose:
+        print("\n  [2/7] Extraction des features (tous les patients)...")
+    X_all, y_all, pids_all, fnames = extract_features(all_results, labeled_only=False)
+    n_total = X_all.shape[0]
+
+    # Ajouter les allele-score features
+    X_all, fnames_aug = _add_allele_score_features(
+        X_all, all_results, signatures, fnames
+    )
+
+    # Séparer labeled / unlabeled
+    labeled_mask = np.array([lab != "" for lab in y_all])
+    unlabeled_mask = ~labeled_mask
+    n_labeled = int(labeled_mask.sum())
+    n_unlabeled = int(unlabeled_mask.sum())
+
+    if verbose:
+        print(f"    {n_total} patients ({n_labeled} labellises, "
+              f"{n_unlabeled} inconnus), {X_all.shape[1]} features")
+
+    if n_labeled < 4:
+        print("    WARN: pas assez de patients labellises (<4) — ML impossible")
         return None
-    if len(set(y)) < 2:
-        print(f"    WARN: une seule classe ({set(y).pop()}) — ML impossible")
+    if len(set(y_all[labeled_mask])) < 2:
+        print(f"    WARN: une seule classe — ML impossible")
         return None
 
-    # 2. Train
+    # ── 3. Sectorisation (ALL patients) ────────────────────────
     if verbose:
-        print("\n  [2/5] Entrainement...")
-    ml = train_and_evaluate(X, y, fnames, verbose=verbose)
+        print("\n  [3/7] Sectorisation (clustering, tous les patients)...")
+
+    # Combiner features mutationnelles + allele matrix pour clustering
+    allele_matrix, allele_pids, allele_names = build_allele_matrix(
+        all_results, signatures
+    )
+    if allele_matrix.shape[1] > 0:
+        # Combiner features classiques + matrice alleles
+        X_cluster = np.hstack([X_all, allele_matrix])
+        cluster_fnames = fnames_aug + [f"allele_{a}" for a in allele_names]
+    else:
+        X_cluster = X_all
+        cluster_fnames = fnames_aug
+
+    sectorization = run_sectorization(
+        X_cluster, y_all, pids_all, cluster_fnames, random_state=42
+    )
+    if verbose and sectorization:
+        coh = sectorization.get("coherence_with_cancer_labels", {})
+        print(f"    k={sectorization['best_k']} | "
+              f"silhouette={sectorization['best_silhouette']} | "
+              f"ARI={coh.get('adjusted_rand_index')} "
+              f"NMI={coh.get('normalized_mutual_info')}")
+        # Afficher où sont les inconnus
+        for sec_name, sec_data in sectorization.get("clusters", {}).items():
+            unknown_in = [p for p in sec_data["patients"]
+                          if p in [pids_all[i] for i in np.where(unlabeled_mask)[0]]]
+            known_types = {k: v for k, v in sec_data["cancer_types"].items() if k}
+            print(f"    {sec_name}: {sec_data['size']} patients "
+                  f"({len(unknown_in)} inconnus) "
+                  f"cancers={dict(known_types)}")
+
+    # ── 4. Entrainement sur patients labellisés ────────────────
+    if verbose:
+        print(f"\n  [4/7] Entrainement + tuning ({n_labeled} patients labellises)...")
+    X_train = X_all[labeled_mask]
+    y_train = y_all[labeled_mask]
+    ml = train_and_evaluate(X_train, y_train, fnames_aug, verbose=verbose)
+    ml["sectorization"] = sectorization
+    ml["_signatures"] = signatures
     if verbose:
         print(f"\n    Best: {ml['best_model_name']} "
               f"(acc={ml['best_accuracy']:.4f})")
 
-    # 3. Predictions
+    # ── 5. Predictions ─────────────────────────────────────────
     if verbose:
-        print("\n  [3/5] Predictions...")
-    predictions = []
+        print("\n  [5/7] Predictions (tous les patients)...")
+    predictions_known = []
+    predictions_unknown = []
     for r in all_results:
         p = predict_patient(r, ml)
-        if p is not None:
-            predictions.append(p)
-    ok = sum(1 for p in predictions if p["correct"])
-    if verbose:
-        print(f"    {ok}/{len(predictions)} correctes "
-              f"({ok / max(len(predictions), 1) * 100:.1f}%)")
+        if p is None:
+            continue
+        if p["is_known"]:
+            predictions_known.append(p)
+        else:
+            # Enrich avec allele scores & cluster info
+            pid = p["patient_id"]
+            allele_scores = score_patient_against_signatures(r, signatures)
+            p["allele_scores"] = {
+                ct: {"score": s["score"], "matched": s["matched_alleles"],
+                     "total": s["total_signature_alleles"]}
+                for ct, s in allele_scores.items()
+            }
+            # Trouver le cluster du patient
+            if sectorization:
+                for sec_name, sec_data in sectorization["clusters"].items():
+                    if pid in sec_data["patients"]:
+                        p["cluster"] = sec_name
+                        p["cluster_cancers"] = sec_data["cancer_types"]
+                        break
+            predictions_unknown.append(p)
 
-    # 4. Plots
+    predictions = predictions_known + predictions_unknown
+    ok_known = sum(1 for p in predictions_known if p["correct"])
+    if verbose:
+        if predictions_known:
+            print(f"    Patients connus : {ok_known}/{len(predictions_known)} correctes "
+                  f"({ok_known / max(len(predictions_known), 1) * 100:.1f}%)")
+        if predictions_unknown:
+            print(f"    Patients inconnus : {len(predictions_unknown)} predictions")
+            for p in predictions_unknown:
+                top3 = list(p["probabilities"].items())[:3]
+                top_str = ", ".join(f"{c}={pr:.2f}" for c, pr in top3)
+                cluster = p.get("cluster", "?")
+                print(f"      {p['patient_id']}: {p['predicted_cancer']} "
+                      f"(conf={p['confidence']:.3f}) cluster={cluster} [{top_str}]")
+
+    # ── 6. Graphiques ──────────────────────────────────────────
     plot_paths = []
     if generate_plots:
         if verbose:
-            print("\n  [4/5] Graphiques...")
-        plot_paths = generate_ml_plots(ml, predictions)
+            print(f"\n  [6/7] Graphiques...")
+        plot_paths = generate_ml_plots(ml, predictions_known)
         if verbose:
             print(f"    {len(plot_paths)} graphiques generes")
     elif verbose:
-        print("\n  [4/5] Graphiques ignores")
+        print("\n  [6/7] Graphiques ignores")
 
-    # 5. Reports
+    # ── 7. Rapports ────────────────────────────────────────────
     if verbose:
-        print("\n  [5/5] Rapports...")
-    txt_path, _ = _report_text(ml, predictions)
-    html_path = _report_html(ml, predictions, plot_paths)
+        print("\n  [7/7] Rapports...")
+    txt_path, _ = _report_text(ml, predictions_known, predictions_unknown, signatures)
+    html_path = _report_html(ml, predictions_known, predictions_unknown, signatures, plot_paths)
 
     json_data = dict(
         best_model=ml["best_model_name"],
         best_accuracy=ml["best_accuracy"],
-        n_samples=ml["n_samples"],
+        n_samples_labeled=n_labeled,
+        n_samples_total=n_total,
         n_features=ml["n_features"],
         class_distribution=ml["class_distribution"],
+        allele_signatures={
+            ct: {"n_alleles": len(sig["alleles"]), "n_patients": sig["n_patients"]}
+            for ct, sig in signatures.items()
+        },
+        sectorization=ml.get("sectorization"),
         training_time=ml["training_time_seconds"],
         models={n: dict(accuracy=d["accuracy"],
                         precision=d["precision_weighted"],
                         recall=d["recall_weighted"],
                         f1=d["f1_weighted"],
-                        roc_auc=d["roc_auc_weighted"])
+                roc_auc=d["roc_auc_weighted"],
+                best_params=d.get("best_params"),
+                overfit_gap_accuracy=d.get("overfit_gap_accuracy"),
+                overfit_gap_f1=d.get("overfit_gap_f1"),
+                overfit_warning=d.get("overfit_warning"))
                 for n, d in ml["models"].items()},
-        predictions_summary=dict(
-            total=len(predictions), correct=ok,
-            accuracy=round(ok / max(len(predictions), 1), 4)),
+        predictions_known=dict(
+            total=len(predictions_known),
+            correct=ok_known,
+            accuracy=round(ok_known / max(len(predictions_known), 1), 4)),
+        predictions_unknown=[
+            dict(patient_id=p["patient_id"],
+                 predicted_cancer=p["predicted_cancer"],
+                 confidence=p["confidence"],
+                 cluster=p.get("cluster"),
+                 allele_scores=p.get("allele_scores"))
+            for p in predictions_unknown
+        ],
     )
     json_path = os.path.join(REPORTS_DIR, "ml_results.json")
     with open(json_path, "w", encoding="utf-8") as f:
-        json.dump(json_data, f, indent=2, ensure_ascii=False)
+        json.dump(json_data, f, indent=2, ensure_ascii=False, default=str)
 
     if verbose:
         print(f"    TXT  : {txt_path}")
@@ -598,8 +753,12 @@ def run_ml_pipeline(all_results, generate_plots=True, verbose=True):
         print("\n" + "=" * 60)
         print(f"  ML OK — {ml['best_model_name']} "
               f"acc={ml['best_accuracy']:.4f}")
+        if predictions_unknown:
+            print(f"  {len(predictions_unknown)} patients inconnus predits")
         print("=" * 60)
 
     return dict(ml_results=ml, predictions=predictions,
+                predictions_known=predictions_known,
+                predictions_unknown=predictions_unknown,
                 plot_paths=plot_paths,
                 report_paths=dict(txt=txt_path, html=html_path, json=json_path))

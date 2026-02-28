@@ -5,6 +5,9 @@ Orchestre tous les modules pour une analyse complete.
 
 import sys
 import os
+import warnings
+os.environ["PYTHONWARNINGS"] = "ignore"
+warnings.filterwarnings("ignore")
 import shutil
 import time
 import json
@@ -487,31 +490,44 @@ def run_real_data_analysis(max_patients=None, generate_plots=True, verbose=True)
 
 
 if __name__ == "__main__":
-    if len(sys.argv) > 1:
-        if sys.argv[1] == "--real-data":
-            # Mode donnees reelles TCGA
-            max_n = None
-            plots = True
-            for i, arg in enumerate(sys.argv[2:], 2):
-                if arg == "--max" and i + 1 < len(sys.argv):
-                    max_n = int(sys.argv[i + 1])
-                elif arg == "--no-plots":
-                    plots = False
-            run_real_data_analysis(max_patients=max_n, generate_plots=plots)
-        elif sys.argv[1] == "--patient" and len(sys.argv) > 2:
-            run_single_patient_analysis(sys.argv[2])
-        elif sys.argv[1] == "--max":
-            n = int(sys.argv[2]) if len(sys.argv) > 2 else 5
-            run_cohort_analysis(max_patients=n)
-        elif sys.argv[1] == "--no-plots":
-            run_cohort_analysis(generate_plots=False)
-        else:
-            print("Usage:")
-            print("  python main.py                     # Analyse complete (donnees synthetiques)")
-            print("  python main.py --real-data          # Analyse avec donnees reelles TCGA")
-            print("  python main.py --real-data --max 10 # Donnees reelles, limiter a N patients")
-            print("  python main.py --patient PAT_0001   # Un seul patient (synthetique)")
-            print("  python main.py --max 5              # Limiter a N patients (synthetique)")
-            print("  python main.py --no-plots           # Sans graphiques")
+    # ── Parse des arguments ──
+    args = sys.argv[1:]
+    mode = "cohort"
+    max_n = None
+    plots = True
+    patient_id = None
+
+    i = 0
+    while i < len(args):
+        a = args[i]
+        if a == "--real-data":
+            mode = "real"
+        elif a == "--patient" and i + 1 < len(args):
+            mode = "single"
+            i += 1
+            patient_id = args[i]
+        elif a == "--max" and i + 1 < len(args):
+            i += 1
+            max_n = int(args[i])
+        elif a == "--no-plots":
+            plots = False
+        elif a == "--help":
+            mode = "help"
+        i += 1
+
+    if mode == "help":
+        print("Usage:")
+        print("  python main.py                     # Analyse complete (donnees synthetiques)")
+        print("  python main.py --real-data          # Analyse avec donnees reelles TCGA")
+        print("  python main.py --real-data --max 10 # Donnees reelles, limiter a N patients")
+        print("  python main.py --patient PAT_0001   # Un seul patient (synthetique)")
+        print("  python main.py --max 5              # Limiter a N patients (synthetique)")
+        print("  python main.py --no-plots           # Sans graphiques")
+    elif mode == "real":
+        run_real_data_analysis(max_patients=max_n, generate_plots=plots)
+    elif mode == "single":
+        run_single_patient_analysis(patient_id, generate_plots=plots)
+    elif max_n is not None or not plots:
+        run_cohort_analysis(max_patients=max_n, generate_plots=plots)
     else:
         run_cohort_analysis()
