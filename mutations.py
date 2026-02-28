@@ -4,7 +4,7 @@ Compare les reads aux sequences de reference pour identifier les variants.
 """
 
 from collections import defaultdict, Counter
-from config import NUCLEOTIDES, MUTATION_FREQ_THRESHOLD
+from config import NUCLEOTIDES, MUTATION_FREQ_THRESHOLD, DEFAULT_DETECT_INDELS
 
 
 def detect_snps(reads, reference_seq):
@@ -53,6 +53,15 @@ def detect_snps(reads, reference_seq):
 
 
 def detect_insertions(reads, reference_seq):
+    """
+    Détecte les insertions par heuristique de longueur de read.
+    
+    ATTENTION: Cette détection est heuristique et non fiable.
+    Elle ne constitue pas un vrai variant calling et ne doit pas
+    être utilisée comme si elle était biologiquement fiable.
+    Elle est basée sur l'hypothèse que read > 155bp = insertion,
+    ce qui n'est pas un critère robuste.
+    """
     insertions = []
 
     for read in reads:
@@ -93,6 +102,15 @@ def detect_insertions(reads, reference_seq):
 
 
 def detect_deletions(reads, reference_seq):
+    """
+    Détecte les délétions par heuristique de longueur de read.
+    
+    ATTENTION: Cette détection est heuristique et non fiable.
+    Elle ne constitue pas un vrai variant calling et ne doit pas
+    être utilisée comme si elle était biologiquement fiable.
+    Elle est basée sur l'hypothèse que read < 145bp = délétion,
+    ce qui n'est pas un critère robuste.
+    """
     deletions = []
 
     for read in reads:
@@ -233,10 +251,33 @@ def find_mutation_hotspots(mutations, window_size=100, min_mutations=3):
     return merged
 
 
-def analyze_gene_mutations(reads, reference_seq, gene_name):
+def analyze_gene_mutations(reads, reference_seq, gene_name, detect_indels=None):
+    """
+    Analyse les mutations d'un gène à partir des reads.
+    
+    Args:
+        reads: Liste des reads séquencés
+        reference_seq: Séquence de référence du gène
+        gene_name: Nom du gène
+        detect_indels: Si True, détecte aussi insertions/délétions.
+                       Par défaut, utilise DEFAULT_DETECT_INDELS (False).
+                       
+    Note: La détection des indels est heuristique et non fiable.
+    Elle est désactivée par défaut car elle ne repose pas sur un
+    vrai variant calling mais sur des heuristiques de longueur de read.
+    """
+    if detect_indels is None:
+        detect_indels = DEFAULT_DETECT_INDELS
+        
     snps = detect_snps(reads, reference_seq)
-    insertions = detect_insertions(reads, reference_seq)
-    deletions = detect_deletions(reads, reference_seq)
+    
+    # Détection des indels seulement si explicitement demandé
+    if detect_indels:
+        insertions = detect_insertions(reads, reference_seq)
+        deletions = detect_deletions(reads, reference_seq)
+    else:
+        insertions = []
+        deletions = []
 
     all_mutations = snps + insertions + deletions
     for m in all_mutations:
@@ -264,3 +305,95 @@ def analyze_gene_mutations(reads, reference_seq, gene_name):
         "impact_distribution": dict(impact_counts),
         "mutation_rate": round(len(all_mutations) / max(len(reference_seq), 1) * 1000, 4)
     }
+
+
+# ============================================================================
+# Validation synthétique
+# ============================================================================
+
+def validate_synthetic_detection(ground_truth: dict, detected_result: dict) -> dict:
+    """
+    Compare les mutations injectées (vérité terrain) aux mutations détectées.
+    
+    Args:
+        ground_truth: Dictionnaire issu de ground_truth_mutations.json
+        detected_result: Résultat de l'analyse (output de analyze_gene_mutations 
+                         ou structure agrégée avec les mutations détectées)
+    
+    Returns:
+        Dictionnaire avec métriques de validation:
+        - snps_injected: nombre de SNPs injectés
+        - snps_detected: nombre de SNPs détectés
+        - coverage_ratio: ratio detected/injected
+        - absolute_diff: différence absolue
+        - status: 'OK' si le ratio est raisonnable, 'EXPLOSION' sinon
+    """
+    # Extraire les comptages
+    if "genes" in ground_truth:
+        # Format ground_truth_mutations.json complet
+        injected_snps = ground_truth.get("total_snps", 0)
+        injected_ins = ground_truth.get("total_insertions", 0)
+        injected_del = ground_truth.get("total_deletions", 0)
+    else:
+        # Format simplifié
+        injected_snps = ground_truth.get("snps", 0)
+        injected_ins = ground_truth.get("insertions", 0)
+        injected_del = ground_truth.get("deletions", 0)
+    
+    # Comptage des mutations détectées
+    if isinstance(detected_result, dict):
+        if "snps" in detected_result:
+            detected_snps = detected_result.get("snps", 0)
+            detected_ins = detected_result.get("insertions", 0)
+            detected_del = detected_result.get("deletions", 0)
+        elif "mutations" in detected_result:
+            mutations = detected_result["mutations"]
+            detected_snps = sum(1 for m in mutations if m.get("type") == "SNP")
+            detected_ins = sum(1 for m in mutations if m.get("type") == "INS")
+            detected_del = sum(1 for m in mutations if m.get("type") == "DEL")
+        else:
+            detected_snps = detected_ins = detected_del = 0
+    else:
+        detected_snps = detected_ins = detected_del = 0
+    
+    # Calcul des métriques
+    coverage_ratio_snp = detected_snps / max(injected_snps, 1)
+    absolute_diff_snp = abs(detected_snps - injected_snps)
+    
+    # Seuil: si détection > 5x les injections, c'est une explosion
+    if injected_snps > 0 and coverage_ratio_snp > 5.0:
+        status = "EXPLOSION"
+    elif injected_snps > 0 and coverage_ratio_snp > 2.0:
+        status = "WARNING"
+    else:
+        status = "OK"
+    
+    result = {
+        "snps_injected": injected_snps,
+        "snps_detected": detected_snps,
+        "insertions_injected": injected_ins,
+        "insertions_detected": detected_ins,
+        "deletions_injected": injected_del,
+        "deletions_detected": detected_del,
+        "coverage_ratio_snp": round(coverage_ratio_snp, 2),
+        "absolute_diff_snp": absolute_diff_snp,
+        "status": status
+    }
+    
+    return result
+
+
+def format_validation_summary(validation: dict) -> str:
+    """Formate le résultat de validation en texte lisible."""
+    lines = [
+        "=== VALIDATION SYNTHÉTIQUE ===",
+        f"SNPs injectés: {validation['snps_injected']}",
+        f"SNPs détectés: {validation['snps_detected']}",
+        f"Ratio détection: {validation['coverage_ratio_snp']}x",
+        f"Écart absolu: {validation['absolute_diff_snp']}",
+        f"Status: {validation['status']}"
+    ]
+    if validation.get("insertions_injected", 0) > 0 or validation.get("deletions_injected", 0) > 0:
+        lines.append(f"Insertions: {validation['insertions_injected']} inj / {validation['insertions_detected']} det")
+        lines.append(f"Délétions: {validation['deletions_injected']} inj / {validation['deletions_detected']} det")
+    return "\n".join(lines)

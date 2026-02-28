@@ -6,7 +6,11 @@ Modeles : Random Forest, Gradient Boosting, SVM (RBF).
 import os, json, time
 import numpy as np
 from collections import Counter, defaultdict
-from config import CANCER_GENES, REPORTS_DIR, PLOTS_DIR
+from config import (
+    CANCER_GENES, REPORTS_DIR, PLOTS_DIR,
+    ALLELE_MIN_PATIENTS, ALLELE_MIN_FREQUENCY, 
+    ALLELE_MAX_OUTSIDE_FREQUENCY, ALLELE_MIN_ENRICHMENT, ALLELE_MAX_PER_CANCER
+)
 from ml_model_selection import evaluate_models_nested_cv
 from ml_sectorization import run_sectorization
 from allele_analyzer import (
@@ -563,9 +567,15 @@ def run_ml_pipeline(all_results, generate_plots=True, verbose=True):
     # ── 1. Signatures d'alleles ─────────────────────────────────
     if verbose:
         print("\n  [1/7] Signatures d'alleles (patients connus)...")
-    signatures = build_cancer_allele_signatures(all_results,
-                                                 min_patients=2,
-                                                 min_frequency=0.5)
+    # Utilise les paramètres de configuration pour des signatures discriminantes
+    signatures = build_cancer_allele_signatures(
+        all_results,
+        min_patients=ALLELE_MIN_PATIENTS,
+        min_frequency=ALLELE_MIN_FREQUENCY,
+        max_outside_frequency=ALLELE_MAX_OUTSIDE_FREQUENCY,
+        min_enrichment=ALLELE_MIN_ENRICHMENT,
+        max_alleles_per_cancer=ALLELE_MAX_PER_CANCER
+    )
     if verbose:
         total_sig = sum(len(s["alleles"]) for s in signatures.values())
         print(f"    {len(signatures)} types de cancer, {total_sig} alleles-signature")

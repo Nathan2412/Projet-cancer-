@@ -121,3 +121,33 @@ CANCER_TYPES = [
     "Melanome", "Leucemie", "Lymphome", "Glioblastome",
     "Ovaire", "Vessie", "Thyroide", "Rein", "Foie"
 ]
+
+# ============================================================================
+# Configuration pour le mode synthétique et la détection de mutations
+# ============================================================================
+
+# Désactivé par défaut car sans alignement propre, les indels décalent
+# tout et produisent des milliers de faux positifs SNP.
+ALLOW_SYNTHETIC_INDELS = False
+
+# Détection des indels dans mutations.py (heuristique non fiable)
+DEFAULT_DETECT_INDELS = False
+
+# ============================================================================
+# Configuration des signatures d'allèles discriminantes
+# ============================================================================
+
+# Nombre minimum de patients partageant un allèle pour le considérer
+ALLELE_MIN_PATIENTS = 2
+
+# Fréquence minimum dans le cancer cible
+ALLELE_MIN_FREQUENCY = 0.4
+
+# Fréquence maximum hors du cancer cible (pour éviter les allèles ubiquitaires)
+ALLELE_MAX_OUTSIDE_FREQUENCY = 0.1
+
+# Enrichissement minimum (freq_in_cancer / freq_outside_cancer)
+ALLELE_MIN_ENRICHMENT = 2.0
+
+# Nombre maximum d'allèles-signature par type de cancer
+ALLELE_MAX_PER_CANCER = 20

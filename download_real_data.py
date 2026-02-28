@@ -349,6 +349,14 @@ def build_known_mutations_db(all_mutations_by_gene):
     """
     Construit known_mutations.json a partir des mutations les plus frequentes
     observees dans le jeu de donnees reel.
+    
+    IMPORTANT: Ces hotspots sont DÉRIVÉS DE LA COHORTE analysée.
+    Ce ne sont PAS des références cliniques externes validées.
+    Cela peut introduire un biais circulaire si utilisé pour 
+    annoter les mêmes données dont ils sont issus.
+    
+    Le champ "derived_from_dataset": true indique explicitement
+    cette origine pour éviter toute confusion.
     """
     known_db = {}
 
@@ -394,7 +402,8 @@ def build_known_mutations_db(all_mutations_by_gene):
                 "cancers": cancers,
                 "frequency": frequency,
                 "occurrences": count,
-                "source": "TCGA_PanCancer_Atlas"
+                "source": "TCGA_PanCancer_Atlas",
+                "derived_from_dataset": True  # Indique que ce hotspot vient des données
             })
 
         known_db[gene_name] = {
@@ -406,7 +415,9 @@ def build_known_mutations_db(all_mutations_by_gene):
             },
             "hotspots": hotspots,
             "total_mutations_observed": len(mutations),
-            "unique_patients": len(set(m.get("patient", "") for m in mutations))
+            "unique_patients": len(set(m.get("patient", "") for m in mutations)),
+            "derived_from_dataset": True,  # Marqueur global
+            "note": "Hotspots derives de la cohorte TCGA, pas d'une base clinique externe"
         }
 
     return known_db
