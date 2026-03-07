@@ -23,6 +23,21 @@ from sklearn.preprocessing import label_binarize
 from sklearn.svm import SVC
 
 
+def _add_fold_allele_features(X, patient_results, fold_signatures):
+    """Ajoute des features allele-score calculees a partir de signatures de fold.
+    Retourne X augmente (ou X inchange si pas de signatures)."""
+    if not fold_signatures or not patient_results:
+        return X
+    from allele_analyzer import score_patient_against_signatures
+    cancer_types_sorted = sorted(fold_signatures.keys())
+    extra_cols = []
+    for r in patient_results:
+        scores = score_patient_against_signatures(r, fold_signatures)
+        extra_cols.append([scores.get(ct, {}).get("score", 0.0) for ct in cancer_types_sorted])
+    extra = np.array(extra_cols, dtype=np.float64)
+    return np.hstack([X, extra])
+
+
 def get_model_specs(random_state=42):
     return {
         "Random Forest": {
@@ -109,8 +124,15 @@ def _feature_importance_from_pipeline(pipeline, feature_names):
     return dict(sorted(fi.items(), key=lambda x: x[1], reverse=True))
 
 
-def evaluate_models_nested_cv(X, y_enc, class_names, feature_names, n_splits=5, random_state=42, verbose=True):
-    """Évalue plusieurs modèles avec nested CV (inner tuning + outer test)."""
+def evaluate_models_nested_cv(X, y_enc, class_names, feature_names,
+                               labeled_results=None, allele_params=None,
+                               n_splits=5, random_state=42, verbose=True):
+    """Évalue plusieurs modèles avec nested CV (inner tuning + outer test).
+    
+    Si labeled_results et allele_params sont fournis, les signatures d'alleles
+    sont recalculees dans chaque fold uniquement sur les donnees d'entrainement,
+    evitant ainsi toute fuite de donnees vers le fold de test.
+    """
     from collections import Counter
     min_class_size = min(Counter(y_enc).values())
     n_splits = min(n_splits, max(2, min_class_size))
@@ -147,8 +169,22 @@ def evaluate_models_nested_cv(X, y_enc, class_names, feature_names, n_splits=5, 
             fold_acc = []
 
             for train_idx, test_idx in outer_cv.split(X, y_enc):
-                X_train, X_test = X[train_idx], X[test_idx]
+                X_train_base, X_test_base = X[train_idx], X[test_idx]
                 y_train, y_test = y_enc[train_idx], y_enc[test_idx]
+
+                # Calcul des signatures d'alleles uniquement sur le fold d'entrainement
+                # pour eviter toute fuite de donnees vers le fold de test.
+                if labeled_results is not None and allele_params is not None:
+                    from allele_analyzer import build_cancer_allele_signatures
+                    train_results_fold = [labeled_results[i] for i in train_idx]
+                    test_results_fold = [labeled_results[i] for i in test_idx]
+                    fold_sigs = build_cancer_allele_signatures(
+                        train_results_fold, **allele_params
+                    )
+                    X_train = _add_fold_allele_features(X_train_base, train_results_fold, fold_sigs)
+                    X_test = _add_fold_allele_features(X_test_base, test_results_fold, fold_sigs)
+                else:
+                    X_train, X_test = X_train_base, X_test_base
 
                 inner_min_class = min(Counter(y_train).values())
                 inner_splits = min(3, max(2, inner_min_class))

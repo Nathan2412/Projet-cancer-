@@ -122,21 +122,23 @@ def build_cohort_mutation_matrix(all_patients_results):
 
 
 def compute_gene_cancer_correlation(all_patients_results):
-    gene_cancer_counts = defaultdict(lambda: defaultdict(int))
+    gene_cancer_patients = defaultdict(lambda: defaultdict(set))
     gene_total_mutations = defaultdict(int)
-    cancer_totals = defaultdict(int)
+    cancer_patient_totals = defaultdict(set)
 
     for patient_result in all_patients_results:
         cancer_type = patient_result.get("metadata", {}).get("cancer_type")
         severity = patient_result.get("metadata", {}).get("severity", "")
+        patient_id = patient_result.get("patient_id", "")
 
         for gene_name, analysis in patient_result.get("gene_analyses", {}).items():
             num_mut = analysis.get("total_mutations", 0)
             gene_total_mutations[gene_name] += num_mut
 
             if cancer_type and severity in ("high", "extreme"):
-                gene_cancer_counts[gene_name][cancer_type] += num_mut
-                cancer_totals[cancer_type] += num_mut
+                cancer_patient_totals[cancer_type].add(patient_id)
+                if num_mut > 0:
+                    gene_cancer_patients[gene_name][cancer_type].add(patient_id)
 
     correlations = {}
     for gene in gene_total_mutations:
@@ -144,12 +146,13 @@ def compute_gene_cancer_correlation(all_patients_results):
             "total_mutations_cohort": gene_total_mutations[gene],
             "cancer_associations": {}
         }
-        for cancer, count in gene_cancer_counts[gene].items():
-            total_cancer = cancer_totals[cancer]
-            proportion = round(count / max(total_cancer, 1), 3)
+        for cancer, patient_set in gene_cancer_patients[gene].items():
+            total_patients_cancer = len(cancer_patient_totals[cancer])
+            frequency = round(len(patient_set) / max(total_patients_cancer, 1), 3)
             correlations[gene]["cancer_associations"][cancer] = {
-                "mutation_count": count,
-                "proportion_in_cancer": proportion
+                "patients_with_mutation": len(patient_set),
+                "total_patients_cancer": total_patients_cancer,
+                "frequency_in_patients": frequency,
             }
 
     return correlations
@@ -235,7 +238,7 @@ def generate_patient_risk_report(patient_id, gene_analyses, annotations, metadat
     return {
         "patient_id": patient_id,
         "metadata": metadata,
-        "mutation_burden_per_mb": burden,
+        "panel_mutation_density": burden,
         "total_mutations_detected": total_muts,
         "cancer_risk_profile": risk_profile,
         "mutation_signature": signature,
@@ -253,10 +256,10 @@ def _build_risk_summary(burden, risk_profile, high_impact):
 
     if burden > 100:
         summary["overall_risk"] = "TRES ELEVE"
-        summary["flags"].append(f"Charge mutationnelle tres elevee: {burden} mut/Mb")
+        summary["flags"].append(f"Densite mutationnelle (panel) tres elevee: {burden} mut/Mb")
     elif burden > 50:
         summary["overall_risk"] = "ELEVE"
-        summary["flags"].append(f"Charge mutationnelle elevee: {burden} mut/Mb")
+        summary["flags"].append(f"Densite mutationnelle (panel) elevee: {burden} mut/Mb")
     elif burden > 20:
         summary["overall_risk"] = "MODERE"
 

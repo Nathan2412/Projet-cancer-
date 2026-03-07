@@ -71,15 +71,18 @@ def _extract_row(r):
             impacts[k] += ga.get(g, {}).get("impact_distribution", {}).get(k, 0)
 
     age = meta.get("age", 50)
-    sex = 1 if meta.get("sex", "M") == "F" else 0
+    sex_val = str(meta.get("sex", "unknown")).strip().upper()
+    sex_M = 1 if sex_val == "M" else 0
+    sex_F = 1 if sex_val == "F" else 0
+    sex_unknown = 1 if sex_val not in ("M", "F") else 0
     n_genes = sum(1 for g in GENE_LIST if ga.get(g, {}).get("total_mutations", 0) > 0)
-    burden = r.get("risk_report", {}).get("mutation_burden_per_mb", 0)
+    burden = r.get("risk_report", {}).get("panel_mutation_density", 0)
 
     return (
         mpg
         + [total, snp, ins, dl]
         + [impacts["HIGH"], impacts["MODERATE"], impacts["LOW"], impacts["MODIFIER"]]
-        + [age, sex, n_genes, burden, int(impacts["HIGH"] > 0), snp / max(total, 1)]
+        + [age, sex_M, sex_F, sex_unknown, n_genes, burden, int(impacts["HIGH"] > 0), snp / max(total, 1)]
     )
 
 
@@ -87,7 +90,7 @@ FEATURE_NAMES = (
     [f"mut_{g}" for g in GENE_LIST]
     + ["total_mut", "SNP", "INS", "DEL"]
     + ["imp_HIGH", "imp_MOD", "imp_LOW", "imp_MODIFIER"]
-    + ["age", "sex_F", "n_genes", "burden", "has_HIGH", "snp_ratio"]
+    + ["age", "sex_M", "sex_F", "sex_unknown", "n_genes", "burden", "has_HIGH", "snp_ratio"]
 )
 
 
@@ -111,8 +114,14 @@ def extract_features(all_results, labeled_only=True):
     return np.array(rows, dtype=np.float64), np.array(labels), ids, list(FEATURE_NAMES)
 
 
-def train_and_evaluate(X, y, feature_names, n_splits=5, verbose=True):
-    """Nested CV + tuning hyperparametres, retourne metriques completes."""
+def train_and_evaluate(X, y, feature_names, labeled_results=None, allele_params=None,
+                       n_splits=5, verbose=True):
+    """Nested CV + tuning hyperparametres, retourne metriques completes.
+    
+    Si labeled_results et allele_params sont fournis, X ne doit PAS contenir
+    de features allele-score : celles-ci seront calculees per-fold dans la CV
+    pour eviter la fuite de donnees.
+    """
     t0 = time.time()
     le = LabelEncoder()
     y_enc = le.fit_transform(y)
@@ -128,6 +137,8 @@ def train_and_evaluate(X, y, feature_names, n_splits=5, verbose=True):
         y_enc=y_enc,
         class_names=classes,
         feature_names=feature_names,
+        labeled_results=labeled_results,
+        allele_params=allele_params,
         n_splits=n_splits,
         random_state=42,
         verbose=verbose,
@@ -160,6 +171,24 @@ def _add_allele_score_features(X, all_results, signatures, feature_names):
     return np.hstack([X, extra]), new_names
 
 
+def apply_sex_constraints(probabilities, sex):
+    """Supprime les probabilites biologiquement impossibles selon le sexe,
+    puis renormalise les probabilites restantes."""
+    sex_val = str(sex or "unknown").strip().upper()
+    if sex_val == "F":
+        for key in list(probabilities.keys()):
+            if key.lower() in ("prostate",):
+                probabilities[key] = 0.0
+    if sex_val == "M":
+        for key in list(probabilities.keys()):
+            if key.lower() in ("ovaire",):
+                probabilities[key] = 0.0
+    total = sum(probabilities.values())
+    if total > 0:
+        probabilities = {k: v / total for k, v in probabilities.items()}
+    return probabilities
+
+
 def predict_patient(patient_result, ml):
     """Prediction pour un patient unique (connu ou inconnu)."""
     X1, _, _, f1 = extract_features([patient_result], labeled_only=False)
@@ -172,12 +201,22 @@ def predict_patient(patient_result, ml):
 
     model = ml["_best_model"]
     le = ml["_label_encoder"]
-    pred = le.inverse_transform(model.predict(X1))[0]
 
     probas = {}
     if hasattr(model, "predict_proba"):
         for i, c in enumerate(ml["class_names"]):
             probas[c] = round(float(model.predict_proba(X1)[0][i]), 4)
+
+    # Appliquer les contraintes biologiques selon le sexe
+    sex = patient_result.get("metadata", {}).get("sex", "unknown")
+    if probas:
+        probas = apply_sex_constraints(probas, sex)
+        probas = {k: round(v, 4) for k, v in probas.items()}
+
+    if probas:
+        pred = max(probas, key=lambda c: probas[c])
+    else:
+        pred = le.inverse_transform(model.predict(X1))[0]
 
     actual = patient_result.get("metadata", {}).get("cancer_type")
     is_known = actual is not None
@@ -350,21 +389,21 @@ def _report_text(ml, predictions_known, predictions_unknown=None, signatures=Non
         L.append(format_signatures_summary(signatures))
 
     L.append(f"\n  Entrainement : {ml['training_time_seconds']}s")
-    L.append(f"  {'Modele':<22} {'Acc':>7} {'Prec':>7} {'Rec':>7} "
-             f"{'F1':>7} {'AUC':>7}")
-    L.append("  " + "-" * 57)
+    L.append(f"  {'Modele':<22} {'CV Acc':>8} {'CV F1':>7} {'Train Acc':>10} {'Train F1':>9} {'AUC':>7}")
+    L.append("  " + "-" * 67)
     for n, d in ml["models"].items():
         tag = " *" if n == ml["best_model_name"] else ""
         roc = f"{d['roc_auc_weighted']:.4f}" if d["roc_auc_weighted"] else "  N/A"
-        L.append(f"  {n:<22} {d['accuracy']:>7.4f} {d['precision_weighted']:>7.4f} "
-                 f"{d['recall_weighted']:>7.4f} {d['f1_weighted']:>7.4f} {roc:>7}{tag}")
+        L.append(f"  {n:<22} {d['accuracy']:>8.4f} {d['f1_weighted']:>7.4f} "
+                 f"{d.get('train_accuracy', 0):>10.4f} {d.get('train_f1_weighted', 0):>9.4f} "
+                 f"{roc:>7}{tag}")
         L.append(f"    params={d.get('best_params', {})} | "
-                 f"train-cv gap acc={d.get('overfit_gap_accuracy', 0):+.4f} "
+                 f"gap (train-CV) acc={d.get('overfit_gap_accuracy', 0):+.4f} "
                  f"f1={d.get('overfit_gap_f1', 0):+.4f}")
 
     best = ml["models"][ml["best_model_name"]]
     L.append(f"\n  Meilleur : {ml['best_model_name']} "
-             f"(acc={best['accuracy']:.4f})")
+             f"(acc CV={best['accuracy']:.4f}  —  metrique principale)")
     L.append(f"  {'Classe':<18} {'Prec':>7} {'Rec':>7} {'F1':>7} {'N':>5}")
     L.append("  " + "-" * 44)
     for c, m in best["per_class_metrics"].items():
@@ -373,8 +412,10 @@ def _report_text(ml, predictions_known, predictions_unknown=None, signatures=Non
 
     if predictions_known:
         ok = sum(1 for p in predictions_known if p["correct"])
-        L.append(f"\n  Predictions (patients connus) : {ok}/{len(predictions_known)} correctes "
+        L.append(f"\n  Score de resubstitution (entrainement, BIAISE) : "
+                 f"{ok}/{len(predictions_known)} correctes "
                  f"({ok / len(predictions_known) * 100:.1f}%)")
+        L.append(f"  [Utiliser le score de validation croisee (CV) comme metrique principale]")
         L.append(f"  Confiance moy : "
                  f"{np.mean([p['confidence'] for p in predictions_known]):.3f}")
 
@@ -427,10 +468,11 @@ def _report_html(ml, predictions_known, predictions_unknown=None, signatures=Non
                  if n == best_n else "")
         roc = f"{d['roc_auc_weighted']:.4f}" if d["roc_auc_weighted"] else "N/A"
         overfit = f"{d.get('overfit_gap_f1', 0):+.3f}"
-        model_rows += (f"<tr><td><b>{n}</b></td><td>{d['accuracy']:.4f}</td>"
-                       f"<td>{d['precision_weighted']:.4f}</td>"
-                       f"<td>{d['recall_weighted']:.4f}</td>"
+        model_rows += (f"<tr><td><b>{n}</b></td>"
+                       f"<td>{d['accuracy']:.4f}</td>"
                        f"<td>{d['f1_weighted']:.4f}</td>"
+                       f"<td>{d.get('train_accuracy', 0):.4f}</td>"
+                       f"<td>{d.get('train_f1_weighted', 0):.4f}</td>"
                        f"<td>{roc}</td><td>{overfit}</td><td>{badge}</td></tr>\n")
 
     class_rows = ""
@@ -524,17 +566,18 @@ tr:hover{{background:#f8f9fa}}
 <div class="c"><div class="v">{ml['n_samples']}</div><div class="l">Patients (train)</div></div>
 <div class="c"><div class="v">{ml['n_features']}</div><div class="l">Features</div></div>
 <div class="c"><div class="v">{len(ml['class_names'])}</div><div class="l">Classes</div></div>
-<div class="c"><div class="v">{bd['accuracy']:.1%}</div><div class="l">Best Accuracy</div></div>
+<div class="c"><div class="v">{bd['accuracy']:.1%}</div><div class="l">Best Accuracy (CV)</div></div>
 </div></div>
 {f'<div class="sec"><h2>Signatures alleles</h2><table><tr><th>Cancer</th><th>Alleles</th><th>Patients</th><th>Top alleles</th></tr>{sig_rows}</table></div>' if sig_rows else ''}
 <div class="sec"><h2>Comparaison des modeles</h2>
-<table><tr><th>Modele</th><th>Accuracy</th><th>Precision</th><th>Recall</th><th>F1</th><th>AUC</th><th>Gap F1(train-cv)</th><th></th></tr>
+<div class="warn">Les métriques <b>Accuracy CV</b> et <b>F1 CV</b> sont issues de la validation croisée imbriquée (nested CV) — c'est la <b>métrique principale</b>. Les scores Train sont indicatifs et biaisés (resubstitution).</div>
+<table><tr><th>Modele</th><th>Accuracy CV ★</th><th>F1 CV ★</th><th>Accuracy Train</th><th>F1 Train</th><th>AUC</th><th>Gap F1 (Train-CV)</th><th></th></tr>
 {model_rows}</table></div>
 <div class="sec"><h2>Metriques par classe ({best_n})</h2>
 <table><tr><th>Cancer</th><th>Precision</th><th>Recall</th><th>F1</th><th>Support</th><th>AUC</th></tr>
 {class_rows}</table></div>
 {f'<div class="sec"><h2>Sectorisation (tous patients)</h2><p>k={sector.get("best_k")}, silhouette={sector.get("best_silhouette")}, ARI={sector.get("coherence_with_cancer_labels", dict()).get("adjusted_rand_index")}, NMI={sector.get("coherence_with_cancer_labels", dict()).get("normalized_mutual_info")}</p><table><tr><th>Secteur</th><th>Taille</th><th>Cancers dominants</th></tr>{sector_rows}</table></div>' if sector else ''}
-{f'<div class="sec"><h2>Predictions patients connus ({ok_n}/{n_pred} — {pct}%)</h2><table><tr><th>Patient</th><th>Reel</th><th>Predit</th><th>Confiance</th><th></th></tr>{pred_rows}</table></div>' if predictions_known else ''}
+{f'<div class="sec"><h2>Score de resubstitution — patients connus ({ok_n}/{n_pred} — {pct}%) [BIAISE]</h2><div class="warn">Ce score est calculé en prédisant les mêmes données sur lesquelles le modèle a été entraîné (resubstitution). Il est biaisé par l\'overfitting. <b>Utiliser le score de validation croisée (CV) comme métrique principale.</b></div><table><tr><th>Patient</th><th>Reel</th><th>Predit</th><th>Confiance</th><th></th></tr>{pred_rows}</table></div>' if predictions_known else ''}
 {f'<div class="sec"><h2>Predictions patients inconnus ({len(predictions_unknown)})</h2><div class="warn">Ces patients n ont pas de diagnostic connu. La prediction est basee sur les signatures alleles et le modele ML.</div><table><tr><th>Patient</th><th>Cancer predit</th><th>Confiance</th><th>Cluster</th><th>Meilleur score allele</th></tr>{unknown_rows}</table></div>' if predictions_unknown else ''}
 {f'<div class="sec"><h2>Visualisations</h2>{imgs}</div>' if imgs else ''}
 <div class="ft">Rapport auto — Module ML genomique. Ne constitue pas un diagnostic.</div>
@@ -587,7 +630,7 @@ def run_ml_pipeline(all_results, generate_plots=True, verbose=True):
     X_all, y_all, pids_all, fnames = extract_features(all_results, labeled_only=False)
     n_total = X_all.shape[0]
 
-    # Ajouter les allele-score features
+    # Ajouter les allele-score features (signatures globales, pour serving + clustering)
     X_all, fnames_aug = _add_allele_score_features(
         X_all, all_results, signatures, fnames
     )
@@ -646,9 +689,28 @@ def run_ml_pipeline(all_results, generate_plots=True, verbose=True):
     # ── 4. Entrainement sur patients labellisés ────────────────
     if verbose:
         print(f"\n  [4/7] Entrainement + tuning ({n_labeled} patients labellises)...")
-    X_train = X_all[labeled_mask]
+    # Extraire les features de base (sans allele scores) pour la CV,
+    # afin de recalculer les signatures d'alleles par fold et eviter la fuite de donnees.
+    X_base, _, _, _ = extract_features(all_results, labeled_only=False)
+    X_train_base = X_base[labeled_mask]
+    labeled_results_list = [r for r in all_results
+                            if r.get("metadata", {}).get("cancer_type")]
+    allele_params = dict(
+        min_patients=ALLELE_MIN_PATIENTS,
+        min_frequency=ALLELE_MIN_FREQUENCY,
+        max_outside_frequency=ALLELE_MAX_OUTSIDE_FREQUENCY,
+        min_enrichment=ALLELE_MIN_ENRICHMENT,
+        max_alleles_per_cancer=ALLELE_MAX_PER_CANCER,
+    )
     y_train = y_all[labeled_mask]
-    ml = train_and_evaluate(X_train, y_train, fnames_aug, verbose=verbose)
+    ml = train_and_evaluate(
+        X_train_base, y_train, list(FEATURE_NAMES),
+        labeled_results=labeled_results_list,
+        allele_params=allele_params,
+        verbose=verbose,
+    )
+    # Le modele de serving utilise les features avec signatures globales
+    # (predict_patient ajoute les allele scores via ml["_signatures"])
     ml["sectorization"] = sectorization
     ml["_signatures"] = signatures
     if verbose:

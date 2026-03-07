@@ -109,8 +109,10 @@ Ce document récapitule l'état d'avancement du projet, ce qui a été réalisé
 | Champ | Description | Calcul |
 |-------|-------------|--------|
 | Mutations totales | Nombre total de mutations détectées | Somme des mutations HIGH + MODERATE |
-| Charge mutationnelle | Densité de mutations | (Nb mutations / Longueur totale des gènes) × 1 000 000 |
+| Densité mutationnelle (panel) | Densité de mutations sur les gènes du panel | (Nb mutations / Longueur totale des gènes du panel) × 1 000 000 |
 | Risque global | Niveau de risque calculé | Basé sur le score max parmi tous les cancers |
+
+> **Note :** La densité mutationnelle (panel) est calculée uniquement sur les 12 gènes du panel d'analyse. Elle **ne constitue pas une TMB (Tumor Mutation Burden) clinique**, qui se calcule sur tout l'exome ou le génome.
 
 **Niveaux de risque global :**
 - FAIBLE (score < 0.5) : Profil mutationnel peu préoccupant
@@ -120,7 +122,7 @@ Ce document récapitule l'état d'avancement du projet, ce qui a été réalisé
 
 #### Section 3 : ALERTES
 Signale automatiquement :
-- Charge mutationnelle > 10 mut/Mb
+- Densité mutationnelle (panel) > 50 mut/Mb (élevée) ou > 100 mut/Mb (très élevée)
 - Scores de risque ELEVE ou TRES ELEVE pour un cancer
 - Mutations pathogènes dans des gènes critiques (TP53, BRCA1/2)
 
@@ -134,12 +136,11 @@ Signale automatiquement :
 
 **Calcul du score de risque cancer :**
 ```
-Score = Σ (poids_gene × impact_mutation × pathogenicite)
+Score = Σ pathogenicity_score (pour chaque mutation du gène associé au cancer)
 
 Où :
-- poids_gene : importance du gène pour ce cancer (config.py)
-- impact_mutation : HIGH=1.0, MODERATE=0.5, LOW=0.1
-- pathogenicite : score 0-1 basé sur les hotspots connus
+- pathogenicity_score : score de pathogénicité de la mutation (0-1),
+  calculé dans annotator.py à partir des hotspots connus et de la sévérité de l'impact.
 ```
 
 #### Section 5 : VARIANTS À IMPACT ÉLEVÉ
