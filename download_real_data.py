@@ -335,7 +335,7 @@ def build_patient_metadata(patient_id, clinical_data, cancer_type_fr, mutations)
         "genes_with_mutations": genes_with_mutations,
         "cancer_type": cancer_type_fr,
         "age": age or random.randint(35, 80),
-        "sex": sex or random.choice(["M", "F"]),
+        "sex": sex if sex is not None else "unknown",
         "data_source": "TCGA_PanCancer_Atlas",
         "is_real_data": True
     }

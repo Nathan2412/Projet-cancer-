@@ -31,7 +31,7 @@ def generate_patient_text_report(patient_report, output_dir=REPORTS_DIR):
 
     lines.append("--- RESUME MUTATIONNEL ---")
     lines.append(f"  Mutations totales:       {patient_report.get('total_mutations_detected', 0)}")
-    lines.append(f"  Charge mutationnelle:    {patient_report.get('mutation_burden_per_mb', 0)} mut/Mb")
+    lines.append(f"  Densité mutationnelle (panel):    {patient_report.get('panel_mutation_density', 0)} mut/Mb")
     lines.append(f"  Risque global:           {risk_summary.get('overall_risk', 'N/A')}")
     lines.append("")
 
@@ -90,11 +90,13 @@ def generate_patient_text_report(patient_report, output_dir=REPORTS_DIR):
     lines.append("  0.3-0.6: VUS (Variant de Signification Incertaine)")
     lines.append("  < 0.3  : Benin ou probablement benin")
     lines.append("")
-    lines.append("  Charge Mutationnelle (mut/Mb):")
+    lines.append("  Densite Mutationnelle (panel) (mut/Mb):")
     lines.append("  > 100  : Tres elevee (ex: Melanome, Poumon)")
     lines.append("  50-100 : Elevee")
     lines.append("  20-50  : Moderee")
     lines.append("  < 20   : Faible")
+    lines.append("  Note: cette metrique est calculee sur les genes du panel (12 genes),")
+    lines.append("  et ne constitue pas une TMB (Tumor Mutation Burden) clinique.")
     lines.append("")
     lines.append("  Niveau de Risque Cancer:")
     lines.append("  TRES ELEVE : Prise en charge urgente (Score >= 1.5)")
@@ -103,7 +105,7 @@ def generate_patient_text_report(patient_report, output_dir=REPORTS_DIR):
     lines.append("  FAIBLE     : Profil mutationnel peu preoccupant (Score < 0.5)")
     lines.append("")
     lines.append("  Calcul du score de risque cancer:")
-    lines.append("  Score = Somme(poids_gene_cancer * impact_mutation * pathogenicite)")
+    lines.append("  Score = Somme(pathogenicity_score) pour chaque mutation du gene associe au cancer")
     lines.append("")
 
     lines.append("=" * 72)
@@ -125,7 +127,7 @@ def generate_cohort_csv_export(all_patients_results, output_dir=REPORTS_DIR):
     
     headers = [
         "Patient_ID", "Age", "Sexe", "Cancer_Connu", "Severite", 
-        "Total_Mutations", "Charge_Mutationnelle", "Risque_Global",
+        "Total_Mutations", "Densite_Mutationnelle_Panel", "Risque_Global",
         "Cancer_Max_Risque", "Score_Max_Risque"
     ]
     
@@ -154,7 +156,7 @@ def generate_cohort_csv_export(all_patients_results, output_dir=REPORTS_DIR):
                 meta.get("cancer_type", ""),
                 meta.get("severity", ""),
                 pr.get("total_mutations_detected", 0),
-                pr.get("mutation_burden_per_mb", 0),
+                pr.get("panel_mutation_density", 0),
                 risk.get("overall_risk", ""),
                 max_cancer,
                 round(max_score, 3)
@@ -220,7 +222,7 @@ def generate_patient_html_report(patient_report, plots=None, output_dir=REPORTS_
             <div class="stat-card"><div class="value">{meta.get('age', 'N/A')}</div><div class="label">Age</div></div>
             <div class="stat-card"><div class="value">{meta.get('sex', 'N/A')}</div><div class="label">Sexe</div></div>
             <div class="stat-card"><div class="value">{patient_report.get('total_mutations_detected', 0)}</div><div class="label">Mutations totales</div></div>
-            <div class="stat-card"><div class="value">{patient_report.get('mutation_burden_per_mb', 0)}</div><div class="label">Charge mut/Mb</div></div>
+            <div class="stat-card"><div class="value">{patient_report.get('panel_mutation_density', 0)}</div><div class="label">Densité mut/Mb (panel)</div></div>
         </div>
     </div>
 
@@ -286,13 +288,15 @@ def generate_patient_html_report(patient_report, plots=None, output_dir=REPORTS_
             <li><b>0.3 - 0.59</b> : VUS (Variant de Signification Incertaine)</li>
             <li><b>&lt; 0.3</b> : Bénin ou probablement bénin</li>
         </ul>
-        <h3>Charge Mutationnelle</h3>
+        <h3>Densité Mutationnelle (panel)</h3>
         <ul>
             <li><b>&gt; 100 mut/Mb</b> : Très élevée (typique mélanome, poumon)</li>
             <li><b>50 - 100 mut/Mb</b> : Élevée</li>
             <li><b>20 - 49 mut/Mb</b> : Modérée</li>
             <li><b>&lt; 20 mut/Mb</b> : Faible</li>
         </ul>
+        <p><i>Note : cette métrique est calculée sur les gènes du panel uniquement (12 gènes)
+        et ne constitue pas une TMB (Tumor Mutation Burden) clinique.</i></p>
         <h3>Niveaux de Risque Global</h3>
         <ul>
             <li><b>TRÈS ÉLEVÉ</b> : Prise en charge urgente recommandée (Score &ge; 1.5)</li>
@@ -301,7 +305,7 @@ def generate_patient_html_report(patient_report, plots=None, output_dir=REPORTS_
             <li><b>FAIBLE</b> : Profil mutationnel peu préoccupant (Score &lt; 0.5)</li>
         </ul>
         <h3>Calcul du Score de Risque</h3>
-        <p><i>Score = &Sigma; (poids_gene &times; impact_mutation &times; pathogenicite)</i></p>
+        <p><i>Score = &Sigma; pathogenicity_score (pour chaque mutation du gène associé au cancer)</i></p>
     </div>
 """
 
