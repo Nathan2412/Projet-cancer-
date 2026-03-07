@@ -1,0 +1,56 @@
+================================================================
+  RAPPORT ML — PREDICTION DE CANCER
+  07/03/2026 20:43  |  3674 patients labellises  |  12 classes
+================================================================
+
+  SIGNATURES D'ALLELES PAR CANCER (discriminantes)
+  --------------------------------------------------
+  Sein: 0 alleles discriminants (sur 669 patients)
+  Poumon: 0 alleles discriminants (sur 469 patients)
+  Colon: 0 alleles discriminants (sur 489 patients)
+  Prostate: 0 alleles discriminants (sur 109 patients)
+  Pancreas: 0 alleles discriminants (sur 135 patients)
+  Melanome: 0 alleles discriminants (sur 342 patients)
+  Ovaire: 0 alleles discriminants (sur 383 patients)
+  Vessie: 0 alleles discriminants (sur 295 patients)
+  Thyroide: 1 alleles discriminants (sur 296 patients)
+    - BRAF V600E (enrich=14.61x, freq_in=0.9561, freq_out=0.0654)
+  Rein: 0 alleles discriminants (sur 51 patients)
+  Foie: 0 alleles discriminants (sur 165 patients)
+  Glioblastome: 0 alleles discriminants (sur 271 patients)
+
+  Entrainement : 569.65s
+  Modele                     Acc    Prec     Rec      F1     AUC
+  ---------------------------------------------------------
+  Random Forest           0.5449  0.5844  0.5449  0.5472  0.8916
+    params={'max_depth': 8, 'min_samples_split': 5, 'n_estimators': 250} | train-cv gap acc=+0.0795 f1=+0.0805
+  Gradient Boosting       0.5784  0.5794  0.5784  0.5743  0.9091 *
+    params={'learning_rate': 0.05, 'max_depth': 3, 'n_estimators': 100, 'subsample': 1.0} | train-cv gap acc=+0.0691 f1=+0.0693
+  SVM (RBF)               0.5354  0.5791  0.5354  0.5362  0.8939
+    params={'C': 30, 'gamma': 0.01} | train-cv gap acc=+0.1230 f1=+0.1272
+
+  Meilleur : Gradient Boosting (acc=0.5784)
+  Classe                Prec     Rec      F1     N
+  --------------------------------------------
+  Colon               0.7960  0.8057  0.8008   489
+  Foie                0.2752  0.2485  0.2611   165
+  Glioblastome        0.5611  0.5424  0.5516   271
+  Melanome            0.5519  0.4971  0.5231   342
+  Ovaire              0.4337  0.6580  0.5228   383
+  Pancreas            0.6250  0.5926  0.6084   135
+  Poumon              0.5549  0.4200  0.4782   469
+  Prostate            0.2782  0.3394  0.3058   109
+  Rein                0.1053  0.0392  0.0571    51
+  Sein                0.6515  0.6203  0.6355   669
+  Thyroide            0.7434  0.8615  0.7981   296
+  Vessie              0.5114  0.4576  0.4830   295
+
+  Predictions (patients connus) : 2379/3674 correctes (64.8%)
+  Confiance moy : 0.584
+
+  Sectorisation (clustering)
+  - k optimal: 2 | silhouette: 0.3716
+  - Coherence labels cancer: ARI=0.022 NMI=0.0834
+    Sector_02: n=645 dominant=Colon
+    Sector_01: n=3029 dominant=Sein
+================================================================

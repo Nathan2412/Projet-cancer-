@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_1421
-  Date: 28/02/2026 22:30
+  Date: 07/03/2026 20:30
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -23,8 +23,8 @@
 --- PROFIL DE RISQUE CANCER ---
   Cancer                  Score Niveau          Genes
   -----------------------------------------------------------------
-  Colon                   2.800 TRES ELEVE      KRAS, PIK3CA, APC
-  Vessie                  1.800 ELEVE           KRAS, PIK3CA
+  Colon                   2.800 TRES ELEVE      PIK3CA, APC, KRAS
+  Vessie                  1.800 ELEVE           PIK3CA, KRAS
   Thyroide                1.000 ELEVE           APC
   Pancreas                0.900 MODERE          KRAS
   Poumon                  0.900 MODERE          KRAS
@@ -46,6 +46,30 @@
 --- RECOMMANDATIONS ---
   -> Consultation oncogenetique recommandee
   -> Surveillance renforcee des organes cibles
+
+========================================================================
+  GUIDE D'INTERPRETATION DES RESULTATS
+========================================================================
+  Score de Pathogenicite:
+  >= 0.8 : Pathogene (cause reconnue de maladie)
+  0.6-0.8: Probablement pathogene
+  0.3-0.6: VUS (Variant de Signification Incertaine)
+  < 0.3  : Benin ou probablement benin
+
+  Charge Mutationnelle (mut/Mb):
+  > 100  : Tres elevee (ex: Melanome, Poumon)
+  50-100 : Elevee
+  20-50  : Moderee
+  < 20   : Faible
+
+  Niveau de Risque Cancer:
+  TRES ELEVE : Prise en charge urgente (Score >= 1.5)
+  ELEVE      : Consultation oncogenetique conseillee (Score 1.0 - 1.49)
+  MODERE     : Suivi regulier (Score 0.5 - 0.99)
+  FAIBLE     : Profil mutationnel peu preoccupant (Score < 0.5)
+
+  Calcul du score de risque cancer:
+  Score = Somme(poids_gene_cancer * impact_mutation * pathogenicite)
 
 ========================================================================
   Ce rapport est genere a des fins de recherche uniquement.

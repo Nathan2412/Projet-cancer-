@@ -63,9 +63,9 @@ Ce document récapitule l'état d'avancement du projet, ce qui a été réalisé
 ## CE QUI RESTE À FAIRE
 
 ### 1. Documentation des résultats (PRIORITAIRE)
-- [ ] **Légende des rapports** : expliquer chaque section du rapport patient
-- [ ] **Explication des calculs** : comment sont calculés les scores de risque, la charge mutationnelle, etc.
-- [ ] **Guide d'interprétation** : que signifie un score de 0.8 ? Quand s'inquiéter ?
+- [x] **Légende des rapports** : expliquer chaque section du rapport patient
+- [x] **Explication des calculs** : comment sont calculés les scores de risque, la charge mutationnelle, etc.
+- [x] **Guide d'interprétation** : que signifie un score de 0.8 ? Quand s'inquiéter ?
 
 ### 2. Améliorations ML
 - [ ] **Optimisation des hyperparamètres** : GridSearch plus exhaustif
@@ -74,7 +74,7 @@ Ce document récapitule l'état d'avancement du projet, ce qui a été réalisé
 - [ ] **Modèles deep learning** : tester des réseaux de neurones
 
 ### 3. Améliorations fonctionnelles
-- [ ] **Export des résultats** en format CSV/Excel pour analyse externe
+- [x] **Export des résultats** en format CSV/Excel pour analyse externe
 - [ ] **API REST** pour intégration dans d'autres systèmes
 - [ ] **Interface web** pour visualisation interactive
 - [ ] **Tests unitaires** pour valider les calculs
@@ -217,13 +217,13 @@ Générées automatiquement selon le profil :
 
 ## DERNIÈRE MISE À JOUR
 
-**Date** : 28 février 2026
+**Date** : 7 mars 2026
 
 **Derniers changements** :
-- Correction du bug de détection des mutations (explosion de faux positifs)
-- Implémentation des signatures alléliques discriminantes
-- Optimisation des performances (désactivation temporaire des rapports HTML)
-- Ajout de la sélection automatique de modèles ML
+- Correction d'un bug majeur NameError lors du compte rendu lié au Machine Learning
+- Implémentation de la fonction d'export CSV `rapport_cohorte.csv` pour analyse externe (Excel)
+- Création d'une légende et d'un guide explicatif d'interprétation pour les données textuelles et HTML.
+- Ajout de la sélection automatique de modèles ML.
 
 ---
 

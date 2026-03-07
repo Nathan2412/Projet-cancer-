@@ -15,6 +15,7 @@ Ce projet a été développé dans le cadre d'un projet ING2. L'objectif est de 
 - **Machine Learning** : prédiction du type de cancer basée sur le profil mutationnel (Random Forest, Gradient Boosting, SVM)
 - **Signatures alléliques discriminantes** : identification des mutations caractéristiques de chaque cancer
 - **104 hotspots mutationnels** identifiés automatiquement
+- **Export CSV** : génération d'un `rapport_cohorte.csv` synthétisant toutes les données pour l'analyse externe sur Excel/outils tiers.
 - **Correction du bug de détection des mutations** : évite l'explosion de faux positifs
 - Le mode synthétique est conservé comme fallback pour fonctionner sans internet
 
@@ -155,9 +156,9 @@ download_real_data.py   -- telecharge mutations TCGA via API cBioPortal
 
 ## Resultats produits
 
-**Par patient** : rapport texte + HTML contenant les informations cliniques, le nombre de mutations, la charge mutationnelle, le niveau de risque global, le profil de risque par cancer, les variants a impact eleve, les signatures COSMIC matchees, et les recommandations.
+**Par patient** : rapport texte + HTML contenant les informations cliniques, le nombre de mutations, la charge mutationnelle, le niveau de risque global, le profil de risque par cancer, les variants a impact eleve, les signatures COSMIC matchees, et les recommandations. Inclut des légendes documentées pour le guide d'interprétation.
 
-**Par cohorte** : matrice mutations (patients x genes), correlations gene-cancer, heatmap globale, distribution des impacts.
+**Par cohorte** : rapport texte global, export complet au format CSV (`rapport_cohorte.csv`), matrice mutations (patients x genes), correlations gene-cancer, heatmap globale, distribution des impacts.
 
 ---
 

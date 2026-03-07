@@ -82,6 +82,31 @@ def generate_patient_text_report(patient_report, output_dir=REPORTS_DIR):
         lines.append("")
 
     lines.append("=" * 72)
+    lines.append("  GUIDE D'INTERPRETATION DES RESULTATS")
+    lines.append("=" * 72)
+    lines.append("  Score de Pathogenicite:")
+    lines.append("  >= 0.8 : Pathogene (cause reconnue de maladie)")
+    lines.append("  0.6-0.8: Probablement pathogene")
+    lines.append("  0.3-0.6: VUS (Variant de Signification Incertaine)")
+    lines.append("  < 0.3  : Benin ou probablement benin")
+    lines.append("")
+    lines.append("  Charge Mutationnelle (mut/Mb):")
+    lines.append("  > 100  : Tres elevee (ex: Melanome, Poumon)")
+    lines.append("  50-100 : Elevee")
+    lines.append("  20-50  : Moderee")
+    lines.append("  < 20   : Faible")
+    lines.append("")
+    lines.append("  Niveau de Risque Cancer:")
+    lines.append("  TRES ELEVE : Prise en charge urgente (Score >= 1.5)")
+    lines.append("  ELEVE      : Consultation oncogenetique conseillee (Score 1.0 - 1.49)")
+    lines.append("  MODERE     : Suivi regulier (Score 0.5 - 0.99)")
+    lines.append("  FAIBLE     : Profil mutationnel peu preoccupant (Score < 0.5)")
+    lines.append("")
+    lines.append("  Calcul du score de risque cancer:")
+    lines.append("  Score = Somme(poids_gene_cancer * impact_mutation * pathogenicite)")
+    lines.append("")
+
+    lines.append("=" * 72)
     lines.append("  Ce rapport est genere a des fins de recherche uniquement.")
     lines.append("  Il ne constitue pas un diagnostic medical.")
     lines.append("=" * 72)
@@ -92,6 +117,51 @@ def generate_patient_text_report(patient_report, output_dir=REPORTS_DIR):
         f.write(report_text)
 
     return filepath, report_text
+
+def generate_cohort_csv_export(all_patients_results, output_dir=REPORTS_DIR):
+    """Exporte les resultats de la cohorte au format CSV."""
+    import csv
+    filepath = os.path.join(output_dir, "rapport_cohorte.csv")
+    
+    headers = [
+        "Patient_ID", "Age", "Sexe", "Cancer_Connu", "Severite", 
+        "Total_Mutations", "Charge_Mutationnelle", "Risque_Global",
+        "Cancer_Max_Risque", "Score_Max_Risque"
+    ]
+    
+    with open(filepath, "w", newline="", encoding="utf-8") as f:
+        writer = csv.writer(f)
+        writer.writerow(headers)
+        
+        for pr in all_patients_results:
+            pid = pr.get("patient_id", "")
+            meta = pr.get("metadata", {})
+            risk = pr.get("risk_summary", {})
+            
+            # Recherche du cancer avec le risque maximum
+            cancer_profiles = pr.get("cancer_risk_profile", {})
+            max_cancer = ""
+            max_score = 0.0
+            for c, profile in cancer_profiles.items():
+                if profile.get("risk_score", 0) > max_score:
+                    max_score = profile.get("risk_score", 0)
+                    max_cancer = c
+                    
+            row = [
+                pid,
+                meta.get("age", ""),
+                meta.get("sex", ""),
+                meta.get("cancer_type", ""),
+                meta.get("severity", ""),
+                pr.get("total_mutations_detected", 0),
+                pr.get("mutation_burden_per_mb", 0),
+                risk.get("overall_risk", ""),
+                max_cancer,
+                round(max_score, 3)
+            ]
+            writer.writerow(row)
+            
+    return filepath
 
 
 def generate_patient_html_report(patient_report, plots=None, output_dir=REPORTS_DIR):
@@ -207,6 +277,34 @@ def generate_patient_html_report(patient_report, plots=None, output_dir=REPORTS_
             html += f'        <div class="recommendation">{rec}</div>\n'
         html += "    </div>\n"
 
+    html += """    <div class="section">
+        <h2>Guide d'interprétation</h2>
+        <h3>Score de Pathogénicité</h3>
+        <ul>
+            <li><b>&ge; 0.8</b> : Pathogène (mutation causant la maladie)</li>
+            <li><b>0.6 - 0.79</b> : Probablement pathogène</li>
+            <li><b>0.3 - 0.59</b> : VUS (Variant de Signification Incertaine)</li>
+            <li><b>&lt; 0.3</b> : Bénin ou probablement bénin</li>
+        </ul>
+        <h3>Charge Mutationnelle</h3>
+        <ul>
+            <li><b>&gt; 100 mut/Mb</b> : Très élevée (typique mélanome, poumon)</li>
+            <li><b>50 - 100 mut/Mb</b> : Élevée</li>
+            <li><b>20 - 49 mut/Mb</b> : Modérée</li>
+            <li><b>&lt; 20 mut/Mb</b> : Faible</li>
+        </ul>
+        <h3>Niveaux de Risque Global</h3>
+        <ul>
+            <li><b>TRÈS ÉLEVÉ</b> : Prise en charge urgente recommandée (Score &ge; 1.5)</li>
+            <li><b>ÉLEVÉ</b> : Consultation oncogénétique conseillée (Score 1.0 - 1.49)</li>
+            <li><b>MODÉRÉ</b> : Surveillance recommandée (Score 0.5 - 0.99)</li>
+            <li><b>FAIBLE</b> : Profil mutationnel peu préoccupant (Score &lt; 0.5)</li>
+        </ul>
+        <h3>Calcul du Score de Risque</h3>
+        <p><i>Score = &Sigma; (poids_gene &times; impact_mutation &times; pathogenicite)</i></p>
+    </div>
+"""
+
     html += """    <div class="footer">
         Ce rapport est genere a des fins de recherche uniquement.<br>
         Il ne constitue pas un diagnostic medical.
@@ -250,6 +348,8 @@ def generate_cohort_summary_report(all_patients_results, output_dir=REPORTS_DIR)
     filepath = os.path.join(output_dir, "rapport_cohorte.txt")
     with open(filepath, "w", encoding="utf-8") as f:
         f.write(report_text)
+
+    generate_cohort_csv_export(all_patients_results, output_dir)
 
     return filepath
 

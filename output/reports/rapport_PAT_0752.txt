@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_0752
-  Date: 28/02/2026 22:30
+  Date: 07/03/2026 20:30
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -25,11 +25,11 @@
 --- PROFIL DE RISQUE CANCER ---
   Cancer                  Score Niveau          Genes
   -----------------------------------------------------------------
-  Melanome                1.800 ELEVE           KRAS, PIK3CA
-  Poumon                  1.800 ELEVE           KRAS, PIK3CA
-  Vessie                  1.800 ELEVE           KRAS, PIK3CA
-  Colon                   1.800 ELEVE           KRAS, PIK3CA
-  Rein                    1.800 ELEVE           KRAS, PIK3CA
+  Melanome                1.800 ELEVE           PIK3CA, KRAS
+  Poumon                  1.800 ELEVE           PIK3CA, KRAS
+  Vessie                  1.800 ELEVE           PIK3CA, KRAS
+  Colon                   1.800 ELEVE           PIK3CA, KRAS
+  Rein                    1.800 ELEVE           PIK3CA, KRAS
   Foie                    0.900 MODERE          KRAS
   Pancreas                0.900 MODERE          KRAS
   Glioblastome            0.900 MODERE          PIK3CA
@@ -48,6 +48,30 @@
 --- RECOMMANDATIONS ---
   -> Consultation oncogenetique recommandee
   -> Surveillance renforcee des organes cibles
+
+========================================================================
+  GUIDE D'INTERPRETATION DES RESULTATS
+========================================================================
+  Score de Pathogenicite:
+  >= 0.8 : Pathogene (cause reconnue de maladie)
+  0.6-0.8: Probablement pathogene
+  0.3-0.6: VUS (Variant de Signification Incertaine)
+  < 0.3  : Benin ou probablement benin
+
+  Charge Mutationnelle (mut/Mb):
+  > 100  : Tres elevee (ex: Melanome, Poumon)
+  50-100 : Elevee
+  20-50  : Moderee
+  < 20   : Faible
+
+  Niveau de Risque Cancer:
+  TRES ELEVE : Prise en charge urgente (Score >= 1.5)
+  ELEVE      : Consultation oncogenetique conseillee (Score 1.0 - 1.49)
+  MODERE     : Suivi regulier (Score 0.5 - 0.99)
+  FAIBLE     : Profil mutationnel peu preoccupant (Score < 0.5)
+
+  Calcul du score de risque cancer:
+  Score = Somme(poids_gene_cancer * impact_mutation * pathogenicite)
 
 ========================================================================
   Ce rapport est genere a des fins de recherche uniquement.
