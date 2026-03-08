@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_1143
-  Date: 07/03/2026 20:30
+  Date: 07/03/2026 22:33
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -12,11 +12,11 @@
 
 --- RESUME MUTATIONNEL ---
   Mutations totales:       15
-  Charge mutationnelle:    66.18 mut/Mb
+  Densité mutationnelle (panel):    66.18 mut/Mb
   Risque global:           ELEVE
 
 --- ALERTES ---
-  [!] Charge mutationnelle elevee: 66.18 mut/Mb
+  [!] Densite mutationnelle (panel) elevee: 66.18 mut/Mb
   [!] Risque TRES ELEVE pour Colon (score: 4.5)
   [!] Risque TRES ELEVE pour Glioblastome (score: 2.8)
   [!] Risque ELEVE pour Foie (score: 1.0)
@@ -26,7 +26,7 @@
 --- PROFIL DE RISQUE CANCER ---
   Cancer                  Score Niveau          Genes
   -----------------------------------------------------------------
-  Colon                   4.500 TRES ELEVE      BRCA2, PIK3CA, APC
+  Colon                   4.500 TRES ELEVE      PTEN, APC, KRAS
   Glioblastome            2.800 TRES ELEVE      PIK3CA, BRCA2, PTEN
   Foie                    1.000 ELEVE           APC
   Melanome                1.000 ELEVE           APC
@@ -65,11 +65,13 @@
   0.3-0.6: VUS (Variant de Signification Incertaine)
   < 0.3  : Benin ou probablement benin
 
-  Charge Mutationnelle (mut/Mb):
+  Densite Mutationnelle (panel) (mut/Mb):
   > 100  : Tres elevee (ex: Melanome, Poumon)
   50-100 : Elevee
   20-50  : Moderee
   < 20   : Faible
+  Note: cette metrique est calculee sur les genes du panel (12 genes),
+  et ne constitue pas une TMB (Tumor Mutation Burden) clinique.
 
   Niveau de Risque Cancer:
   TRES ELEVE : Prise en charge urgente (Score >= 1.5)
@@ -78,7 +80,7 @@
   FAIBLE     : Profil mutationnel peu preoccupant (Score < 0.5)
 
   Calcul du score de risque cancer:
-  Score = Somme(poids_gene_cancer * impact_mutation * pathogenicite)
+  Score = Somme(pathogenicity_score) pour chaque mutation du gene associe au cancer
 
 ========================================================================
   Ce rapport est genere a des fins de recherche uniquement.

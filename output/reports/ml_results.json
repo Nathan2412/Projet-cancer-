@@ -1,9 +1,9 @@
 {
   "best_model": "Gradient Boosting",
-  "best_accuracy": 0.5784,
+  "best_accuracy": 0.577,
   "n_samples_labeled": 3674,
   "n_samples_total": 3674,
-  "n_features": 38,
+  "n_features": 28,
   "class_distribution": {
     "Sein": 669,
     "Poumon": 469,
@@ -7575,58 +7575,58 @@
       "normalized_mutual_info": 0.0834
     }
   },
-  "training_time": 569.65,
+  "training_time": 902.82,
   "models": {
     "Random Forest": {
-      "accuracy": 0.5449,
-      "precision": 0.5844,
-      "recall": 0.5449,
-      "f1": 0.5472,
-      "roc_auc": 0.8916,
+      "accuracy": 0.5425,
+      "precision": 0.576,
+      "recall": 0.5425,
+      "f1": 0.5424,
+      "roc_auc": 0.8908,
       "best_params": {
         "max_depth": 8,
         "min_samples_split": 5,
-        "n_estimators": 250
+        "n_estimators": 150
       },
-      "overfit_gap_accuracy": 0.0795,
-      "overfit_gap_f1": 0.0805,
+      "overfit_gap_accuracy": 0.0855,
+      "overfit_gap_f1": 0.0893,
       "overfit_warning": true
     },
     "Gradient Boosting": {
-      "accuracy": 0.5784,
-      "precision": 0.5794,
-      "recall": 0.5784,
-      "f1": 0.5743,
-      "roc_auc": 0.9091,
+      "accuracy": 0.577,
+      "precision": 0.5783,
+      "recall": 0.577,
+      "f1": 0.573,
+      "roc_auc": 0.909,
       "best_params": {
         "learning_rate": 0.05,
         "max_depth": 3,
         "n_estimators": 100,
         "subsample": 1.0
       },
-      "overfit_gap_accuracy": 0.0691,
-      "overfit_gap_f1": 0.0693,
+      "overfit_gap_accuracy": 0.0705,
+      "overfit_gap_f1": 0.0705,
       "overfit_warning": false
     },
     "SVM (RBF)": {
-      "accuracy": 0.5354,
-      "precision": 0.5791,
-      "recall": 0.5354,
-      "f1": 0.5362,
-      "roc_auc": 0.8939,
+      "accuracy": 0.5305,
+      "precision": 0.5722,
+      "recall": 0.5305,
+      "f1": 0.5312,
+      "roc_auc": 0.8937,
       "best_params": {
         "C": 30,
         "gamma": 0.01
       },
-      "overfit_gap_accuracy": 0.123,
-      "overfit_gap_f1": 0.1272,
+      "overfit_gap_accuracy": 0.1304,
+      "overfit_gap_f1": 0.1342,
       "overfit_warning": true
     }
   },
   "predictions_known": {
     "total": 3674,
-    "correct": 2379,
-    "accuracy": 0.6475
+    "correct": 2378,
+    "accuracy": 0.6473
   },
   "predictions_unknown": []
 }

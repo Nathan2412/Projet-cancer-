@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_1774
-  Date: 07/03/2026 20:30
+  Date: 07/03/2026 22:33
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -12,7 +12,7 @@
 
 --- RESUME MUTATIONNEL ---
   Mutations totales:       2
-  Charge mutationnelle:    8.82 mut/Mb
+  Densité mutationnelle (panel):    8.82 mut/Mb
   Risque global:           ELEVE
 
 --- ALERTES ---
@@ -23,9 +23,9 @@
 --- PROFIL DE RISQUE CANCER ---
   Cancer                  Score Niveau          Genes
   -----------------------------------------------------------------
-  Vessie                  1.700 ELEVE           TP53, KRAS
-  Colon                   1.700 ELEVE           TP53, KRAS
-  Pancreas                1.700 ELEVE           TP53, KRAS
+  Vessie                  1.700 ELEVE           KRAS, TP53
+  Colon                   1.700 ELEVE           KRAS, TP53
+  Pancreas                1.700 ELEVE           KRAS, TP53
   Poumon                  0.900 MODERE          KRAS
   Thyroide                0.900 MODERE          KRAS
   Glioblastome            0.800 MODERE          TP53
@@ -58,11 +58,13 @@
   0.3-0.6: VUS (Variant de Signification Incertaine)
   < 0.3  : Benin ou probablement benin
 
-  Charge Mutationnelle (mut/Mb):
+  Densite Mutationnelle (panel) (mut/Mb):
   > 100  : Tres elevee (ex: Melanome, Poumon)
   50-100 : Elevee
   20-50  : Moderee
   < 20   : Faible
+  Note: cette metrique est calculee sur les genes du panel (12 genes),
+  et ne constitue pas une TMB (Tumor Mutation Burden) clinique.
 
   Niveau de Risque Cancer:
   TRES ELEVE : Prise en charge urgente (Score >= 1.5)
@@ -71,7 +73,7 @@
   FAIBLE     : Profil mutationnel peu preoccupant (Score < 0.5)
 
   Calcul du score de risque cancer:
-  Score = Somme(poids_gene_cancer * impact_mutation * pathogenicite)
+  Score = Somme(pathogenicity_score) pour chaque mutation du gene associe au cancer
 
 ========================================================================
   Ce rapport est genere a des fins de recherche uniquement.

@@ -1,4 +1,4 @@
-Patient_ID,Age,Sexe,Cancer_Connu,Severite,Total_Mutations,Charge_Mutationnelle,Risque_Global,Cancer_Max_Risque,Score_Max_Risque
+Patient_ID,Age,Sexe,Cancer_Connu,Severite,Total_Mutations,Densite_Mutationnelle_Panel,Risque_Global,Cancer_Max_Risque,Score_Max_Risque
 PAT_0001,68,F,Sein,extreme,17,0,ELEVE,,0.0
 PAT_0002,90,F,Sein,high,9,0,MODERE,,0.0
 PAT_0003,52,F,Sein,moderate,6,0,MODERE,,0.0

@@ -1,6 +1,6 @@
 ================================================================
   RAPPORT ML — PREDICTION DE CANCER
-  07/03/2026 20:43  |  3674 patients labellises  |  12 classes
+  07/03/2026 22:51  |  3674 patients labellises  |  12 classes
 ================================================================
 
   SIGNATURES D'ALLELES PAR CANCER (discriminantes)
@@ -19,34 +19,35 @@
   Foie: 0 alleles discriminants (sur 165 patients)
   Glioblastome: 0 alleles discriminants (sur 271 patients)
 
-  Entrainement : 569.65s
-  Modele                     Acc    Prec     Rec      F1     AUC
-  ---------------------------------------------------------
-  Random Forest           0.5449  0.5844  0.5449  0.5472  0.8916
-    params={'max_depth': 8, 'min_samples_split': 5, 'n_estimators': 250} | train-cv gap acc=+0.0795 f1=+0.0805
-  Gradient Boosting       0.5784  0.5794  0.5784  0.5743  0.9091 *
-    params={'learning_rate': 0.05, 'max_depth': 3, 'n_estimators': 100, 'subsample': 1.0} | train-cv gap acc=+0.0691 f1=+0.0693
-  SVM (RBF)               0.5354  0.5791  0.5354  0.5362  0.8939
-    params={'C': 30, 'gamma': 0.01} | train-cv gap acc=+0.1230 f1=+0.1272
+  Entrainement : 902.82s
+  Modele                   CV Acc   CV F1  Train Acc  Train F1     AUC
+  -------------------------------------------------------------------
+  Random Forest            0.5425  0.5424     0.6279    0.6317  0.8908
+    params={'max_depth': 8, 'min_samples_split': 5, 'n_estimators': 150} | gap (train-CV) acc=+0.0855 f1=+0.0893
+  Gradient Boosting        0.5770  0.5730     0.6475    0.6435  0.9090 *
+    params={'learning_rate': 0.05, 'max_depth': 3, 'n_estimators': 100, 'subsample': 1.0} | gap (train-CV) acc=+0.0705 f1=+0.0705
+  SVM (RBF)                0.5305  0.5312     0.6609    0.6654  0.8937
+    params={'C': 30, 'gamma': 0.01} | gap (train-CV) acc=+0.1304 f1=+0.1342
 
-  Meilleur : Gradient Boosting (acc=0.5784)
+  Meilleur : Gradient Boosting (acc CV=0.5770  —  metrique principale)
   Classe                Prec     Rec      F1     N
   --------------------------------------------
   Colon               0.7960  0.8057  0.8008   489
-  Foie                0.2752  0.2485  0.2611   165
-  Glioblastome        0.5611  0.5424  0.5516   271
-  Melanome            0.5519  0.4971  0.5231   342
-  Ovaire              0.4337  0.6580  0.5228   383
+  Foie                0.2632  0.2424  0.2524   165
+  Glioblastome        0.5506  0.5424  0.5465   271
+  Melanome            0.5537  0.4971  0.5239   342
+  Ovaire              0.4330  0.6580  0.5223   383
   Pancreas            0.6250  0.5926  0.6084   135
-  Poumon              0.5549  0.4200  0.4782   469
-  Prostate            0.2782  0.3394  0.3058   109
+  Poumon              0.5475  0.4179  0.4740   469
+  Prostate            0.2836  0.3486  0.3128   109
   Rein                0.1053  0.0392  0.0571    51
-  Sein                0.6515  0.6203  0.6355   669
+  Sein                0.6545  0.6173  0.6354   669
   Thyroide            0.7434  0.8615  0.7981   296
-  Vessie              0.5114  0.4576  0.4830   295
+  Vessie              0.5155  0.4508  0.4810   295
 
-  Predictions (patients connus) : 2379/3674 correctes (64.8%)
-  Confiance moy : 0.584
+  Score de resubstitution (entrainement, BIAISE) : 2378/3674 correctes (64.7%)
+  [Utiliser le score de validation croisee (CV) comme metrique principale]
+  Confiance moy : 0.588
 
   Sectorisation (clustering)
   - k optimal: 2 | silhouette: 0.3716

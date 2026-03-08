@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_1172
-  Date: 07/03/2026 20:30
+  Date: 07/03/2026 22:33
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -12,7 +12,7 @@
 
 --- RESUME MUTATIONNEL ---
   Mutations totales:       5
-  Charge mutationnelle:    22.06 mut/Mb
+  Densité mutationnelle (panel):    22.06 mut/Mb
   Risque global:           MODERE
 
 --- ALERTES ---
@@ -24,10 +24,10 @@
 --- PROFIL DE RISQUE CANCER ---
   Cancer                  Score Niveau          Genes
   -----------------------------------------------------------------
-  Colon                   2.800 TRES ELEVE      PIK3CA, APC, KRAS
-  Glioblastome            1.800 ELEVE           PIK3CA, KRAS
-  Vessie                  1.800 ELEVE           PIK3CA, KRAS
-  Sein                    1.800 ELEVE           PIK3CA, KRAS
+  Colon                   2.800 TRES ELEVE      KRAS, PIK3CA, APC
+  Glioblastome            1.800 ELEVE           KRAS, PIK3CA
+  Vessie                  1.800 ELEVE           KRAS, PIK3CA
+  Sein                    1.800 ELEVE           KRAS, PIK3CA
   Poumon                  0.900 MODERE          KRAS
   Melanome                0.900 MODERE          KRAS
   Foie                    0.900 MODERE          KRAS
@@ -59,11 +59,13 @@
   0.3-0.6: VUS (Variant de Signification Incertaine)
   < 0.3  : Benin ou probablement benin
 
-  Charge Mutationnelle (mut/Mb):
+  Densite Mutationnelle (panel) (mut/Mb):
   > 100  : Tres elevee (ex: Melanome, Poumon)
   50-100 : Elevee
   20-50  : Moderee
   < 20   : Faible
+  Note: cette metrique est calculee sur les genes du panel (12 genes),
+  et ne constitue pas une TMB (Tumor Mutation Burden) clinique.
 
   Niveau de Risque Cancer:
   TRES ELEVE : Prise en charge urgente (Score >= 1.5)
@@ -72,7 +74,7 @@
   FAIBLE     : Profil mutationnel peu preoccupant (Score < 0.5)
 
   Calcul du score de risque cancer:
-  Score = Somme(poids_gene_cancer * impact_mutation * pathogenicite)
+  Score = Somme(pathogenicity_score) pour chaque mutation du gene associe au cancer
 
 ========================================================================
   Ce rapport est genere a des fins de recherche uniquement.

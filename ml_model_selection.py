@@ -156,6 +156,15 @@ def evaluate_models_nested_cv(X, y_enc, class_names, feature_names,
     with warnings.catch_warnings():
         warnings.simplefilter("ignore")
 
+        X_full = X
+        feature_names_full = list(feature_names)
+        if labeled_results is not None and allele_params is not None:
+            from allele_analyzer import build_cancer_allele_signatures
+            global_sigs = build_cancer_allele_signatures(labeled_results, **allele_params)
+            X_full = _add_fold_allele_features(X, labeled_results, global_sigs)
+            cancer_types_sorted = sorted(global_sigs.keys())
+            feature_names_full += [f"allele_score_{ct}" for ct in cancer_types_sorted]
+
         for model_name, spec in specs.items():
             if verbose:
                 print(f"    [{model_name}] nested CV + tuning...", end=" ", flush=True)
@@ -240,10 +249,10 @@ def evaluate_models_nested_cv(X, y_enc, class_names, feature_names,
                 cv=outer_cv,
                 n_jobs=-1,
             )
-            grid_full.fit(X, y_enc)
+            grid_full.fit(X_full, y_enc)
             best_model_full = grid_full.best_estimator_
 
-            y_train_pred = best_model_full.predict(X)
+            y_train_pred = best_model_full.predict(X_full)
 
             acc = accuracy_score(y_enc, oof_pred)
             prec = precision_score(y_enc, oof_pred, average="weighted", zero_division=0)
@@ -282,7 +291,7 @@ def evaluate_models_nested_cv(X, y_enc, class_names, feature_names,
                 "roc_auc_per_class": roc_cls,
                 "confusion_matrix": cm.tolist(),
                 "per_class_metrics": per_class,
-                "feature_importance": _feature_importance_from_pipeline(best_model_full, feature_names),
+                "feature_importance": _feature_importance_from_pipeline(best_model_full, feature_names_full),
                 "classification_report": classification_report(
                     y_enc, oof_pred, target_names=class_names, zero_division=0
                 ),

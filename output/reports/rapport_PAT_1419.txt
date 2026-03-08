@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_1419
-  Date: 07/03/2026 20:30
+  Date: 07/03/2026 22:33
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -12,7 +12,7 @@
 
 --- RESUME MUTATIONNEL ---
   Mutations totales:       3
-  Charge mutationnelle:    13.24 mut/Mb
+  Densité mutationnelle (panel):    13.24 mut/Mb
   Risque global:           ELEVE
 
 --- ALERTES ---
@@ -26,12 +26,12 @@
 --- PROFIL DE RISQUE CANCER ---
   Cancer                  Score Niveau          Genes
   -----------------------------------------------------------------
-  Glioblastome            1.700 ELEVE           PIK3CA, KRAS
-  Prostate                1.700 ELEVE           PIK3CA, KRAS
-  Poumon                  1.700 ELEVE           PIK3CA, KRAS
-  Vessie                  1.700 ELEVE           PIK3CA, KRAS
-  Foie                    1.700 ELEVE           PIK3CA, KRAS
-  Colon                   1.700 ELEVE           PIK3CA, KRAS
+  Glioblastome            1.700 ELEVE           KRAS, PIK3CA
+  Prostate                1.700 ELEVE           KRAS, PIK3CA
+  Poumon                  1.700 ELEVE           KRAS, PIK3CA
+  Vessie                  1.700 ELEVE           KRAS, PIK3CA
+  Foie                    1.700 ELEVE           KRAS, PIK3CA
+  Colon                   1.700 ELEVE           KRAS, PIK3CA
   Melanome                0.900 MODERE          KRAS
   Pancreas                0.900 MODERE          KRAS
   Rein                    0.800 MODERE          PIK3CA
@@ -61,11 +61,13 @@
   0.3-0.6: VUS (Variant de Signification Incertaine)
   < 0.3  : Benin ou probablement benin
 
-  Charge Mutationnelle (mut/Mb):
+  Densite Mutationnelle (panel) (mut/Mb):
   > 100  : Tres elevee (ex: Melanome, Poumon)
   50-100 : Elevee
   20-50  : Moderee
   < 20   : Faible
+  Note: cette metrique est calculee sur les genes du panel (12 genes),
+  et ne constitue pas une TMB (Tumor Mutation Burden) clinique.
 
   Niveau de Risque Cancer:
   TRES ELEVE : Prise en charge urgente (Score >= 1.5)
@@ -74,7 +76,7 @@
   FAIBLE     : Profil mutationnel peu preoccupant (Score < 0.5)
 
   Calcul du score de risque cancer:
-  Score = Somme(poids_gene_cancer * impact_mutation * pathogenicite)
+  Score = Somme(pathogenicity_score) pour chaque mutation du gene associe au cancer
 
 ========================================================================
   Ce rapport est genere a des fins de recherche uniquement.
