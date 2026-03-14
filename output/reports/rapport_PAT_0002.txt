@@ -1,46 +1,54 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_0002
-  Date: 14/03/2026 20:57
+  Date: 14/03/2026 20:59
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
   Identifiant:    PAT_0002
-  Age:            90 ans
-  Sexe:           F
-  Severite:       high
-  Cancer connu:   Sein
-
---- CLASSIFICATION ML — CANCER PROBABLE ---
-  Cancer predit:       Sein
-  Confiance:           72.69%
-  Modele:              Gradient Boosting
-  Top-3 cancers probables:
-    1. Sein                 72.69%
-    2. Melanome             14.38%
-    3. Vessie               4.14%
-  Features determinantes:
-    - age                                 importance=0.0819 valeur=90.0
-    - burden                              importance=0.0323 valeur=39.71
-    - total_mut                           importance=0.0364 valeur=9.0
-    - SNP                                 importance=0.0265 valeur=9.0
-    - n_suppressors                       importance=0.0389 valeur=4.0
+  Age:            63 ans
+  Sexe:           M
+  Severite:       low
 
 --- RESUME MUTATIONNEL ---
-  Mutations totales:       9
-  Densité mutationnelle:   39.71 mut/Mb
+  Mutations totales:       23508
+  Densité mutationnelle:   0.0 mut/Mb
   Hotspots detectes:       0
-  Variants pathogeniques:  0
-  Oncogenes mutes:         5
-  Suppresseurs mutes:      4
-  Risque global:           MODERE
+  Variants pathogeniques:  23508
+  Oncogenes mutes:         17784
+  Suppresseurs mutes:      5724
+  Risque global:           FAIBLE
+
+--- ALERTES ---
+  [!] 23508 variants a impact eleve detectes
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Allele             Type        Pos   Score Classification
+  -------------------------------------------------------------------
+  BRCA2                         SNP         289   0.600 Likely_pathogenic
+  BRCA2                         SNP         612   0.600 Likely_pathogenic
+  BRCA2                         SNP         645   0.600 Likely_pathogenic
+  BRCA2                         SNP         826   0.600 Likely_pathogenic
+  BRCA2                         SNP        2224   0.600 Likely_pathogenic
+  BRCA2                         SNP        2820   0.600 Likely_pathogenic
+  BRCA1                         SNP         234   0.600 Likely_pathogenic
+  BRCA1                         SNP         374   0.600 Likely_pathogenic
+  BRCA1                         SNP         757   0.600 Likely_pathogenic
+  BRCA1                         SNP         923   0.600 Likely_pathogenic
+  BRCA1                         SNP        1091   0.600 Likely_pathogenic
+  BRCA1                         SNP        2164   0.600 Likely_pathogenic
+  BRCA1                         SNP        2540   0.600 Likely_pathogenic
+  BRCA1                         SNP        2541   0.600 Likely_pathogenic
+  BRCA1                         SNP        2543   0.600 Likely_pathogenic
+  (* = hotspot connu)
 
 --- SIGNATURES MUTATIONNELLES (info secondaire) ---
-  SBS2 (APOBEC)                       similarite: 0.733
-  SBS13 (APOBEC)                      similarite: 0.644
-  SBS6 (MMR deficient)                similarite: 0.511
+  SBS6 (MMR deficient)                similarite: 0.567
+  SBS2 (APOBEC)                       similarite: 0.567
+  SBS4 (tabac)                        similarite: 0.367
+  SBS13 (APOBEC)                      similarite: 0.367
 
 --- RECOMMANDATIONS ---
-  -> Suivi regulier avec depistage standard
+  -> Depistage standard selon les recommandations
 
 ========================================================================
   Ce rapport est genere a des fins de recherche uniquement.

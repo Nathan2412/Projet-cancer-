@@ -1,77 +1,54 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_0001
-  Date: 14/03/2026 20:57
+  Date: 14/03/2026 20:59
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
   Identifiant:    PAT_0001
-  Age:            68 ans
-  Sexe:           F
-  Severite:       extreme
-  Cancer connu:   Sein
-
---- CLASSIFICATION ML — CANCER PROBABLE ---
-  Cancer predit:       Sein
-  Confiance:           55.77%
-  Modele:              Gradient Boosting
-  Top-3 cancers probables:
-    1. Sein                 55.77%
-    2. Colon                26.47%
-    3. Vessie               9.45%
-  Features determinantes:
-    - age                                 importance=0.0819 valeur=68.0
-    - burden                              importance=0.0323 valeur=75.0
-    - total_mut                           importance=0.0364 valeur=17.0
-    - n_suppressors                       importance=0.0389 valeur=14.0
-    - SNP                                 importance=0.0265 valeur=17.0
-
---- PROFIL DE COMPATIBILITE CANCER ---
-  Cancer                   Compatibilite Genes supports
-  -----------------------------------------------------------------
-  Colon                           39.0%  ALK, PTEN
-  Sein                            39.0%  ALK, PTEN
-  Glioblastome                    21.9%  PTEN
+  Age:            49 ans
+  Sexe:           M
+  Severite:       low
 
 --- RESUME MUTATIONNEL ---
-  Mutations totales:       17
-  Densité mutationnelle:   75.0 mut/Mb
-  Hotspots detectes:       2
-  Variants pathogeniques:  2
-  Oncogenes mutes:         3
-  Suppresseurs mutes:      14
-  Risque global:           ELEVE
+  Mutations totales:       28071
+  Densité mutationnelle:   0.0 mut/Mb
+  Hotspots detectes:       0
+  Variants pathogeniques:  28071
+  Oncogenes mutes:         13568
+  Suppresseurs mutes:      14503
+  Risque global:           FAIBLE
 
 --- ALERTES ---
-  [!] Densite mutationnelle (panel) elevee: 75.0 mut/Mb
-  [!] Risque ELEVE pour Colon (score: 1.6)
-  [!] Risque ELEVE pour Sein (score: 1.6)
+  [!] 28071 variants a impact eleve detectes
 
 --- VARIANTS A IMPACT ELEVE ---
   Gene       Allele             Type        Pos   Score Classification
   -------------------------------------------------------------------
-  PTEN       R130Q              SNP     1829792   0.900 Pathogenic [*]
-  ALK        G1121D             SNP       29831   0.700 Likely_pathogenic [*]
-  APC        S2223*             SNP      529539   0.500 VUS
-  PTEN       S59*               SNP     1822168   0.500 VUS
-  RB1        X313_splice        SNP      635361   0.500 VUS
+  BRCA2                         SNP         144   0.600 Likely_pathogenic
+  BRCA2                         SNP         148   0.600 Likely_pathogenic
+  BRCA2                         SNP         150   0.600 Likely_pathogenic
+  BRCA2                         SNP         151   0.600 Likely_pathogenic
+  BRCA2                         SNP         152   0.600 Likely_pathogenic
+  BRCA2                         SNP         155   0.600 Likely_pathogenic
+  BRCA2                         SNP         157   0.600 Likely_pathogenic
+  BRCA2                         SNP         158   0.600 Likely_pathogenic
+  BRCA2                         SNP         159   0.600 Likely_pathogenic
+  BRCA2                         SNP         160   0.600 Likely_pathogenic
+  BRCA2                         SNP         161   0.600 Likely_pathogenic
+  BRCA2                         SNP         164   0.600 Likely_pathogenic
+  BRCA2                         SNP         165   0.600 Likely_pathogenic
+  BRCA2                         SNP         166   0.600 Likely_pathogenic
+  BRCA2                         SNP         168   0.600 Likely_pathogenic
   (* = hotspot connu)
 
 --- SIGNATURES MUTATIONNELLES (info secondaire) ---
-  SBS4 (tabac)                        similarite: 0.788
-  SBS6 (MMR deficient)                similarite: 0.694
-  SBS2 (APOBEC)                       similarite: 0.694
-  SBS1 (age)                          similarite: 0.388
-
---- PROFIL DE RISQUE NAIF (outil secondaire) ---
-  Cancer                  Score Niveau          Genes
-  -----------------------------------------------------------------
-  Colon                   1.600 ELEVE           ALK, PTEN
-  Sein                    1.600 ELEVE           ALK, PTEN
-  Glioblastome            0.900 MODERE          PTEN
+  SBS2 (APOBEC)                       similarite: 0.567
+  SBS6 (MMR deficient)                similarite: 0.564
+  SBS13 (APOBEC)                      similarite: 0.371
+  SBS4 (tabac)                        similarite: 0.366
 
 --- RECOMMANDATIONS ---
-  -> Consultation oncogenetique recommandee
-  -> Surveillance renforcee des organes cibles
+  -> Depistage standard selon les recommandations
 
 ========================================================================
   Ce rapport est genere a des fins de recherche uniquement.

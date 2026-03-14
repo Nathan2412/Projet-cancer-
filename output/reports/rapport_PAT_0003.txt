@@ -1,83 +1,54 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_0003
-  Date: 14/03/2026 20:57
+  Date: 14/03/2026 20:59
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
   Identifiant:    PAT_0003
-  Age:            52 ans
-  Sexe:           F
-  Severite:       moderate
-  Cancer connu:   Sein
-
---- CLASSIFICATION ML — CANCER PROBABLE ---
-  Cancer predit:       Sein
-  Confiance:           58.10%
-  Modele:              Gradient Boosting
-  Top-3 cancers probables:
-    1. Sein                 58.10%
-    2. Colon                9.84%
-    3. Vessie               7.55%
-  Features determinantes:
-    - age                                 importance=0.0819 valeur=52.0
-    - burden                              importance=0.0323 valeur=26.47
-    - total_mut                           importance=0.0364 valeur=6.0
-    - n_suppressors                       importance=0.0389 valeur=4.0
-    - SNP                                 importance=0.0265 valeur=6.0
-
---- PROFIL DE COMPATIBILITE CANCER ---
-  Cancer                   Compatibilite Genes supports
-  -----------------------------------------------------------------
-  Vessie                          17.0%  PIK3CA, RB1, TP53
-  Sein                            17.0%  PIK3CA, RB1, TP53
-  Poumon                          12.4%  PIK3CA, TP53
-  Foie                            12.4%  PIK3CA, TP53
-  Colon                           12.4%  PIK3CA, TP53
-  Glioblastome                     8.3%  PIK3CA, TP53
+  Age:            54 ans
+  Sexe:           M
+  Severite:       low
 
 --- RESUME MUTATIONNEL ---
-  Mutations totales:       6
-  Densité mutationnelle:   26.47 mut/Mb
-  Hotspots detectes:       4
-  Variants pathogeniques:  4
-  Oncogenes mutes:         2
-  Suppresseurs mutes:      4
-  Risque global:           MODERE
+  Mutations totales:       27071
+  Densité mutationnelle:   0.0 mut/Mb
+  Hotspots detectes:       0
+  Variants pathogeniques:  27071
+  Oncogenes mutes:         11397
+  Suppresseurs mutes:      15674
+  Risque global:           FAIBLE
 
 --- ALERTES ---
-  [!] Risque TRES ELEVE pour Vessie (score: 3.7)
-  [!] Risque TRES ELEVE pour Sein (score: 3.7)
-  [!] Risque TRES ELEVE pour Poumon (score: 2.7)
-  [!] Risque TRES ELEVE pour Foie (score: 2.7)
-  [!] Risque TRES ELEVE pour Colon (score: 2.7)
-  [!] Risque ELEVE pour Glioblastome (score: 1.8)
-  [!] Risque ELEVE pour Ovaire (score: 1.8)
+  [!] 27071 variants a impact eleve detectes
 
 --- VARIANTS A IMPACT ELEVE ---
   Gene       Allele             Type        Pos   Score Classification
   -------------------------------------------------------------------
-  RB1        S829*              SNP      735754   1.000 Pathogenic [*]
-  TP53       R175H              SNP       89996   0.900 Pathogenic [*]
-  PIK3CA     H1047R             SNP      196029   0.900 Pathogenic [*]
-  PIK3CA     E726K              SNP      209180   0.900 Pathogenic [*]
+  BRCA2                         SNP         612   0.600 Likely_pathogenic
+  BRCA2                         SNP         635   0.600 Likely_pathogenic
+  BRCA2                         SNP         636   0.600 Likely_pathogenic
+  BRCA2                         SNP         637   0.600 Likely_pathogenic
+  BRCA2                         SNP         638   0.600 Likely_pathogenic
+  BRCA2                         SNP         639   0.600 Likely_pathogenic
+  BRCA2                         SNP         641   0.600 Likely_pathogenic
+  BRCA2                         SNP         642   0.600 Likely_pathogenic
+  BRCA2                         SNP         643   0.600 Likely_pathogenic
+  BRCA2                         SNP         647   0.600 Likely_pathogenic
+  BRCA2                         SNP         648   0.600 Likely_pathogenic
+  BRCA2                         SNP         649   0.600 Likely_pathogenic
+  BRCA2                         SNP         651   0.600 Likely_pathogenic
+  BRCA2                         SNP         652   0.600 Likely_pathogenic
+  BRCA2                         SNP         654   0.600 Likely_pathogenic
   (* = hotspot connu)
 
 --- SIGNATURES MUTATIONNELLES (info secondaire) ---
-  SBS13 (APOBEC)                      similarite: 0.867
-  SBS2 (APOBEC)                       similarite: 0.833
-  SBS6 (MMR deficient)                similarite: 0.567
-
---- PROFIL DE RISQUE NAIF (outil secondaire) ---
-  Cancer                  Score Niveau          Genes
-  -----------------------------------------------------------------
-  Vessie                  3.700 TRES ELEVE      TP53, RB1, PIK3CA
-  Sein                    3.700 TRES ELEVE      TP53, RB1, PIK3CA
-  Poumon                  2.700 TRES ELEVE      TP53, PIK3CA
-  Foie                    2.700 TRES ELEVE      TP53, PIK3CA
-  Colon                   2.700 TRES ELEVE      TP53, PIK3CA
+  SBS2 (APOBEC)                       similarite: 0.566
+  SBS6 (MMR deficient)                similarite: 0.565
+  SBS4 (tabac)                        similarite: 0.365
+  SBS13 (APOBEC)                      similarite: 0.365
 
 --- RECOMMANDATIONS ---
-  -> Suivi regulier avec depistage standard
+  -> Depistage standard selon les recommandations
 
 ========================================================================
   Ce rapport est genere a des fins de recherche uniquement.
