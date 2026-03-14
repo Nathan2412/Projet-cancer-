@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_3488
-  Date: 14/03/2026 20:35
+  Date: 14/03/2026 20:57
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -11,19 +11,19 @@
   Cancer connu:   Glioblastome
 
 --- CLASSIFICATION ML — CANCER PROBABLE ---
-  Cancer predit:       Sein
-  Confiance:           37.75%
+  Cancer predit:       Vessie
+  Confiance:           34.10%
   Modele:              Gradient Boosting
   Top-3 cancers probables:
-    1. Sein                 37.75%
-    2. Vessie               29.58%
-    3. Poumon               13.30%
+    1. Vessie               34.10%
+    2. Sein                 31.20%
+    3. Poumon               12.79%
   Features determinantes:
-    - age                                 importance=0.0736 valeur=78.0
-    - burden                              importance=0.0321 valeur=8.82
-    - total_mut                           importance=0.0333 valeur=2.0
-    - n_genes                             importance=0.0302 valeur=2.0
-    - n_suppressors                       importance=0.0418 valeur=1.0
+    - age                                 importance=0.0819 valeur=78.0
+    - burden                              importance=0.0323 valeur=8.82
+    - total_mut                           importance=0.0364 valeur=2.0
+    - SNP                                 importance=0.0265 valeur=2.0
+    - n_suppressors                       importance=0.0389 valeur=1.0
 
 --- RESUME MUTATIONNEL ---
   Mutations totales:       2

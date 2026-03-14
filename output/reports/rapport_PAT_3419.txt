@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_3419
-  Date: 14/03/2026 20:35
+  Date: 14/03/2026 20:57
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -12,18 +12,18 @@
 
 --- CLASSIFICATION ML — CANCER PROBABLE ---
   Cancer predit:       Glioblastome
-  Confiance:           87.12%
+  Confiance:           85.80%
   Modele:              Gradient Boosting
   Top-3 cancers probables:
-    1. Glioblastome         87.12%
-    2. Sein                 3.97%
-    3. Colon                2.55%
+    1. Glioblastome         85.80%
+    2. Sein                 3.74%
+    3. Ovaire               2.97%
   Features determinantes:
-    - age                                 importance=0.0736 valeur=45.0
-    - burden                              importance=0.0321 valeur=17.65
-    - n_suppressors                       importance=0.0418 valeur=4.0
-    - total_mut                           importance=0.0333 valeur=4.0
-    - n_genes                             importance=0.0302 valeur=4.0
+    - age                                 importance=0.0819 valeur=45.0
+    - burden                              importance=0.0323 valeur=17.65
+    - n_suppressors                       importance=0.0389 valeur=4.0
+    - total_mut                           importance=0.0364 valeur=4.0
+    - n_pathogenic                        importance=0.0344 valeur=3.0
 
 --- PROFIL DE COMPATIBILITE CANCER ---
   Cancer                   Compatibilite Genes supports
@@ -70,11 +70,11 @@
 --- PROFIL DE RISQUE NAIF (outil secondaire) ---
   Cancer                  Score Niveau          Genes
   -----------------------------------------------------------------
-  Glioblastome            3.000 TRES ELEVE      RB1, PTEN, TP53
-  Poumon                  2.000 TRES ELEVE      RB1, TP53
-  Ovaire                  2.000 TRES ELEVE      RB1, TP53
-  Vessie                  2.000 TRES ELEVE      RB1, TP53
-  Colon                   2.000 TRES ELEVE      PTEN, TP53
+  Glioblastome            3.000 TRES ELEVE      TP53, PTEN, RB1
+  Poumon                  2.000 TRES ELEVE      TP53, RB1
+  Ovaire                  2.000 TRES ELEVE      TP53, RB1
+  Vessie                  2.000 TRES ELEVE      TP53, RB1
+  Colon                   2.000 TRES ELEVE      TP53, PTEN
 
 --- RECOMMANDATIONS ---
   -> Consultation oncogenetique recommandee

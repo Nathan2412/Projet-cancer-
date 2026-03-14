@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_2019
-  Date: 14/03/2026 20:35
+  Date: 14/03/2026 20:57
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -12,18 +12,18 @@
 
 --- CLASSIFICATION ML — CANCER PROBABLE ---
   Cancer predit:       Colon
-  Confiance:           58.15%
+  Confiance:           74.36%
   Modele:              Gradient Boosting
   Top-3 cancers probables:
-    1. Colon                58.15%
-    2. Melanome             20.49%
-    3. Thyroide             7.02%
+    1. Colon                74.36%
+    2. Melanome             12.02%
+    3. Thyroide             3.90%
   Features determinantes:
-    - age                                 importance=0.0736 valeur=78.0
-    - burden                              importance=0.0321 valeur=8.82
-    - allele_score_Thyroide               importance=0.0742 valeur=1.0
-    - mut_count_BRAF                      importance=0.0591 valeur=1.0
-    - total_mut                           importance=0.0333 valeur=2.0
+    - age                                 importance=0.0819 valeur=78.0
+    - burden                              importance=0.0323 valeur=8.82
+    - allele_score_Thyroide               importance=0.0672 valeur=1.0
+    - mut_count_BRAF                      importance=0.0581 valeur=1.0
+    - total_mut                           importance=0.0364 valeur=2.0
 
 --- PROFIL DE COMPATIBILITE CANCER ---
   Cancer                   Compatibilite Genes supports
@@ -63,9 +63,9 @@
 --- PROFIL DE RISQUE NAIF (outil secondaire) ---
   Cancer                  Score Niveau          Genes
   -----------------------------------------------------------------
-  Melanome                1.800 ELEVE           PIK3CA, BRAF
-  Vessie                  1.800 ELEVE           PIK3CA, BRAF
-  Colon                   1.800 ELEVE           PIK3CA, BRAF
+  Melanome                1.800 ELEVE           BRAF, PIK3CA
+  Vessie                  1.800 ELEVE           BRAF, PIK3CA
+  Colon                   1.800 ELEVE           BRAF, PIK3CA
   Foie                    0.900 MODERE          PIK3CA
   Rein                    0.900 MODERE          PIK3CA
 

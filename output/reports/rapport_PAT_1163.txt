@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_1163
-  Date: 14/03/2026 20:35
+  Date: 14/03/2026 20:57
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -12,18 +12,18 @@
 
 --- CLASSIFICATION ML — CANCER PROBABLE ---
   Cancer predit:       Colon
-  Confiance:           87.89%
+  Confiance:           89.18%
   Modele:              Gradient Boosting
   Top-3 cancers probables:
-    1. Colon                87.89%
-    2. Melanome             10.21%
-    3. Poumon               0.70%
+    1. Colon                89.18%
+    2. Melanome             8.33%
+    3. Poumon               1.28%
   Features determinantes:
-    - age                                 importance=0.0736 valeur=82.0
-    - burden                              importance=0.0321 valeur=26.47
-    - total_mut                           importance=0.0333 valeur=6.0
-    - n_pathogenic                        importance=0.0328 valeur=5.0
-    - n_genes                             importance=0.0302 valeur=5.0
+    - age                                 importance=0.0819 valeur=82.0
+    - burden                              importance=0.0323 valeur=26.47
+    - total_mut                           importance=0.0364 valeur=6.0
+    - n_pathogenic                        importance=0.0344 valeur=5.0
+    - n_hotspots                          importance=0.0320 valeur=4.0
 
 --- PROFIL DE COMPATIBILITE CANCER ---
   Cancer                   Compatibilite Genes supports
@@ -72,7 +72,7 @@
 --- PROFIL DE RISQUE NAIF (outil secondaire) ---
   Cancer                  Score Niveau          Genes
   -----------------------------------------------------------------
-  Colon                   3.600 TRES ELEVE      TP53, BRAF, ALK
+  Colon                   3.600 TRES ELEVE      TP53, ALK, APC
   Glioblastome            1.000 ELEVE           TP53
   Prostate                1.000 ELEVE           TP53
   Vessie                  1.000 ELEVE           TP53

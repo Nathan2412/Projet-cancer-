@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_1166
-  Date: 14/03/2026 20:35
+  Date: 14/03/2026 20:57
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -12,18 +12,18 @@
 
 --- CLASSIFICATION ML — CANCER PROBABLE ---
   Cancer predit:       Colon
-  Confiance:           97.97%
+  Confiance:           97.85%
   Modele:              Gradient Boosting
   Top-3 cancers probables:
-    1. Colon                97.97%
-    2. Melanome             0.60%
-    3. Poumon               0.36%
+    1. Colon                97.85%
+    2. Melanome             0.58%
+    3. Poumon               0.57%
   Features determinantes:
-    - age                                 importance=0.0736 valeur=44.0
-    - burden                              importance=0.0321 valeur=26.47
-    - total_mut                           importance=0.0333 valeur=6.0
-    - n_suppressors                       importance=0.0418 valeur=4.0
-    - SNP                                 importance=0.0276 valeur=6.0
+    - age                                 importance=0.0819 valeur=44.0
+    - burden                              importance=0.0323 valeur=26.47
+    - total_mut                           importance=0.0364 valeur=6.0
+    - n_suppressors                       importance=0.0389 valeur=4.0
+    - SNP                                 importance=0.0265 valeur=6.0
 
 --- PROFIL DE COMPATIBILITE CANCER ---
   Cancer                   Compatibilite Genes supports
@@ -65,8 +65,8 @@
 --- PROFIL DE RISQUE NAIF (outil secondaire) ---
   Cancer                  Score Niveau          Genes
   -----------------------------------------------------------------
-  Colon                   1.800 ELEVE           KRAS, MYC
-  Poumon                  1.800 ELEVE           KRAS, MYC
+  Colon                   1.800 ELEVE           MYC, KRAS
+  Poumon                  1.800 ELEVE           MYC, KRAS
   Pancreas                0.900 MODERE          KRAS
   Melanome                0.900 MODERE          MYC
 

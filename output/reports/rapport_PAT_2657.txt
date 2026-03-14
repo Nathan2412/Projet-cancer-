@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_2657
-  Date: 14/03/2026 20:35
+  Date: 14/03/2026 20:57
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -11,19 +11,19 @@
   Cancer connu:   Vessie
 
 --- CLASSIFICATION ML — CANCER PROBABLE ---
-  Cancer predit:       Sein
-  Confiance:           25.97%
+  Cancer predit:       Glioblastome
+  Confiance:           28.09%
   Modele:              Gradient Boosting
   Top-3 cancers probables:
-    1. Sein                 25.97%
-    2. Glioblastome         25.35%
-    3. Vessie               21.41%
+    1. Glioblastome         28.09%
+    2. Vessie               26.27%
+    3. Sein                 24.54%
   Features determinantes:
-    - age                                 importance=0.0736 valeur=56.0
-    - burden                              importance=0.0321 valeur=13.24
-    - n_suppressors                       importance=0.0418 valeur=3.0
-    - total_mut                           importance=0.0333 valeur=3.0
-    - SNP                                 importance=0.0276 valeur=3.0
+    - age                                 importance=0.0819 valeur=56.0
+    - burden                              importance=0.0323 valeur=13.24
+    - n_suppressors                       importance=0.0389 valeur=3.0
+    - total_mut                           importance=0.0364 valeur=3.0
+    - SNP                                 importance=0.0265 valeur=3.0
 
 --- RESUME MUTATIONNEL ---
   Mutations totales:       3

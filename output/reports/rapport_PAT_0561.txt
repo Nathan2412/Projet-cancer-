@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_0561
-  Date: 14/03/2026 20:35
+  Date: 14/03/2026 20:57
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -12,18 +12,18 @@
 
 --- CLASSIFICATION ML — CANCER PROBABLE ---
   Cancer predit:       Sein
-  Confiance:           51.06%
+  Confiance:           48.83%
   Modele:              Gradient Boosting
   Top-3 cancers probables:
-    1. Sein                 51.06%
-    2. Vessie               19.32%
-    3. Foie                 7.20%
+    1. Sein                 48.83%
+    2. Vessie               20.54%
+    3. Foie                 7.27%
   Features determinantes:
-    - age                                 importance=0.0736 valeur=80.0
-    - burden                              importance=0.0321 valeur=4.41
-    - total_mut                           importance=0.0333 valeur=1.0
-    - n_genes                             importance=0.0302 valeur=1.0
-    - SNP                                 importance=0.0276 valeur=1.0
+    - age                                 importance=0.0819 valeur=80.0
+    - burden                              importance=0.0323 valeur=4.41
+    - total_mut                           importance=0.0364 valeur=1.0
+    - n_oncogenes                         importance=0.0294 valeur=1.0
+    - SNP                                 importance=0.0265 valeur=1.0
 
 --- RESUME MUTATIONNEL ---
   Mutations totales:       1

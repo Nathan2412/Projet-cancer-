@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_1052
-  Date: 14/03/2026 20:35
+  Date: 14/03/2026 20:57
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -12,18 +12,18 @@
 
 --- CLASSIFICATION ML — CANCER PROBABLE ---
   Cancer predit:       Poumon
-  Confiance:           62.68%
+  Confiance:           60.86%
   Modele:              Gradient Boosting
   Top-3 cancers probables:
-    1. Poumon               62.68%
-    2. Rein                 6.82%
-    3. Foie                 5.83%
+    1. Poumon               60.86%
+    2. Rein                 8.43%
+    3. Pancreas             6.65%
   Features determinantes:
-    - age                                 importance=0.0736 valeur=74.0
-    - burden                              importance=0.0321 valeur=4.41
-    - mut_bin_KRAS                        importance=0.0612 valeur=1.0
-    - mut_count_KRAS                      importance=0.0481 valeur=1.0
-    - total_mut                           importance=0.0333 valeur=1.0
+    - age                                 importance=0.0819 valeur=74.0
+    - burden                              importance=0.0323 valeur=4.41
+    - mut_bin_KRAS                        importance=0.0628 valeur=1.0
+    - mut_count_KRAS                      importance=0.0469 valeur=1.0
+    - total_mut                           importance=0.0364 valeur=1.0
 
 --- RESUME MUTATIONNEL ---
   Mutations totales:       1

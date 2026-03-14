@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_3359
-  Date: 14/03/2026 20:35
+  Date: 14/03/2026 20:57
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -12,18 +12,18 @@
 
 --- CLASSIFICATION ML — CANCER PROBABLE ---
   Cancer predit:       Poumon
-  Confiance:           19.31%
+  Confiance:           21.21%
   Modele:              Gradient Boosting
   Top-3 cancers probables:
-    1. Poumon               19.31%
-    2. Sein                 16.16%
-    3. Foie                 15.22%
+    1. Poumon               21.21%
+    2. Foie                 16.51%
+    3. Sein                 15.20%
   Features determinantes:
-    - age                                 importance=0.0736 valeur=70.0
-    - burden                              importance=0.0321 valeur=4.41
-    - n_suppressors                       importance=0.0418 valeur=1.0
-    - total_mut                           importance=0.0333 valeur=1.0
-    - n_genes                             importance=0.0302 valeur=1.0
+    - age                                 importance=0.0819 valeur=70.0
+    - burden                              importance=0.0323 valeur=4.41
+    - n_suppressors                       importance=0.0389 valeur=1.0
+    - total_mut                           importance=0.0364 valeur=1.0
+    - SNP                                 importance=0.0265 valeur=1.0
 
 --- RESUME MUTATIONNEL ---
   Mutations totales:       1

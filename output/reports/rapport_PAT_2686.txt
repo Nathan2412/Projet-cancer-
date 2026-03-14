@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_2686
-  Date: 14/03/2026 20:35
+  Date: 14/03/2026 20:57
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -12,18 +12,18 @@
 
 --- CLASSIFICATION ML — CANCER PROBABLE ---
   Cancer predit:       Sein
-  Confiance:           27.66%
+  Confiance:           26.44%
   Modele:              Gradient Boosting
   Top-3 cancers probables:
-    1. Sein                 27.66%
-    2. Poumon               19.73%
-    3. Foie                 15.80%
+    1. Sein                 26.44%
+    2. Poumon               22.94%
+    3. Vessie               13.78%
   Features determinantes:
-    - age                                 importance=0.0736 valeur=54.0
-    - burden                              importance=0.0321 valeur=8.82
-    - n_suppressors                       importance=0.0418 valeur=2.0
-    - total_mut                           importance=0.0333 valeur=2.0
-    - n_genes                             importance=0.0302 valeur=2.0
+    - age                                 importance=0.0819 valeur=54.0
+    - burden                              importance=0.0323 valeur=8.82
+    - n_suppressors                       importance=0.0389 valeur=2.0
+    - total_mut                           importance=0.0364 valeur=2.0
+    - SNP                                 importance=0.0265 valeur=2.0
 
 --- RESUME MUTATIONNEL ---
   Mutations totales:       2

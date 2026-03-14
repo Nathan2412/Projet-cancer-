@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_1153
-  Date: 14/03/2026 20:35
+  Date: 14/03/2026 20:57
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -12,18 +12,18 @@
 
 --- CLASSIFICATION ML — CANCER PROBABLE ---
   Cancer predit:       Colon
-  Confiance:           96.68%
+  Confiance:           96.57%
   Modele:              Gradient Boosting
   Top-3 cancers probables:
-    1. Colon                96.68%
-    2. Sein                 1.05%
-    3. Vessie               0.99%
+    1. Colon                96.57%
+    2. Vessie               1.09%
+    3. Sein                 0.84%
   Features determinantes:
-    - age                                 importance=0.0736 valeur=71.0
-    - burden                              importance=0.0321 valeur=35.29
-    - total_mut                           importance=0.0333 valeur=8.0
-    - n_suppressors                       importance=0.0418 valeur=6.0
-    - SNP                                 importance=0.0276 valeur=8.0
+    - age                                 importance=0.0819 valeur=71.0
+    - burden                              importance=0.0323 valeur=35.29
+    - total_mut                           importance=0.0364 valeur=8.0
+    - n_suppressors                       importance=0.0389 valeur=6.0
+    - n_pathogenic                        importance=0.0344 valeur=6.0
 
 --- PROFIL DE COMPATIBILITE CANCER ---
   Cancer                   Compatibilite Genes supports
@@ -71,7 +71,7 @@
 --- PROFIL DE RISQUE NAIF (outil secondaire) ---
   Cancer                  Score Niveau          Genes
   -----------------------------------------------------------------
-  Colon                   5.600 TRES ELEVE      PTEN, KRAS, PIK3CA
+  Colon                   5.600 TRES ELEVE      PTEN, KRAS, APC
   Glioblastome            3.800 TRES ELEVE      PTEN, KRAS, PIK3CA
   Melanome                1.900 ELEVE           PTEN, KRAS
   Prostate                1.800 ELEVE           KRAS, PIK3CA

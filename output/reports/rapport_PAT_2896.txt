@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_2896
-  Date: 14/03/2026 20:35
+  Date: 14/03/2026 20:57
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -12,18 +12,18 @@
 
 --- CLASSIFICATION ML — CANCER PROBABLE ---
   Cancer predit:       Melanome
-  Confiance:           38.37%
+  Confiance:           38.98%
   Modele:              Gradient Boosting
   Top-3 cancers probables:
-    1. Melanome             38.37%
-    2. Thyroide             35.78%
-    3. Colon                10.55%
+    1. Melanome             38.98%
+    2. Thyroide             34.18%
+    3. Sein                 10.19%
   Features determinantes:
-    - age                                 importance=0.0736 valeur=51.0
-    - burden                              importance=0.0321 valeur=8.82
-    - allele_score_Thyroide               importance=0.0742 valeur=1.0
-    - mut_count_BRAF                      importance=0.0591 valeur=1.0
-    - total_mut                           importance=0.0333 valeur=2.0
+    - age                                 importance=0.0819 valeur=51.0
+    - burden                              importance=0.0323 valeur=8.82
+    - allele_score_Thyroide               importance=0.0672 valeur=1.0
+    - mut_count_BRAF                      importance=0.0581 valeur=1.0
+    - total_mut                           importance=0.0364 valeur=2.0
 
 --- PROFIL DE COMPATIBILITE CANCER ---
   Cancer                   Compatibilite Genes supports
@@ -63,9 +63,9 @@
 --- PROFIL DE RISQUE NAIF (outil secondaire) ---
   Cancer                  Score Niveau          Genes
   -----------------------------------------------------------------
-  Thyroide                1.800 ELEVE           PIK3CA, BRAF
-  Colon                   1.800 ELEVE           PIK3CA, BRAF
-  Vessie                  1.800 ELEVE           PIK3CA, BRAF
+  Thyroide                1.800 ELEVE           BRAF, PIK3CA
+  Colon                   1.800 ELEVE           BRAF, PIK3CA
+  Vessie                  1.800 ELEVE           BRAF, PIK3CA
   Glioblastome            0.900 MODERE          BRAF
   Melanome                0.900 MODERE          BRAF
 

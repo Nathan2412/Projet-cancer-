@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_1105
-  Date: 14/03/2026 20:35
+  Date: 14/03/2026 20:57
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -12,18 +12,18 @@
 
 --- CLASSIFICATION ML — CANCER PROBABLE ---
   Cancer predit:       Glioblastome
-  Confiance:           47.26%
+  Confiance:           50.27%
   Modele:              Gradient Boosting
   Top-3 cancers probables:
-    1. Glioblastome         47.26%
-    2. Poumon               12.94%
-    3. Foie                 9.61%
+    1. Glioblastome         50.27%
+    2. Poumon               10.53%
+    3. Melanome             9.96%
   Features determinantes:
-    - age                                 importance=0.0736 valeur=59.0
-    - burden                              importance=0.0321 valeur=4.41
-    - total_mut                           importance=0.0333 valeur=1.0
-    - n_genes                             importance=0.0302 valeur=1.0
-    - SNP                                 importance=0.0276 valeur=1.0
+    - age                                 importance=0.0819 valeur=59.0
+    - burden                              importance=0.0323 valeur=4.41
+    - total_mut                           importance=0.0364 valeur=1.0
+    - n_oncogenes                         importance=0.0294 valeur=1.0
+    - SNP                                 importance=0.0265 valeur=1.0
 
 --- RESUME MUTATIONNEL ---
   Mutations totales:       1

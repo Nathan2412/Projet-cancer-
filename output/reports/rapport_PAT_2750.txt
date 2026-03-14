@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_2750
-  Date: 14/03/2026 20:35
+  Date: 14/03/2026 20:57
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -11,19 +11,19 @@
   Cancer connu:   Vessie
 
 --- CLASSIFICATION ML — CANCER PROBABLE ---
-  Cancer predit:       Colon
-  Confiance:           29.64%
+  Cancer predit:       Vessie
+  Confiance:           30.61%
   Modele:              Gradient Boosting
   Top-3 cancers probables:
-    1. Colon                29.64%
-    2. Vessie               26.45%
-    3. Melanome             21.14%
+    1. Vessie               30.61%
+    2. Colon                25.05%
+    3. Melanome             20.32%
   Features determinantes:
-    - age                                 importance=0.0736 valeur=79.0
-    - burden                              importance=0.0321 valeur=8.82
-    - n_suppressors                       importance=0.0418 valeur=2.0
-    - total_mut                           importance=0.0333 valeur=2.0
-    - mut_count_APC                       importance=0.0454 valeur=1.0
+    - age                                 importance=0.0819 valeur=79.0
+    - burden                              importance=0.0323 valeur=8.82
+    - n_suppressors                       importance=0.0389 valeur=2.0
+    - total_mut                           importance=0.0364 valeur=2.0
+    - mut_count_APC                       importance=0.0420 valeur=1.0
 
 --- RESUME MUTATIONNEL ---
   Mutations totales:       2

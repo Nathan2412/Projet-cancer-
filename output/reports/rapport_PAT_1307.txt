@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_1307
-  Date: 14/03/2026 20:35
+  Date: 14/03/2026 20:57
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -12,18 +12,18 @@
 
 --- CLASSIFICATION ML — CANCER PROBABLE ---
   Cancer predit:       Colon
-  Confiance:           94.85%
+  Confiance:           91.73%
   Modele:              Gradient Boosting
   Top-3 cancers probables:
-    1. Colon                94.85%
-    2. Melanome             2.13%
-    3. Vessie               1.36%
+    1. Colon                91.73%
+    2. Melanome             4.31%
+    3. Vessie               1.54%
   Features determinantes:
-    - age                                 importance=0.0736 valeur=61.0
-    - burden                              importance=0.0321 valeur=17.65
-    - total_mut                           importance=0.0333 valeur=4.0
-    - SNP                                 importance=0.0276 valeur=4.0
-    - mut_count_APC                       importance=0.0454 valeur=2.0
+    - age                                 importance=0.0819 valeur=61.0
+    - burden                              importance=0.0323 valeur=17.65
+    - total_mut                           importance=0.0364 valeur=4.0
+    - n_pathogenic                        importance=0.0344 valeur=3.0
+    - SNP                                 importance=0.0265 valeur=4.0
 
 --- PROFIL DE COMPATIBILITE CANCER ---
   Cancer                   Compatibilite Genes supports
@@ -64,7 +64,7 @@
 --- PROFIL DE RISQUE NAIF (outil secondaire) ---
   Cancer                  Score Niveau          Genes
   -----------------------------------------------------------------
-  Colon                   2.600 TRES ELEVE      PIK3CA, APC
+  Colon                   2.600 TRES ELEVE      APC, PIK3CA
   Glioblastome            0.900 MODERE          PIK3CA
   Melanome                0.900 MODERE          PIK3CA
   Poumon                  0.900 MODERE          PIK3CA

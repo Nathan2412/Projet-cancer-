@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_1152
-  Date: 14/03/2026 20:35
+  Date: 14/03/2026 20:57
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -12,18 +12,18 @@
 
 --- CLASSIFICATION ML — CANCER PROBABLE ---
   Cancer predit:       Colon
-  Confiance:           97.07%
+  Confiance:           96.74%
   Modele:              Gradient Boosting
   Top-3 cancers probables:
-    1. Colon                97.07%
-    2. Melanome             0.91%
-    3. Vessie               0.64%
+    1. Colon                96.74%
+    2. Melanome             0.85%
+    3. Poumon               0.66%
   Features determinantes:
-    - age                                 importance=0.0736 valeur=60.0
-    - burden                              importance=0.0321 valeur=35.29
-    - total_mut                           importance=0.0333 valeur=8.0
-    - n_suppressors                       importance=0.0418 valeur=5.0
-    - SNP                                 importance=0.0276 valeur=7.0
+    - age                                 importance=0.0819 valeur=60.0
+    - burden                              importance=0.0323 valeur=35.29
+    - total_mut                           importance=0.0364 valeur=8.0
+    - n_suppressors                       importance=0.0389 valeur=5.0
+    - SNP                                 importance=0.0265 valeur=7.0
 
 --- PROFIL DE COMPATIBILITE CANCER ---
   Cancer                   Compatibilite Genes supports
@@ -67,10 +67,10 @@
 --- PROFIL DE RISQUE NAIF (outil secondaire) ---
   Cancer                  Score Niveau          Genes
   -----------------------------------------------------------------
-  Glioblastome            1.800 ELEVE           PIK3CA, BRAF
-  Poumon                  1.800 ELEVE           PIK3CA, BRAF
-  Vessie                  1.800 ELEVE           PIK3CA, BRAF
-  Colon                   1.800 ELEVE           PIK3CA, BRAF
+  Glioblastome            1.800 ELEVE           BRAF, PIK3CA
+  Poumon                  1.800 ELEVE           BRAF, PIK3CA
+  Vessie                  1.800 ELEVE           BRAF, PIK3CA
+  Colon                   1.800 ELEVE           BRAF, PIK3CA
   Ovaire                  0.900 MODERE          PIK3CA
 
 --- RECOMMANDATIONS ---

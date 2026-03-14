@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_2745
-  Date: 14/03/2026 20:35
+  Date: 14/03/2026 20:57
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -12,18 +12,18 @@
 
 --- CLASSIFICATION ML — CANCER PROBABLE ---
   Cancer predit:       Vessie
-  Confiance:           51.39%
+  Confiance:           50.05%
   Modele:              Gradient Boosting
   Top-3 cancers probables:
-    1. Vessie               51.39%
-    2. Ovaire               13.94%
-    3. Sein                 11.81%
+    1. Vessie               50.05%
+    2. Ovaire               15.86%
+    3. Poumon               10.59%
   Features determinantes:
-    - age                                 importance=0.0736 valeur=60.0
-    - burden                              importance=0.0321 valeur=8.82
-    - n_suppressors                       importance=0.0418 valeur=2.0
-    - total_mut                           importance=0.0333 valeur=2.0
-    - n_genes                             importance=0.0302 valeur=2.0
+    - age                                 importance=0.0819 valeur=60.0
+    - burden                              importance=0.0323 valeur=8.82
+    - n_suppressors                       importance=0.0389 valeur=2.0
+    - total_mut                           importance=0.0364 valeur=2.0
+    - SNP                                 importance=0.0265 valeur=2.0
 
 --- RESUME MUTATIONNEL ---
   Mutations totales:       2

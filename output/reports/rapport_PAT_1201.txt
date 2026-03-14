@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_1201
-  Date: 14/03/2026 20:35
+  Date: 14/03/2026 20:57
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -12,18 +12,18 @@
 
 --- CLASSIFICATION ML — CANCER PROBABLE ---
   Cancer predit:       Colon
-  Confiance:           95.93%
+  Confiance:           96.35%
   Modele:              Gradient Boosting
   Top-3 cancers probables:
-    1. Colon                95.93%
-    2. Sein                 1.91%
-    3. Vessie               0.56%
+    1. Colon                96.35%
+    2. Sein                 1.48%
+    3. Vessie               0.61%
   Features determinantes:
-    - age                                 importance=0.0736 valeur=46.0
-    - burden                              importance=0.0321 valeur=22.06
-    - total_mut                           importance=0.0333 valeur=5.0
-    - n_pathogenic                        importance=0.0328 valeur=5.0
-    - n_hotspots                          importance=0.0307 valeur=4.0
+    - age                                 importance=0.0819 valeur=46.0
+    - burden                              importance=0.0323 valeur=22.06
+    - total_mut                           importance=0.0364 valeur=5.0
+    - n_pathogenic                        importance=0.0344 valeur=5.0
+    - n_hotspots                          importance=0.0320 valeur=4.0
 
 --- PROFIL DE COMPATIBILITE CANCER ---
   Cancer                   Compatibilite Genes supports
@@ -70,11 +70,11 @@
 --- PROFIL DE RISQUE NAIF (outil secondaire) ---
   Cancer                  Score Niveau          Genes
   -----------------------------------------------------------------
-  Colon                   3.500 TRES ELEVE      KRAS, PIK3CA, BRCA2
+  Colon                   3.500 TRES ELEVE      KRAS, BRCA2, PIK3CA
   Poumon                  2.700 TRES ELEVE      KRAS, PIK3CA
   Vessie                  1.800 ELEVE           PIK3CA
   Foie                    1.800 ELEVE           PIK3CA
-  Glioblastome            1.700 ELEVE           PIK3CA, BRCA2
+  Glioblastome            1.700 ELEVE           BRCA2, PIK3CA
 
 --- RECOMMANDATIONS ---
   -> Suivi regulier avec depistage standard

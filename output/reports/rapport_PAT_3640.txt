@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_3640
-  Date: 14/03/2026 20:35
+  Date: 14/03/2026 20:57
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -12,18 +12,18 @@
 
 --- CLASSIFICATION ML — CANCER PROBABLE ---
   Cancer predit:       Glioblastome
-  Confiance:           49.13%
+  Confiance:           51.00%
   Modele:              Gradient Boosting
   Top-3 cancers probables:
-    1. Glioblastome         49.13%
-    2. Sein                 14.66%
-    3. Rein                 12.11%
+    1. Glioblastome         51.00%
+    2. Sein                 15.73%
+    3. Rein                 9.97%
   Features determinantes:
-    - age                                 importance=0.0736 valeur=76.0
-    - burden                              importance=0.0321 valeur=4.41
-    - n_suppressors                       importance=0.0418 valeur=1.0
-    - total_mut                           importance=0.0333 valeur=1.0
-    - n_pathogenic                        importance=0.0328 valeur=1.0
+    - age                                 importance=0.0819 valeur=76.0
+    - burden                              importance=0.0323 valeur=4.41
+    - n_suppressors                       importance=0.0389 valeur=1.0
+    - total_mut                           importance=0.0364 valeur=1.0
+    - n_pathogenic                        importance=0.0344 valeur=1.0
 
 --- PROFIL DE COMPATIBILITE CANCER ---
   Cancer                   Compatibilite Genes supports

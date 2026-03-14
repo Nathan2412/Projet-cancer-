@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_1372
-  Date: 14/03/2026 20:35
+  Date: 14/03/2026 20:57
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -12,18 +12,18 @@
 
 --- CLASSIFICATION ML — CANCER PROBABLE ---
   Cancer predit:       Colon
-  Confiance:           88.22%
+  Confiance:           89.76%
   Modele:              Gradient Boosting
   Top-3 cancers probables:
-    1. Colon                88.22%
-    2. Sein                 6.28%
-    3. Poumon               1.70%
+    1. Colon                89.76%
+    2. Sein                 5.17%
+    3. Vessie               1.54%
   Features determinantes:
-    - age                                 importance=0.0736 valeur=44.0
-    - burden                              importance=0.0321 valeur=13.24
-    - total_mut                           importance=0.0333 valeur=3.0
-    - n_suppressors                       importance=0.0418 valeur=2.0
-    - n_genes                             importance=0.0302 valeur=3.0
+    - age                                 importance=0.0819 valeur=44.0
+    - burden                              importance=0.0323 valeur=13.24
+    - total_mut                           importance=0.0364 valeur=3.0
+    - n_suppressors                       importance=0.0389 valeur=2.0
+    - SNP                                 importance=0.0265 valeur=3.0
 
 --- PROFIL DE COMPATIBILITE CANCER ---
   Cancer                   Compatibilite Genes supports

@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_2690
-  Date: 14/03/2026 20:35
+  Date: 14/03/2026 20:57
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -12,18 +12,18 @@
 
 --- CLASSIFICATION ML — CANCER PROBABLE ---
   Cancer predit:       Vessie
-  Confiance:           28.75%
+  Confiance:           32.02%
   Modele:              Gradient Boosting
   Top-3 cancers probables:
-    1. Vessie               28.75%
-    2. Poumon               24.75%
-    3. Sein                 18.78%
+    1. Vessie               32.02%
+    2. Poumon               25.42%
+    3. Sein                 13.41%
   Features determinantes:
-    - age                                 importance=0.0736 valeur=60.0
-    - burden                              importance=0.0321 valeur=8.82
-    - n_suppressors                       importance=0.0418 valeur=2.0
-    - total_mut                           importance=0.0333 valeur=2.0
-    - mut_count_TP53                      importance=0.0312 valeur=2.0
+    - age                                 importance=0.0819 valeur=60.0
+    - burden                              importance=0.0323 valeur=8.82
+    - n_suppressors                       importance=0.0389 valeur=2.0
+    - total_mut                           importance=0.0364 valeur=2.0
+    - mut_count_TP53                      importance=0.0318 valeur=2.0
 
 --- RESUME MUTATIONNEL ---
   Mutations totales:       2

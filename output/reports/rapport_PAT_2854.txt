@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_2854
-  Date: 14/03/2026 20:35
+  Date: 14/03/2026 20:57
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -12,18 +12,18 @@
 
 --- CLASSIFICATION ML — CANCER PROBABLE ---
   Cancer predit:       Sein
-  Confiance:           74.44%
+  Confiance:           72.66%
   Modele:              Gradient Boosting
   Top-3 cancers probables:
-    1. Sein                 74.44%
-    2. Vessie               11.53%
-    3. Poumon               3.63%
+    1. Sein                 72.66%
+    2. Vessie               12.30%
+    3. Poumon               4.53%
   Features determinantes:
-    - age                                 importance=0.0736 valeur=73.0
-    - burden                              importance=0.0321 valeur=4.41
-    - total_mut                           importance=0.0333 valeur=1.0
-    - n_pathogenic                        importance=0.0328 valeur=1.0
-    - n_hotspots                          importance=0.0307 valeur=1.0
+    - age                                 importance=0.0819 valeur=73.0
+    - burden                              importance=0.0323 valeur=4.41
+    - total_mut                           importance=0.0364 valeur=1.0
+    - n_pathogenic                        importance=0.0344 valeur=1.0
+    - n_hotspots                          importance=0.0320 valeur=1.0
 
 --- PROFIL DE COMPATIBILITE CANCER ---
   Cancer                   Compatibilite Genes supports

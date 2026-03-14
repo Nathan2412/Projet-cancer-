@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_1145
-  Date: 14/03/2026 20:35
+  Date: 14/03/2026 20:57
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -12,18 +12,18 @@
 
 --- CLASSIFICATION ML — CANCER PROBABLE ---
   Cancer predit:       Colon
-  Confiance:           97.04%
+  Confiance:           96.20%
   Modele:              Gradient Boosting
   Top-3 cancers probables:
-    1. Colon                97.04%
-    2. Melanome             1.34%
-    3. Sein                 0.46%
+    1. Colon                96.20%
+    2. Melanome             1.77%
+    3. Sein                 0.42%
   Features determinantes:
-    - age                                 importance=0.0736 valeur=46.0
-    - burden                              importance=0.0321 valeur=57.35
-    - total_mut                           importance=0.0333 valeur=13.0
-    - SNP                                 importance=0.0276 valeur=12.0
-    - n_suppressors                       importance=0.0418 valeur=7.0
+    - age                                 importance=0.0819 valeur=46.0
+    - burden                              importance=0.0323 valeur=57.35
+    - total_mut                           importance=0.0364 valeur=13.0
+    - SNP                                 importance=0.0265 valeur=12.0
+    - n_suppressors                       importance=0.0389 valeur=7.0
 
 --- PROFIL DE COMPATIBILITE CANCER ---
   Cancer                   Compatibilite Genes supports
@@ -76,10 +76,10 @@
 --- PROFIL DE RISQUE NAIF (outil secondaire) ---
   Cancer                  Score Niveau          Genes
   -----------------------------------------------------------------
-  Colon                   3.900 TRES ELEVE      TP53, PIK3CA, APC
+  Colon                   3.900 TRES ELEVE      TP53, APC, PIK3CA
   Melanome                3.000 TRES ELEVE      TP53, APC
   Glioblastome            1.900 ELEVE           TP53, PIK3CA
-  Prostate                1.900 ELEVE           PIK3CA, APC
+  Prostate                1.900 ELEVE           APC, PIK3CA
   Poumon                  1.000 ELEVE           TP53
 
 --- RECOMMANDATIONS ---

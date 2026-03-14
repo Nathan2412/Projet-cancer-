@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_3470
-  Date: 14/03/2026 20:35
+  Date: 14/03/2026 20:57
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -12,18 +12,18 @@
 
 --- CLASSIFICATION ML — CANCER PROBABLE ---
   Cancer predit:       Glioblastome
-  Confiance:           84.79%
+  Confiance:           87.07%
   Modele:              Gradient Boosting
   Top-3 cancers probables:
-    1. Glioblastome         84.79%
-    2. Ovaire               5.66%
-    3. Sein                 5.06%
+    1. Glioblastome         87.07%
+    2. Sein                 6.00%
+    3. Ovaire               2.39%
   Features determinantes:
-    - age                                 importance=0.0736 valeur=21.0
-    - burden                              importance=0.0321 valeur=8.82
-    - n_suppressors                       importance=0.0418 valeur=2.0
-    - total_mut                           importance=0.0333 valeur=2.0
-    - n_pathogenic                        importance=0.0328 valeur=2.0
+    - age                                 importance=0.0819 valeur=21.0
+    - burden                              importance=0.0323 valeur=8.82
+    - n_suppressors                       importance=0.0389 valeur=2.0
+    - total_mut                           importance=0.0364 valeur=2.0
+    - n_pathogenic                        importance=0.0344 valeur=2.0
 
 --- RESUME MUTATIONNEL ---
   Mutations totales:       2

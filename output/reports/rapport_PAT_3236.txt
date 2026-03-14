@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_3236
-  Date: 14/03/2026 20:35
+  Date: 14/03/2026 20:57
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -11,19 +11,19 @@
   Cancer connu:   Rein
 
 --- CLASSIFICATION ML — CANCER PROBABLE ---
-  Cancer predit:       Melanome
-  Confiance:           28.03%
+  Cancer predit:       Rein
+  Confiance:           55.83%
   Modele:              Gradient Boosting
   Top-3 cancers probables:
-    1. Melanome             28.03%
-    2. Rein                 25.54%
-    3. Vessie               12.58%
+    1. Rein                 55.83%
+    2. Melanome             19.22%
+    3. Poumon               7.49%
   Features determinantes:
-    - age                                 importance=0.0736 valeur=71.0
-    - burden                              importance=0.0321 valeur=4.41
-    - total_mut                           importance=0.0333 valeur=1.0
-    - n_genes                             importance=0.0302 valeur=1.0
-    - SNP                                 importance=0.0276 valeur=1.0
+    - age                                 importance=0.0819 valeur=71.0
+    - burden                              importance=0.0323 valeur=4.41
+    - total_mut                           importance=0.0364 valeur=1.0
+    - n_oncogenes                         importance=0.0294 valeur=1.0
+    - SNP                                 importance=0.0265 valeur=1.0
 
 --- RESUME MUTATIONNEL ---
   Mutations totales:       1

@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_1327
-  Date: 14/03/2026 20:35
+  Date: 14/03/2026 20:57
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -12,18 +12,18 @@
 
 --- CLASSIFICATION ML — CANCER PROBABLE ---
   Cancer predit:       Colon
-  Confiance:           95.04%
+  Confiance:           95.11%
   Modele:              Gradient Boosting
   Top-3 cancers probables:
-    1. Colon                95.04%
-    2. Poumon               1.79%
-    3. Vessie               1.20%
+    1. Colon                95.11%
+    2. Poumon               1.91%
+    3. Vessie               1.02%
   Features determinantes:
-    - age                                 importance=0.0736 valeur=74.0
-    - burden                              importance=0.0321 valeur=13.24
-    - total_mut                           importance=0.0333 valeur=3.0
-    - n_pathogenic                        importance=0.0328 valeur=3.0
-    - n_suppressors                       importance=0.0418 valeur=2.0
+    - age                                 importance=0.0819 valeur=74.0
+    - burden                              importance=0.0323 valeur=13.24
+    - total_mut                           importance=0.0364 valeur=3.0
+    - n_pathogenic                        importance=0.0344 valeur=3.0
+    - n_hotspots                          importance=0.0320 valeur=3.0
 
 --- PROFIL DE COMPATIBILITE CANCER ---
   Cancer                   Compatibilite Genes supports
@@ -68,11 +68,11 @@
 --- PROFIL DE RISQUE NAIF (outil secondaire) ---
   Cancer                  Score Niveau          Genes
   -----------------------------------------------------------------
-  Colon                   2.900 TRES ELEVE      KRAS, TP53, APC
-  Glioblastome            1.900 ELEVE           KRAS, TP53
-  Prostate                1.900 ELEVE           KRAS, TP53
-  Poumon                  1.900 ELEVE           KRAS, TP53
-  Melanome                1.900 ELEVE           KRAS, TP53
+  Colon                   2.900 TRES ELEVE      TP53, KRAS, APC
+  Glioblastome            1.900 ELEVE           TP53, KRAS
+  Prostate                1.900 ELEVE           TP53, KRAS
+  Poumon                  1.900 ELEVE           TP53, KRAS
+  Melanome                1.900 ELEVE           TP53, KRAS
 
 --- RECOMMANDATIONS ---
   -> Consultation oncogenetique recommandee

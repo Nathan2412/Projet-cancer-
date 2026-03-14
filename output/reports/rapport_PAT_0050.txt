@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_0050
-  Date: 14/03/2026 20:35
+  Date: 14/03/2026 20:57
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -12,18 +12,18 @@
 
 --- CLASSIFICATION ML — CANCER PROBABLE ---
   Cancer predit:       Ovaire
-  Confiance:           25.08%
+  Confiance:           26.93%
   Modele:              Gradient Boosting
   Top-3 cancers probables:
-    1. Ovaire               25.08%
-    2. Sein                 18.99%
-    3. Poumon               18.69%
+    1. Ovaire               26.93%
+    2. Poumon               18.99%
+    3. Sein                 18.38%
   Features determinantes:
-    - age                                 importance=0.0736 valeur=67.0
-    - burden                              importance=0.0321 valeur=8.82
-    - n_suppressors                       importance=0.0418 valeur=2.0
-    - total_mut                           importance=0.0333 valeur=2.0
-    - n_pathogenic                        importance=0.0328 valeur=2.0
+    - age                                 importance=0.0819 valeur=67.0
+    - burden                              importance=0.0323 valeur=8.82
+    - n_suppressors                       importance=0.0389 valeur=2.0
+    - total_mut                           importance=0.0364 valeur=2.0
+    - n_pathogenic                        importance=0.0344 valeur=2.0
 
 --- PROFIL DE COMPATIBILITE CANCER ---
   Cancer                   Compatibilite Genes supports

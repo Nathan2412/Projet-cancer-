@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_0705
-  Date: 14/03/2026 20:35
+  Date: 14/03/2026 20:57
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -12,18 +12,18 @@
 
 --- CLASSIFICATION ML — CANCER PROBABLE ---
   Cancer predit:       Poumon
-  Confiance:           59.39%
+  Confiance:           49.55%
   Modele:              Gradient Boosting
   Top-3 cancers probables:
-    1. Poumon               59.39%
-    2. Colon                17.64%
-    3. Vessie               9.40%
+    1. Poumon               49.55%
+    2. Colon                18.99%
+    3. Vessie               11.25%
   Features determinantes:
-    - age                                 importance=0.0736 valeur=74.0
-    - burden                              importance=0.0321 valeur=13.24
-    - total_mut                           importance=0.0333 valeur=3.0
-    - n_suppressors                       importance=0.0418 valeur=2.0
-    - mut_bin_KRAS                        importance=0.0612 valeur=1.0
+    - age                                 importance=0.0819 valeur=74.0
+    - burden                              importance=0.0323 valeur=13.24
+    - total_mut                           importance=0.0364 valeur=3.0
+    - mut_bin_KRAS                        importance=0.0628 valeur=1.0
+    - n_suppressors                       importance=0.0389 valeur=2.0
 
 --- PROFIL DE COMPATIBILITE CANCER ---
   Cancer                   Compatibilite Genes supports
@@ -69,11 +69,11 @@
 --- PROFIL DE RISQUE NAIF (outil secondaire) ---
   Cancer                  Score Niveau          Genes
   -----------------------------------------------------------------
-  Poumon                  1.700 ELEVE           KRAS, TP53
-  Melanome                1.700 ELEVE           KRAS, TP53
-  Vessie                  1.700 ELEVE           KRAS, TP53
-  Foie                    1.700 ELEVE           KRAS, TP53
-  Colon                   1.700 ELEVE           KRAS, TP53
+  Poumon                  1.700 ELEVE           TP53, KRAS
+  Melanome                1.700 ELEVE           TP53, KRAS
+  Vessie                  1.700 ELEVE           TP53, KRAS
+  Foie                    1.700 ELEVE           TP53, KRAS
+  Colon                   1.700 ELEVE           TP53, KRAS
 
 --- RECOMMANDATIONS ---
   -> Consultation oncogenetique recommandee

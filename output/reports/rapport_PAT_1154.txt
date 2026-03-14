@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_1154
-  Date: 14/03/2026 20:35
+  Date: 14/03/2026 20:57
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -12,18 +12,18 @@
 
 --- CLASSIFICATION ML — CANCER PROBABLE ---
   Cancer predit:       Colon
-  Confiance:           91.53%
+  Confiance:           93.01%
   Modele:              Gradient Boosting
   Top-3 cancers probables:
-    1. Colon                91.53%
-    2. Poumon               5.32%
-    3. Melanome             1.04%
+    1. Colon                93.01%
+    2. Poumon               3.94%
+    3. Melanome             0.93%
   Features determinantes:
-    - age                                 importance=0.0736 valeur=68.0
-    - burden                              importance=0.0321 valeur=30.88
-    - total_mut                           importance=0.0333 valeur=7.0
-    - n_genes                             importance=0.0302 valeur=5.0
-    - n_suppressors                       importance=0.0418 valeur=3.0
+    - age                                 importance=0.0819 valeur=68.0
+    - burden                              importance=0.0323 valeur=30.88
+    - total_mut                           importance=0.0364 valeur=7.0
+    - n_pathogenic                        importance=0.0344 valeur=4.0
+    - SNP                                 importance=0.0265 valeur=5.0
 
 --- PROFIL DE COMPATIBILITE CANCER ---
   Cancer                   Compatibilite Genes supports
@@ -69,10 +69,10 @@
 --- PROFIL DE RISQUE NAIF (outil secondaire) ---
   Cancer                  Score Niveau          Genes
   -----------------------------------------------------------------
-  Glioblastome            2.600 TRES ELEVE      TP53, PIK3CA, BRAF
-  Poumon                  2.600 TRES ELEVE      TP53, PIK3CA, BRAF
-  Vessie                  2.600 TRES ELEVE      TP53, PIK3CA, BRAF
-  Colon                   2.600 TRES ELEVE      TP53, PIK3CA, BRAF
+  Glioblastome            2.600 TRES ELEVE      TP53, BRAF, PIK3CA
+  Poumon                  2.600 TRES ELEVE      TP53, BRAF, PIK3CA
+  Vessie                  2.600 TRES ELEVE      TP53, BRAF, PIK3CA
+  Colon                   2.600 TRES ELEVE      TP53, BRAF, PIK3CA
   Ovaire                  1.700 ELEVE           TP53, PIK3CA
 
 --- RECOMMANDATIONS ---

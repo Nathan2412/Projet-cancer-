@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_2079
-  Date: 14/03/2026 20:35
+  Date: 14/03/2026 20:57
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -11,19 +11,19 @@
   Cancer connu:   Melanome
 
 --- CLASSIFICATION ML — CANCER PROBABLE ---
-  Cancer predit:       Sein
-  Confiance:           29.57%
+  Cancer predit:       Melanome
+  Confiance:           29.67%
   Modele:              Gradient Boosting
   Top-3 cancers probables:
-    1. Sein                 29.57%
-    2. Melanome             26.75%
-    3. Foie                 10.69%
+    1. Melanome             29.67%
+    2. Sein                 23.56%
+    3. Rein                 12.97%
   Features determinantes:
-    - age                                 importance=0.0736 valeur=43.0
-    - burden                              importance=0.0321 valeur=4.41
-    - n_suppressors                       importance=0.0418 valeur=1.0
-    - total_mut                           importance=0.0333 valeur=1.0
-    - n_genes                             importance=0.0302 valeur=1.0
+    - age                                 importance=0.0819 valeur=43.0
+    - burden                              importance=0.0323 valeur=4.41
+    - n_suppressors                       importance=0.0389 valeur=1.0
+    - total_mut                           importance=0.0364 valeur=1.0
+    - SNP                                 importance=0.0265 valeur=1.0
 
 --- RESUME MUTATIONNEL ---
   Mutations totales:       1

@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_1887
-  Date: 14/03/2026 20:35
+  Date: 14/03/2026 20:57
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -12,18 +12,18 @@
 
 --- CLASSIFICATION ML — CANCER PROBABLE ---
   Cancer predit:       Melanome
-  Confiance:           73.35%
+  Confiance:           74.81%
   Modele:              Gradient Boosting
   Top-3 cancers probables:
-    1. Melanome             73.35%
-    2. Colon                15.03%
-    3. Sein                 4.15%
+    1. Melanome             74.81%
+    2. Colon                7.77%
+    3. Poumon               6.92%
   Features determinantes:
-    - age                                 importance=0.0736 valeur=36.0
-    - burden                              importance=0.0321 valeur=22.06
-    - total_mut                           importance=0.0333 valeur=5.0
-    - n_genes                             importance=0.0302 valeur=5.0
-    - SNP                                 importance=0.0276 valeur=5.0
+    - age                                 importance=0.0819 valeur=36.0
+    - burden                              importance=0.0323 valeur=22.06
+    - total_mut                           importance=0.0364 valeur=5.0
+    - n_pathogenic                        importance=0.0344 valeur=4.0
+    - SNP                                 importance=0.0265 valeur=5.0
 
 --- PROFIL DE COMPATIBILITE CANCER ---
   Cancer                   Compatibilite Genes supports
@@ -73,11 +73,11 @@
 --- PROFIL DE RISQUE NAIF (outil secondaire) ---
   Cancer                  Score Niveau          Genes
   -----------------------------------------------------------------
-  Melanome                2.800 TRES ELEVE      PIK3CA, ALK, BRAF
-  Glioblastome            2.000 TRES ELEVE      PIK3CA, BRAF
-  Poumon                  2.000 TRES ELEVE      PIK3CA, BRAF
-  Vessie                  2.000 TRES ELEVE      PIK3CA, BRAF
-  Colon                   2.000 TRES ELEVE      PIK3CA, BRAF
+  Melanome                2.800 TRES ELEVE      ALK, BRAF, PIK3CA
+  Glioblastome            2.000 TRES ELEVE      BRAF, PIK3CA
+  Poumon                  2.000 TRES ELEVE      BRAF, PIK3CA
+  Vessie                  2.000 TRES ELEVE      BRAF, PIK3CA
+  Colon                   2.000 TRES ELEVE      BRAF, PIK3CA
 
 --- RECOMMANDATIONS ---
   -> Suivi regulier avec depistage standard

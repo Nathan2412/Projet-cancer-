@@ -16,20 +16,20 @@ tr:hover{background:#f8f9fa}
 .warn{background:#fff3cd;border-left:4px solid #ffc107;padding:12px;border-radius:4px;margin:10px 0;font-size:13px}
 </style></head><body>
 <div class="hdr"><h1>Rapport ML — Prediction de Cancer</h1>
-<p>14/03/2026 20:35 | 3674 patients labellises | 12 types</p></div>
+<p>14/03/2026 20:57 | 3639 patients labellises | 12 types</p></div>
 <div class="sec"><h2>Resume</h2><div class="g">
-<div class="c"><div class="v">3674</div><div class="l">Patients (train)</div></div>
+<div class="c"><div class="v">3639</div><div class="l">Patients (train)</div></div>
 <div class="c"><div class="v">57</div><div class="l">Features</div></div>
 <div class="c"><div class="v">12</div><div class="l">Classes</div></div>
-<div class="c"><div class="v">54.4%</div><div class="l">Best Accuracy (CV)</div></div>
+<div class="c"><div class="v">54.9%</div><div class="l">Best Accuracy (CV)</div></div>
 </div></div>
-<div class="sec"><h2>Signatures alleles</h2><table><tr><th>Cancer</th><th>Alleles</th><th>Patients</th><th>Top alleles</th></tr><tr><td>Sein</td><td>0</td><td>669</td><td style='font-size:11px'></td></tr>
+<div class="sec"><h2>Signatures alleles</h2><table><tr><th>Cancer</th><th>Alleles</th><th>Patients</th><th>Top alleles</th></tr><tr><td>Sein</td><td>0</td><td>663</td><td style='font-size:11px'></td></tr>
 <tr><td>Poumon</td><td>0</td><td>469</td><td style='font-size:11px'></td></tr>
 <tr><td>Colon</td><td>0</td><td>489</td><td style='font-size:11px'></td></tr>
 <tr><td>Prostate</td><td>0</td><td>109</td><td style='font-size:11px'></td></tr>
 <tr><td>Pancreas</td><td>0</td><td>135</td><td style='font-size:11px'></td></tr>
 <tr><td>Melanome</td><td>0</td><td>342</td><td style='font-size:11px'></td></tr>
-<tr><td>Ovaire</td><td>0</td><td>383</td><td style='font-size:11px'></td></tr>
+<tr><td>Ovaire</td><td>0</td><td>354</td><td style='font-size:11px'></td></tr>
 <tr><td>Vessie</td><td>0</td><td>295</td><td style='font-size:11px'></td></tr>
 <tr><td>Thyroide</td><td>1</td><td>296</td><td style='font-size:11px'>BRAF:266191 (MODERATE)</td></tr>
 <tr><td>Rein</td><td>0</td><td>51</td><td style='font-size:11px'></td></tr>
@@ -39,58 +39,58 @@ tr:hover{background:#f8f9fa}
 <div class="sec"><h2>Comparaison des modeles</h2>
 <div class="warn">Les métriques <b>Accuracy CV</b> et <b>F1 CV</b> sont issues de la validation croisée imbriquée (nested CV) — c'est la <b>métrique principale</b>. Les scores Train sont indicatifs et biaisés (resubstitution).</div>
 <table><tr><th>Modele</th><th>Accuracy CV ★</th><th>F1 CV ★</th><th>Accuracy Train</th><th>F1 Train</th><th>AUC</th><th>Gap F1 (Train-CV)</th><th></th></tr>
-<tr><td><b>Random Forest</b></td><td>0.5220</td><td>0.5175</td><td>0.5833</td><td>0.5839</td><td>0.8774</td><td>+0.067</td><td></td></tr>
-<tr><td><b>Gradient Boosting</b></td><td>0.5438</td><td>0.5294</td><td>0.6170</td><td>0.6068</td><td>0.8852</td><td>+0.077</td><td><span style="background:#2ecc71;color:#fff;padding:2px 8px;border-radius:8px;font-size:11px">BEST</span></td></tr>
-<tr><td><b>SVM (RBF)</b></td><td>0.4935</td><td>0.4996</td><td>0.5915</td><td>0.6003</td><td>0.8732</td><td>+0.101</td><td></td></tr>
+<tr><td><b>Random Forest</b></td><td>0.5191</td><td>0.5157</td><td>0.5988</td><td>0.6003</td><td>0.8774</td><td>+0.085</td><td></td></tr>
+<tr><td><b>Gradient Boosting</b></td><td>0.5491</td><td>0.5358</td><td>0.6249</td><td>0.6159</td><td>0.8850</td><td>+0.080</td><td><span style="background:#2ecc71;color:#fff;padding:2px 8px;border-radius:8px;font-size:11px">BEST</span></td></tr>
+<tr><td><b>SVM (RBF)</b></td><td>0.4938</td><td>0.5010</td><td>0.5897</td><td>0.6003</td><td>0.8719</td><td>+0.099</td><td></td></tr>
 </table></div>
 <div class="sec"><h2>Metriques par classe (Gradient Boosting)</h2>
 <table><tr><th>Cancer</th><th>Precision</th><th>Recall</th><th>F1</th><th>Support</th><th>AUC</th></tr>
-<tr><td>Colon</td><td>0.8110</td><td>0.8160</td><td>0.8135</td><td>489</td><td>0.9501</td></tr>
-<tr><td>Foie</td><td>0.1765</td><td>0.0364</td><td>0.0603</td><td>165</td><td>0.7845</td></tr>
-<tr><td>Glioblastome</td><td>0.5390</td><td>0.5609</td><td>0.5497</td><td>271</td><td>0.8894</td></tr>
-<tr><td>Melanome</td><td>0.5196</td><td>0.4649</td><td>0.4907</td><td>342</td><td>0.9001</td></tr>
-<tr><td>Ovaire</td><td>0.3367</td><td>0.6867</td><td>0.4519</td><td>383</td><td>0.8770</td></tr>
-<tr><td>Pancreas</td><td>0.6400</td><td>0.5926</td><td>0.6154</td><td>135</td><td>0.9531</td></tr>
-<tr><td>Poumon</td><td>0.5089</td><td>0.4264</td><td>0.4640</td><td>469</td><td>0.8429</td></tr>
-<tr><td>Prostate</td><td>0.2766</td><td>0.1193</td><td>0.1667</td><td>109</td><td>0.8452</td></tr>
-<tr><td>Rein</td><td>0.1250</td><td>0.0392</td><td>0.0597</td><td>51</td><td>0.7892</td></tr>
-<tr><td>Sein</td><td>0.5818</td><td>0.5531</td><td>0.5670</td><td>669</td><td>0.8719</td></tr>
-<tr><td>Thyroide</td><td>0.7388</td><td>0.8885</td><td>0.8067</td><td>296</td><td>0.9759</td></tr>
-<tr><td>Vessie</td><td>0.4417</td><td>0.3085</td><td>0.3633</td><td>295</td><td>0.8298</td></tr>
+<tr><td>Colon</td><td>0.8230</td><td>0.8180</td><td>0.8205</td><td>489</td><td>0.9500</td></tr>
+<tr><td>Foie</td><td>0.2143</td><td>0.0545</td><td>0.0870</td><td>165</td><td>0.7794</td></tr>
+<tr><td>Glioblastome</td><td>0.5448</td><td>0.5609</td><td>0.5527</td><td>271</td><td>0.8872</td></tr>
+<tr><td>Melanome</td><td>0.5387</td><td>0.4678</td><td>0.5008</td><td>342</td><td>0.8951</td></tr>
+<tr><td>Ovaire</td><td>0.3211</td><td>0.6158</td><td>0.4221</td><td>354</td><td>0.8732</td></tr>
+<tr><td>Pancreas</td><td>0.6457</td><td>0.6074</td><td>0.6260</td><td>135</td><td>0.9480</td></tr>
+<tr><td>Poumon</td><td>0.5281</td><td>0.4414</td><td>0.4808</td><td>469</td><td>0.8470</td></tr>
+<tr><td>Prostate</td><td>0.2353</td><td>0.1101</td><td>0.1500</td><td>109</td><td>0.8438</td></tr>
+<tr><td>Rein</td><td>0.1250</td><td>0.0392</td><td>0.0597</td><td>51</td><td>0.7862</td></tr>
+<tr><td>Sein</td><td>0.5663</td><td>0.5988</td><td>0.5821</td><td>663</td><td>0.8742</td></tr>
+<tr><td>Thyroide</td><td>0.7444</td><td>0.9054</td><td>0.8171</td><td>296</td><td>0.9760</td></tr>
+<tr><td>Vessie</td><td>0.4354</td><td>0.3085</td><td>0.3611</td><td>295</td><td>0.8334</td></tr>
 </table></div>
-<div class="sec"><h2>Sectorisation (tous patients)</h2><p>k=2, silhouette=0.3417, ARI=0.0232, NMI=0.0891</p><table><tr><th>Secteur</th><th>Taille</th><th>Cancers dominants</th></tr><tr><td>Sector_01</td><td>620</td><td>Colon:308, Melanome:83, Poumon:68</td></tr>
-<tr><td>Sector_02</td><td>3054</td><td>Sein:638, Poumon:401, Ovaire:372</td></tr>
+<div class="sec"><h2>Sectorisation (tous patients)</h2><p>k=2, silhouette=0.3384, ARI=0.023, NMI=0.0897</p><table><tr><th>Secteur</th><th>Taille</th><th>Cancers dominants</th></tr><tr><td>Sector_01</td><td>623</td><td>Colon:311, Melanome:82, Poumon:68</td></tr>
+<tr><td>Sector_02</td><td>3016</td><td>Sein:630, Poumon:401, Ovaire:344</td></tr>
 </table></div>
-<div class="sec"><h2>Score de resubstitution — patients connus (2280/3674 — 62.1%) [BIAISE]</h2><div class="warn">Ce score est calculé en prédisant les mêmes données sur lesquelles le modèle a été entraîné (resubstitution). Il est biaisé par l'overfitting. <b>Utiliser le score de validation croisée (CV) comme métrique principale.</b></div><table><tr><th>Patient</th><th>Reel</th><th>Predit</th><th>Confiance</th><th></th></tr><tr><td>PAT_0001</td><td>Sein</td><td>Sein</td><td>0.469</td><td style="color:#27ae60;font-weight:bold">&#10003;</td></tr>
-<tr><td>PAT_0002</td><td>Sein</td><td>Sein</td><td>0.490</td><td style="color:#27ae60;font-weight:bold">&#10003;</td></tr>
-<tr><td>PAT_0003</td><td>Sein</td><td>Sein</td><td>0.587</td><td style="color:#27ae60;font-weight:bold">&#10003;</td></tr>
-<tr><td>PAT_0004</td><td>Sein</td><td>Vessie</td><td>0.304</td><td style="color:#e74c3c;font-weight:bold">&#10007;</td></tr>
-<tr><td>PAT_0005</td><td>Sein</td><td>Sein</td><td>0.470</td><td style="color:#27ae60;font-weight:bold">&#10003;</td></tr>
-<tr><td>PAT_0006</td><td>Sein</td><td>Colon</td><td>0.540</td><td style="color:#e74c3c;font-weight:bold">&#10007;</td></tr>
-<tr><td>PAT_0007</td><td>Sein</td><td>Sein</td><td>0.527</td><td style="color:#27ae60;font-weight:bold">&#10003;</td></tr>
-<tr><td>PAT_0008</td><td>Sein</td><td>Sein</td><td>0.412</td><td style="color:#27ae60;font-weight:bold">&#10003;</td></tr>
-<tr><td>PAT_0009</td><td>Sein</td><td>Sein</td><td>0.812</td><td style="color:#27ae60;font-weight:bold">&#10003;</td></tr>
-<tr><td>PAT_0010</td><td>Sein</td><td>Sein</td><td>0.500</td><td style="color:#27ae60;font-weight:bold">&#10003;</td></tr>
-<tr><td>PAT_0011</td><td>Sein</td><td>Vessie</td><td>0.299</td><td style="color:#e74c3c;font-weight:bold">&#10007;</td></tr>
-<tr><td>PAT_0012</td><td>Sein</td><td>Sein</td><td>0.567</td><td style="color:#27ae60;font-weight:bold">&#10003;</td></tr>
-<tr><td>PAT_0013</td><td>Sein</td><td>Sein</td><td>0.567</td><td style="color:#27ae60;font-weight:bold">&#10003;</td></tr>
-<tr><td>PAT_0014</td><td>Sein</td><td>Sein</td><td>0.282</td><td style="color:#27ae60;font-weight:bold">&#10003;</td></tr>
-<tr><td>PAT_0015</td><td>Sein</td><td>Sein</td><td>0.702</td><td style="color:#27ae60;font-weight:bold">&#10003;</td></tr>
-<tr><td>PAT_0016</td><td>Sein</td><td>Vessie</td><td>0.504</td><td style="color:#e74c3c;font-weight:bold">&#10007;</td></tr>
-<tr><td>PAT_0017</td><td>Sein</td><td>Poumon</td><td>0.285</td><td style="color:#e74c3c;font-weight:bold">&#10007;</td></tr>
-<tr><td>PAT_0018</td><td>Sein</td><td>Sein</td><td>0.800</td><td style="color:#27ae60;font-weight:bold">&#10003;</td></tr>
-<tr><td>PAT_0019</td><td>Sein</td><td>Sein</td><td>0.791</td><td style="color:#27ae60;font-weight:bold">&#10003;</td></tr>
-<tr><td>PAT_0020</td><td>Sein</td><td>Sein</td><td>0.274</td><td style="color:#27ae60;font-weight:bold">&#10003;</td></tr>
-<tr><td>PAT_0021</td><td>Sein</td><td>Glioblastome</td><td>0.500</td><td style="color:#e74c3c;font-weight:bold">&#10007;</td></tr>
-<tr><td>PAT_0022</td><td>Sein</td><td>Colon</td><td>0.588</td><td style="color:#e74c3c;font-weight:bold">&#10007;</td></tr>
-<tr><td>PAT_0023</td><td>Sein</td><td>Sein</td><td>0.558</td><td style="color:#27ae60;font-weight:bold">&#10003;</td></tr>
-<tr><td>PAT_0024</td><td>Sein</td><td>Sein</td><td>0.729</td><td style="color:#27ae60;font-weight:bold">&#10003;</td></tr>
-<tr><td>PAT_0025</td><td>Sein</td><td>Glioblastome</td><td>0.566</td><td style="color:#e74c3c;font-weight:bold">&#10007;</td></tr>
-<tr><td>PAT_0026</td><td>Sein</td><td>Sein</td><td>0.575</td><td style="color:#27ae60;font-weight:bold">&#10003;</td></tr>
-<tr><td>PAT_0027</td><td>Sein</td><td>Colon</td><td>0.775</td><td style="color:#e74c3c;font-weight:bold">&#10007;</td></tr>
+<div class="sec"><h2>Score de resubstitution — patients connus (2316/3639 — 63.6%) [BIAISE]</h2><div class="warn">Ce score est calculé en prédisant les mêmes données sur lesquelles le modèle a été entraîné (resubstitution). Il est biaisé par l'overfitting. <b>Utiliser le score de validation croisée (CV) comme métrique principale.</b></div><table><tr><th>Patient</th><th>Reel</th><th>Predit</th><th>Confiance</th><th></th></tr><tr><td>PAT_0001</td><td>Sein</td><td>Sein</td><td>0.558</td><td style="color:#27ae60;font-weight:bold">&#10003;</td></tr>
+<tr><td>PAT_0002</td><td>Sein</td><td>Sein</td><td>0.727</td><td style="color:#27ae60;font-weight:bold">&#10003;</td></tr>
+<tr><td>PAT_0003</td><td>Sein</td><td>Sein</td><td>0.581</td><td style="color:#27ae60;font-weight:bold">&#10003;</td></tr>
+<tr><td>PAT_0004</td><td>Sein</td><td>Vessie</td><td>0.350</td><td style="color:#e74c3c;font-weight:bold">&#10007;</td></tr>
+<tr><td>PAT_0005</td><td>Sein</td><td>Sein</td><td>0.507</td><td style="color:#27ae60;font-weight:bold">&#10003;</td></tr>
+<tr><td>PAT_0006</td><td>Sein</td><td>Colon</td><td>0.559</td><td style="color:#e74c3c;font-weight:bold">&#10007;</td></tr>
+<tr><td>PAT_0007</td><td>Sein</td><td>Sein</td><td>0.539</td><td style="color:#27ae60;font-weight:bold">&#10003;</td></tr>
+<tr><td>PAT_0008</td><td>Sein</td><td>Sein</td><td>0.520</td><td style="color:#27ae60;font-weight:bold">&#10003;</td></tr>
+<tr><td>PAT_0009</td><td>Sein</td><td>Sein</td><td>0.794</td><td style="color:#27ae60;font-weight:bold">&#10003;</td></tr>
+<tr><td>PAT_0010</td><td>Sein</td><td>Sein</td><td>0.477</td><td style="color:#27ae60;font-weight:bold">&#10003;</td></tr>
+<tr><td>PAT_0011</td><td>Sein</td><td>Vessie</td><td>0.367</td><td style="color:#e74c3c;font-weight:bold">&#10007;</td></tr>
+<tr><td>PAT_0012</td><td>Sein</td><td>Sein</td><td>0.465</td><td style="color:#27ae60;font-weight:bold">&#10003;</td></tr>
+<tr><td>PAT_0013</td><td>Sein</td><td>Sein</td><td>0.608</td><td style="color:#27ae60;font-weight:bold">&#10003;</td></tr>
+<tr><td>PAT_0014</td><td>Sein</td><td>Sein</td><td>0.283</td><td style="color:#27ae60;font-weight:bold">&#10003;</td></tr>
+<tr><td>PAT_0015</td><td>Sein</td><td>Sein</td><td>0.695</td><td style="color:#27ae60;font-weight:bold">&#10003;</td></tr>
+<tr><td>PAT_0016</td><td>Sein</td><td>Vessie</td><td>0.508</td><td style="color:#e74c3c;font-weight:bold">&#10007;</td></tr>
+<tr><td>PAT_0017</td><td>Sein</td><td>Poumon</td><td>0.311</td><td style="color:#e74c3c;font-weight:bold">&#10007;</td></tr>
+<tr><td>PAT_0018</td><td>Sein</td><td>Sein</td><td>0.781</td><td style="color:#27ae60;font-weight:bold">&#10003;</td></tr>
+<tr><td>PAT_0019</td><td>Sein</td><td>Sein</td><td>0.840</td><td style="color:#27ae60;font-weight:bold">&#10003;</td></tr>
+<tr><td>PAT_0020</td><td>Sein</td><td>Glioblastome</td><td>0.318</td><td style="color:#e74c3c;font-weight:bold">&#10007;</td></tr>
+<tr><td>PAT_0021</td><td>Sein</td><td>Glioblastome</td><td>0.396</td><td style="color:#e74c3c;font-weight:bold">&#10007;</td></tr>
+<tr><td>PAT_0022</td><td>Sein</td><td>Colon</td><td>0.605</td><td style="color:#e74c3c;font-weight:bold">&#10007;</td></tr>
+<tr><td>PAT_0023</td><td>Sein</td><td>Sein</td><td>0.586</td><td style="color:#27ae60;font-weight:bold">&#10003;</td></tr>
+<tr><td>PAT_0024</td><td>Sein</td><td>Sein</td><td>0.757</td><td style="color:#27ae60;font-weight:bold">&#10003;</td></tr>
+<tr><td>PAT_0025</td><td>Sein</td><td>Glioblastome</td><td>0.656</td><td style="color:#e74c3c;font-weight:bold">&#10007;</td></tr>
+<tr><td>PAT_0026</td><td>Sein</td><td>Sein</td><td>0.534</td><td style="color:#27ae60;font-weight:bold">&#10003;</td></tr>
+<tr><td>PAT_0027</td><td>Sein</td><td>Colon</td><td>0.732</td><td style="color:#e74c3c;font-weight:bold">&#10007;</td></tr>
 <tr><td>PAT_0028</td><td>Sein</td><td>Sein</td><td>0.686</td><td style="color:#27ae60;font-weight:bold">&#10003;</td></tr>
-<tr><td>PAT_0029</td><td>Sein</td><td>Sein</td><td>0.633</td><td style="color:#27ae60;font-weight:bold">&#10003;</td></tr>
-<tr><td>PAT_0030</td><td>Sein</td><td>Sein</td><td>0.740</td><td style="color:#27ae60;font-weight:bold">&#10003;</td></tr>
+<tr><td>PAT_0029</td><td>Sein</td><td>Sein</td><td>0.649</td><td style="color:#27ae60;font-weight:bold">&#10003;</td></tr>
+<tr><td>PAT_0030</td><td>Sein</td><td>Sein</td><td>0.820</td><td style="color:#27ae60;font-weight:bold">&#10003;</td></tr>
 </table></div>
 
 <div class="sec"><h2>Visualisations</h2><div style="text-align:center;margin:12px 0"><img src="../plots/ml_confusion_Random_Forest.png" style="max-width:100%;border-radius:4px;box-shadow:0 2px 6px rgba(0,0,0,.1)"></div>

@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_1630
-  Date: 14/03/2026 20:35
+  Date: 14/03/2026 20:57
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -12,18 +12,18 @@
 
 --- CLASSIFICATION ML — CANCER PROBABLE ---
   Cancer predit:       Prostate
-  Confiance:           48.05%
+  Confiance:           45.29%
   Modele:              Gradient Boosting
   Top-3 cancers probables:
-    1. Prostate             48.05%
-    2. Melanome             30.77%
-    3. Vessie               13.55%
+    1. Prostate             45.29%
+    2. Melanome             28.30%
+    3. Vessie               18.93%
   Features determinantes:
-    - age                                 importance=0.0736 valeur=64.0
-    - burden                              importance=0.0321 valeur=13.24
-    - total_mut                           importance=0.0333 valeur=3.0
-    - n_suppressors                       importance=0.0418 valeur=2.0
-    - mut_count_BRAF                      importance=0.0591 valeur=1.0
+    - age                                 importance=0.0819 valeur=64.0
+    - burden                              importance=0.0323 valeur=13.24
+    - total_mut                           importance=0.0364 valeur=3.0
+    - n_suppressors                       importance=0.0389 valeur=2.0
+    - mut_count_BRAF                      importance=0.0581 valeur=1.0
 
 --- PROFIL DE COMPATIBILITE CANCER ---
   Cancer                   Compatibilite Genes supports

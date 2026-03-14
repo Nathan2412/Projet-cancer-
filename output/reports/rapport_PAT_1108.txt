@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_1108
-  Date: 14/03/2026 20:35
+  Date: 14/03/2026 20:57
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -12,18 +12,18 @@
 
 --- CLASSIFICATION ML — CANCER PROBABLE ---
   Cancer predit:       Poumon
-  Confiance:           75.64%
+  Confiance:           80.48%
   Modele:              Gradient Boosting
   Top-3 cancers probables:
-    1. Poumon               75.64%
-    2. Glioblastome         11.85%
-    3. Sein                 3.55%
+    1. Poumon               80.48%
+    2. Glioblastome         7.43%
+    3. Sein                 4.49%
   Features determinantes:
-    - age                                 importance=0.0736 valeur=81.0
-    - burden                              importance=0.0321 valeur=4.41
-    - total_mut                           importance=0.0333 valeur=1.0
-    - n_pathogenic                        importance=0.0328 valeur=1.0
-    - n_hotspots                          importance=0.0307 valeur=1.0
+    - age                                 importance=0.0819 valeur=81.0
+    - burden                              importance=0.0323 valeur=4.41
+    - total_mut                           importance=0.0364 valeur=1.0
+    - n_pathogenic                        importance=0.0344 valeur=1.0
+    - n_hotspots                          importance=0.0320 valeur=1.0
 
 --- PROFIL DE COMPATIBILITE CANCER ---
   Cancer                   Compatibilite Genes supports

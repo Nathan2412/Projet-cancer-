@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_1250
-  Date: 14/03/2026 20:35
+  Date: 14/03/2026 20:57
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -12,18 +12,18 @@
 
 --- CLASSIFICATION ML — CANCER PROBABLE ---
   Cancer predit:       Colon
-  Confiance:           97.36%
+  Confiance:           97.72%
   Modele:              Gradient Boosting
   Top-3 cancers probables:
-    1. Colon                97.36%
-    2. Poumon               0.87%
-    3. Melanome             0.37%
+    1. Colon                97.72%
+    2. Poumon               0.81%
+    3. Vessie               0.27%
   Features determinantes:
-    - age                                 importance=0.0736 valeur=51.0
-    - burden                              importance=0.0321 valeur=17.65
-    - n_suppressors                       importance=0.0418 valeur=3.0
-    - total_mut                           importance=0.0333 valeur=4.0
-    - SNP                                 importance=0.0276 valeur=4.0
+    - age                                 importance=0.0819 valeur=51.0
+    - burden                              importance=0.0323 valeur=17.65
+    - total_mut                           importance=0.0364 valeur=4.0
+    - n_suppressors                       importance=0.0389 valeur=3.0
+    - SNP                                 importance=0.0265 valeur=4.0
 
 --- PROFIL DE COMPATIBILITE CANCER ---
   Cancer                   Compatibilite Genes supports
@@ -72,11 +72,11 @@
 --- PROFIL DE RISQUE NAIF (outil secondaire) ---
   Cancer                  Score Niveau          Genes
   -----------------------------------------------------------------
-  Glioblastome            1.800 ELEVE           KRAS, TP53
-  Poumon                  1.800 ELEVE           KRAS, TP53
-  Melanome                1.800 ELEVE           KRAS, TP53
-  Vessie                  1.800 ELEVE           KRAS, TP53
-  Foie                    1.800 ELEVE           KRAS, TP53
+  Glioblastome            1.800 ELEVE           TP53, KRAS
+  Poumon                  1.800 ELEVE           TP53, KRAS
+  Melanome                1.800 ELEVE           TP53, KRAS
+  Vessie                  1.800 ELEVE           TP53, KRAS
+  Foie                    1.800 ELEVE           TP53, KRAS
 
 --- RECOMMANDATIONS ---
   -> Consultation oncogenetique recommandee

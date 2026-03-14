@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_1902
-  Date: 14/03/2026 20:35
+  Date: 14/03/2026 20:57
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -12,18 +12,18 @@
 
 --- CLASSIFICATION ML — CANCER PROBABLE ---
   Cancer predit:       Melanome
-  Confiance:           47.44%
+  Confiance:           53.46%
   Modele:              Gradient Boosting
   Top-3 cancers probables:
-    1. Melanome             47.44%
-    2. Poumon               26.61%
-    3. Vessie               7.36%
+    1. Melanome             53.46%
+    2. Poumon               23.99%
+    3. Vessie               6.44%
   Features determinantes:
-    - age                                 importance=0.0736 valeur=48.0
-    - burden                              importance=0.0321 valeur=17.65
-    - n_suppressors                       importance=0.0418 valeur=3.0
-    - total_mut                           importance=0.0333 valeur=4.0
-    - n_genes                             importance=0.0302 valeur=4.0
+    - age                                 importance=0.0819 valeur=48.0
+    - burden                              importance=0.0323 valeur=17.65
+    - total_mut                           importance=0.0364 valeur=4.0
+    - n_suppressors                       importance=0.0389 valeur=3.0
+    - SNP                                 importance=0.0265 valeur=4.0
 
 --- RESUME MUTATIONNEL ---
   Mutations totales:       4
