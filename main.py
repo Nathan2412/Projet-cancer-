@@ -227,22 +227,22 @@ def run_cohort_analysis(max_patients=None, generate_plots=True, verbose=True):
     print("  Correlation mutations ADN <-> Cancer")
     print("=" * 60)
 
-    print("\n[0/6] Nettoyage des anciens resultats...")
+    print("\n[0/7] Nettoyage des anciens resultats...")
     clean_previous_outputs()
 
-    print("\n[1/6] Chargement des references...")
+    print("\n[1/7] Chargement des references...")
     reference = load_reference()
     known_db = load_known_mutations()
     print(f"  {len(reference)} genes de reference charges")
     print(f"  Base de mutations: {len(known_db)} genes annotes")
 
-    print("\n[2/6] Identification des patients...")
+    print("\n[2/7] Identification des patients...")
     patient_list = get_patient_list()
     if max_patients:
         patient_list = patient_list[:max_patients]
     print(f"  {len(patient_list)} patients a analyser")
 
-    print("\n[3/6] Analyse individuelle des patients...")
+    print("\n[3/7] Analyse individuelle des patients...")
     all_results = []
     for i, pid in enumerate(patient_list):
         if verbose:
@@ -252,11 +252,11 @@ def run_cohort_analysis(max_patients=None, generate_plots=True, verbose=True):
         result = analyze_single_patient(pid, reference, known_db, verbose)
         all_results.append(result)
 
-    print("\n\n[4/6] Analyse de cohorte...")
+    print("\n\n[4/7] Analyse de cohorte...")
     mutation_matrix, genes, patients = build_cohort_mutation_matrix(all_results)
     gene_correlations = compute_gene_cancer_correlation(all_results)
 
-    print("\n[5/6] Generation des rapports...")
+    print("\n[5/7] Generation des rapports...")
     for result in all_results:
         report = result["risk_report"]
 
@@ -265,7 +265,7 @@ def run_cohort_analysis(max_patients=None, generate_plots=True, verbose=True):
             print(f"  {result['patient_id']}: rapport texte OK")
 
     # ── ML : prediction de cancer ──
-    print("\n[7/7] Machine Learning — Prediction de cancer...")
+    print("\n[6/7] Machine Learning — Prediction de cancer...")
     ml_output = run_ml_pipeline(all_results, generate_plots=generate_plots, verbose=verbose)
 
     # Mettre à jour les rapports avec les prédictions ML
@@ -282,6 +282,20 @@ def run_cohort_analysis(max_patients=None, generate_plots=True, verbose=True):
 
     cohort_path = generate_cohort_summary_report(all_results, ml_predictions=ml_preds)
     print(f"  Rapport de cohorte: {cohort_path}")
+
+    save_json_results(gene_correlations, "gene_cancer_correlations.json")
+    save_json_results(
+        {"matrix": mutation_matrix, "genes": genes, "patients": patients},
+        "mutation_matrix.json"
+    )
+
+    if generate_plots and check_matplotlib():
+        print("\n[7/7] Generation des graphiques de cohorte...")
+        plot_cohort_mutation_heatmap(mutation_matrix, genes, patients)
+        plot_impact_distribution(all_results)
+        print("  Graphiques generes")
+    else:
+        print("\n[7/7] Graphiques ignores (matplotlib non disponible)")
 
     elapsed = time.time() - start_time
     print("\n" + "=" * 60)
@@ -355,10 +369,10 @@ def run_real_data_analysis(max_patients=None, generate_plots=True, verbose=True)
     print("  Source: cBioPortal / TCGA PanCancer Atlas")
     print("=" * 60)
 
-    print("\n[0/6] Nettoyage des anciens resultats...")
+    print("\n[0/7] Nettoyage des anciens resultats...")
     clean_previous_outputs()
 
-    print("\n[1/6] Chargement des references (donnees reelles)...")
+    print("\n[1/7] Chargement des references (donnees reelles)...")
     reference = load_reference_real()
     known_db = load_known_mutations_real()
     print(f"  {len(reference)} genes de reference charges")
@@ -370,7 +384,7 @@ def run_real_data_analysis(max_patients=None, generate_plots=True, verbose=True)
         if n_hotspots > 0:
             print(f"    {gene}: {n_hotspots} hotspots, {n_total} mutations TCGA")
 
-    print("\n[2/6] Identification des patients reels...")
+    print("\n[2/7] Identification des patients reels...")
     patient_list = get_patient_list_real()
     if not patient_list:
         print("  ERREUR: Aucun patient reel trouve.")
@@ -381,7 +395,7 @@ def run_real_data_analysis(max_patients=None, generate_plots=True, verbose=True)
         patient_list = patient_list[:max_patients]
     print(f"  {len(patient_list)} patients a analyser")
 
-    print("\n[3/6] Analyse individuelle des patients (donnees reelles)...")
+    print("\n[3/7] Analyse individuelle des patients (donnees reelles)...")
     all_results = []
     for i, pid in enumerate(patient_list):
         if verbose:
@@ -391,11 +405,11 @@ def run_real_data_analysis(max_patients=None, generate_plots=True, verbose=True)
         result = analyze_single_patient_real(pid, reference, known_db, verbose)
         all_results.append(result)
 
-    print("\n\n[4/6] Analyse de cohorte...")
+    print("\n\n[4/7] Analyse de cohorte...")
     mutation_matrix, genes, patients = build_cohort_mutation_matrix(all_results)
     gene_correlations = compute_gene_cancer_correlation(all_results)
 
-    print("\n[5/6] Generation des rapports...")
+    print("\n[5/7] Generation des rapports...")
     for result in all_results:
         report = result["risk_report"]
 
@@ -404,7 +418,7 @@ def run_real_data_analysis(max_patients=None, generate_plots=True, verbose=True)
             print(f"  {result['patient_id']}: rapport texte OK")
 
     # ── ML : prediction de cancer ──
-    print("\n[7/7] Machine Learning — Prediction de cancer...")
+    print("\n[6/7] Machine Learning — Prediction de cancer...")
     ml_output = run_ml_pipeline(all_results, generate_plots=generate_plots, verbose=verbose)
 
     # Mettre à jour les rapports avec les prédictions ML
@@ -429,12 +443,12 @@ def run_real_data_analysis(max_patients=None, generate_plots=True, verbose=True)
     )
 
     if generate_plots and check_matplotlib():
-        print("\n[6/6] Generation des graphiques de cohorte...")
+        print("\n[7/7] Generation des graphiques de cohorte...")
         plot_cohort_mutation_heatmap(mutation_matrix, genes, patients)
         plot_impact_distribution(all_results)
         print("  Graphiques generes")
     else:
-        print("\n[6/6] Graphiques ignores (matplotlib non disponible)")
+        print("\n[7/7] Graphiques ignores (matplotlib non disponible)")
 
     elapsed = time.time() - start_time
     print("\n" + "=" * 60)

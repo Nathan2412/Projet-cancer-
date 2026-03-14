@@ -770,6 +770,13 @@ def run_ml_pipeline(all_results, generate_plots=True, verbose=True):
         print("\n  [0/7] Validation des metadonnees...")
     meta_report = validate_metadata(all_results, verbose=verbose)
 
+    # Filtrer les patients exclus (incohérence sexe/cancer, doublons)
+    excluded_ids = set(meta_report.get("excluded_ids", []))
+    if excluded_ids:
+        all_results = [r for r in all_results if r.get("patient_id") not in excluded_ids]
+        if verbose:
+            print(f"    {len(excluded_ids)} patients exclus, {len(all_results)} restants")
+
     # -- 1. Signatures d'alleles --────
     if verbose:
         print("\n  [1/7] Signatures d'alleles (patients connus)...")
