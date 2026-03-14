@@ -1,6 +1,8 @@
 """
 Analyse de correlation entre les mutations et les maladies.
 Statistiques, scoring de risque, et profilage tumoral.
+Le coeur du projet est desormais la classification multi-classe (likelihood profile),
+et non plus le score de risque naif (conserve comme outil secondaire).
 """
 
 import math
@@ -45,7 +47,150 @@ def compute_mutation_burden(patient_analysis):
     return round(total_mutations / total_bases * 1e6, 2)
 
 
+# ============================================================================
+# SCORING DISCRIMINANT — coeur du nouveau pipeline
+# ============================================================================
+
+def compute_gene_specificity_table(all_patients_results):
+    """
+    Pour chaque paire (gène, cancer), calcule :
+    - freq_in_cancer  : fréquence du gène muté chez les patients de ce cancer
+    - freq_outside    : fréquence hors de ce cancer
+    - enrichment      : freq_in / freq_out
+    - odds_ratio      : (a/b) / (c/d) standard
+    - n_patients_cancer, n_patients_total
+
+    Retourne un dict :
+    { gene: { cancer: { freq_in, freq_out, enrichment, odds_ratio, ... } } }
+    """
+    # Collecter les données
+    gene_cancer_hit = defaultdict(lambda: defaultdict(int))   # gene → cancer → n patients mutés
+    cancer_totals = defaultdict(int)                           # cancer → n patients
+    gene_totals = defaultdict(int)                             # gene → n patients mutés (toutes classes)
+    total_patients = 0
+
+    for r in all_patients_results:
+        cancer = r.get("metadata", {}).get("cancer_type", "")
+        if not cancer:
+            continue
+        cancer_totals[cancer] += 1
+        total_patients += 1
+
+        for gene, ga in r.get("gene_analyses", {}).items():
+            if ga.get("total_mutations", 0) > 0:
+                gene_cancer_hit[gene][cancer] += 1
+                gene_totals[gene] += 1
+
+    table = defaultdict(dict)
+    all_cancers = list(cancer_totals.keys())
+
+    for gene in gene_cancer_hit:
+        for cancer in all_cancers:
+            n_in = gene_cancer_hit[gene].get(cancer, 0)
+            n_cancer = cancer_totals[cancer]
+            n_out = gene_totals[gene] - n_in
+            n_outside_cancer = total_patients - n_cancer
+
+            freq_in = n_in / max(n_cancer, 1)
+            freq_out = n_out / max(n_outside_cancer, 1)
+            enrichment = freq_in / max(freq_out, 1e-6)
+
+            # Odds ratio : (mut_in/nomut_in) / (mut_out/nomut_out)
+            a = n_in
+            b = n_cancer - n_in
+            c = n_out
+            d = n_outside_cancer - n_out
+            if b == 0 or c == 0:
+                odds_ratio = enrichment  # fallback
+            else:
+                odds_ratio = (a * d) / max(b * c, 1e-9)
+
+            table[gene][cancer] = {
+                "n_in": n_in,
+                "n_cancer": n_cancer,
+                "n_out": n_out,
+                "n_outside_cancer": n_outside_cancer,
+                "freq_in_cancer": round(freq_in, 4),
+                "freq_outside_cancer": round(freq_out, 4),
+                "enrichment": round(enrichment, 3),
+                "odds_ratio": round(odds_ratio, 3),
+            }
+
+    return dict(table)
+
+
+def compute_likelihood_profile(all_annotations, gene_specificity_table=None, sex=None):
+    """
+    Calcule un profil de vraisemblance (likelihood) pour chaque type de cancer.
+
+    Au lieu d'additionner les scores de pathogénicité sur tous les cancers associés
+    (scoring naïf), on pondère chaque contribution par la spécificité du gène
+    pour chaque cancer (enrichment / odds_ratio).
+
+    Si gene_specificity_table est None, on retombe sur le scoring naïf.
+
+    Retourne un dict trié par vraisemblance décroissante :
+    { cancer: { "likelihood": float (0-1), "supporting_genes": [...],
+                "supporting_alleles": [...] } }
+    """
+    raw_scores = defaultdict(float)
+    supporting_genes = defaultdict(set)
+    supporting_alleles = defaultdict(list)
+
+    for gene_annotations in all_annotations:
+        for mut in gene_annotations:
+            gene = mut.get("gene", "")
+            path_score = mut.get("pathogenicity_score", 0)
+            protein_change = mut.get("protein_change", "") or mut.get("hotspot_change", "")
+
+            for cancer in mut.get("associated_cancers", []):
+                if not _is_cancer_compatible_with_sex(cancer, sex):
+                    continue
+
+                # Calcul du facteur de spécificité
+                specificity = 1.0
+                if gene_specificity_table and gene in gene_specificity_table:
+                    cancer_stats = gene_specificity_table[gene].get(cancer, {})
+                    enrichment = cancer_stats.get("enrichment", 1.0)
+                    # Utiliser sqrt(enrichment) pour atténuer l'effet des gènes très enrichis
+                    specificity = max(math.sqrt(enrichment), 0.1)
+
+                contribution = path_score * specificity
+                raw_scores[cancer] += contribution
+                supporting_genes[cancer].add(gene)
+                if protein_change:
+                    supporting_alleles[cancer].append(
+                        {"gene": gene, "allele": protein_change, "score": round(contribution, 4)}
+                    )
+
+    if not raw_scores:
+        return {}
+
+    # Normaliser en probabilités (softmax simplifié)
+    total = sum(raw_scores.values())
+    result = {}
+    for cancer, score in sorted(raw_scores.items(), key=lambda x: x[1], reverse=True):
+        result[cancer] = {
+            "likelihood": round(score / max(total, 1e-9), 4),
+            "raw_score": round(score, 4),
+            "supporting_genes": sorted(supporting_genes[cancer]),
+            "supporting_alleles": sorted(
+                supporting_alleles[cancer], key=lambda x: x["score"], reverse=True
+            )[:5],
+        }
+
+    return result
+
+
+# ============================================================================
+# SCORING NAÏF — conservé comme outil secondaire / explicatif
+# ============================================================================
+
 def compute_cancer_risk_profile(all_annotations, sex=None):
+    """Scoring naïf multi-cancers (outil secondaire / explicatif uniquement).
+    Ne doit plus être utilisé comme prédiction principale.
+    Utiliser compute_likelihood_profile() à la place.
+    """
     risk_profile = defaultdict(lambda: {
         "score": 0.0,
         "contributing_mutations": [],
@@ -217,9 +362,14 @@ def identify_cosmic_signature(spectrum):
     return sorted(matches, key=lambda x: x["similarity"], reverse=True)
 
 
-def generate_patient_risk_report(patient_id, gene_analyses, annotations, metadata):
+def generate_patient_risk_report(patient_id, gene_analyses, annotations, metadata,
+                                 gene_specificity_table=None):
     burden = compute_mutation_burden(gene_analyses)
-    risk_profile = compute_cancer_risk_profile(annotations, sex=metadata.get("sex"))
+    sex = metadata.get("sex")
+    risk_profile = compute_cancer_risk_profile(annotations, sex=sex)
+    likelihood_profile = compute_likelihood_profile(
+        annotations, gene_specificity_table=gene_specificity_table, sex=sex
+    )
     signature = compute_mutation_signature(annotations)
 
     high_impact = []
@@ -235,15 +385,37 @@ def generate_patient_risk_report(patient_id, gene_analyses, annotations, metadat
         if isinstance(a, dict)
     )
 
+    # Comptage des hotspots et roles géniques
+    n_hotspots = sum(
+        1 for annots in annotations for mut in annots if mut.get("is_hotspot", False)
+    )
+    n_oncogenes = sum(
+        1 for annots in annotations for mut in annots
+        if mut.get("gene_role", "") == "oncogene"
+    )
+    n_suppressors = sum(
+        1 for annots in annotations for mut in annots
+        if mut.get("gene_role", "") == "suppressor"
+    )
+    n_pathogenic = sum(
+        1 for annots in annotations for mut in annots
+        if mut.get("acmg_classification", "") in ("Pathogenic", "Likely_pathogenic")
+    )
+
     return {
         "patient_id": patient_id,
         "metadata": metadata,
         "panel_mutation_density": burden,
         "total_mutations_detected": total_muts,
-        "cancer_risk_profile": risk_profile,
+        "cancer_risk_profile": risk_profile,      # outil secondaire
+        "likelihood_profile": likelihood_profile,  # profil principal orienté classification
         "mutation_signature": signature,
         "high_impact_variants": high_impact[:20],
-        "risk_summary": _build_risk_summary(burden, risk_profile, high_impact)
+        "risk_summary": _build_risk_summary(burden, risk_profile, high_impact),
+        "n_hotspots": n_hotspots,
+        "n_oncogenes_mutated": n_oncogenes,
+        "n_suppressors_mutated": n_suppressors,
+        "n_pathogenic_variants": n_pathogenic,
     }
 
 

@@ -349,3 +349,118 @@ def format_signatures_summary(signatures: dict[str, dict]) -> str:
         if n_alleles > 5:
             lines.append(f"    ... +{n_alleles - 5} autres")
     return "\n".join(lines)
+
+
+def compute_allele_discriminant_table(all_patients_results):
+    """
+    Calcule une table de discriminance allèle-par-cancer.
+
+    Pour chaque allèle (clé gène+protein_change) et chaque cancer, retourne :
+    - freq_in_cancer  : fréquence chez les patients du cancer cible
+    - freq_out        : fréquence chez les autres patients
+    - enrichment      : freq_in / freq_out
+    - odds_ratio      : odds ratio standard
+    - n_patients_with : nombre de patients avec cet allèle
+
+    Retourne une liste de dicts triée par enrichissement décroissant.
+    """
+    from collections import defaultdict
+    import math
+
+    allele_cancer_hits = defaultdict(lambda: defaultdict(int))
+    cancer_totals = defaultdict(int)
+    allele_totals = defaultdict(int)
+    allele_info = {}
+
+    total_patients = 0
+    for r in all_patients_results:
+        cancer = r.get("metadata", {}).get("cancer_type", "")
+        if not cancer:
+            continue
+        cancer_totals[cancer] += 1
+        total_patients += 1
+
+        for gene, ga in r.get("gene_analyses", {}).items():
+            for mut in ga.get("mutations", []):
+                prot = (
+                    mut.get("protein_change", "") or
+                    mut.get("hotspot_change", "") or
+                    mut.get("hotspot_name", "")
+                ).strip()
+                if not prot:
+                    continue
+                key = f"{gene}:{prot}"
+                allele_cancer_hits[key][cancer] += 1
+                allele_totals[key] += 1
+                if key not in allele_info:
+                    allele_info[key] = {
+                        "gene": gene,
+                        "allele": prot,
+                        "is_hotspot": mut.get("is_hotspot", False),
+                        "gene_role": mut.get("gene_role", "unknown"),
+                    }
+
+    rows = []
+    all_cancers = list(cancer_totals.keys())
+
+    for key, info in allele_info.items():
+        for cancer in all_cancers:
+            n_in = allele_cancer_hits[key].get(cancer, 0)
+            n_cancer = cancer_totals[cancer]
+            n_out = allele_totals[key] - n_in
+            n_outside = total_patients - n_cancer
+
+            freq_in = n_in / max(n_cancer, 1)
+            freq_out = n_out / max(n_outside, 1)
+            enrichment = freq_in / max(freq_out, 1e-6)
+
+            a, b = n_in, n_cancer - n_in
+            c, d = n_out, n_outside - n_out
+            if b == 0 or c == 0:
+                odds_ratio = enrichment
+            else:
+                odds_ratio = (a * d) / max(b * c, 1e-9)
+
+            if n_in == 0:
+                continue
+
+            rows.append({
+                "gene": info["gene"],
+                "allele": info["allele"],
+                "cancer": cancer,
+                "n_patients_with": n_in,
+                "n_cancer_total": n_cancer,
+                "freq_in_cancer": round(freq_in, 4),
+                "freq_outside_cancer": round(freq_out, 4),
+                "enrichment": round(enrichment, 3),
+                "odds_ratio": round(odds_ratio, 3),
+                "is_hotspot": info["is_hotspot"],
+                "gene_role": info["gene_role"],
+            })
+
+    return sorted(rows, key=lambda x: x["enrichment"], reverse=True)
+
+
+def get_top_discriminant_alleles_per_cancer(all_patients_results, min_enrichment=2.0,
+                                            min_freq=0.05, top_k=10):
+    """
+    Retourne les top allèles discriminants par cancer.
+    Filtre par enrichissement minimum et fréquence minimum dans le cancer.
+
+    Retourne un dict { cancer: [allele_rows sorted by enrichment] }
+    """
+    from collections import defaultdict
+
+    table = compute_allele_discriminant_table(all_patients_results)
+    by_cancer = defaultdict(list)
+
+    for row in table:
+        if (row["enrichment"] >= min_enrichment and
+                row["freq_in_cancer"] >= min_freq):
+            by_cancer[row["cancer"]].append(row)
+
+    result = {}
+    for cancer, rows in by_cancer.items():
+        result[cancer] = sorted(rows, key=lambda x: x["enrichment"], reverse=True)[:top_k]
+
+    return result

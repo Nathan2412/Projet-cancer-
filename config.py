@@ -151,3 +151,132 @@ ALLELE_MIN_ENRICHMENT = 2.0
 
 # Nombre maximum d'allèles-signature par type de cancer
 ALLELE_MAX_PER_CANCER = 20
+
+# ============================================================================
+# Paramètres pour la classification multi-classe orientée cancer
+# ============================================================================
+
+# Activer les features de gènes mutés (binaire 0/1 par gène)
+USE_GENE_FEATURES = True
+
+# Activer les features d'allèles spécifiques (binaire 0/1 par hotspot)
+USE_ALLELE_FEATURES = True
+
+# Activer l'âge comme feature
+USE_AGE_FEATURES = True
+
+# Activer le sexe comme feature (désactivé pour forcer l'apprentissage génomique)
+USE_SEX_FEATURES = False
+
+# Activer les features de hotspots connus
+USE_HOTSPOT_FEATURES = True
+
+# Fréquence minimale d'un allèle pour le considérer dans les features
+MIN_ALLELE_FREQ = 0.01
+
+# Enrichissement minimum pour considérer un gène/allèle discriminant
+MIN_ENRICHMENT = 2.0
+
+# Nombre max d'allèles à utiliser comme features
+TOP_K_ALLELES = 100
+
+# Nombre max de gènes discriminants à analyser
+TOP_K_GENES = 50
+
+# ============================================================================
+# Rôles biologiques des gènes (pour features et interprétabilité)
+# ============================================================================
+
+GENE_ROLES = {
+    "TP53":   "suppressor",
+    "BRCA1":  "suppressor",
+    "BRCA2":  "suppressor",
+    "KRAS":   "oncogene",
+    "EGFR":   "oncogene",
+    "PIK3CA": "oncogene",
+    "APC":    "suppressor",
+    "PTEN":   "suppressor",
+    "RB1":    "suppressor",
+    "MYC":    "oncogene",
+    "ALK":    "oncogene",
+    "BRAF":   "oncogene",
+}
+
+# ============================================================================
+# Mapping pour harmoniser les noms de cancers (variantes → label unique)
+# ============================================================================
+
+CANCER_LABEL_MAPPING = {
+    # Sein
+    "breast": "Sein",
+    "breast cancer": "Sein",
+    "breast invasive carcinoma": "Sein",
+    "sein": "Sein",
+    # Colon / colorectal
+    "colon": "Colon",
+    "colon adenocarcinoma": "Colon",
+    "colorectal": "Colon",
+    "colorectal adenocarcinoma": "Colon",
+    "rectal adenocarcinoma": "Colon",
+    "rectum": "Colon",
+    # Poumon
+    "lung": "Poumon",
+    "lung adenocarcinoma": "Poumon",
+    "lung squamous cell carcinoma": "Poumon",
+    "poumon": "Poumon",
+    # Thyroïde
+    "thyroid": "Thyroide",
+    "thyroid carcinoma": "Thyroide",
+    "thyroide": "Thyroide",
+    "thyroïde": "Thyroide",
+    # Glioblastome
+    "glioblastoma": "Glioblastome",
+    "glioblastoma multiforme": "Glioblastome",
+    "glioblastome": "Glioblastome",
+    "gbm": "Glioblastome",
+    # Prostate
+    "prostate": "Prostate",
+    "prostate adenocarcinoma": "Prostate",
+    # Pancréas
+    "pancreas": "Pancreas",
+    "pancreatic adenocarcinoma": "Pancreas",
+    "pancreas adenocarcinoma": "Pancreas",
+    "pancréas": "Pancreas",
+    # Melanome
+    "melanoma": "Melanome",
+    "melanome": "Melanome",
+    "skin cutaneous melanoma": "Melanome",
+    # Leucémie
+    "leukemia": "Leucemie",
+    "leucemie": "Leucemie",
+    "leucémie": "Leucemie",
+    "aml": "Leucemie",
+    # Lymphome
+    "lymphoma": "Lymphome",
+    "lymphome": "Lymphome",
+    # Ovaire
+    "ovarian": "Ovaire",
+    "ovarian serous cystadenocarcinoma": "Ovaire",
+    "ovaire": "Ovaire",
+    # Vessie
+    "bladder": "Vessie",
+    "bladder urothelial carcinoma": "Vessie",
+    "vessie": "Vessie",
+    # Rein
+    "kidney": "Rein",
+    "kidney renal clear cell carcinoma": "Rein",
+    "rein": "Rein",
+    # Foie
+    "liver": "Foie",
+    "hepatocellular carcinoma": "Foie",
+    "foie": "Foie",
+    # Estomac
+    "stomach": "Estomac",
+    "gastric adenocarcinoma": "Estomac",
+    "estomac": "Estomac",
+    # Endomètre / Utérus
+    "uterine": "Uterus",
+    "uterine corpus endometrial carcinoma": "Uterus",
+    "endometrial": "Uterus",
+    "uterus": "Uterus",
+}

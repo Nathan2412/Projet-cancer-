@@ -265,47 +265,24 @@ def run_cohort_analysis(max_patients=None, generate_plots=True, verbose=True):
         if verbose:
             print(f"  {result['patient_id']}: rapport texte OK")
 
-        # plots = []
-        # if generate_plots and check_matplotlib():
-        #     plots = generate_all_patient_plots(
-        #         report,
-        #         result["sequencing"],
-        #         result["coverage_data"]
-        #     )
-
-        # html_path = generate_patient_html_report(report, plots)
-        # if verbose:
-        #     print(f"  {result['patient_id']}: rapport HTML OK")
-
-    cohort_path = generate_cohort_summary_report(all_results)
-    print(f"  Rapport de cohorte: {cohort_path}")
-
-    save_json_results(gene_correlations, "gene_cancer_correlations.json")
-    save_json_results(
-        {"matrix": mutation_matrix, "genes": genes, "patients": patients},
-        "mutation_matrix.json"
-    )
-
-    if generate_plots and check_matplotlib():
-        print("\n[6/6] Generation des graphiques de cohorte...")
-        plot_cohort_mutation_heatmap(mutation_matrix, genes, patients)
-        plot_impact_distribution(all_results)
-
-        for gene_name in list(reference.keys())[:5]:
-            for result in all_results[:3]:
-                analyses = result.get("gene_analyses", {})
-                if gene_name in analyses:
-                    density = analyses[gene_name].get("density", [])
-                    plot_mutation_density(density, f"{gene_name}_{result['patient_id']}")
-                    break
-
-        print("  Graphiques generes")
-    else:
-        print("\n[6/6] Graphiques ignores (matplotlib non disponible)")
-
     # ── ML : prediction de cancer ──
     print("\n[7/7] Machine Learning — Prediction de cancer...")
     ml_output = run_ml_pipeline(all_results, generate_plots=generate_plots, verbose=verbose)
+
+    # Mettre à jour les rapports avec les prédictions ML
+    if ml_output:
+        pred_by_pid = {p["patient_id"]: p for p in ml_output.get("predictions", [])}
+        for result in all_results:
+            report = result["risk_report"]
+            pid = result["patient_id"]
+            ml_pred = pred_by_pid.get(pid)
+            txt_path, _ = generate_patient_text_report(report, ml_prediction=ml_pred)
+        ml_preds = ml_output.get("predictions", [])
+    else:
+        ml_preds = None
+
+    cohort_path = generate_cohort_summary_report(all_results, ml_predictions=ml_preds)
+    print(f"  Rapport de cohorte: {cohort_path}")
 
     elapsed = time.time() - start_time
     print("\n" + "=" * 60)
@@ -427,19 +404,23 @@ def run_real_data_analysis(max_patients=None, generate_plots=True, verbose=True)
         if verbose:
             print(f"  {result['patient_id']}: rapport texte OK")
 
-        # plots = []
-        # if generate_plots and check_matplotlib():
-        #     plots = generate_all_patient_plots(
-        #         report,
-        #         result["sequencing"],
-        #         result["coverage_data"]
-        #     )
+    # ── ML : prediction de cancer ──
+    print("\n[7/7] Machine Learning — Prediction de cancer...")
+    ml_output = run_ml_pipeline(all_results, generate_plots=generate_plots, verbose=verbose)
 
-        # html_path = generate_patient_html_report(report, plots)
-        # if verbose:
-        #     print(f"  {result['patient_id']}: rapport HTML OK")
+    # Mettre à jour les rapports avec les prédictions ML
+    if ml_output:
+        pred_by_pid = {p["patient_id"]: p for p in ml_output.get("predictions", [])}
+        for result in all_results:
+            report = result["risk_report"]
+            pid = result["patient_id"]
+            ml_pred = pred_by_pid.get(pid)
+            txt_path, _ = generate_patient_text_report(report, ml_prediction=ml_pred)
+        ml_preds = ml_output.get("predictions", [])
+    else:
+        ml_preds = None
 
-    cohort_path = generate_cohort_summary_report(all_results)
+    cohort_path = generate_cohort_summary_report(all_results, ml_predictions=ml_preds)
     print(f"  Rapport de cohorte: {cohort_path}")
 
     save_json_results(gene_correlations, "gene_cancer_correlations.json")
@@ -455,10 +436,6 @@ def run_real_data_analysis(max_patients=None, generate_plots=True, verbose=True)
         print("  Graphiques generes")
     else:
         print("\n[6/6] Graphiques ignores (matplotlib non disponible)")
-
-    # ── ML : prediction de cancer ──
-    print("\n[7/7] Machine Learning — Prediction de cancer...")
-    ml_output = run_ml_pipeline(all_results, generate_plots=generate_plots, verbose=verbose)
 
     elapsed = time.time() - start_time
     print("\n" + "=" * 60)

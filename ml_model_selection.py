@@ -16,6 +16,7 @@ from sklearn.metrics import (
     precision_score,
     recall_score,
     roc_auc_score,
+    top_k_accuracy_score,
 )
 from sklearn.model_selection import GridSearchCV, StratifiedKFold
 from sklearn.pipeline import Pipeline
@@ -260,6 +261,16 @@ def evaluate_models_nested_cv(X, y_enc, class_names, feature_names,
             f1w = f1_score(y_enc, oof_pred, average="weighted", zero_division=0)
             cm = confusion_matrix(y_enc, oof_pred)
 
+            # Top-3 accuracy (si probas disponibles et assez de classes)
+            top3_acc = None
+            if has_prob and len(class_names) >= 3:
+                try:
+                    top3_acc = round(float(
+                        top_k_accuracy_score(y_enc, oof_prob, k=3, labels=list(range(len(class_names))))
+                    ), 4)
+                except Exception:
+                    top3_acc = None
+
             train_acc = accuracy_score(y_enc, y_train_pred)
             train_f1 = f1_score(y_enc, y_train_pred, average="weighted", zero_division=0)
 
@@ -284,6 +295,7 @@ def evaluate_models_nested_cv(X, y_enc, class_names, feature_names,
 
             model_result = {
                 "accuracy": round(float(acc), 4),
+                "top3_accuracy": top3_acc,
                 "precision_weighted": round(float(prec), 4),
                 "recall_weighted": round(float(rec), 4),
                 "f1_weighted": round(float(f1w), 4),

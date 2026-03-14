@@ -4,7 +4,7 @@ Croise les mutations avec la base de donnees de mutations connues
 pour identifier les variants associes aux cancers.
 """
 
-from config import CANCER_GENES, IMPACT_LEVELS
+from config import CANCER_GENES, IMPACT_LEVELS, GENE_ROLES
 
 
 def annotate_with_known_db(mutations, known_db, gene_name):
@@ -18,14 +18,22 @@ def annotate_with_known_db(mutations, known_db, gene_name):
         annotation["clinical_significance"] = "VUS"
         annotation["associated_cancers"] = []
         annotation["literature_refs"] = []
+        annotation["is_hotspot"] = False
+        annotation["hotspot_name"] = ""
+        annotation["gene_role"] = GENE_ROLES.get(gene_name, "unknown")
 
         for hotspot in hotspots:
             if _matches_hotspot(mutation, hotspot):
                 annotation["known"] = True
+                annotation["is_hotspot"] = True
                 annotation["clinical_significance"] = "Pathogenic"
                 annotation["associated_cancers"] = hotspot.get("cancers", [])
                 annotation["hotspot_change"] = hotspot.get("change", "")
+                annotation["hotspot_name"] = hotspot.get("change", "")
                 annotation["population_frequency"] = hotspot.get("frequency", 0)
+                # Préserver protein_change depuis le hotspot si absent dans la mutation
+                if not annotation.get("protein_change") and hotspot.get("change"):
+                    annotation["protein_change"] = hotspot.get("change", "")
                 break
 
         if not annotation["known"]:

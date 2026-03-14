@@ -7,8 +7,122 @@ import json
 import os
 from config import (
     REFERENCE_GENOME_FILE, SAMPLES_DIR, KNOWN_MUTATIONS_FILE,
-    REAL_DATA_DIR, REAL_SAMPLES_DIR, REAL_REFERENCE_FILE, REAL_KNOWN_MUTATIONS_FILE
+    REAL_DATA_DIR, REAL_SAMPLES_DIR, REAL_REFERENCE_FILE, REAL_KNOWN_MUTATIONS_FILE,
+    CANCER_LABEL_MAPPING,
 )
+
+
+# Cancers biologiquement impossibles par sexe
+_MALE_ONLY_CANCERS = {"prostate", "testicule"}
+_FEMALE_ONLY_CANCERS = {"sein", "ovaire", "uterus", "endometre", "col utérin", "cervix"}
+
+
+def harmonize_cancer_label(label):
+    """Normalise un label de cancer vers la forme canonique du projet."""
+    if not label:
+        return label
+    key = str(label).strip().lower()
+    return CANCER_LABEL_MAPPING.get(key, label)
+
+
+def validate_metadata(all_patients_data, verbose=True):
+    """
+    Valide et nettoie les métadonnées d'une cohorte de patients.
+
+    Détecte :
+    - Cancers biologiquement impossibles selon le sexe
+    - Types de cancer manquants
+    - Patients en doublon (même patient_id)
+    - Âges aberrants (< 0 ou > 120)
+
+    Retourne un dict :
+    {
+      "warnings": [str],
+      "errors": [str],
+      "n_valid": int,
+      "n_excluded": int,
+      "excluded_ids": [str],
+    }
+    """
+    warnings_list = []
+    errors_list = []
+    seen_ids = {}
+    excluded_ids = []
+
+    for patient_data in all_patients_data:
+        pid = patient_data.get("patient_id", "UNKNOWN")
+        meta = patient_data.get("metadata", {})
+
+        # Harmoniser le label cancer
+        raw_cancer = meta.get("cancer_type", "")
+        harmonized = harmonize_cancer_label(raw_cancer)
+        if harmonized and harmonized != raw_cancer:
+            meta["cancer_type"] = harmonized
+            if verbose:
+                warnings_list.append(
+                    f"[{pid}] Label cancer harmonisé : '{raw_cancer}' → '{harmonized}'"
+                )
+
+        cancer_type = meta.get("cancer_type", "")
+        sex = str(meta.get("sex", "")).strip().upper()
+        age = meta.get("age")
+
+        # Doublon de patient_id
+        if pid in seen_ids:
+            errors_list.append(
+                f"[{pid}] Doublon détecté (déjà vu une fois) — patient ignoré"
+            )
+            excluded_ids.append(pid)
+            continue
+        seen_ids[pid] = True
+
+        # Cancer manquant (warning, pas exclusion)
+        if not cancer_type:
+            warnings_list.append(f"[{pid}] Cancer inconnu — sera traité comme patient à prédire")
+
+        # Âge aberrant
+        if age is not None:
+            try:
+                age_val = float(age)
+                if age_val < 0 or age_val > 120:
+                    errors_list.append(f"[{pid}] Âge aberrant : {age_val}")
+            except (TypeError, ValueError):
+                warnings_list.append(f"[{pid}] Âge non numérique : {age}")
+
+        # Cohérence sexe/cancer
+        if sex and cancer_type:
+            cn = cancer_type.strip().lower()
+            if sex == "M" and cn in _FEMALE_ONLY_CANCERS:
+                errors_list.append(
+                    f"[{pid}] Incohérence sexe/cancer : patient M avec cancer '{cancer_type}'"
+                )
+                excluded_ids.append(pid)
+            elif sex == "F" and cn in _MALE_ONLY_CANCERS:
+                errors_list.append(
+                    f"[{pid}] Incohérence sexe/cancer : patient F avec cancer '{cancer_type}'"
+                )
+                excluded_ids.append(pid)
+
+    n_valid = len(all_patients_data) - len(excluded_ids)
+    report = {
+        "warnings": warnings_list,
+        "errors": errors_list,
+        "n_valid": n_valid,
+        "n_excluded": len(excluded_ids),
+        "excluded_ids": excluded_ids,
+    }
+
+    if verbose and (warnings_list or errors_list):
+        print(f"  [validate_metadata] {len(warnings_list)} avertissements, "
+              f"{len(errors_list)} erreurs, {len(excluded_ids)} patients exclus")
+        for msg in errors_list:
+            print(f"    ERREUR: {msg}")
+        for msg in warnings_list[:5]:
+            print(f"    WARN:   {msg}")
+        if len(warnings_list) > 5:
+            print(f"    ... +{len(warnings_list) - 5} autres avertissements")
+
+    return report
 
 
 def load_fasta(filepath):

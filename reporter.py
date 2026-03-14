@@ -8,7 +8,8 @@ from datetime import datetime
 from config import REPORTS_DIR
 
 
-def generate_patient_text_report(patient_report, output_dir=REPORTS_DIR):
+def generate_patient_text_report(patient_report, output_dir=REPORTS_DIR,
+                                  ml_prediction=None):
     pid = patient_report["patient_id"]
     meta = patient_report.get("metadata", {})
     risk_summary = patient_report.get("risk_summary", {})
@@ -29,9 +30,52 @@ def generate_patient_text_report(patient_report, output_dir=REPORTS_DIR):
         lines.append(f"  Cancer connu:   {meta['cancer_type']}")
     lines.append("")
 
+    # --- Section Classification ML (priorite 1) ---
+    if ml_prediction:
+        lines.append("--- CLASSIFICATION ML — CANCER PROBABLE ---")
+        pred_cancer = ml_prediction.get("predicted_cancer", "N/A")
+        confidence = ml_prediction.get("confidence", 0)
+        model_used = ml_prediction.get("model_used", "N/A")
+        lines.append(f"  Cancer predit:       {pred_cancer}")
+        lines.append(f"  Confiance:           {confidence:.2%}")
+        lines.append(f"  Modele:              {model_used}")
+
+        top3 = ml_prediction.get("top3", [])
+        if top3:
+            lines.append(f"  Top-3 cancers probables:")
+            for rank, (cancer, prob) in enumerate(top3, 1):
+                lines.append(f"    {rank}. {cancer:<20} {prob:.2%}")
+
+        top_features = ml_prediction.get("top_features", [])
+        if top_features:
+            lines.append(f"  Features determinantes:")
+            for feat in top_features[:5]:
+                lines.append(
+                    f"    - {feat['feature']:<35} importance={feat['importance']:.4f} "
+                    f"valeur={feat['patient_value']}"
+                )
+        lines.append("")
+
+    # --- Profil de vraisemblance (outil secondaire) ---
+    likelihood_profile = patient_report.get("likelihood_profile", {})
+    if likelihood_profile:
+        lines.append("--- PROFIL DE COMPATIBILITE CANCER ---")
+        lines.append(f"  {'Cancer':<22} {'Compatibilite':>15} {'Genes supports'}")
+        lines.append("  " + "-" * 65)
+        for cancer, lk in list(likelihood_profile.items())[:6]:
+            genes = ", ".join(lk.get("supporting_genes", [])[:3])
+            lines.append(
+                f"  {cancer:<22} {lk['likelihood']:>14.1%}  {genes}"
+            )
+        lines.append("")
+
     lines.append("--- RESUME MUTATIONNEL ---")
     lines.append(f"  Mutations totales:       {patient_report.get('total_mutations_detected', 0)}")
-    lines.append(f"  Densité mutationnelle (panel):    {patient_report.get('panel_mutation_density', 0)} mut/Mb")
+    lines.append(f"  Densité mutationnelle:   {patient_report.get('panel_mutation_density', 0)} mut/Mb")
+    lines.append(f"  Hotspots detectes:       {patient_report.get('n_hotspots', 0)}")
+    lines.append(f"  Variants pathogeniques:  {patient_report.get('n_pathogenic_variants', 0)}")
+    lines.append(f"  Oncogenes mutes:         {patient_report.get('n_oncogenes_mutated', 0)}")
+    lines.append(f"  Suppresseurs mutes:      {patient_report.get('n_suppressors_mutated', 0)}")
     lines.append(f"  Risque global:           {risk_summary.get('overall_risk', 'N/A')}")
     lines.append("")
 
@@ -41,12 +85,37 @@ def generate_patient_text_report(patient_report, output_dir=REPORTS_DIR):
             lines.append(f"  [!] {flag}")
         lines.append("")
 
+    high_impact = patient_report.get("high_impact_variants", [])
+    if high_impact:
+        lines.append("--- VARIANTS A IMPACT ELEVE ---")
+        lines.append(f"  {'Gene':<10} {'Allele':<18} {'Type':<6} {'Pos':>8} {'Score':>7} {'Classification'}")
+        lines.append("  " + "-" * 67)
+        for var in high_impact[:15]:
+            prot = (var.get("protein_change") or var.get("hotspot_change") or "").strip()
+            hotspot_flag = " [*]" if var.get("is_hotspot") else ""
+            lines.append(
+                f"  {var.get('gene', ''):<10} {prot:<18} {var.get('type', ''):<6} "
+                f"{var.get('position', 0):>8} {var.get('pathogenicity_score', 0):>7.3f} "
+                f"{var.get('acmg_classification', '')}{hotspot_flag}"
+            )
+        lines.append("  (* = hotspot connu)")
+        lines.append("")
+
+    signature = patient_report.get("mutation_signature", {})
+    matched_sigs = signature.get("matched_signatures", [])
+    if matched_sigs:
+        lines.append("--- SIGNATURES MUTATIONNELLES (info secondaire) ---")
+        for sig in matched_sigs[:5]:
+            lines.append(f"  {sig['signature']:<35} similarite: {sig['similarity']:.3f}")
+        lines.append("")
+
+    # --- Profil de risque naif (outil secondaire) ---
     risk_profile = patient_report.get("cancer_risk_profile", {})
     if risk_profile:
-        lines.append("--- PROFIL DE RISQUE CANCER ---")
+        lines.append("--- PROFIL DE RISQUE NAIF (outil secondaire) ---")
         lines.append(f"  {'Cancer':<20} {'Score':>8} {'Niveau':<15} {'Genes'}")
         lines.append("  " + "-" * 65)
-        for cancer, profile in risk_profile.items():
+        for cancer, profile in list(risk_profile.items())[:5]:
             genes = ", ".join(profile["genes_involved"][:3])
             lines.append(
                 f"  {cancer:<20} {profile['risk_score']:>8.3f} "
@@ -54,59 +123,11 @@ def generate_patient_text_report(patient_report, output_dir=REPORTS_DIR):
             )
         lines.append("")
 
-    high_impact = patient_report.get("high_impact_variants", [])
-    if high_impact:
-        lines.append("--- VARIANTS A IMPACT ELEVE ---")
-        lines.append(f"  {'Gene':<10} {'Type':<6} {'Pos':>8} {'Score':>7} {'Classification'}")
-        lines.append("  " + "-" * 55)
-        for var in high_impact[:15]:
-            lines.append(
-                f"  {var.get('gene', ''):<10} {var.get('type', ''):<6} "
-                f"{var.get('position', 0):>8} {var.get('pathogenicity_score', 0):>7.3f} "
-                f"{var.get('acmg_classification', '')}"
-            )
-        lines.append("")
-
-    signature = patient_report.get("mutation_signature", {})
-    matched_sigs = signature.get("matched_signatures", [])
-    if matched_sigs:
-        lines.append("--- SIGNATURES MUTATIONNELLES ---")
-        for sig in matched_sigs[:5]:
-            lines.append(f"  {sig['signature']:<35} similarite: {sig['similarity']:.3f}")
-        lines.append("")
-
     if risk_summary.get("recommendations"):
         lines.append("--- RECOMMANDATIONS ---")
         for rec in risk_summary["recommendations"]:
             lines.append(f"  -> {rec}")
         lines.append("")
-
-    lines.append("=" * 72)
-    lines.append("  GUIDE D'INTERPRETATION DES RESULTATS")
-    lines.append("=" * 72)
-    lines.append("  Score de Pathogenicite:")
-    lines.append("  >= 0.8 : Pathogene (cause reconnue de maladie)")
-    lines.append("  0.6-0.8: Probablement pathogene")
-    lines.append("  0.3-0.6: VUS (Variant de Signification Incertaine)")
-    lines.append("  < 0.3  : Benin ou probablement benin")
-    lines.append("")
-    lines.append("  Densite Mutationnelle (panel) (mut/Mb):")
-    lines.append("  > 100  : Tres elevee (ex: Melanome, Poumon)")
-    lines.append("  50-100 : Elevee")
-    lines.append("  20-50  : Moderee")
-    lines.append("  < 20   : Faible")
-    lines.append("  Note: cette metrique est calculee sur les genes du panel (12 genes),")
-    lines.append("  et ne constitue pas une TMB (Tumor Mutation Burden) clinique.")
-    lines.append("")
-    lines.append("  Niveau de Risque Cancer:")
-    lines.append("  TRES ELEVE : Prise en charge urgente (Score >= 1.5)")
-    lines.append("  ELEVE      : Consultation oncogenetique conseillee (Score 1.0 - 1.49)")
-    lines.append("  MODERE     : Suivi regulier (Score 0.5 - 0.99)")
-    lines.append("  FAIBLE     : Profil mutationnel peu preoccupant (Score < 0.5)")
-    lines.append("")
-    lines.append("  Calcul du score de risque cancer:")
-    lines.append("  Score = Somme(pathogenicity_score) pour chaque mutation du gene associe au cancer")
-    lines.append("")
 
     lines.append("=" * 72)
     lines.append("  Ce rapport est genere a des fins de recherche uniquement.")
@@ -120,35 +141,40 @@ def generate_patient_text_report(patient_report, output_dir=REPORTS_DIR):
 
     return filepath, report_text
 
-def generate_cohort_csv_export(all_patients_results, output_dir=REPORTS_DIR):
-    """Exporte les resultats de la cohorte au format CSV."""
+def generate_cohort_csv_export(all_patients_results, output_dir=REPORTS_DIR,
+                               ml_predictions=None):
+    """Exporte les resultats de la cohorte au format CSV avec predictions ML."""
     import csv
     filepath = os.path.join(output_dir, "rapport_cohorte.csv")
-    
+
+    # Construire un index des prédictions ML par patient_id
+    pred_by_pid = {}
+    if ml_predictions:
+        for p in ml_predictions:
+            pred_by_pid[p.get("patient_id", "")] = p
+
     headers = [
-        "Patient_ID", "Age", "Sexe", "Cancer_Connu", "Severite", 
+        "Patient_ID", "Age", "Sexe", "Cancer_Connu", "Severite",
         "Total_Mutations", "Densite_Mutationnelle_Panel", "Risque_Global",
-        "Cancer_Max_Risque", "Score_Max_Risque"
+        "N_Hotspots", "N_Pathogeniques", "N_Oncogenes", "N_Suppresseurs",
+        "Cancer_ML_Predit", "Confiance_ML", "Top2_Cancer", "Top3_Cancer",
+        "Cancer_ML_Correct",
     ]
-    
+
     with open(filepath, "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
         writer.writerow(headers)
-        
+
         for pr in all_patients_results:
             pid = pr.get("patient_id", "")
             meta = pr.get("metadata", {})
             risk = pr.get("risk_summary", {})
-            
-            # Recherche du cancer avec le risque maximum
-            cancer_profiles = pr.get("cancer_risk_profile", {})
-            max_cancer = ""
-            max_score = 0.0
-            for c, profile in cancer_profiles.items():
-                if profile.get("risk_score", 0) > max_score:
-                    max_score = profile.get("risk_score", 0)
-                    max_cancer = c
-                    
+            mp = pred_by_pid.get(pid, {})
+
+            top3 = mp.get("top3", [])
+            top2_cancer = top3[1][0] if len(top3) > 1 else ""
+            top3_cancer = top3[2][0] if len(top3) > 2 else ""
+
             row = [
                 pid,
                 meta.get("age", ""),
@@ -158,172 +184,23 @@ def generate_cohort_csv_export(all_patients_results, output_dir=REPORTS_DIR):
                 pr.get("total_mutations_detected", 0),
                 pr.get("panel_mutation_density", 0),
                 risk.get("overall_risk", ""),
-                max_cancer,
-                round(max_score, 3)
+                pr.get("n_hotspots", 0),
+                pr.get("n_pathogenic_variants", 0),
+                pr.get("n_oncogenes_mutated", 0),
+                pr.get("n_suppressors_mutated", 0),
+                mp.get("predicted_cancer", ""),
+                round(mp.get("confidence", 0), 4) if mp else "",
+                top2_cancer,
+                top3_cancer,
+                mp.get("correct", "") if mp else "",
             ]
             writer.writerow(row)
-            
-    return filepath
-
-
-def generate_patient_html_report(patient_report, plots=None, output_dir=REPORTS_DIR):
-    pid = patient_report["patient_id"]
-    meta = patient_report.get("metadata", {})
-    risk_summary = patient_report.get("risk_summary", {})
-
-    risk_color = {
-        "TRES ELEVE": "#c0392b",
-        "ELEVE": "#e74c3c",
-        "MODERE": "#f39c12",
-        "FAIBLE": "#27ae60",
-        "TRES FAIBLE": "#2ecc71",
-    }
-
-    overall_risk = risk_summary.get("overall_risk", "N/A")
-    color = risk_color.get(overall_risk, "#95a5a6")
-
-    html = f"""<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Rapport genomique - {pid}</title>
-    <style>
-        body {{ font-family: 'Segoe UI', Arial, sans-serif; margin: 40px; background: #f5f6fa; color: #2c3e50; }}
-        .header {{ background: #2c3e50; color: white; padding: 30px; border-radius: 8px; margin-bottom: 30px; }}
-        .header h1 {{ margin: 0; font-size: 24px; }}
-        .header p {{ margin: 5px 0 0; opacity: 0.8; }}
-        .section {{ background: white; padding: 25px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }}
-        .section h2 {{ color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; margin-top: 0; }}
-        .risk-badge {{ display: inline-block; padding: 8px 20px; border-radius: 20px; color: white; font-weight: bold; font-size: 18px; background: {color}; }}
-        table {{ width: 100%; border-collapse: collapse; margin: 15px 0; }}
-        th {{ background: #34495e; color: white; padding: 10px; text-align: left; }}
-        td {{ padding: 8px 10px; border-bottom: 1px solid #ecf0f1; }}
-        tr:hover {{ background: #f8f9fa; }}
-        .alert {{ background: #fdf2e9; border-left: 4px solid #e74c3c; padding: 12px 20px; margin: 10px 0; border-radius: 0 4px 4px 0; }}
-        .recommendation {{ background: #eaf2f8; border-left: 4px solid #3498db; padding: 12px 20px; margin: 10px 0; border-radius: 0 4px 4px 0; }}
-        .plot {{ text-align: center; margin: 20px 0; }}
-        .plot img {{ max-width: 100%; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }}
-        .footer {{ text-align: center; color: #95a5a6; margin-top: 40px; padding: 20px; font-size: 12px; }}
-        .grid {{ display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }}
-        .stat-card {{ background: #f8f9fa; padding: 15px; border-radius: 6px; text-align: center; }}
-        .stat-card .value {{ font-size: 28px; font-weight: bold; color: #2c3e50; }}
-        .stat-card .label {{ color: #7f8c8d; font-size: 13px; }}
-    </style>
-</head>
-<body>
-    <div class="header">
-        <h1>Rapport d'analyse genomique</h1>
-        <p>Patient: {pid} | Date: {datetime.now().strftime('%d/%m/%Y %H:%M')}</p>
-    </div>
-
-    <div class="section">
-        <h2>Informations patient</h2>
-        <div class="grid">
-            <div class="stat-card"><div class="value">{meta.get('age', 'N/A')}</div><div class="label">Age</div></div>
-            <div class="stat-card"><div class="value">{meta.get('sex', 'N/A')}</div><div class="label">Sexe</div></div>
-            <div class="stat-card"><div class="value">{patient_report.get('total_mutations_detected', 0)}</div><div class="label">Mutations totales</div></div>
-            <div class="stat-card"><div class="value">{patient_report.get('panel_mutation_density', 0)}</div><div class="label">Densité mut/Mb (panel)</div></div>
-        </div>
-    </div>
-
-    <div class="section">
-        <h2>Niveau de risque global</h2>
-        <p><span class="risk-badge">{overall_risk}</span></p>
-"""
-
-    for flag in risk_summary.get("flags", []):
-        html += f'        <div class="alert">{flag}</div>\n'
-
-    html += "    </div>\n"
-
-    risk_profile = patient_report.get("cancer_risk_profile", {})
-    if risk_profile:
-        html += """    <div class="section">
-        <h2>Profil de risque par cancer</h2>
-        <table>
-            <tr><th>Cancer</th><th>Score</th><th>Niveau</th><th>Genes impliques</th></tr>
-"""
-        for cancer, profile in risk_profile.items():
-            genes = ", ".join(profile["genes_involved"][:3])
-            rc = risk_color.get(profile["risk_level"], "#95a5a6")
-            html += f'            <tr><td>{cancer}</td><td>{profile["risk_score"]:.3f}</td>'
-            html += f'<td style="color:{rc};font-weight:bold">{profile["risk_level"]}</td>'
-            html += f'<td>{genes}</td></tr>\n'
-        html += "        </table>\n    </div>\n"
-
-    high_impact = patient_report.get("high_impact_variants", [])
-    if high_impact:
-        html += """    <div class="section">
-        <h2>Variants pathogenes detectes</h2>
-        <table>
-            <tr><th>Gene</th><th>Type</th><th>Position</th><th>Score</th><th>Classification</th></tr>
-"""
-        for var in high_impact[:15]:
-            html += f'            <tr><td>{var.get("gene", "")}</td>'
-            html += f'<td>{var.get("type", "")}</td>'
-            html += f'<td>{var.get("position", 0)}</td>'
-            html += f'<td>{var.get("pathogenicity_score", 0):.3f}</td>'
-            html += f'<td>{var.get("acmg_classification", "")}</td></tr>\n'
-        html += "        </table>\n    </div>\n"
-
-    if plots:
-        html += '    <div class="section">\n        <h2>Visualisations</h2>\n'
-        for plot_path in plots:
-            rel_path = os.path.relpath(plot_path, output_dir)
-            html += f'        <div class="plot"><img src="{rel_path}" alt="Graphique"></div>\n'
-        html += "    </div>\n"
-
-    if risk_summary.get("recommendations"):
-        html += '    <div class="section">\n        <h2>Recommandations</h2>\n'
-        for rec in risk_summary["recommendations"]:
-            html += f'        <div class="recommendation">{rec}</div>\n'
-        html += "    </div>\n"
-
-    html += """    <div class="section">
-        <h2>Guide d'interprétation</h2>
-        <h3>Score de Pathogénicité</h3>
-        <ul>
-            <li><b>&ge; 0.8</b> : Pathogène (mutation causant la maladie)</li>
-            <li><b>0.6 - 0.79</b> : Probablement pathogène</li>
-            <li><b>0.3 - 0.59</b> : VUS (Variant de Signification Incertaine)</li>
-            <li><b>&lt; 0.3</b> : Bénin ou probablement bénin</li>
-        </ul>
-        <h3>Densité Mutationnelle (panel)</h3>
-        <ul>
-            <li><b>&gt; 100 mut/Mb</b> : Très élevée (typique mélanome, poumon)</li>
-            <li><b>50 - 100 mut/Mb</b> : Élevée</li>
-            <li><b>20 - 49 mut/Mb</b> : Modérée</li>
-            <li><b>&lt; 20 mut/Mb</b> : Faible</li>
-        </ul>
-        <p><i>Note : cette métrique est calculée sur les gènes du panel uniquement (12 gènes)
-        et ne constitue pas une TMB (Tumor Mutation Burden) clinique.</i></p>
-        <h3>Niveaux de Risque Global</h3>
-        <ul>
-            <li><b>TRÈS ÉLEVÉ</b> : Prise en charge urgente recommandée (Score &ge; 1.5)</li>
-            <li><b>ÉLEVÉ</b> : Consultation oncogénétique conseillée (Score 1.0 - 1.49)</li>
-            <li><b>MODÉRÉ</b> : Surveillance recommandée (Score 0.5 - 0.99)</li>
-            <li><b>FAIBLE</b> : Profil mutationnel peu préoccupant (Score &lt; 0.5)</li>
-        </ul>
-        <h3>Calcul du Score de Risque</h3>
-        <p><i>Score = &Sigma; pathogenicity_score (pour chaque mutation du gène associé au cancer)</i></p>
-    </div>
-"""
-
-    html += """    <div class="footer">
-        Ce rapport est genere a des fins de recherche uniquement.<br>
-        Il ne constitue pas un diagnostic medical.
-    </div>
-</body>
-</html>"""
-
-    filepath = os.path.join(output_dir, f"rapport_{pid}.html")
-    with open(filepath, "w", encoding="utf-8") as f:
-        f.write(html)
 
     return filepath
 
 
-def generate_cohort_summary_report(all_patients_results, output_dir=REPORTS_DIR):
+def generate_cohort_summary_report(all_patients_results, output_dir=REPORTS_DIR,
+                                   ml_predictions=None):
     lines = []
     lines.append("=" * 72)
     lines.append("  RAPPORT DE COHORTE - ANALYSE GENOMIQUE")
@@ -332,18 +209,42 @@ def generate_cohort_summary_report(all_patients_results, output_dir=REPORTS_DIR)
     lines.append("=" * 72)
     lines.append("")
 
-    lines.append(f"  {'Patient':<12} {'Age':>4} {'Sexe':>5} {'Mutations':>10} {'Risque':<15} {'Cancer connu'}")
-    lines.append("  " + "-" * 65)
+    # Construire un index des prédictions ML par patient_id
+    pred_by_pid = {}
+    if ml_predictions:
+        for p in ml_predictions:
+            pred_by_pid[p.get("patient_id", "")] = p
 
-    for pr in all_patients_results:
-        meta = pr.get("metadata", {})
-        risk = pr.get("risk_summary", {}).get("overall_risk", "N/A")
-        cancer = meta.get("cancer_type", "-")
-        lines.append(
-            f"  {pr['patient_id']:<12} {meta.get('age', 0):>4} "
-            f"{meta.get('sex', ''):>5} {pr.get('total_mutations_detected', 0):>10} "
-            f"{risk:<15} {cancer or '-'}"
-        )
+    if ml_predictions:
+        lines.append(f"  {'Patient':<12} {'Age':>4} {'Sexe':>5} {'Cancer connu':<20} "
+                     f"{'ML predit':<20} {'Conf':>6} {'OK'}")
+        lines.append("  " + "-" * 75)
+        for pr in all_patients_results:
+            meta = pr.get("metadata", {})
+            pid = pr["patient_id"]
+            mp = pred_by_pid.get(pid, {})
+            cancer_known = meta.get("cancer_type", "-") or "-"
+            pred = mp.get("predicted_cancer", "-")
+            conf = mp.get("confidence", 0)
+            ok = "OK" if mp.get("correct") else ("ERR" if mp.get("correct") is False else "?")
+            lines.append(
+                f"  {pid:<12} {meta.get('age', 0):>4} "
+                f"{meta.get('sex', ''):>5} {cancer_known:<20} "
+                f"{pred:<20} {conf:>6.3f} {ok}"
+            )
+    else:
+        lines.append(f"  {'Patient':<12} {'Age':>4} {'Sexe':>5} {'Mutations':>10} "
+                     f"{'Risque':<15} {'Cancer connu'}")
+        lines.append("  " + "-" * 65)
+        for pr in all_patients_results:
+            meta = pr.get("metadata", {})
+            risk = pr.get("risk_summary", {}).get("overall_risk", "N/A")
+            cancer = meta.get("cancer_type", "-")
+            lines.append(
+                f"  {pr['patient_id']:<12} {meta.get('age', 0):>4} "
+                f"{meta.get('sex', ''):>5} {pr.get('total_mutations_detected', 0):>10} "
+                f"{risk:<15} {cancer or '-'}"
+            )
 
     lines.append("")
     lines.append("=" * 72)
@@ -353,7 +254,7 @@ def generate_cohort_summary_report(all_patients_results, output_dir=REPORTS_DIR)
     with open(filepath, "w", encoding="utf-8") as f:
         f.write(report_text)
 
-    generate_cohort_csv_export(all_patients_results, output_dir)
+    generate_cohort_csv_export(all_patients_results, output_dir, ml_predictions)
 
     return filepath
 
