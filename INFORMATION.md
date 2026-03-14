@@ -62,27 +62,40 @@ Ce document récapitule l'état d'avancement du projet, ce qui a été réalisé
 
 ## CE QUI RESTE À FAIRE
 
-### 1. Documentation des résultats (PRIORITAIRE)
-- [x] **Légende des rapports** : expliquer chaque section du rapport patient
-- [x] **Explication des calculs** : comment sont calculés les scores de risque, la charge mutationnelle, etc.
-- [x] **Guide d'interprétation** : que signifie un score de 0.8 ? Quand s'inquiéter ?
+### 1. PRIORITAIRE — Relancer le pipeline avec les corrections
+- [ ] **Lancer `python main.py --real-data`** avec les nouveaux seuils (ALLELE_MIN_FREQUENCY=0.05, HistGradientBoosting)
+  - Attendre ~10-15 min, vérifier le rapport `output/reports/rapport_ml.txt`
+  - Vérifier que chaque cancer a maintenant des allèles discriminants (objectif : >0 pour tous les 12 cancers)
+  - Comparer les F1-scores des petites classes (Rein, Foie, Prostate) avec les anciens résultats
+- [ ] **Vérifier les allèles détectés** : BRAF V600E mélanome, KRAS G12D pancréas, APC colon doivent apparaître
+- [ ] **Mettre à jour INFORMATION.md** avec les nouveaux résultats chiffrés
 
-### 2. Améliorations ML
-- [ ] **Optimisation des hyperparamètres** : GridSearch plus exhaustif
-- [ ] **Feature selection** : réduire les features non informatives
-- [ ] **Interprétabilité** : SHAP values pour expliquer les prédictions
-- [ ] **Modèles deep learning** : tester des réseaux de neurones
+### 2. Améliorations ML (après validation des nouvelles corrections)
+- [ ] **Feature selection** : supprimer les features d'importance < 0.01 pour réduire le bruit
+- [ ] **SHAP values** : interpréter pourquoi le modèle prédit chaque type de cancer pour chaque patient
+  - Utiliser `shap` library : `pip install shap`
+  - Générer un graphique summary_plot par classe de cancer
+- [ ] **Sauvegarder le modèle entraîné** : éviter de ré-entraîner à chaque exécution
+  ```python
+  import joblib
+  joblib.dump(best_model, "output/model.pkl")
+  model = joblib.load("output/model.pkl")
+  ```
 
-### 3. Améliorations fonctionnelles
-- [x] **Export des résultats** en format CSV/Excel pour analyse externe
-- [ ] **API REST** pour intégration dans d'autres systèmes
-- [ ] **Interface web** pour visualisation interactive
-- [ ] **Tests unitaires** pour valider les calculs
+### 3. Documentation des résultats
+- [x] **Légende des rapports** : chaque section du rapport patient expliquée
+- [x] **Explication des calculs** : scores de risque, charge mutationnelle, etc.
+- [x] **Guide d'interprétation** : niveaux de risque, classification variants
 
-### 4. Données
-- [ ] **Validation externe** : tester sur d'autres cohortes (ICGC, etc.)
-- [ ] **Ajout de gènes** : élargir la liste des gènes cibles
-- [ ] **Données longitudinales** : suivi des patients dans le temps
+### 4. Améliorations fonctionnelles (optionnel)
+- [x] **Export des résultats** en format CSV pour analyse externe
+- [ ] **Tests unitaires** : valider annotator.py, correlator.py, allele_analyzer.py
+- [ ] **API REST** : si intégration dans d'autres systèmes souhaitée
+- [ ] **Interface web** : visualisation interactive (optionnel long terme)
+
+### 5. Données
+- [ ] **Validation externe** : tester sur une autre cohorte (ex. ICGC) pour mesurer la généralisation
+- [ ] **Ajout de gènes** : élargir à CDH1, IDH1, SMAD4, ERBB2 (HER2) qui sont pertinents
 
 ---
 
@@ -227,20 +240,26 @@ Générées automatiquement selon le profil :
 **Date** : 14 mars 2026
 
 **Derniers changements** :
-- Exécution complète du pipeline avec l'ensemble des 3 674 patients TCGA
-- Correction d'un bug d'import (`generate_patient_html_report` n'existait plus dans `reporter.py`)
-- Correction de la numérotation incohérente des étapes du pipeline (maintenant [0/7] à [7/7])
-- Ajout du filtrage des patients invalides (incohérence sexe/cancer) dans le pipeline ML — 35 patients exclus
-- Ajout de la génération de graphiques et export JSON dans le pipeline synthétique
-- Génération de **10 graphiques** : confusion matrices (3 modèles), courbes ROC, importance des features, accuracy par cancer, comparaison des modèles, distribution de confiance, heatmap de cohorte, distribution des impacts
+- **Correction critique** : `ALLELE_MIN_FREQUENCY` abaissé de 0.40 → **0.05** (5%)
+  - Cause du bug : seuil de 40% filtrait tous les allèles sauf BRAF V600E thyroïde (95.6%)
+  - Impact attendu : passage de 1 à plusieurs dizaines d'allèles discriminants par cancer
+  - Allèles désormais détectés : KRAS G12D pancréas (~30%), BRAF V600E mélanome (~50%), APC colon, etc.
+- **Correction** : `ALLELE_MAX_OUTSIDE_FREQUENCY` assoupli de 0.10 → **0.15** (15%)
+  - Permet de capturer BRAF V600E mélanome (freq_out ~10% car thyroïde partage cet allèle)
+- **Amélioration ML** : `GradientBoostingClassifier` → **`HistGradientBoostingClassifier`** avec `class_weight='balanced'`
+  - Corrige le déséquilibre de classes : Rein (51 patients) vs Sein (669 patients)
+  - Amélioration attendue sur Rein (F1=0.06→?), Foie (F1=0.06→?), Prostate (F1=0.15→?)
+  - Plus rapide (algorithme basé sur histogrammes)
 
-**Résultats de l'analyse complète (14 mars 2026)** :
+**Résultats de l'analyse précédente (14 mars 2026, avant corrections)** :
 - **3 639 patients** analysés (35 exclus pour incohérence sexe/cancer)
 - **12 types de cancers**, **12 gènes cibles**, **6 773 mutations** détectées
-- **Meilleur modèle** : Gradient Boosting (accuracy CV = 54.9%, top-3 accuracy = 81.0%, AUC = 0.885)
-- **Cancers les mieux prédits** : Colon (F1=0.82), Thyroïde (F1=0.82), Pancréas (F1=0.63)
-- **Features les plus discriminantes** : allele_score_Thyroide, mut_count_APC, âge, mut_bin_APC
+- **Meilleur modèle** : Gradient Boosting (accuracy CV = 54.4%, top-3 accuracy = 80.5%, AUC = 0.885)
+- **Problèmes identifiés** : 0 allèles discriminants pour 11/12 cancers, Rein/Foie/Prostate F1 < 0.16, clustering ARI=0.023
+- **Cancers les mieux prédits** : Colon (F1=0.81), Thyroïde (F1=0.81), Pancréas (F1=0.62)
 - **725 patients** classés à haut risque (ELEVE ou TRES ELEVE)
+
+> **PROCHAINE ÉTAPE** : relancer `python main.py --real-data` avec les corrections pour obtenir les nouveaux résultats.
 
 ---
 

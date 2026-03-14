@@ -12,12 +12,15 @@ Ce projet a été développé dans le cadre d'un projet ING2. L'objectif est de 
 
 - **Intégration de données réelles TCGA** : 3 674 patients provenant de 12 études TCGA PanCancer Atlas
 - **Pipeline d'analyse complet** : téléchargement → détection → annotation → scoring → corrélation → ML → rapports
-- **Machine Learning** : prédiction du type de cancer basée sur le profil mutationnel (Random Forest, Gradient Boosting, SVM)
-- **Signatures alléliques discriminantes** : identification des mutations caractéristiques de chaque cancer
+- **Machine Learning** : prédiction du type de cancer basée sur le profil mutationnel (Random Forest, HistGradientBoosting avec class_weight, SVM)
+- **Signatures alléliques discriminantes** : identification des mutations caractéristiques de chaque cancer (seuil corrigé à 5% de fréquence minimum)
 - **104 hotspots mutationnels** identifiés automatiquement
-- **Export CSV** : génération d'un `rapport_cohorte.csv` synthétisant toutes les données pour l'analyse externe sur Excel/outils tiers.
-- **Correction du bug de détection des mutations** : évite l'explosion de faux positifs
+- **Export CSV** : génération d'un `rapport_cohorte.csv` synthétisant toutes les données pour l'analyse externe
+- **Correction du bug ALLELE_MIN_FREQUENCY** : seuil abaissé de 40% → 5% (seul BRAF V600E thyroïde était détecté avant)
+- **Correction du déséquilibre de classes** : HistGradientBoosting avec class_weight='balanced' (Rein=51 vs Sein=669)
 - Le mode synthétique est conservé comme fallback pour fonctionner sans internet
+
+> **Prochaine étape** : relancer `python main.py --real-data` pour obtenir les résultats corrigés. Voir [INFORMATION.md](INFORMATION.md).
 
 > 📋 Voir [INFORMATION.md](INFORMATION.md) pour le détail complet de ce qui a été fait et ce qui reste à faire.
 

@@ -7,7 +7,7 @@ from collections import Counter
 
 import numpy as np
 from sklearn.base import clone
-from sklearn.ensemble import GradientBoostingClassifier, RandomForestClassifier
+from sklearn.ensemble import GradientBoostingClassifier, HistGradientBoostingClassifier, RandomForestClassifier
 from sklearn.metrics import (
     accuracy_score,
     classification_report,
@@ -52,12 +52,14 @@ def get_model_specs(random_state=42):
             },
         },
         "Gradient Boosting": {
-            "estimator": GradientBoostingClassifier(random_state=random_state),
+            "estimator": HistGradientBoostingClassifier(
+                class_weight="balanced", random_state=random_state
+            ),
             "param_grid": {
-                "model__n_estimators": [100, 200],
+                "model__max_iter": [100, 200],
                 "model__learning_rate": [0.05, 0.1],
-                "model__max_depth": [3, 5],
-                "model__subsample": [0.8, 1.0],
+                "model__max_depth": [3, 5, None],
+                "model__l2_regularization": [0.0, 0.1],
             },
         },
         "SVM (RBF)": {

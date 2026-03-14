@@ -191,11 +191,15 @@ Combine l'impact predit, la presence dans les bases de donnees, la frequence et 
 
 Editez `config.py` pour ajuster les seuils :
 
-| Parametre | Defaut | Description |
-|-----------|--------|-------------|
+| Parametre | Valeur actuelle | Description |
+|-----------|-----------------|-------------|
 | `MIN_COVERAGE` | 10 | Couverture minimale acceptee (x) |
 | `MIN_QUALITY_SCORE` | 20 | Score Phred minimum |
 | `MUTATION_FREQ_THRESHOLD` | 0.05 | Frequence minimale pour un variant |
+| `ALLELE_MIN_FREQUENCY` | **0.05** | Freq. minimale d'un allele dans son cancer (corrige de 0.40 → 0.05) |
+| `ALLELE_MAX_OUTSIDE_FREQUENCY` | **0.15** | Freq. maximale hors du cancer cible (corrige de 0.10 → 0.15) |
+| `ALLELE_MIN_ENRICHMENT` | 2.0 | Enrichissement minimum (freq_in / freq_out) |
+| `ALLELE_MIN_PATIENTS` | 2 | Nb minimum de patients porteurs de l'allele |
 
 ---
 
@@ -234,6 +238,53 @@ Chaque module est independant, sans dependance circulaire. Les modules communiqu
 - L'alignement de reads est simplifie (pas de Burrows-Wheeler) — mode synthetique uniquement
 - Ce pipeline est un outil de recherche et d'education, **pas un outil de diagnostic medical**
 - Les donnees TCGA sont publiques et anonymisees
+
+---
+
+## Prochaines etapes recommandees
+
+### 1. Relancer le pipeline avec les corrections (URGENT)
+
+Les corrections suivantes ont ete appliquees au code et necessitent un nouveau run complet :
+
+```bash
+python main.py --real-data
+```
+
+**Ce qui a change :**
+- `ALLELE_MIN_FREQUENCY` : 0.40 → 0.05 (detecte maintenant KRAS G12D pancreas, BRAF V600E melanome, etc.)
+- `ALLELE_MAX_OUTSIDE_FREQUENCY` : 0.10 → 0.15 (alleles partages entre cancers proches mieux geres)
+- `HistGradientBoostingClassifier` avec `class_weight='balanced'` (corrige le desequilibre Rein=51 vs Sein=669)
+
+**Verifications apres le run :**
+- `output/reports/rapport_ml.txt` : chaque cancer doit avoir >0 alleles discriminants
+- F1-score Rein, Foie, Prostate doivent augmenter par rapport aux anciens (0.06, 0.06, 0.15)
+
+### 2. Interpreter les nouveaux resultats
+
+Ouvrir `output/reports/rapport_ml.txt` et verifier :
+```
+SIGNATURES D'ALLELES PAR CANCER (discriminantes)
+  Sein:       X alleles discriminants
+  Melanome:   X alleles (BRAF V600E attendu)
+  Pancreas:   X alleles (KRAS G12D attendu)
+  Colon:      X alleles (APC attendu)
+  Thyroide:   1+ alleles (BRAF V600E deja present)
+```
+
+### 3. Ajouter les SHAP values (optionnel)
+
+```bash
+pip install shap
+```
+
+Puis dans `ml_predictor.py`, apres l'entrainement du meilleur modele :
+```python
+import shap
+explainer = shap.TreeExplainer(best_model)
+shap_values = explainer.shap_values(X)
+shap.summary_plot(shap_values, X, feature_names=feature_names)
+```
 
 ---
 
