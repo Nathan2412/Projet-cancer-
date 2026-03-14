@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_2606
-  Date: 07/03/2026 22:33
+  Date: 14/03/2026 20:35
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -10,12 +10,53 @@
   Severite:       moderate
   Cancer connu:   Vessie
 
+--- CLASSIFICATION ML — CANCER PROBABLE ---
+  Cancer predit:       Vessie
+  Confiance:           57.44%
+  Modele:              Gradient Boosting
+  Top-3 cancers probables:
+    1. Vessie               57.44%
+    2. Glioblastome         29.63%
+    3. Sein                 7.36%
+  Features determinantes:
+    - age                                 importance=0.0736 valeur=59.0
+    - burden                              importance=0.0321 valeur=22.06
+    - n_suppressors                       importance=0.0418 valeur=4.0
+    - total_mut                           importance=0.0333 valeur=5.0
+    - n_genes                             importance=0.0302 valeur=4.0
+
+--- PROFIL DE COMPATIBILITE CANCER ---
+  Cancer                   Compatibilite Genes supports
+  -----------------------------------------------------------------
+  Glioblastome                    16.7%  PIK3CA
+  Melanome                        16.7%  PIK3CA
+  Poumon                          16.7%  PIK3CA
+  Vessie                          16.7%  PIK3CA
+  Colon                           16.7%  PIK3CA
+  Rein                            16.7%  PIK3CA
+
 --- RESUME MUTATIONNEL ---
   Mutations totales:       5
-  Densité mutationnelle (panel):    22.06 mut/Mb
+  Densité mutationnelle:   22.06 mut/Mb
+  Hotspots detectes:       1
+  Variants pathogeniques:  1
+  Oncogenes mutes:         1
+  Suppresseurs mutes:      4
   Risque global:           MODERE
 
---- PROFIL DE RISQUE CANCER ---
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Allele             Type        Pos   Score Classification
+  -------------------------------------------------------------------
+  PIK3CA     E545K              SNP      212023   0.900 Pathogenic [*]
+  TP53       E294Sfs*51         DEL       91337   0.550 VUS
+  RB1        Q736*              SNP      734219   0.500 VUS
+  (* = hotspot connu)
+
+--- SIGNATURES MUTATIONNELLES (info secondaire) ---
+  SBS7 (UV)                           similarite: 0.900
+  SBS1 (age)                          similarite: 0.700
+
+--- PROFIL DE RISQUE NAIF (outil secondaire) ---
   Cancer                  Score Niveau          Genes
   -----------------------------------------------------------------
   Glioblastome            0.900 MODERE          PIK3CA
@@ -23,47 +64,9 @@
   Poumon                  0.900 MODERE          PIK3CA
   Vessie                  0.900 MODERE          PIK3CA
   Colon                   0.900 MODERE          PIK3CA
-  Rein                    0.900 MODERE          PIK3CA
-
---- VARIANTS A IMPACT ELEVE ---
-  Gene       Type        Pos   Score Classification
-  -------------------------------------------------------
-  PIK3CA     SNP      212023   0.900 Pathogenic
-  TP53       DEL       91337   0.550 VUS
-  RB1        SNP      734219   0.500 VUS
-
---- SIGNATURES MUTATIONNELLES ---
-  SBS7 (UV)                           similarite: 0.900
-  SBS1 (age)                          similarite: 0.700
 
 --- RECOMMANDATIONS ---
   -> Suivi regulier avec depistage standard
-
-========================================================================
-  GUIDE D'INTERPRETATION DES RESULTATS
-========================================================================
-  Score de Pathogenicite:
-  >= 0.8 : Pathogene (cause reconnue de maladie)
-  0.6-0.8: Probablement pathogene
-  0.3-0.6: VUS (Variant de Signification Incertaine)
-  < 0.3  : Benin ou probablement benin
-
-  Densite Mutationnelle (panel) (mut/Mb):
-  > 100  : Tres elevee (ex: Melanome, Poumon)
-  50-100 : Elevee
-  20-50  : Moderee
-  < 20   : Faible
-  Note: cette metrique est calculee sur les genes du panel (12 genes),
-  et ne constitue pas une TMB (Tumor Mutation Burden) clinique.
-
-  Niveau de Risque Cancer:
-  TRES ELEVE : Prise en charge urgente (Score >= 1.5)
-  ELEVE      : Consultation oncogenetique conseillee (Score 1.0 - 1.49)
-  MODERE     : Suivi regulier (Score 0.5 - 0.99)
-  FAIBLE     : Profil mutationnel peu preoccupant (Score < 0.5)
-
-  Calcul du score de risque cancer:
-  Score = Somme(pathogenicity_score) pour chaque mutation du gene associe au cancer
 
 ========================================================================
   Ce rapport est genere a des fins de recherche uniquement.

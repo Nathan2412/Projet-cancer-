@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_1915
-  Date: 07/03/2026 22:33
+  Date: 14/03/2026 20:35
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -10,9 +10,38 @@
   Severite:       moderate
   Cancer connu:   Melanome
 
+--- CLASSIFICATION ML — CANCER PROBABLE ---
+  Cancer predit:       Melanome
+  Confiance:           88.64%
+  Modele:              Gradient Boosting
+  Top-3 cancers probables:
+    1. Melanome             88.64%
+    2. Colon                6.22%
+    3. Glioblastome         4.08%
+  Features determinantes:
+    - age                                 importance=0.0736 valeur=46.0
+    - burden                              importance=0.0321 valeur=17.65
+    - total_mut                           importance=0.0333 valeur=4.0
+    - n_genes                             importance=0.0302 valeur=4.0
+    - allele_score_Thyroide               importance=0.0742 valeur=1.0
+
+--- PROFIL DE COMPATIBILITE CANCER ---
+  Cancer                   Compatibilite Genes supports
+  -----------------------------------------------------------------
+  Colon                           20.0%  BRAF, PTEN
+  Melanome                        20.0%  BRAF, PTEN
+  Glioblastome                    20.0%  BRAF, PTEN
+  Sein                            10.0%  PTEN
+  Poumon                          10.0%  BRAF
+  Vessie                          10.0%  BRAF
+
 --- RESUME MUTATIONNEL ---
   Mutations totales:       4
-  Densité mutationnelle (panel):    17.65 mut/Mb
+  Densité mutationnelle:   17.65 mut/Mb
+  Hotspots detectes:       2
+  Variants pathogeniques:  2
+  Oncogenes mutes:         2
+  Suppresseurs mutes:      2
   Risque global:           TRES ELEVE
 
 --- ALERTES ---
@@ -24,58 +53,31 @@
   [!] Risque ELEVE pour Vessie (score: 1.0)
   [!] Risque ELEVE pour Thyroide (score: 1.0)
 
---- PROFIL DE RISQUE CANCER ---
-  Cancer                  Score Niveau          Genes
-  -----------------------------------------------------------------
-  Colon                   2.000 TRES ELEVE      BRAF, PTEN
-  Melanome                2.000 TRES ELEVE      BRAF, PTEN
-  Glioblastome            2.000 TRES ELEVE      BRAF, PTEN
-  Sein                    1.000 ELEVE           PTEN
-  Poumon                  1.000 ELEVE           BRAF
-  Vessie                  1.000 ELEVE           BRAF
-  Thyroide                1.000 ELEVE           BRAF
-
 --- VARIANTS A IMPACT ELEVE ---
-  Gene       Type        Pos   Score Classification
-  -------------------------------------------------------
-  PTEN       SNP     1829791   1.000 Pathogenic
-  BRAF       SNP      266191   1.000 Pathogenic
+  Gene       Allele             Type        Pos   Score Classification
+  -------------------------------------------------------------------
+  PTEN       R130*              SNP     1829791   1.000 Pathogenic [*]
+  BRAF       V600E              SNP      266191   1.000 Pathogenic [*]
+  (* = hotspot connu)
 
---- SIGNATURES MUTATIONNELLES ---
+--- SIGNATURES MUTATIONNELLES (info secondaire) ---
   SBS4 (tabac)                        similarite: 0.800
   SBS6 (MMR deficient)                similarite: 0.650
   SBS2 (APOBEC)                       similarite: 0.650
   SBS1 (age)                          similarite: 0.300
 
+--- PROFIL DE RISQUE NAIF (outil secondaire) ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Colon                   2.000 TRES ELEVE      PTEN, BRAF
+  Melanome                2.000 TRES ELEVE      PTEN, BRAF
+  Glioblastome            2.000 TRES ELEVE      PTEN, BRAF
+  Sein                    1.000 ELEVE           PTEN
+  Poumon                  1.000 ELEVE           BRAF
+
 --- RECOMMANDATIONS ---
   -> Consultation oncogenetique recommandee
   -> Surveillance renforcee des organes cibles
-
-========================================================================
-  GUIDE D'INTERPRETATION DES RESULTATS
-========================================================================
-  Score de Pathogenicite:
-  >= 0.8 : Pathogene (cause reconnue de maladie)
-  0.6-0.8: Probablement pathogene
-  0.3-0.6: VUS (Variant de Signification Incertaine)
-  < 0.3  : Benin ou probablement benin
-
-  Densite Mutationnelle (panel) (mut/Mb):
-  > 100  : Tres elevee (ex: Melanome, Poumon)
-  50-100 : Elevee
-  20-50  : Moderee
-  < 20   : Faible
-  Note: cette metrique est calculee sur les genes du panel (12 genes),
-  et ne constitue pas une TMB (Tumor Mutation Burden) clinique.
-
-  Niveau de Risque Cancer:
-  TRES ELEVE : Prise en charge urgente (Score >= 1.5)
-  ELEVE      : Consultation oncogenetique conseillee (Score 1.0 - 1.49)
-  MODERE     : Suivi regulier (Score 0.5 - 0.99)
-  FAIBLE     : Profil mutationnel peu preoccupant (Score < 0.5)
-
-  Calcul du score de risque cancer:
-  Score = Somme(pathogenicity_score) pour chaque mutation du gene associe au cancer
 
 ========================================================================
   Ce rapport est genere a des fins de recherche uniquement.

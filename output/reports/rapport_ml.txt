@@ -1,6 +1,6 @@
 ================================================================
-  RAPPORT ML — PREDICTION DE CANCER
-  07/03/2026 22:51  |  3674 patients labellises  |  12 classes
+  RAPPORT ML - CLASSIFICATION DU CANCER
+  14/03/2026 20:35  |  3674 patients labellises  |  12 classes
 ================================================================
 
   SIGNATURES D'ALLELES PAR CANCER (discriminantes)
@@ -19,39 +19,56 @@
   Foie: 0 alleles discriminants (sur 165 patients)
   Glioblastome: 0 alleles discriminants (sur 271 patients)
 
-  Entrainement : 902.82s
-  Modele                   CV Acc   CV F1  Train Acc  Train F1     AUC
+  Entrainement : 1044.04s
+  Modele                   CV Acc   Top-3   CV F1  Train Acc     AUC
   -------------------------------------------------------------------
-  Random Forest            0.5425  0.5424     0.6279    0.6317  0.8908
-    params={'max_depth': 8, 'min_samples_split': 5, 'n_estimators': 150} | gap (train-CV) acc=+0.0855 f1=+0.0893
-  Gradient Boosting        0.5770  0.5730     0.6475    0.6435  0.9090 *
-    params={'learning_rate': 0.05, 'max_depth': 3, 'n_estimators': 100, 'subsample': 1.0} | gap (train-CV) acc=+0.0705 f1=+0.0705
-  SVM (RBF)                0.5305  0.5312     0.6609    0.6654  0.8937
-    params={'C': 30, 'gamma': 0.01} | gap (train-CV) acc=+0.1304 f1=+0.1342
+  Random Forest            0.5220  0.7608  0.5175     0.5833  0.8774
+    params={'max_depth': 8, 'min_samples_split': 5, 'n_estimators': 150} | gap (train-CV) acc=+0.0612 f1=+0.0665
+  Gradient Boosting        0.5438  0.8059  0.5294     0.6170  0.8852 *
+    params={'learning_rate': 0.05, 'max_depth': 3, 'n_estimators': 100, 'subsample': 1.0} | gap (train-CV) acc=+0.0732 f1=+0.0775
+  SVM (RBF)                0.4935  0.7945  0.4996     0.5915  0.8732
+    params={'C': 10, 'gamma': 0.01} | gap (train-CV) acc=+0.0980 f1=+0.1008
 
-  Meilleur : Gradient Boosting (acc CV=0.5770  —  metrique principale)
+  Meilleur : Gradient Boosting (acc CV=0.5438 | top-3=0.8059 -- metrique principale)
   Classe                Prec     Rec      F1     N
   --------------------------------------------
-  Colon               0.7960  0.8057  0.8008   489
-  Foie                0.2632  0.2424  0.2524   165
-  Glioblastome        0.5506  0.5424  0.5465   271
-  Melanome            0.5537  0.4971  0.5239   342
-  Ovaire              0.4330  0.6580  0.5223   383
-  Pancreas            0.6250  0.5926  0.6084   135
-  Poumon              0.5475  0.4179  0.4740   469
-  Prostate            0.2836  0.3486  0.3128   109
-  Rein                0.1053  0.0392  0.0571    51
-  Sein                0.6545  0.6173  0.6354   669
-  Thyroide            0.7434  0.8615  0.7981   296
-  Vessie              0.5155  0.4508  0.4810   295
+  Colon               0.8110  0.8160  0.8135   489
+  Foie                0.1765  0.0364  0.0603   165
+  Glioblastome        0.5390  0.5609  0.5497   271
+  Melanome            0.5196  0.4649  0.4907   342
+  Ovaire              0.3367  0.6867  0.4519   383
+  Pancreas            0.6400  0.5926  0.6154   135
+  Poumon              0.5089  0.4264  0.4640   469
+  Prostate            0.2766  0.1193  0.1667   109
+  Rein                0.1250  0.0392  0.0597    51
+  Sein                0.5818  0.5531  0.5670   669
+  Thyroide            0.7388  0.8885  0.8067   296
+  Vessie              0.4417  0.3085  0.3633   295
 
-  Score de resubstitution (entrainement, BIAISE) : 2378/3674 correctes (64.7%)
+  TOP FEATURES DISCRIMINANTES (importance modele):
+    allele_score_Thyroide                    0.12668
+    mut_bin_APC                              0.10304
+    mut_count_APC                            0.07488
+    age                                      0.07361
+    n_oncogenes                              0.05512
+    mut_bin_PIK3CA                           0.04731
+    n_genes                                  0.04582
+    n_pathogenic                             0.03481
+    mut_count_BRAF                           0.03029
+    SNP                                      0.02962
+    imp_HIGH                                 0.02690
+    mut_bin_BRAF                             0.02455
+    mut_count_TP53                           0.02436
+    mut_bin_KRAS                             0.02433
+    mut_count_PIK3CA                         0.02406
+
+  Score de resubstitution (entrainement, BIAISE) : 2280/3674 correctes (62.1%)
   [Utiliser le score de validation croisee (CV) comme metrique principale]
-  Confiance moy : 0.588
+  Confiance moy : 0.569
 
   Sectorisation (clustering)
-  - k optimal: 2 | silhouette: 0.3716
-  - Coherence labels cancer: ARI=0.022 NMI=0.0834
-    Sector_02: n=645 dominant=Colon
-    Sector_01: n=3029 dominant=Sein
+  - k optimal: 2 | silhouette: 0.3417
+  - Coherence labels cancer: ARI=0.0232 NMI=0.0891
+    Sector_01: n=620 dominant=Colon
+    Sector_02: n=3054 dominant=Sein
 ================================================================

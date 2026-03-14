@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_3453
-  Date: 07/03/2026 22:33
+  Date: 14/03/2026 20:35
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -10,59 +10,58 @@
   Severite:       moderate
   Cancer connu:   Glioblastome
 
+--- CLASSIFICATION ML — CANCER PROBABLE ---
+  Cancer predit:       Glioblastome
+  Confiance:           91.80%
+  Modele:              Gradient Boosting
+  Top-3 cancers probables:
+    1. Glioblastome         91.80%
+    2. Poumon               2.57%
+    3. Sein                 1.61%
+  Features determinantes:
+    - age                                 importance=0.0736 valeur=54.0
+    - burden                              importance=0.0321 valeur=13.24
+    - total_mut                           importance=0.0333 valeur=3.0
+    - n_pathogenic                        importance=0.0328 valeur=3.0
+    - n_hotspots                          importance=0.0307 valeur=2.0
+
+--- PROFIL DE COMPATIBILITE CANCER ---
+  Cancer                   Compatibilite Genes supports
+  -----------------------------------------------------------------
+  Glioblastome                   100.0%  EGFR
+
 --- RESUME MUTATIONNEL ---
   Mutations totales:       3
-  Densité mutationnelle (panel):    13.24 mut/Mb
+  Densité mutationnelle:   13.24 mut/Mb
+  Hotspots detectes:       2
+  Variants pathogeniques:  3
+  Oncogenes mutes:         2
+  Suppresseurs mutes:      1
   Risque global:           ELEVE
 
 --- ALERTES ---
   [!] Risque ELEVE pour Glioblastome (score: 1.3)
 
---- PROFIL DE RISQUE CANCER ---
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Allele             Type        Pos   Score Classification
+  -------------------------------------------------------------------
+  EGFR       A289T              SNP      202804   0.700 Likely_pathogenic [*]
+  PTEN       D297Ifs*10         DEL     1857625   0.650 Likely_pathogenic
+  EGFR       V774M              SNP      230005   0.600 Likely_pathogenic [*]
+  (* = hotspot connu)
+
+--- SIGNATURES MUTATIONNELLES (info secondaire) ---
+  SBS6 (MMR deficient)                similarite: 0.400
+  SBS2 (APOBEC)                       similarite: 0.400
+
+--- PROFIL DE RISQUE NAIF (outil secondaire) ---
   Cancer                  Score Niveau          Genes
   -----------------------------------------------------------------
   Glioblastome            1.300 ELEVE           EGFR
 
---- VARIANTS A IMPACT ELEVE ---
-  Gene       Type        Pos   Score Classification
-  -------------------------------------------------------
-  EGFR       SNP      202804   0.700 Likely_pathogenic
-  PTEN       DEL     1857625   0.650 Likely_pathogenic
-  EGFR       SNP      230005   0.600 Likely_pathogenic
-
---- SIGNATURES MUTATIONNELLES ---
-  SBS6 (MMR deficient)                similarite: 0.400
-  SBS2 (APOBEC)                       similarite: 0.400
-
 --- RECOMMANDATIONS ---
   -> Consultation oncogenetique recommandee
   -> Surveillance renforcee des organes cibles
-
-========================================================================
-  GUIDE D'INTERPRETATION DES RESULTATS
-========================================================================
-  Score de Pathogenicite:
-  >= 0.8 : Pathogene (cause reconnue de maladie)
-  0.6-0.8: Probablement pathogene
-  0.3-0.6: VUS (Variant de Signification Incertaine)
-  < 0.3  : Benin ou probablement benin
-
-  Densite Mutationnelle (panel) (mut/Mb):
-  > 100  : Tres elevee (ex: Melanome, Poumon)
-  50-100 : Elevee
-  20-50  : Moderee
-  < 20   : Faible
-  Note: cette metrique est calculee sur les genes du panel (12 genes),
-  et ne constitue pas une TMB (Tumor Mutation Burden) clinique.
-
-  Niveau de Risque Cancer:
-  TRES ELEVE : Prise en charge urgente (Score >= 1.5)
-  ELEVE      : Consultation oncogenetique conseillee (Score 1.0 - 1.49)
-  MODERE     : Suivi regulier (Score 0.5 - 0.99)
-  FAIBLE     : Profil mutationnel peu preoccupant (Score < 0.5)
-
-  Calcul du score de risque cancer:
-  Score = Somme(pathogenicity_score) pour chaque mutation du gene associe au cancer
 
 ========================================================================
   Ce rapport est genere a des fins de recherche uniquement.

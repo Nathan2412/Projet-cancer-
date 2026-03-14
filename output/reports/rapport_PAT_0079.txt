@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_0079
-  Date: 07/03/2026 22:33
+  Date: 14/03/2026 20:35
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -10,9 +10,36 @@
   Severite:       moderate
   Cancer connu:   Sein
 
+--- CLASSIFICATION ML — CANCER PROBABLE ---
+  Cancer predit:       Sein
+  Confiance:           26.90%
+  Modele:              Gradient Boosting
+  Top-3 cancers probables:
+    1. Sein                 26.90%
+    2. Poumon               19.31%
+    3. Ovaire               15.41%
+  Features determinantes:
+    - age                                 importance=0.0736 valeur=55.0
+    - burden                              importance=0.0321 valeur=8.82
+    - n_suppressors                       importance=0.0418 valeur=2.0
+    - total_mut                           importance=0.0333 valeur=2.0
+    - n_genes                             importance=0.0302 valeur=2.0
+
+--- PROFIL DE COMPATIBILITE CANCER ---
+  Cancer                   Compatibilite Genes supports
+  -----------------------------------------------------------------
+  Glioblastome                    25.0%  RB1
+  Sein                            25.0%  RB1
+  Poumon                          25.0%  RB1
+  Vessie                          25.0%  RB1
+
 --- RESUME MUTATIONNEL ---
   Mutations totales:       2
-  Densité mutationnelle (panel):    8.82 mut/Mb
+  Densité mutationnelle:   8.82 mut/Mb
+  Hotspots detectes:       1
+  Variants pathogeniques:  1
+  Oncogenes mutes:         0
+  Suppresseurs mutes:      2
   Risque global:           ELEVE
 
 --- ALERTES ---
@@ -21,7 +48,16 @@
   [!] Risque ELEVE pour Poumon (score: 1.0)
   [!] Risque ELEVE pour Vessie (score: 1.0)
 
---- PROFIL DE RISQUE CANCER ---
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Allele             Type        Pos   Score Classification
+  -------------------------------------------------------------------
+  RB1        R552*              SNP      651791   1.000 Pathogenic [*]
+  (* = hotspot connu)
+
+--- SIGNATURES MUTATIONNELLES (info secondaire) ---
+  SBS7 (UV)                           similarite: 0.400
+
+--- PROFIL DE RISQUE NAIF (outil secondaire) ---
   Cancer                  Score Niveau          Genes
   -----------------------------------------------------------------
   Glioblastome            1.000 ELEVE           RB1
@@ -29,43 +65,9 @@
   Poumon                  1.000 ELEVE           RB1
   Vessie                  1.000 ELEVE           RB1
 
---- VARIANTS A IMPACT ELEVE ---
-  Gene       Type        Pos   Score Classification
-  -------------------------------------------------------
-  RB1        SNP      651791   1.000 Pathogenic
-
---- SIGNATURES MUTATIONNELLES ---
-  SBS7 (UV)                           similarite: 0.400
-
 --- RECOMMANDATIONS ---
   -> Consultation oncogenetique recommandee
   -> Surveillance renforcee des organes cibles
-
-========================================================================
-  GUIDE D'INTERPRETATION DES RESULTATS
-========================================================================
-  Score de Pathogenicite:
-  >= 0.8 : Pathogene (cause reconnue de maladie)
-  0.6-0.8: Probablement pathogene
-  0.3-0.6: VUS (Variant de Signification Incertaine)
-  < 0.3  : Benin ou probablement benin
-
-  Densite Mutationnelle (panel) (mut/Mb):
-  > 100  : Tres elevee (ex: Melanome, Poumon)
-  50-100 : Elevee
-  20-50  : Moderee
-  < 20   : Faible
-  Note: cette metrique est calculee sur les genes du panel (12 genes),
-  et ne constitue pas une TMB (Tumor Mutation Burden) clinique.
-
-  Niveau de Risque Cancer:
-  TRES ELEVE : Prise en charge urgente (Score >= 1.5)
-  ELEVE      : Consultation oncogenetique conseillee (Score 1.0 - 1.49)
-  MODERE     : Suivi regulier (Score 0.5 - 0.99)
-  FAIBLE     : Profil mutationnel peu preoccupant (Score < 0.5)
-
-  Calcul du score de risque cancer:
-  Score = Somme(pathogenicity_score) pour chaque mutation du gene associe au cancer
 
 ========================================================================
   Ce rapport est genere a des fins de recherche uniquement.

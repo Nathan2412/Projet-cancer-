@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_2617
-  Date: 07/03/2026 22:33
+  Date: 14/03/2026 20:35
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -10,63 +10,63 @@
   Severite:       moderate
   Cancer connu:   Vessie
 
+--- CLASSIFICATION ML — CANCER PROBABLE ---
+  Cancer predit:       Vessie
+  Confiance:           59.46%
+  Modele:              Gradient Boosting
+  Top-3 cancers probables:
+    1. Vessie               59.46%
+    2. Poumon               11.89%
+    3. Melanome             11.32%
+  Features determinantes:
+    - age                                 importance=0.0736 valeur=54.0
+    - burden                              importance=0.0321 valeur=17.65
+    - n_suppressors                       importance=0.0418 valeur=3.0
+    - total_mut                           importance=0.0333 valeur=4.0
+    - SNP                                 importance=0.0276 valeur=4.0
+
+--- PROFIL DE COMPATIBILITE CANCER ---
+  Cancer                   Compatibilite Genes supports
+  -----------------------------------------------------------------
+  Melanome                        50.0%  ALK, RB1
+  Vessie                          50.0%  ALK, RB1
+
 --- RESUME MUTATIONNEL ---
   Mutations totales:       4
-  Densité mutationnelle (panel):    17.65 mut/Mb
+  Densité mutationnelle:   17.65 mut/Mb
+  Hotspots detectes:       2
+  Variants pathogeniques:  3
+  Oncogenes mutes:         1
+  Suppresseurs mutes:      3
   Risque global:           ELEVE
 
 --- ALERTES ---
   [!] Risque ELEVE pour Melanome (score: 1.8)
   [!] Risque ELEVE pour Vessie (score: 1.8)
 
---- PROFIL DE RISQUE CANCER ---
-  Cancer                  Score Niveau          Genes
-  -----------------------------------------------------------------
-  Melanome                1.800 ELEVE           RB1, ALK
-  Vessie                  1.800 ELEVE           RB1, ALK
-
 --- VARIANTS A IMPACT ELEVE ---
-  Gene       Type        Pos   Score Classification
-  -------------------------------------------------------
-  RB1        SNP      650013   1.000 Pathogenic
-  ALK        SNP      191038   0.800 Pathogenic
-  TP53       SNP       90112   0.600 Likely_pathogenic
+  Gene       Allele             Type        Pos   Score Classification
+  -------------------------------------------------------------------
+  RB1        R455*              SNP      650013   1.000 Pathogenic [*]
+  ALK        R401Q              SNP      191038   0.800 Pathogenic [*]
+  TP53       X187_splice        SNP       90112   0.600 Likely_pathogenic
+  (* = hotspot connu)
 
---- SIGNATURES MUTATIONNELLES ---
+--- SIGNATURES MUTATIONNELLES (info secondaire) ---
   SBS7 (UV)                           similarite: 0.900
   SBS1 (age)                          similarite: 0.700
   SBS13 (APOBEC)                      similarite: 0.700
   SBS2 (APOBEC)                       similarite: 0.500
 
+--- PROFIL DE RISQUE NAIF (outil secondaire) ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Melanome                1.800 ELEVE           RB1, ALK
+  Vessie                  1.800 ELEVE           RB1, ALK
+
 --- RECOMMANDATIONS ---
   -> Consultation oncogenetique recommandee
   -> Surveillance renforcee des organes cibles
-
-========================================================================
-  GUIDE D'INTERPRETATION DES RESULTATS
-========================================================================
-  Score de Pathogenicite:
-  >= 0.8 : Pathogene (cause reconnue de maladie)
-  0.6-0.8: Probablement pathogene
-  0.3-0.6: VUS (Variant de Signification Incertaine)
-  < 0.3  : Benin ou probablement benin
-
-  Densite Mutationnelle (panel) (mut/Mb):
-  > 100  : Tres elevee (ex: Melanome, Poumon)
-  50-100 : Elevee
-  20-50  : Moderee
-  < 20   : Faible
-  Note: cette metrique est calculee sur les genes du panel (12 genes),
-  et ne constitue pas une TMB (Tumor Mutation Burden) clinique.
-
-  Niveau de Risque Cancer:
-  TRES ELEVE : Prise en charge urgente (Score >= 1.5)
-  ELEVE      : Consultation oncogenetique conseillee (Score 1.0 - 1.49)
-  MODERE     : Suivi regulier (Score 0.5 - 0.99)
-  FAIBLE     : Profil mutationnel peu preoccupant (Score < 0.5)
-
-  Calcul du score de risque cancer:
-  Score = Somme(pathogenicity_score) pour chaque mutation du gene associe au cancer
 
 ========================================================================
   Ce rapport est genere a des fins de recherche uniquement.
