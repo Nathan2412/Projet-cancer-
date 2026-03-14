@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_1446
-  Date: 07/03/2026 22:33
+  Date: 14/03/2026 22:57
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -10,12 +10,52 @@
   Severite:       low
   Cancer connu:   Colon
 
+--- CLASSIFICATION ML — CANCER PROBABLE ---
+  Cancer predit:       Melanome
+  Confiance:           47.33%
+  Modele:              Gradient Boosting
+  Top-3 cancers probables:
+    1. Melanome             47.33%
+    2. Colon                20.29%
+    3. Poumon               14.38%
+  Features determinantes:
+    - age                                 importance=0.0736 valeur=67.0
+    - burden                              importance=0.0321 valeur=13.24
+    - allele_score_Thyroide               importance=0.0742 valeur=1.0
+    - total_mut                           importance=0.0333 valeur=3.0
+    - n_genes                             importance=0.0302 valeur=3.0
+
+--- PROFIL DE COMPATIBILITE CANCER ---
+  Cancer                   Compatibilite Genes supports
+  -----------------------------------------------------------------
+  Glioblastome                    16.7%  BRAF
+  Melanome                        16.7%  BRAF
+  Poumon                          16.7%  BRAF
+  Vessie                          16.7%  BRAF
+  Colon                           16.7%  BRAF
+  Thyroide                        16.7%  BRAF
+
 --- RESUME MUTATIONNEL ---
   Mutations totales:       3
-  Densité mutationnelle (panel):    13.24 mut/Mb
+  Densité mutationnelle:   13.24 mut/Mb
+  Hotspots detectes:       1
+  Variants pathogeniques:  1
+  Oncogenes mutes:         2
+  Suppresseurs mutes:      1
   Risque global:           FAIBLE
 
---- PROFIL DE RISQUE CANCER ---
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Allele             Type        Pos   Score Classification
+  -------------------------------------------------------------------
+  BRAF       V600E              SNP      266191   0.900 Pathogenic [*]
+  (* = hotspot connu)
+
+--- SIGNATURES MUTATIONNELLES (info secondaire) ---
+  SBS6 (MMR deficient)                similarite: 0.667
+  SBS2 (APOBEC)                       similarite: 0.667
+  SBS1 (age)                          similarite: 0.467
+
+--- PROFIL DE RISQUE NAIF (outil secondaire) ---
   Cancer                  Score Niveau          Genes
   -----------------------------------------------------------------
   Glioblastome            0.900 MODERE          BRAF
@@ -23,46 +63,9 @@
   Poumon                  0.900 MODERE          BRAF
   Vessie                  0.900 MODERE          BRAF
   Colon                   0.900 MODERE          BRAF
-  Thyroide                0.900 MODERE          BRAF
-
---- VARIANTS A IMPACT ELEVE ---
-  Gene       Type        Pos   Score Classification
-  -------------------------------------------------------
-  BRAF       SNP      266191   0.900 Pathogenic
-
---- SIGNATURES MUTATIONNELLES ---
-  SBS6 (MMR deficient)                similarite: 0.667
-  SBS2 (APOBEC)                       similarite: 0.667
-  SBS1 (age)                          similarite: 0.467
 
 --- RECOMMANDATIONS ---
   -> Depistage standard selon les recommandations
-
-========================================================================
-  GUIDE D'INTERPRETATION DES RESULTATS
-========================================================================
-  Score de Pathogenicite:
-  >= 0.8 : Pathogene (cause reconnue de maladie)
-  0.6-0.8: Probablement pathogene
-  0.3-0.6: VUS (Variant de Signification Incertaine)
-  < 0.3  : Benin ou probablement benin
-
-  Densite Mutationnelle (panel) (mut/Mb):
-  > 100  : Tres elevee (ex: Melanome, Poumon)
-  50-100 : Elevee
-  20-50  : Moderee
-  < 20   : Faible
-  Note: cette metrique est calculee sur les genes du panel (12 genes),
-  et ne constitue pas une TMB (Tumor Mutation Burden) clinique.
-
-  Niveau de Risque Cancer:
-  TRES ELEVE : Prise en charge urgente (Score >= 1.5)
-  ELEVE      : Consultation oncogenetique conseillee (Score 1.0 - 1.49)
-  MODERE     : Suivi regulier (Score 0.5 - 0.99)
-  FAIBLE     : Profil mutationnel peu preoccupant (Score < 0.5)
-
-  Calcul du score de risque cancer:
-  Score = Somme(pathogenicity_score) pour chaque mutation du gene associe au cancer
 
 ========================================================================
   Ce rapport est genere a des fins de recherche uniquement.

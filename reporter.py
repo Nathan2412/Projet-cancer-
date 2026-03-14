@@ -156,6 +156,7 @@ def generate_cohort_csv_export(all_patients_results, output_dir=REPORTS_DIR,
     headers = [
         "Patient_ID", "Age", "Sexe", "Cancer_Connu", "Severite",
         "Total_Mutations", "Densite_Mutationnelle_Panel", "Risque_Global",
+        "Cancer_Max_Risque", "Score_Max_Risque", "Niveau_Max_Risque",
         "N_Hotspots", "N_Pathogeniques", "N_Oncogenes", "N_Suppresseurs",
         "Cancer_ML_Predit", "Confiance_ML", "Top2_Cancer", "Top3_Cancer",
         "Cancer_ML_Correct",
@@ -169,7 +170,21 @@ def generate_cohort_csv_export(all_patients_results, output_dir=REPORTS_DIR,
             pid = pr.get("patient_id", "")
             meta = pr.get("metadata", {})
             risk = pr.get("risk_summary", {})
+            risk_profile = pr.get("cancer_risk_profile", {}) or {}
             mp = pred_by_pid.get(pid, {})
+
+            # Extraire le cancer avec le score de risque naif maximal.
+            max_risk_cancer = ""
+            max_risk_score = ""
+            max_risk_level = ""
+            if risk_profile:
+                best = max(
+                    risk_profile.items(),
+                    key=lambda kv: kv[1].get("risk_score", 0)
+                )
+                max_risk_cancer = best[0]
+                max_risk_score = round(best[1].get("risk_score", 0), 3)
+                max_risk_level = best[1].get("risk_level", "")
 
             top3 = mp.get("top3", [])
             top2_cancer = top3[1][0] if len(top3) > 1 else ""
@@ -184,6 +199,9 @@ def generate_cohort_csv_export(all_patients_results, output_dir=REPORTS_DIR,
                 pr.get("total_mutations_detected", 0),
                 pr.get("panel_mutation_density", 0),
                 risk.get("overall_risk", ""),
+                max_risk_cancer,
+                max_risk_score,
+                max_risk_level,
                 pr.get("n_hotspots", 0),
                 pr.get("n_pathogenic_variants", 0),
                 pr.get("n_oncogenes_mutated", 0),

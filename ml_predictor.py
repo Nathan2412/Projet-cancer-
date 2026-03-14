@@ -69,6 +69,7 @@ def _plt():
 
 
 def _save(fig, name, out=PLOTS_DIR):
+    os.makedirs(out, exist_ok=True)
     path = os.path.join(out, name)
     fig.savefig(path, dpi=150, bbox_inches="tight")
     import matplotlib.pyplot as plt

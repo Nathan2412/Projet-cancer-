@@ -37,7 +37,6 @@ from visualizer import (
 )
 from reporter import (
     generate_patient_text_report,
-    generate_patient_html_report,
     generate_cohort_summary_report,
     save_json_results
 )

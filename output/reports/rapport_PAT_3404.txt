@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_3404
-  Date: 07/03/2026 22:33
+  Date: 14/03/2026 22:57
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -10,9 +10,38 @@
   Severite:       extreme
   Cancer connu:   Glioblastome
 
+--- CLASSIFICATION ML — CANCER PROBABLE ---
+  Cancer predit:       Glioblastome
+  Confiance:           79.99%
+  Modele:              Gradient Boosting
+  Top-3 cancers probables:
+    1. Glioblastome         79.99%
+    2. Melanome             9.64%
+    3. Colon                8.39%
+  Features determinantes:
+    - burden                              importance=0.0321 valeur=110.29
+    - age                                 importance=0.0736 valeur=23.0
+    - total_mut                           importance=0.0333 valeur=25.0
+    - SNP                                 importance=0.0276 valeur=25.0
+    - n_suppressors                       importance=0.0418 valeur=15.0
+
+--- PROFIL DE COMPATIBILITE CANCER ---
+  Cancer                   Compatibilite Genes supports
+  -----------------------------------------------------------------
+  Glioblastome                    25.7%  ALK, BRCA1, BRCA2
+  Colon                           25.7%  ALK, BRCA1, BRCA2
+  Sein                            10.6%  PIK3CA, TP53
+  Vessie                          10.1%  ALK, PIK3CA
+  Melanome                         5.6%  TP53
+  Poumon                           5.6%  TP53
+
 --- RESUME MUTATIONNEL ---
   Mutations totales:       25
-  Densité mutationnelle (panel):    110.29 mut/Mb
+  Densité mutationnelle:   110.29 mut/Mb
+  Hotspots detectes:       5
+  Variants pathogeniques:  6
+  Oncogenes mutes:         10
+  Suppresseurs mutes:      15
   Risque global:           TRES ELEVE
 
 --- ALERTES ---
@@ -28,63 +57,34 @@
   [!] Risque ELEVE pour Rein (score: 1.0)
   [!] 6 variants a impact eleve detectes
 
---- PROFIL DE RISQUE CANCER ---
-  Cancer                  Score Niveau          Genes
-  -----------------------------------------------------------------
-  Glioblastome            4.600 TRES ELEVE      BRCA1, PIK3CA, BRCA2
-  Colon                   4.600 TRES ELEVE      BRCA1, PIK3CA, BRCA2
-  Sein                    1.900 ELEVE           PIK3CA, TP53
-  Vessie                  1.800 ELEVE           ALK, PIK3CA
-  Melanome                1.000 ELEVE           TP53
-  Poumon                  1.000 ELEVE           TP53
-  Ovaire                  1.000 ELEVE           TP53
-  Pancreas                1.000 ELEVE           TP53
-  Rein                    1.000 ELEVE           TP53
-
 --- VARIANTS A IMPACT ELEVE ---
-  Gene       Type        Pos   Score Classification
-  -------------------------------------------------------
-  TP53       SNP       90190   1.000 Pathogenic
-  BRCA2      SNP      590934   1.000 Pathogenic
-  PIK3CA     SNP      231238   0.900 Pathogenic
-  ALK        SNP      502154   0.900 Pathogenic
-  BRCA1      SNP     1800521   0.800 Pathogenic
-  BRCA1      SNP     1800516   0.600 Likely_pathogenic
+  Gene       Allele             Type        Pos   Score Classification
+  -------------------------------------------------------------------
+  TP53       R213*              SNP       90190   1.000 Pathogenic [*]
+  BRCA2      X265_splice        SNP      590934   1.000 Pathogenic [*]
+  PIK3CA     R88Q               SNP      231238   0.900 Pathogenic [*]
+  ALK        R292C              SNP      502154   0.900 Pathogenic [*]
+  BRCA1      E1258D             SNP     1800521   0.800 Pathogenic [*]
+  BRCA1      E1257*             SNP     1800516   0.600 Likely_pathogenic
+  (* = hotspot connu)
 
---- SIGNATURES MUTATIONNELLES ---
+--- SIGNATURES MUTATIONNELLES (info secondaire) ---
   SBS6 (MMR deficient)                similarite: 0.680
   SBS4 (tabac)                        similarite: 0.600
   SBS2 (APOBEC)                       similarite: 0.560
 
+--- PROFIL DE RISQUE NAIF (outil secondaire) ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Glioblastome            4.600 TRES ELEVE      ALK, TP53, BRCA1
+  Colon                   4.600 TRES ELEVE      ALK, TP53, BRCA1
+  Sein                    1.900 ELEVE           PIK3CA, TP53
+  Vessie                  1.800 ELEVE           PIK3CA, ALK
+  Melanome                1.000 ELEVE           TP53
+
 --- RECOMMANDATIONS ---
   -> Consultation oncogenetique recommandee
   -> Surveillance renforcee des organes cibles
-
-========================================================================
-  GUIDE D'INTERPRETATION DES RESULTATS
-========================================================================
-  Score de Pathogenicite:
-  >= 0.8 : Pathogene (cause reconnue de maladie)
-  0.6-0.8: Probablement pathogene
-  0.3-0.6: VUS (Variant de Signification Incertaine)
-  < 0.3  : Benin ou probablement benin
-
-  Densite Mutationnelle (panel) (mut/Mb):
-  > 100  : Tres elevee (ex: Melanome, Poumon)
-  50-100 : Elevee
-  20-50  : Moderee
-  < 20   : Faible
-  Note: cette metrique est calculee sur les genes du panel (12 genes),
-  et ne constitue pas une TMB (Tumor Mutation Burden) clinique.
-
-  Niveau de Risque Cancer:
-  TRES ELEVE : Prise en charge urgente (Score >= 1.5)
-  ELEVE      : Consultation oncogenetique conseillee (Score 1.0 - 1.49)
-  MODERE     : Suivi regulier (Score 0.5 - 0.99)
-  FAIBLE     : Profil mutationnel peu preoccupant (Score < 0.5)
-
-  Calcul du score de risque cancer:
-  Score = Somme(pathogenicity_score) pour chaque mutation du gene associe au cancer
 
 ========================================================================
   Ce rapport est genere a des fins de recherche uniquement.
