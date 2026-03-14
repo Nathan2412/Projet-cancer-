@@ -1,6 +1,0 @@
-Patient_ID,Age,Sexe,Cancer_Connu,Severite,Total_Mutations,Densite_Mutationnelle_Panel,Risque_Global,N_Hotspots,N_Pathogeniques,N_Oncogenes,N_Suppresseurs,Cancer_ML_Predit,Confiance_ML,Top2_Cancer,Top3_Cancer,Cancer_ML_Correct
-PAT_0001,49,M,,low,28071,0,FAIBLE,0,0,0,0,,,,,
-PAT_0002,63,M,,low,23508,0,FAIBLE,0,0,0,0,,,,,
-PAT_0003,54,M,,low,27071,0,FAIBLE,0,0,0,0,,,,,
-PAT_0004,43,M,,low,18788,0,FAIBLE,0,0,0,0,,,,,
-PAT_0005,39,M,,low,28510,0,FAIBLE,0,0,0,0,,,,,

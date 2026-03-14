@@ -1,0 +1,68 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_1298
+  Date: 14/03/2026 21:00
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_1298
+  Age:            84 ans
+  Sexe:           F
+  Severite:       moderate
+  Cancer connu:   Colon
+
+--- PROFIL DE COMPATIBILITE CANCER ---
+  Cancer                   Compatibilite Genes supports
+  -----------------------------------------------------------------
+  Colon                           20.5%  APC, KRAS, PIK3CA
+  Melanome                        13.4%  KRAS, PIK3CA
+  Poumon                          13.4%  KRAS, PIK3CA
+  Vessie                          13.4%  KRAS, PIK3CA
+  Foie                             7.1%  KRAS
+  Pancreas                         7.1%  APC
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       4
+  Densité mutationnelle:   17.65 mut/Mb
+  Hotspots detectes:       3
+  Variants pathogeniques:  3
+  Oncogenes mutes:         2
+  Suppresseurs mutes:      2
+  Risque global:           TRES ELEVE
+
+--- ALERTES ---
+  [!] Risque TRES ELEVE pour Colon (score: 2.6)
+  [!] Risque ELEVE pour Melanome (score: 1.7)
+  [!] Risque ELEVE pour Poumon (score: 1.7)
+  [!] Risque ELEVE pour Vessie (score: 1.7)
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Allele             Type        Pos   Score Classification
+  -------------------------------------------------------------------
+  KRAS       G13D               SNP      193492   0.900 Pathogenic [*]
+  APC        R499*              SNP      544607   0.900 Pathogenic [*]
+  PIK3CA     E545K              SNP      212023   0.800 Pathogenic [*]
+  (* = hotspot connu)
+
+--- SIGNATURES MUTATIONNELLES (info secondaire) ---
+  SBS1 (age)                          similarite: 0.800
+  SBS7 (UV)                           similarite: 0.600
+  SBS6 (MMR deficient)                similarite: 0.500
+  SBS2 (APOBEC)                       similarite: 0.500
+
+--- PROFIL DE RISQUE NAIF (outil secondaire) ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Colon                   2.600 TRES ELEVE      PIK3CA, KRAS, APC
+  Melanome                1.700 ELEVE           PIK3CA, KRAS
+  Poumon                  1.700 ELEVE           PIK3CA, KRAS
+  Vessie                  1.700 ELEVE           PIK3CA, KRAS
+  Foie                    0.900 MODERE          KRAS
+
+--- RECOMMANDATIONS ---
+  -> Consultation oncogenetique recommandee
+  -> Surveillance renforcee des organes cibles
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

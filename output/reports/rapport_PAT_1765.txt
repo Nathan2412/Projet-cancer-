@@ -1,0 +1,69 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_1765
+  Date: 14/03/2026 21:00
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_1765
+  Age:            72 ans
+  Sexe:           F
+  Severite:       low
+  Cancer connu:   Pancreas
+
+--- PROFIL DE COMPATIBILITE CANCER ---
+  Cancer                   Compatibilite Genes supports
+  -----------------------------------------------------------------
+  Poumon                          14.3%  KRAS, TP53
+  Ovaire                          14.3%  KRAS, TP53
+  Vessie                          14.3%  KRAS, TP53
+  Colon                           14.3%  KRAS, TP53
+  Pancreas                        14.3%  KRAS, TP53
+  Sein                            14.3%  KRAS, TP53
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       2
+  Densité mutationnelle:   8.82 mut/Mb
+  Hotspots detectes:       2
+  Variants pathogeniques:  2
+  Oncogenes mutes:         1
+  Suppresseurs mutes:      1
+  Risque global:           ELEVE
+
+--- ALERTES ---
+  [!] Risque ELEVE pour Poumon (score: 1.9)
+  [!] Risque ELEVE pour Ovaire (score: 1.9)
+  [!] Risque ELEVE pour Vessie (score: 1.9)
+  [!] Risque ELEVE pour Colon (score: 1.9)
+  [!] Risque ELEVE pour Pancreas (score: 1.9)
+  [!] Risque ELEVE pour Sein (score: 1.9)
+  [!] Risque ELEVE pour Glioblastome (score: 1.0)
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Allele             Type        Pos   Score Classification
+  -------------------------------------------------------------------
+  TP53       R273C              SNP       91281   1.000 Pathogenic [*]
+  KRAS       G12V               SNP      193495   0.900 Pathogenic [*]
+  (* = hotspot connu)
+
+--- SIGNATURES MUTATIONNELLES (info secondaire) ---
+  SBS4 (tabac)                        similarite: 0.800
+  SBS6 (MMR deficient)                similarite: 0.400
+  SBS2 (APOBEC)                       similarite: 0.400
+
+--- PROFIL DE RISQUE NAIF (outil secondaire) ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Poumon                  1.900 ELEVE           KRAS, TP53
+  Ovaire                  1.900 ELEVE           KRAS, TP53
+  Vessie                  1.900 ELEVE           KRAS, TP53
+  Colon                   1.900 ELEVE           KRAS, TP53
+  Pancreas                1.900 ELEVE           KRAS, TP53
+
+--- RECOMMANDATIONS ---
+  -> Consultation oncogenetique recommandee
+  -> Surveillance renforcee des organes cibles
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

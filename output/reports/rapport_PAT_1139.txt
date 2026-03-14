@@ -1,0 +1,62 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_1139
+  Date: 14/03/2026 21:00
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_1139
+  Age:            57 ans
+  Sexe:           M
+  Severite:       extreme
+  Cancer connu:   Colon
+
+--- PROFIL DE COMPATIBILITE CANCER ---
+  Cancer                   Compatibilite Genes supports
+  -----------------------------------------------------------------
+  Colon                           38.6%  APC, PIK3CA
+  Glioblastome                    20.4%  PIK3CA
+  Prostate                        20.4%  PIK3CA
+  Vessie                          20.4%  PIK3CA
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       29
+  Densité mutationnelle:   127.94 mut/Mb
+  Hotspots detectes:       2
+  Variants pathogeniques:  2
+  Oncogenes mutes:         6
+  Suppresseurs mutes:      23
+  Risque global:           TRES ELEVE
+
+--- ALERTES ---
+  [!] Densite mutationnelle (panel) tres elevee: 127.94 mut/Mb
+  [!] Risque ELEVE pour Colon (score: 1.7)
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Allele             Type        Pos   Score Classification
+  -------------------------------------------------------------------
+  PIK3CA     R88Q               SNP      231238   0.900 Pathogenic [*]
+  APC        R1450*             SNP      531859   0.800 Pathogenic [*]
+  APC        R2816*             SNP      527761   0.500 VUS
+  (* = hotspot connu)
+
+--- SIGNATURES MUTATIONNELLES (info secondaire) ---
+  SBS6 (MMR deficient)                similarite: 0.641
+  SBS2 (APOBEC)                       similarite: 0.607
+  SBS4 (tabac)                        similarite: 0.476
+
+--- PROFIL DE RISQUE NAIF (outil secondaire) ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Colon                   1.700 ELEVE           APC, PIK3CA
+  Glioblastome            0.900 MODERE          PIK3CA
+  Prostate                0.900 MODERE          PIK3CA
+  Vessie                  0.900 MODERE          PIK3CA
+
+--- RECOMMANDATIONS ---
+  -> Consultation oncogenetique recommandee
+  -> Surveillance renforcee des organes cibles
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

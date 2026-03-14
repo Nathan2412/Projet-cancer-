@@ -1,0 +1,76 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_1146
+  Date: 14/03/2026 21:00
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_1146
+  Age:            65 ans
+  Sexe:           M
+  Severite:       high
+  Cancer connu:   Colon
+
+--- PROFIL DE COMPATIBILITE CANCER ---
+  Cancer                   Compatibilite Genes supports
+  -----------------------------------------------------------------
+  Colon                           29.6%  APC, PIK3CA, PTEN
+  Glioblastome                    19.6%  PIK3CA, PTEN, TP53
+  Melanome                        10.6%  APC, TP53
+  Prostate                        10.1%  APC, PIK3CA
+  Vessie                           9.5%  PIK3CA
+  Poumon                           5.3%  TP53
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       12
+  Densité mutationnelle:   52.94 mut/Mb
+  Hotspots detectes:       6
+  Variants pathogeniques:  6
+  Oncogenes mutes:         4
+  Suppresseurs mutes:      8
+  Risque global:           ELEVE
+
+--- ALERTES ---
+  [!] Densite mutationnelle (panel) elevee: 52.94 mut/Mb
+  [!] Risque TRES ELEVE pour Colon (score: 5.6)
+  [!] Risque TRES ELEVE pour Glioblastome (score: 3.7)
+  [!] Risque TRES ELEVE pour Melanome (score: 2.0)
+  [!] Risque ELEVE pour Prostate (score: 1.9)
+  [!] Risque ELEVE pour Vessie (score: 1.8)
+  [!] Risque ELEVE pour Poumon (score: 1.0)
+  [!] Risque ELEVE pour Pancreas (score: 1.0)
+  [!] Risque ELEVE pour Rein (score: 1.0)
+  [!] 6 variants a impact eleve detectes
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Allele             Type        Pos   Score Classification
+  -------------------------------------------------------------------
+  TP53       R213*              SNP       90190   1.000 Pathogenic [*]
+  APC        R1114*             SNP      532867   1.000 Pathogenic [*]
+  PTEN       E299*              SNP     1857631   1.000 Pathogenic [*]
+  PIK3CA     M1043I             SNP      196040   0.900 Pathogenic [*]
+  PIK3CA     R88Q               SNP      231238   0.900 Pathogenic [*]
+  PTEN       R130Q              SNP     1829792   0.800 Pathogenic [*]
+  (* = hotspot connu)
+
+--- SIGNATURES MUTATIONNELLES (info secondaire) ---
+  SBS6 (MMR deficient)                similarite: 0.567
+  SBS2 (APOBEC)                       similarite: 0.567
+  SBS4 (tabac)                        similarite: 0.367
+
+--- PROFIL DE RISQUE NAIF (outil secondaire) ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Colon                   5.600 TRES ELEVE      APC, PTEN, PIK3CA
+  Glioblastome            3.700 TRES ELEVE      PTEN, PIK3CA, TP53
+  Melanome                2.000 TRES ELEVE      APC, TP53
+  Prostate                1.900 ELEVE           APC, PIK3CA
+  Vessie                  1.800 ELEVE           PIK3CA
+
+--- RECOMMANDATIONS ---
+  -> Consultation oncogenetique recommandee
+  -> Surveillance renforcee des organes cibles
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

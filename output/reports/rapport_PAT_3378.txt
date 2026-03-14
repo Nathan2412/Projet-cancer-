@@ -1,0 +1,56 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_3378
+  Date: 14/03/2026 21:00
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_3378
+  Age:            58 ans
+  Sexe:           M
+  Severite:       low
+  Cancer connu:   Foie
+
+--- PROFIL DE COMPATIBILITE CANCER ---
+  Cancer                   Compatibilite Genes supports
+  -----------------------------------------------------------------
+  Melanome                        20.0%  PIK3CA
+  Vessie                          20.0%  PIK3CA
+  Foie                            20.0%  PIK3CA
+  Colon                           20.0%  PIK3CA
+  Rein                            20.0%  PIK3CA
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       1
+  Densité mutationnelle:   4.41 mut/Mb
+  Hotspots detectes:       1
+  Variants pathogeniques:  1
+  Oncogenes mutes:         1
+  Suppresseurs mutes:      0
+  Risque global:           FAIBLE
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Allele             Type        Pos   Score Classification
+  -------------------------------------------------------------------
+  PIK3CA     H1047L             SNP      196029   0.900 Pathogenic [*]
+  (* = hotspot connu)
+
+--- SIGNATURES MUTATIONNELLES (info secondaire) ---
+  SBS6 (MMR deficient)                similarite: 0.400
+  SBS2 (APOBEC)                       similarite: 0.400
+
+--- PROFIL DE RISQUE NAIF (outil secondaire) ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Melanome                0.900 MODERE          PIK3CA
+  Vessie                  0.900 MODERE          PIK3CA
+  Foie                    0.900 MODERE          PIK3CA
+  Colon                   0.900 MODERE          PIK3CA
+  Rein                    0.900 MODERE          PIK3CA
+
+--- RECOMMANDATIONS ---
+  -> Depistage standard selon les recommandations
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

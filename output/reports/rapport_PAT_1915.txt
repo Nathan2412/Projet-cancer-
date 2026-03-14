@@ -1,0 +1,70 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_1915
+  Date: 14/03/2026 21:00
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_1915
+  Age:            46 ans
+  Sexe:           F
+  Severite:       moderate
+  Cancer connu:   Melanome
+
+--- PROFIL DE COMPATIBILITE CANCER ---
+  Cancer                   Compatibilite Genes supports
+  -----------------------------------------------------------------
+  Colon                           20.0%  BRAF, PTEN
+  Melanome                        20.0%  BRAF, PTEN
+  Glioblastome                    20.0%  BRAF, PTEN
+  Sein                            10.0%  PTEN
+  Poumon                          10.0%  BRAF
+  Vessie                          10.0%  BRAF
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       4
+  Densité mutationnelle:   17.65 mut/Mb
+  Hotspots detectes:       2
+  Variants pathogeniques:  2
+  Oncogenes mutes:         2
+  Suppresseurs mutes:      2
+  Risque global:           TRES ELEVE
+
+--- ALERTES ---
+  [!] Risque TRES ELEVE pour Colon (score: 2.0)
+  [!] Risque TRES ELEVE pour Melanome (score: 2.0)
+  [!] Risque TRES ELEVE pour Glioblastome (score: 2.0)
+  [!] Risque ELEVE pour Sein (score: 1.0)
+  [!] Risque ELEVE pour Poumon (score: 1.0)
+  [!] Risque ELEVE pour Vessie (score: 1.0)
+  [!] Risque ELEVE pour Thyroide (score: 1.0)
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Allele             Type        Pos   Score Classification
+  -------------------------------------------------------------------
+  PTEN       R130*              SNP     1829791   1.000 Pathogenic [*]
+  BRAF       V600E              SNP      266191   1.000 Pathogenic [*]
+  (* = hotspot connu)
+
+--- SIGNATURES MUTATIONNELLES (info secondaire) ---
+  SBS4 (tabac)                        similarite: 0.800
+  SBS6 (MMR deficient)                similarite: 0.650
+  SBS2 (APOBEC)                       similarite: 0.650
+  SBS1 (age)                          similarite: 0.300
+
+--- PROFIL DE RISQUE NAIF (outil secondaire) ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Colon                   2.000 TRES ELEVE      BRAF, PTEN
+  Melanome                2.000 TRES ELEVE      BRAF, PTEN
+  Glioblastome            2.000 TRES ELEVE      BRAF, PTEN
+  Sein                    1.000 ELEVE           PTEN
+  Poumon                  1.000 ELEVE           BRAF
+
+--- RECOMMANDATIONS ---
+  -> Consultation oncogenetique recommandee
+  -> Surveillance renforcee des organes cibles
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

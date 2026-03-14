@@ -1,0 +1,38 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_3216
+  Date: 14/03/2026 21:00
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_3216
+  Age:            61 ans
+  Sexe:           F
+  Severite:       moderate
+  Cancer connu:   Rein
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       1
+  Densité mutationnelle:   4.41 mut/Mb
+  Hotspots detectes:       0
+  Variants pathogeniques:  0
+  Oncogenes mutes:         1
+  Suppresseurs mutes:      0
+  Risque global:           FAIBLE
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Allele             Type        Pos   Score Classification
+  -------------------------------------------------------------------
+  PIK3CA     Y272*              SNP      226780   0.500 VUS
+  (* = hotspot connu)
+
+--- SIGNATURES MUTATIONNELLES (info secondaire) ---
+  SBS6 (MMR deficient)                similarite: 0.400
+  SBS2 (APOBEC)                       similarite: 0.400
+
+--- RECOMMANDATIONS ---
+  -> Depistage standard selon les recommandations
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

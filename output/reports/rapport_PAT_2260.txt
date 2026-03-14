@@ -1,0 +1,38 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_2260
+  Date: 14/03/2026 21:00
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_2260
+  Age:            80 ans
+  Sexe:           F
+  Severite:       moderate
+  Cancer connu:   Ovaire
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       2
+  Densité mutationnelle:   8.82 mut/Mb
+  Hotspots detectes:       0
+  Variants pathogeniques:  1
+  Oncogenes mutes:         0
+  Suppresseurs mutes:      2
+  Risque global:           FAIBLE
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Allele             Type        Pos   Score Classification
+  -------------------------------------------------------------------
+  RB1        F526Lfs*6          DEL      651711   0.650 Likely_pathogenic
+  TP53       X33_splice         SNP       88811   0.500 VUS
+  (* = hotspot connu)
+
+--- SIGNATURES MUTATIONNELLES (info secondaire) ---
+  SBS7 (UV)                           similarite: 0.400
+
+--- RECOMMANDATIONS ---
+  -> Depistage standard selon les recommandations
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

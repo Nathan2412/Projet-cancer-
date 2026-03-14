@@ -1,0 +1,40 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_2682
+  Date: 14/03/2026 21:00
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_2682
+  Age:            72 ans
+  Sexe:           M
+  Severite:       moderate
+  Cancer connu:   Vessie
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       2
+  Densité mutationnelle:   8.82 mut/Mb
+  Hotspots detectes:       0
+  Variants pathogeniques:  1
+  Oncogenes mutes:         1
+  Suppresseurs mutes:      1
+  Risque global:           FAIBLE
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Allele             Type        Pos   Score Classification
+  -------------------------------------------------------------------
+  TP53       X33_splice         SNP       88811   0.600 Likely_pathogenic
+  (* = hotspot connu)
+
+--- SIGNATURES MUTATIONNELLES (info secondaire) ---
+  SBS1 (age)                          similarite: 0.800
+  SBS7 (UV)                           similarite: 0.600
+  SBS6 (MMR deficient)                similarite: 0.500
+  SBS2 (APOBEC)                       similarite: 0.500
+
+--- RECOMMANDATIONS ---
+  -> Depistage standard selon les recommandations
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

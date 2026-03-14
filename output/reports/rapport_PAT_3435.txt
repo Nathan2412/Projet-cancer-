@@ -1,0 +1,58 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_3435
+  Date: 14/03/2026 21:00
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_3435
+  Age:            58 ans
+  Sexe:           M
+  Severite:       moderate
+  Cancer connu:   Glioblastome
+
+--- PROFIL DE COMPATIBILITE CANCER ---
+  Cancer                   Compatibilite Genes supports
+  -----------------------------------------------------------------
+  Glioblastome                    16.7%  TP53
+  Prostate                        16.7%  TP53
+  Vessie                          16.7%  TP53
+  Foie                            16.7%  TP53
+  Colon                           16.7%  TP53
+  Pancreas                        16.7%  TP53
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       3
+  Densité mutationnelle:   13.24 mut/Mb
+  Hotspots detectes:       1
+  Variants pathogeniques:  3
+  Oncogenes mutes:         0
+  Suppresseurs mutes:      3
+  Risque global:           FAIBLE
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Allele             Type        Pos   Score Classification
+  -------------------------------------------------------------------
+  TP53       R248Q              SNP       90864   0.900 Pathogenic [*]
+  PTEN       I300Kfs*8          INS     1857631   0.650 Likely_pathogenic
+  RB1        L343Sfs*3          DEL      637968   0.650 Likely_pathogenic
+  (* = hotspot connu)
+
+--- SIGNATURES MUTATIONNELLES (info secondaire) ---
+  SBS7 (UV)                           similarite: 0.400
+
+--- PROFIL DE RISQUE NAIF (outil secondaire) ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Glioblastome            0.900 MODERE          TP53
+  Prostate                0.900 MODERE          TP53
+  Vessie                  0.900 MODERE          TP53
+  Foie                    0.900 MODERE          TP53
+  Colon                   0.900 MODERE          TP53
+
+--- RECOMMANDATIONS ---
+  -> Depistage standard selon les recommandations
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

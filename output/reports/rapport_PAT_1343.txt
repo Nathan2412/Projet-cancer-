@@ -1,0 +1,71 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_1343
+  Date: 14/03/2026 21:00
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_1343
+  Age:            66 ans
+  Sexe:           F
+  Severite:       moderate
+  Cancer connu:   Colon
+
+--- PROFIL DE COMPATIBILITE CANCER ---
+  Cancer                   Compatibilite Genes supports
+  -----------------------------------------------------------------
+  Colon                           20.0%  APC, KRAS
+  Poumon                          10.0%  KRAS
+  Ovaire                          10.0%  KRAS
+  Vessie                          10.0%  KRAS
+  Pancreas                        10.0%  KRAS
+  Thyroide                        10.0%  KRAS
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       3
+  Densité mutationnelle:   13.24 mut/Mb
+  Hotspots detectes:       2
+  Variants pathogeniques:  2
+  Oncogenes mutes:         1
+  Suppresseurs mutes:      2
+  Risque global:           TRES ELEVE
+
+--- ALERTES ---
+  [!] Risque TRES ELEVE pour Colon (score: 2.0)
+  [!] Risque ELEVE pour Poumon (score: 1.0)
+  [!] Risque ELEVE pour Ovaire (score: 1.0)
+  [!] Risque ELEVE pour Vessie (score: 1.0)
+  [!] Risque ELEVE pour Pancreas (score: 1.0)
+  [!] Risque ELEVE pour Thyroide (score: 1.0)
+  [!] Risque ELEVE pour Sein (score: 1.0)
+  [!] Risque ELEVE pour Foie (score: 1.0)
+  [!] Risque ELEVE pour Melanome (score: 1.0)
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Allele             Type        Pos   Score Classification
+  -------------------------------------------------------------------
+  KRAS       G12V               SNP      193495   1.000 Pathogenic [*]
+  APC        T1556Nfs*3         INS      531547   1.000 Pathogenic [*]
+  (* = hotspot connu)
+
+--- SIGNATURES MUTATIONNELLES (info secondaire) ---
+  SBS4 (tabac)                        similarite: 0.800
+  SBS6 (MMR deficient)                similarite: 0.400
+  SBS2 (APOBEC)                       similarite: 0.400
+
+--- PROFIL DE RISQUE NAIF (outil secondaire) ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Colon                   2.000 TRES ELEVE      APC, KRAS
+  Poumon                  1.000 ELEVE           KRAS
+  Ovaire                  1.000 ELEVE           KRAS
+  Vessie                  1.000 ELEVE           KRAS
+  Pancreas                1.000 ELEVE           KRAS
+
+--- RECOMMANDATIONS ---
+  -> Consultation oncogenetique recommandee
+  -> Surveillance renforcee des organes cibles
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

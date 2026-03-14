@@ -1,0 +1,32 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_3614
+  Date: 14/03/2026 21:00
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_3614
+  Age:            54 ans
+  Sexe:           M
+  Severite:       low
+  Cancer connu:   Glioblastome
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       1
+  Densité mutationnelle:   4.41 mut/Mb
+  Hotspots detectes:       0
+  Variants pathogeniques:  0
+  Oncogenes mutes:         1
+  Suppresseurs mutes:      0
+  Risque global:           FAIBLE
+
+--- SIGNATURES MUTATIONNELLES (info secondaire) ---
+  SBS6 (MMR deficient)                similarite: 0.400
+  SBS2 (APOBEC)                       similarite: 0.400
+
+--- RECOMMANDATIONS ---
+  -> Depistage standard selon les recommandations
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

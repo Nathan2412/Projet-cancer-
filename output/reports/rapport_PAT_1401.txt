@@ -1,0 +1,64 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_1401
+  Date: 14/03/2026 21:00
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_1401
+  Age:            71 ans
+  Sexe:           M
+  Severite:       moderate
+  Cancer connu:   Colon
+
+--- PROFIL DE COMPATIBILITE CANCER ---
+  Cancer                   Compatibilite Genes supports
+  -----------------------------------------------------------------
+  Colon                           33.3%  APC, KRAS
+  Melanome                        16.7%  KRAS
+  Poumon                          16.7%  KRAS
+  Vessie                          16.7%  KRAS
+  Foie                            16.7%  KRAS
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       3
+  Densité mutationnelle:   13.24 mut/Mb
+  Hotspots detectes:       2
+  Variants pathogeniques:  2
+  Oncogenes mutes:         1
+  Suppresseurs mutes:      2
+  Risque global:           ELEVE
+
+--- ALERTES ---
+  [!] Risque ELEVE pour Colon (score: 1.8)
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Allele             Type        Pos   Score Classification
+  -------------------------------------------------------------------
+  KRAS       G13D               SNP      193492   0.900 Pathogenic [*]
+  APC        R1450*             SNP      531859   0.900 Pathogenic [*]
+  (* = hotspot connu)
+
+--- SIGNATURES MUTATIONNELLES (info secondaire) ---
+  SBS7 (UV)                           similarite: 0.933
+  SBS1 (age)                          similarite: 0.867
+  SBS4 (tabac)                        similarite: 0.867
+  SBS6 (MMR deficient)                similarite: 0.333
+  SBS2 (APOBEC)                       similarite: 0.333
+
+--- PROFIL DE RISQUE NAIF (outil secondaire) ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Colon                   1.800 ELEVE           APC, KRAS
+  Melanome                0.900 MODERE          KRAS
+  Poumon                  0.900 MODERE          KRAS
+  Vessie                  0.900 MODERE          KRAS
+  Foie                    0.900 MODERE          KRAS
+
+--- RECOMMANDATIONS ---
+  -> Consultation oncogenetique recommandee
+  -> Surveillance renforcee des organes cibles
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

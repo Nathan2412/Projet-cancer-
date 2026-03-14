@@ -1,0 +1,42 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_0025
+  Date: 14/03/2026 21:00
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_0025
+  Age:            34 ans
+  Sexe:           F
+  Severite:       moderate
+  Cancer connu:   Sein
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       3
+  Densité mutationnelle:   13.24 mut/Mb
+  Hotspots detectes:       0
+  Variants pathogeniques:  2
+  Oncogenes mutes:         0
+  Suppresseurs mutes:      3
+  Risque global:           FAIBLE
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Allele             Type        Pos   Score Classification
+  -------------------------------------------------------------------
+  PTEN       X154_splice        DEL     1829863   0.850 Pathogenic
+  RB1        Q93*               SNP      613000   0.600 Likely_pathogenic
+  (* = hotspot connu)
+
+--- SIGNATURES MUTATIONNELLES (info secondaire) ---
+  SBS1 (age)                          similarite: 0.800
+  SBS13 (APOBEC)                      similarite: 0.800
+  SBS7 (UV)                           similarite: 0.600
+  SBS2 (APOBEC)                       similarite: 0.600
+  SBS6 (MMR deficient)                similarite: 0.500
+
+--- RECOMMANDATIONS ---
+  -> Depistage standard selon les recommandations
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

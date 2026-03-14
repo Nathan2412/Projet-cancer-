@@ -1,0 +1,35 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_0685
+  Date: 14/03/2026 21:00
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_0685
+  Age:            47 ans
+  Sexe:           F
+  Severite:       moderate
+  Cancer connu:   Poumon
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       4
+  Densité mutationnelle:   17.65 mut/Mb
+  Hotspots detectes:       0
+  Variants pathogeniques:  0
+  Oncogenes mutes:         2
+  Suppresseurs mutes:      2
+  Risque global:           FAIBLE
+
+--- SIGNATURES MUTATIONNELLES (info secondaire) ---
+  SBS1 (age)                          similarite: 0.800
+  SBS4 (tabac)                        similarite: 0.700
+  SBS7 (UV)                           similarite: 0.600
+  SBS6 (MMR deficient)                similarite: 0.500
+  SBS2 (APOBEC)                       similarite: 0.500
+
+--- RECOMMANDATIONS ---
+  -> Depistage standard selon les recommandations
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

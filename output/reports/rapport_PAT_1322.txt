@@ -1,0 +1,69 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_1322
+  Date: 14/03/2026 21:00
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_1322
+  Age:            68 ans
+  Sexe:           M
+  Severite:       moderate
+  Cancer connu:   Colon
+
+--- PROFIL DE COMPATIBILITE CANCER ---
+  Cancer                   Compatibilite Genes supports
+  -----------------------------------------------------------------
+  Glioblastome                    15.4%  KRAS, TP53
+  Poumon                          15.4%  KRAS, TP53
+  Foie                            15.4%  KRAS, TP53
+  Colon                           15.4%  KRAS, TP53
+  Pancreas                        15.4%  KRAS, TP53
+  Prostate                         7.7%  KRAS
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       3
+  Densité mutationnelle:   13.24 mut/Mb
+  Hotspots detectes:       2
+  Variants pathogeniques:  3
+  Oncogenes mutes:         1
+  Suppresseurs mutes:      2
+  Risque global:           TRES ELEVE
+
+--- ALERTES ---
+  [!] Risque TRES ELEVE pour Glioblastome (score: 2.0)
+  [!] Risque TRES ELEVE pour Poumon (score: 2.0)
+  [!] Risque TRES ELEVE pour Foie (score: 2.0)
+  [!] Risque TRES ELEVE pour Colon (score: 2.0)
+  [!] Risque TRES ELEVE pour Pancreas (score: 2.0)
+  [!] Risque ELEVE pour Prostate (score: 1.0)
+  [!] Risque ELEVE pour Melanome (score: 1.0)
+  [!] Risque ELEVE pour Vessie (score: 1.0)
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Allele             Type        Pos   Score Classification
+  -------------------------------------------------------------------
+  TP53       R273H              SNP       91282   1.000 Pathogenic [*]
+  KRAS       G12D               SNP      193495   1.000 Pathogenic [*]
+  APC        Q1444*             SNP      531877   0.600 Likely_pathogenic
+  (* = hotspot connu)
+
+--- SIGNATURES MUTATIONNELLES (info secondaire) ---
+  SBS7 (UV)                           similarite: 0.400
+
+--- PROFIL DE RISQUE NAIF (outil secondaire) ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Glioblastome            2.000 TRES ELEVE      KRAS, TP53
+  Poumon                  2.000 TRES ELEVE      KRAS, TP53
+  Foie                    2.000 TRES ELEVE      KRAS, TP53
+  Colon                   2.000 TRES ELEVE      KRAS, TP53
+  Pancreas                2.000 TRES ELEVE      KRAS, TP53
+
+--- RECOMMANDATIONS ---
+  -> Consultation oncogenetique recommandee
+  -> Surveillance renforcee des organes cibles
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

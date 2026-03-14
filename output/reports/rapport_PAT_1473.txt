@@ -1,0 +1,41 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_1473
+  Date: 14/03/2026 21:00
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_1473
+  Age:            57 ans
+  Sexe:           F
+  Severite:       moderate
+  Cancer connu:   Colon
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       2
+  Densité mutationnelle:   8.82 mut/Mb
+  Hotspots detectes:       0
+  Variants pathogeniques:  1
+  Oncogenes mutes:         0
+  Suppresseurs mutes:      2
+  Risque global:           FAIBLE
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Allele             Type        Pos   Score Classification
+  -------------------------------------------------------------------
+  APC        Q1244*             SNP      532477   0.600 Likely_pathogenic
+  (* = hotspot connu)
+
+--- SIGNATURES MUTATIONNELLES (info secondaire) ---
+  SBS1 (age)                          similarite: 0.800
+  SBS13 (APOBEC)                      similarite: 0.800
+  SBS7 (UV)                           similarite: 0.600
+  SBS2 (APOBEC)                       similarite: 0.600
+  SBS6 (MMR deficient)                similarite: 0.500
+
+--- RECOMMANDATIONS ---
+  -> Depistage standard selon les recommandations
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

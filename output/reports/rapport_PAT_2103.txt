@@ -1,0 +1,51 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_2103
+  Date: 14/03/2026 21:00
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_2103
+  Age:            84 ans
+  Sexe:           F
+  Severite:       low
+  Cancer connu:   Melanome
+
+--- PROFIL DE COMPATIBILITE CANCER ---
+  Cancer                   Compatibilite Genes supports
+  -----------------------------------------------------------------
+  Colon                           33.3%  MYC
+  Melanome                        33.3%  MYC
+  Poumon                          33.3%  MYC
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       1
+  Densité mutationnelle:   4.41 mut/Mb
+  Hotspots detectes:       1
+  Variants pathogeniques:  1
+  Oncogenes mutes:         1
+  Suppresseurs mutes:      0
+  Risque global:           FAIBLE
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Allele             Type        Pos   Score Classification
+  -------------------------------------------------------------------
+  MYC        S161L              SNP     1015511   0.900 Pathogenic [*]
+  (* = hotspot connu)
+
+--- SIGNATURES MUTATIONNELLES (info secondaire) ---
+  SBS7 (UV)                           similarite: 0.400
+
+--- PROFIL DE RISQUE NAIF (outil secondaire) ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Colon                   0.900 MODERE          MYC
+  Melanome                0.900 MODERE          MYC
+  Poumon                  0.900 MODERE          MYC
+
+--- RECOMMANDATIONS ---
+  -> Depistage standard selon les recommandations
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

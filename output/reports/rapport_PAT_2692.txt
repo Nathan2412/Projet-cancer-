@@ -1,0 +1,68 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_2692
+  Date: 14/03/2026 21:00
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_2692
+  Age:            79 ans
+  Sexe:           F
+  Severite:       moderate
+  Cancer connu:   Vessie
+
+--- PROFIL DE COMPATIBILITE CANCER ---
+  Cancer                   Compatibilite Genes supports
+  -----------------------------------------------------------------
+  Glioblastome                    18.2%  RB1, TP53
+  Vessie                          18.2%  RB1, TP53
+  Sein                            18.2%  RB1, TP53
+  Ovaire                           9.1%  TP53
+  Foie                             9.1%  TP53
+  Colon                            9.1%  TP53
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       2
+  Densité mutationnelle:   8.82 mut/Mb
+  Hotspots detectes:       2
+  Variants pathogeniques:  2
+  Oncogenes mutes:         0
+  Suppresseurs mutes:      2
+  Risque global:           TRES ELEVE
+
+--- ALERTES ---
+  [!] Risque TRES ELEVE pour Glioblastome (score: 2.0)
+  [!] Risque TRES ELEVE pour Vessie (score: 2.0)
+  [!] Risque TRES ELEVE pour Sein (score: 2.0)
+  [!] Risque ELEVE pour Ovaire (score: 1.0)
+  [!] Risque ELEVE pour Foie (score: 1.0)
+  [!] Risque ELEVE pour Colon (score: 1.0)
+  [!] Risque ELEVE pour Pancreas (score: 1.0)
+  [!] Risque ELEVE pour Poumon (score: 1.0)
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Allele             Type        Pos   Score Classification
+  -------------------------------------------------------------------
+  TP53       R248Q              SNP       90864   1.000 Pathogenic [*]
+  RB1        R552*              SNP      651791   1.000 Pathogenic [*]
+  (* = hotspot connu)
+
+--- SIGNATURES MUTATIONNELLES (info secondaire) ---
+  SBS7 (UV)                           similarite: 0.400
+
+--- PROFIL DE RISQUE NAIF (outil secondaire) ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Glioblastome            2.000 TRES ELEVE      RB1, TP53
+  Vessie                  2.000 TRES ELEVE      RB1, TP53
+  Sein                    2.000 TRES ELEVE      RB1, TP53
+  Ovaire                  1.000 ELEVE           TP53
+  Foie                    1.000 ELEVE           TP53
+
+--- RECOMMANDATIONS ---
+  -> Consultation oncogenetique recommandee
+  -> Surveillance renforcee des organes cibles
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

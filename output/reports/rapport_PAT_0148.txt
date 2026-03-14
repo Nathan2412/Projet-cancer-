@@ -1,0 +1,60 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_0148
+  Date: 14/03/2026 21:00
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_0148
+  Age:            61 ans
+  Sexe:           F
+  Severite:       moderate
+  Cancer connu:   Sein
+
+--- PROFIL DE COMPATIBILITE CANCER ---
+  Cancer                   Compatibilite Genes supports
+  -----------------------------------------------------------------
+  Glioblastome                    14.3%  TP53
+  Poumon                          14.3%  TP53
+  Ovaire                          14.3%  TP53
+  Foie                            14.3%  TP53
+  Colon                           14.3%  TP53
+  Pancreas                        14.3%  TP53
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       2
+  Densité mutationnelle:   8.82 mut/Mb
+  Hotspots detectes:       1
+  Variants pathogeniques:  1
+  Oncogenes mutes:         0
+  Suppresseurs mutes:      2
+  Risque global:           FAIBLE
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Allele             Type        Pos   Score Classification
+  -------------------------------------------------------------------
+  TP53       R273H              SNP       91282   0.900 Pathogenic [*]
+  BRCA1      Q139*              SNP     1788130   0.500 VUS
+  (* = hotspot connu)
+
+--- SIGNATURES MUTATIONNELLES (info secondaire) ---
+  SBS1 (age)                          similarite: 0.800
+  SBS7 (UV)                           similarite: 0.600
+  SBS6 (MMR deficient)                similarite: 0.500
+  SBS2 (APOBEC)                       similarite: 0.500
+
+--- PROFIL DE RISQUE NAIF (outil secondaire) ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Glioblastome            0.900 MODERE          TP53
+  Poumon                  0.900 MODERE          TP53
+  Ovaire                  0.900 MODERE          TP53
+  Foie                    0.900 MODERE          TP53
+  Colon                   0.900 MODERE          TP53
+
+--- RECOMMANDATIONS ---
+  -> Depistage standard selon les recommandations
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

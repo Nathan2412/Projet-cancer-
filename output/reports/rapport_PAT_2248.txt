@@ -1,0 +1,68 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_2248
+  Date: 14/03/2026 21:00
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_2248
+  Age:            46 ans
+  Sexe:           F
+  Severite:       moderate
+  Cancer connu:   Ovaire
+
+--- PROFIL DE COMPATIBILITE CANCER ---
+  Cancer                   Compatibilite Genes supports
+  -----------------------------------------------------------------
+  Glioblastome                    14.3%  PTEN
+  Melanome                        14.3%  PTEN
+  Ovaire                          14.3%  PTEN
+  Foie                            14.3%  PTEN
+  Colon                           14.3%  PTEN
+  Rein                            14.3%  PTEN
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       2
+  Densité mutationnelle:   8.82 mut/Mb
+  Hotspots detectes:       1
+  Variants pathogeniques:  1
+  Oncogenes mutes:         0
+  Suppresseurs mutes:      2
+  Risque global:           ELEVE
+
+--- ALERTES ---
+  [!] Risque ELEVE pour Glioblastome (score: 1.0)
+  [!] Risque ELEVE pour Melanome (score: 1.0)
+  [!] Risque ELEVE pour Ovaire (score: 1.0)
+  [!] Risque ELEVE pour Foie (score: 1.0)
+  [!] Risque ELEVE pour Colon (score: 1.0)
+  [!] Risque ELEVE pour Rein (score: 1.0)
+  [!] Risque ELEVE pour Sein (score: 1.0)
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Allele             Type        Pos   Score Classification
+  -------------------------------------------------------------------
+  PTEN       X212_splice        SNP     1848904   1.000 Pathogenic [*]
+  (* = hotspot connu)
+
+--- SIGNATURES MUTATIONNELLES (info secondaire) ---
+  SBS4 (tabac)                        similarite: 0.800
+  SBS6 (MMR deficient)                similarite: 0.400
+  SBS2 (APOBEC)                       similarite: 0.400
+
+--- PROFIL DE RISQUE NAIF (outil secondaire) ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Glioblastome            1.000 ELEVE           PTEN
+  Melanome                1.000 ELEVE           PTEN
+  Ovaire                  1.000 ELEVE           PTEN
+  Foie                    1.000 ELEVE           PTEN
+  Colon                   1.000 ELEVE           PTEN
+
+--- RECOMMANDATIONS ---
+  -> Consultation oncogenetique recommandee
+  -> Surveillance renforcee des organes cibles
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

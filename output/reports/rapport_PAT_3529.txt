@@ -1,0 +1,38 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_3529
+  Date: 14/03/2026 21:00
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_3529
+  Age:            69 ans
+  Sexe:           F
+  Severite:       moderate
+  Cancer connu:   Glioblastome
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       2
+  Densité mutationnelle:   8.82 mut/Mb
+  Hotspots detectes:       0
+  Variants pathogeniques:  0
+  Oncogenes mutes:         2
+  Suppresseurs mutes:      0
+  Risque global:           FAIBLE
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Allele             Type        Pos   Score Classification
+  -------------------------------------------------------------------
+  PIK3CA     *1069Wext*4        SNP      195962   0.500 VUS
+  (* = hotspot connu)
+
+--- SIGNATURES MUTATIONNELLES (info secondaire) ---
+  SBS6 (MMR deficient)                similarite: 0.400
+  SBS2 (APOBEC)                       similarite: 0.400
+
+--- RECOMMANDATIONS ---
+  -> Depistage standard selon les recommandations
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

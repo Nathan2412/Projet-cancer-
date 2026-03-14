@@ -1,54 +1,31 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_0002
-  Date: 14/03/2026 20:59
+  Date: 14/03/2026 21:00
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
   Identifiant:    PAT_0002
-  Age:            63 ans
-  Sexe:           M
-  Severite:       low
+  Age:            90 ans
+  Sexe:           F
+  Severite:       high
+  Cancer connu:   Sein
 
 --- RESUME MUTATIONNEL ---
-  Mutations totales:       23508
-  Densité mutationnelle:   0.0 mut/Mb
+  Mutations totales:       9
+  Densité mutationnelle:   39.71 mut/Mb
   Hotspots detectes:       0
-  Variants pathogeniques:  23508
-  Oncogenes mutes:         17784
-  Suppresseurs mutes:      5724
-  Risque global:           FAIBLE
-
---- ALERTES ---
-  [!] 23508 variants a impact eleve detectes
-
---- VARIANTS A IMPACT ELEVE ---
-  Gene       Allele             Type        Pos   Score Classification
-  -------------------------------------------------------------------
-  BRCA2                         SNP         289   0.600 Likely_pathogenic
-  BRCA2                         SNP         612   0.600 Likely_pathogenic
-  BRCA2                         SNP         645   0.600 Likely_pathogenic
-  BRCA2                         SNP         826   0.600 Likely_pathogenic
-  BRCA2                         SNP        2224   0.600 Likely_pathogenic
-  BRCA2                         SNP        2820   0.600 Likely_pathogenic
-  BRCA1                         SNP         234   0.600 Likely_pathogenic
-  BRCA1                         SNP         374   0.600 Likely_pathogenic
-  BRCA1                         SNP         757   0.600 Likely_pathogenic
-  BRCA1                         SNP         923   0.600 Likely_pathogenic
-  BRCA1                         SNP        1091   0.600 Likely_pathogenic
-  BRCA1                         SNP        2164   0.600 Likely_pathogenic
-  BRCA1                         SNP        2540   0.600 Likely_pathogenic
-  BRCA1                         SNP        2541   0.600 Likely_pathogenic
-  BRCA1                         SNP        2543   0.600 Likely_pathogenic
-  (* = hotspot connu)
+  Variants pathogeniques:  0
+  Oncogenes mutes:         5
+  Suppresseurs mutes:      4
+  Risque global:           MODERE
 
 --- SIGNATURES MUTATIONNELLES (info secondaire) ---
-  SBS6 (MMR deficient)                similarite: 0.567
-  SBS2 (APOBEC)                       similarite: 0.567
-  SBS4 (tabac)                        similarite: 0.367
-  SBS13 (APOBEC)                      similarite: 0.367
+  SBS2 (APOBEC)                       similarite: 0.733
+  SBS13 (APOBEC)                      similarite: 0.644
+  SBS6 (MMR deficient)                similarite: 0.511
 
 --- RECOMMANDATIONS ---
-  -> Depistage standard selon les recommandations
+  -> Suivi regulier avec depistage standard
 
 ========================================================================
   Ce rapport est genere a des fins de recherche uniquement.

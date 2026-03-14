@@ -1,0 +1,39 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_2723
+  Date: 14/03/2026 21:00
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_2723
+  Age:            78 ans
+  Sexe:           M
+  Severite:       moderate
+  Cancer connu:   Vessie
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       2
+  Densité mutationnelle:   8.82 mut/Mb
+  Hotspots detectes:       0
+  Variants pathogeniques:  2
+  Oncogenes mutes:         0
+  Suppresseurs mutes:      2
+  Risque global:           FAIBLE
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Allele             Type        Pos   Score Classification
+  -------------------------------------------------------------------
+  RB1        D270Rfs*6          INS      633292   0.650 Likely_pathogenic
+  TP53       E294*              SNP       91344   0.600 Likely_pathogenic
+  (* = hotspot connu)
+
+--- SIGNATURES MUTATIONNELLES (info secondaire) ---
+  SBS6 (MMR deficient)                similarite: 0.400
+  SBS2 (APOBEC)                       similarite: 0.400
+
+--- RECOMMANDATIONS ---
+  -> Depistage standard selon les recommandations
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

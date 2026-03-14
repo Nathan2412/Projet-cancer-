@@ -1,0 +1,68 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_1335
+  Date: 14/03/2026 21:00
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_1335
+  Age:            84 ans
+  Sexe:           M
+  Severite:       moderate
+  Cancer connu:   Colon
+
+--- PROFIL DE COMPATIBILITE CANCER ---
+  Cancer                   Compatibilite Genes supports
+  -----------------------------------------------------------------
+  Glioblastome                    16.7%  PIK3CA, TP53
+  Prostate                        16.7%  PIK3CA, TP53
+  Poumon                          16.7%  PIK3CA, TP53
+  Vessie                          16.7%  PIK3CA, TP53
+  Colon                           16.7%  PIK3CA, TP53
+  Pancreas                         8.8%  TP53
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       3
+  Densité mutationnelle:   13.24 mut/Mb
+  Hotspots detectes:       2
+  Variants pathogeniques:  3
+  Oncogenes mutes:         1
+  Suppresseurs mutes:      2
+  Risque global:           ELEVE
+
+--- ALERTES ---
+  [!] Risque ELEVE pour Glioblastome (score: 1.9)
+  [!] Risque ELEVE pour Prostate (score: 1.9)
+  [!] Risque ELEVE pour Poumon (score: 1.9)
+  [!] Risque ELEVE pour Vessie (score: 1.9)
+  [!] Risque ELEVE pour Colon (score: 1.9)
+  [!] Risque ELEVE pour Pancreas (score: 1.0)
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Allele             Type        Pos   Score Classification
+  -------------------------------------------------------------------
+  TP53       R282W              SNP       91308   1.000 Pathogenic [*]
+  PIK3CA     E542K              SNP      212032   0.900 Pathogenic [*]
+  APC        S1190Yfs*75        DEL      532638   0.650 Likely_pathogenic
+  (* = hotspot connu)
+
+--- SIGNATURES MUTATIONNELLES (info secondaire) ---
+  SBS6 (MMR deficient)                similarite: 0.400
+  SBS2 (APOBEC)                       similarite: 0.400
+
+--- PROFIL DE RISQUE NAIF (outil secondaire) ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Glioblastome            1.900 ELEVE           PIK3CA, TP53
+  Prostate                1.900 ELEVE           PIK3CA, TP53
+  Poumon                  1.900 ELEVE           PIK3CA, TP53
+  Vessie                  1.900 ELEVE           PIK3CA, TP53
+  Colon                   1.900 ELEVE           PIK3CA, TP53
+
+--- RECOMMANDATIONS ---
+  -> Consultation oncogenetique recommandee
+  -> Surveillance renforcee des organes cibles
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

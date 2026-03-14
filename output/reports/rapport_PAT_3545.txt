@@ -1,0 +1,58 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_3545
+  Date: 14/03/2026 21:00
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_3545
+  Age:            74 ans
+  Sexe:           M
+  Severite:       moderate
+  Cancer connu:   Glioblastome
+
+--- PROFIL DE COMPATIBILITE CANCER ---
+  Cancer                   Compatibilite Genes supports
+  -----------------------------------------------------------------
+  Glioblastome                    50.0%  RB1
+  Vessie                          50.0%  RB1
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       2
+  Densité mutationnelle:   8.82 mut/Mb
+  Hotspots detectes:       1
+  Variants pathogeniques:  2
+  Oncogenes mutes:         0
+  Suppresseurs mutes:      2
+  Risque global:           ELEVE
+
+--- ALERTES ---
+  [!] Risque ELEVE pour Glioblastome (score: 1.0)
+  [!] Risque ELEVE pour Vessie (score: 1.0)
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Allele             Type        Pos   Score Classification
+  -------------------------------------------------------------------
+  RB1        R445*              SNP      649983   1.000 Pathogenic [*]
+  PTEN       X268_splice        SNP     1857537   0.600 Likely_pathogenic
+  (* = hotspot connu)
+
+--- SIGNATURES MUTATIONNELLES (info secondaire) ---
+  SBS1 (age)                          similarite: 0.800
+  SBS7 (UV)                           similarite: 0.600
+  SBS6 (MMR deficient)                similarite: 0.500
+  SBS2 (APOBEC)                       similarite: 0.500
+
+--- PROFIL DE RISQUE NAIF (outil secondaire) ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Glioblastome            1.000 ELEVE           RB1
+  Vessie                  1.000 ELEVE           RB1
+
+--- RECOMMANDATIONS ---
+  -> Consultation oncogenetique recommandee
+  -> Surveillance renforcee des organes cibles
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

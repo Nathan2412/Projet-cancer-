@@ -1,0 +1,39 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_0675
+  Date: 14/03/2026 21:00
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_0675
+  Age:            68 ans
+  Sexe:           M
+  Severite:       moderate
+  Cancer connu:   Poumon
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       5
+  Densité mutationnelle:   22.06 mut/Mb
+  Hotspots detectes:       0
+  Variants pathogeniques:  1
+  Oncogenes mutes:         3
+  Suppresseurs mutes:      2
+  Risque global:           MODERE
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Allele             Type        Pos   Score Classification
+  -------------------------------------------------------------------
+  PTEN       G36*               SNP     1790695   0.600 Likely_pathogenic
+  (* = hotspot connu)
+
+--- SIGNATURES MUTATIONNELLES (info secondaire) ---
+  SBS4 (tabac)                        similarite: 0.600
+  SBS6 (MMR deficient)                similarite: 0.400
+  SBS2 (APOBEC)                       similarite: 0.400
+
+--- RECOMMANDATIONS ---
+  -> Suivi regulier avec depistage standard
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

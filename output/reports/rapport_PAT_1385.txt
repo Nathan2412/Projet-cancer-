@@ -1,0 +1,60 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_1385
+  Date: 14/03/2026 21:00
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_1385
+  Age:            68 ans
+  Sexe:           F
+  Severite:       moderate
+  Cancer connu:   Colon
+
+--- PROFIL DE COMPATIBILITE CANCER ---
+  Cancer                   Compatibilite Genes supports
+  -----------------------------------------------------------------
+  Glioblastome                    11.1%  TP53
+  Poumon                          11.1%  TP53
+  Melanome                        11.1%  TP53
+  Ovaire                          11.1%  TP53
+  Vessie                          11.1%  TP53
+  Foie                            11.1%  TP53
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       3
+  Densité mutationnelle:   13.24 mut/Mb
+  Hotspots detectes:       1
+  Variants pathogeniques:  1
+  Oncogenes mutes:         0
+  Suppresseurs mutes:      3
+  Risque global:           FAIBLE
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Allele             Type        Pos   Score Classification
+  -------------------------------------------------------------------
+  TP53       R175H              SNP       89996   0.800 Pathogenic [*]
+  APC        E1209*             SNP      532582   0.500 VUS
+  (* = hotspot connu)
+
+--- SIGNATURES MUTATIONNELLES (info secondaire) ---
+  SBS4 (tabac)                        similarite: 0.867
+  SBS6 (MMR deficient)                similarite: 0.667
+  SBS2 (APOBEC)                       similarite: 0.667
+  SBS1 (age)                          similarite: 0.467
+
+--- PROFIL DE RISQUE NAIF (outil secondaire) ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Glioblastome            0.800 MODERE          TP53
+  Poumon                  0.800 MODERE          TP53
+  Melanome                0.800 MODERE          TP53
+  Ovaire                  0.800 MODERE          TP53
+  Vessie                  0.800 MODERE          TP53
+
+--- RECOMMANDATIONS ---
+  -> Depistage standard selon les recommandations
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

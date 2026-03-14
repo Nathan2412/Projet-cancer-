@@ -1,0 +1,63 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_3408
+  Date: 14/03/2026 21:00
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_3408
+  Age:            68 ans
+  Sexe:           M
+  Severite:       moderate
+  Cancer connu:   Glioblastome
+
+--- PROFIL DE COMPATIBILITE CANCER ---
+  Cancer                   Compatibilite Genes supports
+  -----------------------------------------------------------------
+  Glioblastome                    25.9%  EGFR, TP53
+  Prostate                        10.6%  TP53
+  Poumon                          10.6%  TP53
+  Melanome                        10.6%  TP53
+  Vessie                          10.6%  TP53
+  Foie                            10.6%  TP53
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       5
+  Densité mutationnelle:   22.06 mut/Mb
+  Hotspots detectes:       3
+  Variants pathogeniques:  3
+  Oncogenes mutes:         3
+  Suppresseurs mutes:      2
+  Risque global:           MODERE
+
+--- ALERTES ---
+  [!] Risque TRES ELEVE pour Glioblastome (score: 2.2)
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Allele             Type        Pos   Score Classification
+  -------------------------------------------------------------------
+  TP53       R248W              SNP       90863   0.900 Pathogenic [*]
+  EGFR       G598V              SNP      214026   0.700 Likely_pathogenic [*]
+  EGFR       A289D              SNP      202805   0.600 Likely_pathogenic [*]
+  (* = hotspot connu)
+
+--- SIGNATURES MUTATIONNELLES (info secondaire) ---
+  SBS4 (tabac)                        similarite: 0.600
+  SBS6 (MMR deficient)                similarite: 0.600
+  SBS2 (APOBEC)                       similarite: 0.400
+
+--- PROFIL DE RISQUE NAIF (outil secondaire) ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Glioblastome            2.200 TRES ELEVE      EGFR, TP53
+  Prostate                0.900 MODERE          TP53
+  Poumon                  0.900 MODERE          TP53
+  Melanome                0.900 MODERE          TP53
+  Vessie                  0.900 MODERE          TP53
+
+--- RECOMMANDATIONS ---
+  -> Suivi regulier avec depistage standard
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

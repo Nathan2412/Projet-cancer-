@@ -1,0 +1,66 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_1158
+  Date: 14/03/2026 21:00
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_1158
+  Age:            40 ans
+  Sexe:           F
+  Severite:       high
+  Cancer connu:   Colon
+
+--- PROFIL DE COMPATIBILITE CANCER ---
+  Cancer                   Compatibilite Genes supports
+  -----------------------------------------------------------------
+  Colon                           22.2%  APC, KRAS
+  Glioblastome                    11.1%  KRAS
+  Poumon                          11.1%  KRAS
+  Melanome                        11.1%  KRAS
+  Vessie                          11.1%  KRAS
+  Foie                            11.1%  KRAS
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       7
+  Densité mutationnelle:   30.88 mut/Mb
+  Hotspots detectes:       2
+  Variants pathogeniques:  2
+  Oncogenes mutes:         4
+  Suppresseurs mutes:      3
+  Risque global:           MODERE
+
+--- ALERTES ---
+  [!] Risque ELEVE pour Colon (score: 1.6)
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Allele             Type        Pos   Score Classification
+  -------------------------------------------------------------------
+  KRAS       G12D               SNP      193495   0.800 Pathogenic [*]
+  APC        R876*              SNP      533581   0.800 Pathogenic [*]
+  BRCA2      F15Lfs*10          DEL      575164   0.550 VUS
+  APC        N1455Ifs*18        DEL      531847   0.550 VUS
+  MYC        A414Cfs*18         INS     1017644   0.550 VUS
+  (* = hotspot connu)
+
+--- SIGNATURES MUTATIONNELLES (info secondaire) ---
+  SBS1 (age)                          similarite: 0.800
+  SBS6 (MMR deficient)                similarite: 0.750
+  SBS7 (UV)                           similarite: 0.600
+  SBS2 (APOBEC)                       similarite: 0.500
+
+--- PROFIL DE RISQUE NAIF (outil secondaire) ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Colon                   1.600 ELEVE           APC, KRAS
+  Glioblastome            0.800 MODERE          KRAS
+  Poumon                  0.800 MODERE          KRAS
+  Melanome                0.800 MODERE          KRAS
+  Vessie                  0.800 MODERE          KRAS
+
+--- RECOMMANDATIONS ---
+  -> Suivi regulier avec depistage standard
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

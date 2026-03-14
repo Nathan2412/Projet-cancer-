@@ -1,0 +1,41 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_2602
+  Date: 14/03/2026 21:00
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_2602
+  Age:            72 ans
+  Sexe:           M
+  Severite:       moderate
+  Cancer connu:   Vessie
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       5
+  Densité mutationnelle:   22.06 mut/Mb
+  Hotspots detectes:       0
+  Variants pathogeniques:  0
+  Oncogenes mutes:         0
+  Suppresseurs mutes:      5
+  Risque global:           MODERE
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Allele             Type        Pos   Score Classification
+  -------------------------------------------------------------------
+  RB1        S780*              SNP      735607   0.500 VUS
+  (* = hotspot connu)
+
+--- SIGNATURES MUTATIONNELLES (info secondaire) ---
+  SBS13 (APOBEC)                      similarite: 0.800
+  SBS2 (APOBEC)                       similarite: 0.750
+  SBS4 (tabac)                        similarite: 0.700
+  SBS6 (MMR deficient)                similarite: 0.650
+  SBS1 (age)                          similarite: 0.300
+
+--- RECOMMANDATIONS ---
+  -> Suivi regulier avec depistage standard
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

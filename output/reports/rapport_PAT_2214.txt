@@ -1,0 +1,64 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_2214
+  Date: 14/03/2026 21:00
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_2214
+  Age:            38 ans
+  Sexe:           M
+  Severite:       extreme
+  Cancer connu:   Ovaire
+
+--- PROFIL DE COMPATIBILITE CANCER ---
+  Cancer                   Compatibilite Genes supports
+  -----------------------------------------------------------------
+  Glioblastome                    25.0%  PIK3CA
+  Vessie                          25.0%  PIK3CA
+  Foie                            25.0%  PIK3CA
+  Colon                           25.0%  PIK3CA
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       8
+  Densité mutationnelle:   35.29 mut/Mb
+  Hotspots detectes:       1
+  Variants pathogeniques:  1
+  Oncogenes mutes:         4
+  Suppresseurs mutes:      4
+  Risque global:           MODERE
+
+--- ALERTES ---
+  [!] 8 variants a impact eleve detectes
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Allele             Type        Pos   Score Classification
+  -------------------------------------------------------------------
+  PIK3CA     E545A              SNP      212022   0.900 Pathogenic [*]
+  TP53       F270Lfs*2          INS       91271   0.550 VUS
+  TP53       S260Lfs*4          INS       90899   0.550 VUS
+  BRCA2      T2517Hfs*22        INS      615202   0.550 VUS
+  BRCA2      V3283Afs*2         INS      657023   0.550 VUS
+  EGFR       T1074Nfs*6         INS      251249   0.550 VUS
+  ALK        C1006Lfs*4         INS       34199   0.550 VUS
+  ALK        S1001Tfs*9         INS       34213   0.550 VUS
+  (* = hotspot connu)
+
+--- SIGNATURES MUTATIONNELLES (info secondaire) ---
+  SBS6 (MMR deficient)                similarite: 0.400
+  SBS2 (APOBEC)                       similarite: 0.400
+
+--- PROFIL DE RISQUE NAIF (outil secondaire) ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Glioblastome            0.900 MODERE          PIK3CA
+  Vessie                  0.900 MODERE          PIK3CA
+  Foie                    0.900 MODERE          PIK3CA
+  Colon                   0.900 MODERE          PIK3CA
+
+--- RECOMMANDATIONS ---
+  -> Suivi regulier avec depistage standard
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

@@ -1,0 +1,73 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_1280
+  Date: 14/03/2026 21:00
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_1280
+  Age:            73 ans
+  Sexe:           F
+  Severite:       moderate
+  Cancer connu:   Colon
+
+--- PROFIL DE COMPATIBILITE CANCER ---
+  Cancer                   Compatibilite Genes supports
+  -----------------------------------------------------------------
+  Colon                           16.1%  BRAF, PIK3CA, RB1
+  Melanome                        12.3%  BRAF, RB1, TP53
+  Glioblastome                    11.9%  BRAF, PIK3CA, TP53
+  Poumon                          11.9%  BRAF, PIK3CA, TP53
+  Ovaire                           8.1%  PIK3CA, TP53
+  Rein                             8.1%  PIK3CA, TP53
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       4
+  Densité mutationnelle:   17.65 mut/Mb
+  Hotspots detectes:       4
+  Variants pathogeniques:  4
+  Oncogenes mutes:         2
+  Suppresseurs mutes:      2
+  Risque global:           TRES ELEVE
+
+--- ALERTES ---
+  [!] Risque TRES ELEVE pour Colon (score: 3.8)
+  [!] Risque TRES ELEVE pour Melanome (score: 2.9)
+  [!] Risque TRES ELEVE pour Glioblastome (score: 2.8)
+  [!] Risque TRES ELEVE pour Poumon (score: 2.8)
+  [!] Risque ELEVE pour Ovaire (score: 1.9)
+  [!] Risque ELEVE pour Rein (score: 1.9)
+  [!] Risque ELEVE pour Sein (score: 1.9)
+  [!] Risque ELEVE pour Foie (score: 1.9)
+  [!] Risque ELEVE pour Vessie (score: 1.8)
+  [!] Risque ELEVE pour Pancreas (score: 1.0)
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Allele             Type        Pos   Score Classification
+  -------------------------------------------------------------------
+  TP53       R213*              SNP       90190   1.000 Pathogenic [*]
+  RB1        X180_splice        SNP      618253   1.000 Pathogenic [*]
+  PIK3CA     H1047R             SNP      196029   0.900 Pathogenic [*]
+  BRAF       V600E              SNP      266191   0.900 Pathogenic [*]
+  (* = hotspot connu)
+
+--- SIGNATURES MUTATIONNELLES (info secondaire) ---
+  SBS6 (MMR deficient)                similarite: 0.400
+  SBS2 (APOBEC)                       similarite: 0.400
+
+--- PROFIL DE RISQUE NAIF (outil secondaire) ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Colon                   3.800 TRES ELEVE      RB1, BRAF, PIK3CA
+  Melanome                2.900 TRES ELEVE      RB1, BRAF, TP53
+  Glioblastome            2.800 TRES ELEVE      BRAF, PIK3CA, TP53
+  Poumon                  2.800 TRES ELEVE      BRAF, PIK3CA, TP53
+  Ovaire                  1.900 ELEVE           PIK3CA, TP53
+
+--- RECOMMANDATIONS ---
+  -> Consultation oncogenetique recommandee
+  -> Surveillance renforcee des organes cibles
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

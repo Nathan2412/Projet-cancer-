@@ -1,0 +1,69 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_2661
+  Date: 14/03/2026 21:00
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_2661
+  Age:            77 ans
+  Sexe:           M
+  Severite:       moderate
+  Cancer connu:   Vessie
+
+--- PROFIL DE COMPATIBILITE CANCER ---
+  Cancer                   Compatibilite Genes supports
+  -----------------------------------------------------------------
+  Glioblastome                    14.4%  PIK3CA, TP53
+  Poumon                          14.4%  PIK3CA, TP53
+  Melanome                        14.4%  PIK3CA, TP53
+  Vessie                          14.4%  PIK3CA, TP53
+  Colon                           14.4%  PIK3CA, TP53
+  Rein                             7.6%  PIK3CA
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       3
+  Densité mutationnelle:   13.24 mut/Mb
+  Hotspots detectes:       2
+  Variants pathogeniques:  2
+  Oncogenes mutes:         1
+  Suppresseurs mutes:      2
+  Risque global:           ELEVE
+
+--- ALERTES ---
+  [!] Risque ELEVE pour Glioblastome (score: 1.9)
+  [!] Risque ELEVE pour Poumon (score: 1.9)
+  [!] Risque ELEVE pour Melanome (score: 1.9)
+  [!] Risque ELEVE pour Vessie (score: 1.9)
+  [!] Risque ELEVE pour Colon (score: 1.9)
+  [!] Risque ELEVE pour Rein (score: 1.0)
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Allele             Type        Pos   Score Classification
+  -------------------------------------------------------------------
+  PIK3CA     E545K              SNP      212023   1.000 Pathogenic [*]
+  TP53       R175H              SNP       89996   0.900 Pathogenic [*]
+  RB1        X737_splice        SNP      734225   0.500 VUS
+  (* = hotspot connu)
+
+--- SIGNATURES MUTATIONNELLES (info secondaire) ---
+  SBS6 (MMR deficient)                similarite: 0.667
+  SBS2 (APOBEC)                       similarite: 0.667
+  SBS1 (age)                          similarite: 0.467
+
+--- PROFIL DE RISQUE NAIF (outil secondaire) ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Glioblastome            1.900 ELEVE           PIK3CA, TP53
+  Poumon                  1.900 ELEVE           PIK3CA, TP53
+  Melanome                1.900 ELEVE           PIK3CA, TP53
+  Vessie                  1.900 ELEVE           PIK3CA, TP53
+  Colon                   1.900 ELEVE           PIK3CA, TP53
+
+--- RECOMMANDATIONS ---
+  -> Consultation oncogenetique recommandee
+  -> Surveillance renforcee des organes cibles
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

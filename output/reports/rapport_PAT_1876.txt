@@ -1,0 +1,34 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_1876
+  Date: 14/03/2026 21:00
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_1876
+  Age:            80 ans
+  Sexe:           M
+  Severite:       moderate
+  Cancer connu:   Melanome
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       7
+  Densité mutationnelle:   30.88 mut/Mb
+  Hotspots detectes:       0
+  Variants pathogeniques:  0
+  Oncogenes mutes:         2
+  Suppresseurs mutes:      5
+  Risque global:           MODERE
+
+--- SIGNATURES MUTATIONNELLES (info secondaire) ---
+  SBS6 (MMR deficient)                similarite: 0.686
+  SBS2 (APOBEC)                       similarite: 0.686
+  SBS4 (tabac)                        similarite: 0.486
+  SBS1 (age)                          similarite: 0.371
+
+--- RECOMMANDATIONS ---
+  -> Suivi regulier avec depistage standard
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

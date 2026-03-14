@@ -1,0 +1,67 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_1177
+  Date: 14/03/2026 21:00
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_1177
+  Age:            85 ans
+  Sexe:           F
+  Severite:       moderate
+  Cancer connu:   Colon
+
+--- PROFIL DE COMPATIBILITE CANCER ---
+  Cancer                   Compatibilite Genes supports
+  -----------------------------------------------------------------
+  Colon                           23.5%  APC, KRAS, TP53
+  Pancreas                        23.5%  APC, KRAS, TP53
+  Poumon                          15.1%  KRAS, TP53
+  Glioblastome                     7.6%  TP53
+  Ovaire                           7.6%  TP53
+  Foie                             7.6%  TP53
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       5
+  Densité mutationnelle:   22.06 mut/Mb
+  Hotspots detectes:       3
+  Variants pathogeniques:  3
+  Oncogenes mutes:         2
+  Suppresseurs mutes:      3
+  Risque global:           MODERE
+
+--- ALERTES ---
+  [!] Risque TRES ELEVE pour Colon (score: 2.8)
+  [!] Risque TRES ELEVE pour Pancreas (score: 2.8)
+  [!] Risque ELEVE pour Poumon (score: 1.8)
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Allele             Type        Pos   Score Classification
+  -------------------------------------------------------------------
+  APC        R499*              SNP      544607   1.000 Pathogenic [*]
+  TP53       R273H              SNP       91282   0.900 Pathogenic [*]
+  KRAS       Q61H               SNP      175486   0.900 Pathogenic [*]
+  APC        Q1303*             SNP      532300   0.500 VUS
+  (* = hotspot connu)
+
+--- SIGNATURES MUTATIONNELLES (info secondaire) ---
+  SBS1 (age)                          similarite: 1.000
+  SBS7 (UV)                           similarite: 0.800
+  SBS6 (MMR deficient)                similarite: 0.400
+  SBS2 (APOBEC)                       similarite: 0.400
+
+--- PROFIL DE RISQUE NAIF (outil secondaire) ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Colon                   2.800 TRES ELEVE      APC, KRAS, TP53
+  Pancreas                2.800 TRES ELEVE      APC, KRAS, TP53
+  Poumon                  1.800 ELEVE           KRAS, TP53
+  Glioblastome            0.900 MODERE          TP53
+  Ovaire                  0.900 MODERE          TP53
+
+--- RECOMMANDATIONS ---
+  -> Suivi regulier avec depistage standard
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

@@ -1,0 +1,57 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_3180
+  Date: 14/03/2026 21:00
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_3180
+  Age:            45 ans
+  Sexe:           F
+  Severite:       low
+  Cancer connu:   Thyroide
+
+--- PROFIL DE COMPATIBILITE CANCER ---
+  Cancer                   Compatibilite Genes supports
+  -----------------------------------------------------------------
+  Glioblastome                    16.7%  BRAF
+  Melanome                        16.7%  BRAF
+  Poumon                          16.7%  BRAF
+  Vessie                          16.7%  BRAF
+  Colon                           16.7%  BRAF
+  Thyroide                        16.7%  BRAF
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       1
+  Densité mutationnelle:   4.41 mut/Mb
+  Hotspots detectes:       1
+  Variants pathogeniques:  1
+  Oncogenes mutes:         1
+  Suppresseurs mutes:      0
+  Risque global:           FAIBLE
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Allele             Type        Pos   Score Classification
+  -------------------------------------------------------------------
+  BRAF       V600E              SNP      266191   0.900 Pathogenic [*]
+  (* = hotspot connu)
+
+--- SIGNATURES MUTATIONNELLES (info secondaire) ---
+  SBS6 (MMR deficient)                similarite: 0.400
+  SBS2 (APOBEC)                       similarite: 0.400
+
+--- PROFIL DE RISQUE NAIF (outil secondaire) ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Glioblastome            0.900 MODERE          BRAF
+  Melanome                0.900 MODERE          BRAF
+  Poumon                  0.900 MODERE          BRAF
+  Vessie                  0.900 MODERE          BRAF
+  Colon                   0.900 MODERE          BRAF
+
+--- RECOMMANDATIONS ---
+  -> Depistage standard selon les recommandations
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

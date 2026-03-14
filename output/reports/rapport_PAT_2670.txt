@@ -1,0 +1,58 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_2670
+  Date: 14/03/2026 21:00
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_2670
+  Age:            60 ans
+  Sexe:           M
+  Severite:       moderate
+  Cancer connu:   Vessie
+
+--- PROFIL DE COMPATIBILITE CANCER ---
+  Cancer                   Compatibilite Genes supports
+  -----------------------------------------------------------------
+  Glioblastome                    16.7%  PIK3CA
+  Melanome                        16.7%  PIK3CA
+  Poumon                          16.7%  PIK3CA
+  Vessie                          16.7%  PIK3CA
+  Colon                           16.7%  PIK3CA
+  Rein                            16.7%  PIK3CA
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       3
+  Densité mutationnelle:   13.24 mut/Mb
+  Hotspots detectes:       1
+  Variants pathogeniques:  1
+  Oncogenes mutes:         1
+  Suppresseurs mutes:      2
+  Risque global:           FAIBLE
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Allele             Type        Pos   Score Classification
+  -------------------------------------------------------------------
+  PIK3CA     E545K              SNP      212023   0.900 Pathogenic [*]
+  TP53       S94*               SNP       88996   0.500 VUS
+  (* = hotspot connu)
+
+--- SIGNATURES MUTATIONNELLES (info secondaire) ---
+  SBS6 (MMR deficient)                similarite: 0.400
+  SBS2 (APOBEC)                       similarite: 0.400
+
+--- PROFIL DE RISQUE NAIF (outil secondaire) ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Glioblastome            0.900 MODERE          PIK3CA
+  Melanome                0.900 MODERE          PIK3CA
+  Poumon                  0.900 MODERE          PIK3CA
+  Vessie                  0.900 MODERE          PIK3CA
+  Colon                   0.900 MODERE          PIK3CA
+
+--- RECOMMANDATIONS ---
+  -> Depistage standard selon les recommandations
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

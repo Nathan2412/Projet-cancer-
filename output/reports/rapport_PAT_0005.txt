@@ -1,54 +1,69 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_0005
-  Date: 14/03/2026 20:59
+  Date: 14/03/2026 21:00
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
   Identifiant:    PAT_0005
-  Age:            39 ans
-  Sexe:           M
-  Severite:       low
+  Age:            60 ans
+  Sexe:           F
+  Severite:       moderate
+  Cancer connu:   Sein
+
+--- PROFIL DE COMPATIBILITE CANCER ---
+  Cancer                   Compatibilite Genes supports
+  -----------------------------------------------------------------
+  Glioblastome                    12.5%  PIK3CA, TP53
+  Poumon                          12.5%  PIK3CA, TP53
+  Ovaire                          12.5%  PIK3CA, TP53
+  Colon                           12.5%  PIK3CA, TP53
+  Rein                            12.5%  PIK3CA, TP53
+  Sein                            12.5%  PIK3CA, TP53
 
 --- RESUME MUTATIONNEL ---
-  Mutations totales:       28510
-  Densité mutationnelle:   0.0 mut/Mb
-  Hotspots detectes:       0
-  Variants pathogeniques:  28510
-  Oncogenes mutes:         14952
-  Suppresseurs mutes:      13558
-  Risque global:           FAIBLE
+  Mutations totales:       4
+  Densité mutationnelle:   17.65 mut/Mb
+  Hotspots detectes:       2
+  Variants pathogeniques:  2
+  Oncogenes mutes:         2
+  Suppresseurs mutes:      2
+  Risque global:           ELEVE
 
 --- ALERTES ---
-  [!] 28510 variants a impact eleve detectes
+  [!] Risque ELEVE pour Glioblastome (score: 1.9)
+  [!] Risque ELEVE pour Poumon (score: 1.9)
+  [!] Risque ELEVE pour Ovaire (score: 1.9)
+  [!] Risque ELEVE pour Colon (score: 1.9)
+  [!] Risque ELEVE pour Rein (score: 1.9)
+  [!] Risque ELEVE pour Sein (score: 1.9)
+  [!] Risque ELEVE pour Melanome (score: 1.0)
+  [!] Risque ELEVE pour Pancreas (score: 1.0)
 
 --- VARIANTS A IMPACT ELEVE ---
   Gene       Allele             Type        Pos   Score Classification
   -------------------------------------------------------------------
-  BRCA2                         SNP         457   0.600 Likely_pathogenic
-  BRCA2                         SNP         458   0.600 Likely_pathogenic
-  BRCA2                         SNP         459   0.600 Likely_pathogenic
-  BRCA2                         SNP         460   0.600 Likely_pathogenic
-  BRCA2                         SNP         461   0.600 Likely_pathogenic
-  BRCA2                         SNP         462   0.600 Likely_pathogenic
-  BRCA2                         SNP         463   0.600 Likely_pathogenic
-  BRCA2                         SNP         464   0.600 Likely_pathogenic
-  BRCA2                         SNP         466   0.600 Likely_pathogenic
-  BRCA2                         SNP         469   0.600 Likely_pathogenic
-  BRCA2                         SNP         471   0.600 Likely_pathogenic
-  BRCA2                         SNP         473   0.600 Likely_pathogenic
-  BRCA2                         SNP         475   0.600 Likely_pathogenic
-  BRCA2                         SNP         476   0.600 Likely_pathogenic
-  BRCA2                         SNP         477   0.600 Likely_pathogenic
+  TP53       R213*              SNP       90190   1.000 Pathogenic [*]
+  PIK3CA     H1047R             SNP      196029   0.900 Pathogenic [*]
+  RB1        S215*              SNP      630442   0.500 VUS
   (* = hotspot connu)
 
 --- SIGNATURES MUTATIONNELLES (info secondaire) ---
-  SBS2 (APOBEC)                       similarite: 0.565
-  SBS6 (MMR deficient)                similarite: 0.564
-  SBS4 (tabac)                        similarite: 0.370
-  SBS13 (APOBEC)                      similarite: 0.365
+  SBS4 (tabac)                        similarite: 0.700
+  SBS6 (MMR deficient)                similarite: 0.400
+  SBS2 (APOBEC)                       similarite: 0.400
+
+--- PROFIL DE RISQUE NAIF (outil secondaire) ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Glioblastome            1.900 ELEVE           PIK3CA, TP53
+  Poumon                  1.900 ELEVE           PIK3CA, TP53
+  Ovaire                  1.900 ELEVE           PIK3CA, TP53
+  Colon                   1.900 ELEVE           PIK3CA, TP53
+  Rein                    1.900 ELEVE           PIK3CA, TP53
 
 --- RECOMMANDATIONS ---
-  -> Depistage standard selon les recommandations
+  -> Consultation oncogenetique recommandee
+  -> Surveillance renforcee des organes cibles
 
 ========================================================================
   Ce rapport est genere a des fins de recherche uniquement.

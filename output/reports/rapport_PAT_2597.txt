@@ -1,0 +1,33 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_2597
+  Date: 14/03/2026 21:00
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_2597
+  Age:            73 ans
+  Sexe:           M
+  Severite:       high
+  Cancer connu:   Vessie
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       11
+  Densité mutationnelle:   48.53 mut/Mb
+  Hotspots detectes:       0
+  Variants pathogeniques:  0
+  Oncogenes mutes:         3
+  Suppresseurs mutes:      8
+  Risque global:           MODERE
+
+--- SIGNATURES MUTATIONNELLES (info secondaire) ---
+  SBS4 (tabac)                        similarite: 0.745
+  SBS6 (MMR deficient)                similarite: 0.400
+  SBS2 (APOBEC)                       similarite: 0.400
+
+--- RECOMMANDATIONS ---
+  -> Suivi regulier avec depistage standard
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

@@ -1,0 +1,67 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_3405
+  Date: 14/03/2026 21:00
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_3405
+  Age:            53 ans
+  Sexe:           F
+  Severite:       extreme
+  Cancer connu:   Glioblastome
+
+--- PROFIL DE COMPATIBILITE CANCER ---
+  Cancer                   Compatibilite Genes supports
+  -----------------------------------------------------------------
+  Colon                           42.6%  BRCA2, PTEN
+  Glioblastome                    42.6%  BRCA2, PTEN
+  Sein                            14.8%  PTEN
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       21
+  Densité mutationnelle:   92.65 mut/Mb
+  Hotspots detectes:       3
+  Variants pathogeniques:  4
+  Oncogenes mutes:         3
+  Suppresseurs mutes:      18
+  Risque global:           ELEVE
+
+--- ALERTES ---
+  [!] Densite mutationnelle (panel) elevee: 92.65 mut/Mb
+  [!] Risque TRES ELEVE pour Colon (score: 2.6)
+  [!] Risque TRES ELEVE pour Glioblastome (score: 2.6)
+  [!] 7 variants a impact eleve detectes
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Allele             Type        Pos   Score Classification
+  -------------------------------------------------------------------
+  PTEN       E299*              SNP     1857631   1.000 Pathogenic [*]
+  PTEN       R130Q              SNP     1829792   0.900 Pathogenic [*]
+  BRCA2      T3401M             SNP      657378   0.700 Likely_pathogenic [*]
+  APC        R2204*             SNP      529597   0.600 Likely_pathogenic
+  TP53       Y327*              SNP       91537   0.500 VUS
+  TP53       Q192*              SNP       90127   0.500 VUS
+  BRCA1      E1033*             SNP     1799844   0.500 VUS
+  (* = hotspot connu)
+
+--- SIGNATURES MUTATIONNELLES (info secondaire) ---
+  SBS6 (MMR deficient)                similarite: 0.781
+  SBS2 (APOBEC)                       similarite: 0.686
+  SBS4 (tabac)                        similarite: 0.390
+  SBS1 (age)                          similarite: 0.371
+
+--- PROFIL DE RISQUE NAIF (outil secondaire) ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Colon                   2.600 TRES ELEVE      PTEN, BRCA2
+  Glioblastome            2.600 TRES ELEVE      PTEN, BRCA2
+  Sein                    0.900 MODERE          PTEN
+
+--- RECOMMANDATIONS ---
+  -> Consultation oncogenetique recommandee
+  -> Surveillance renforcee des organes cibles
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

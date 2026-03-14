@@ -1,0 +1,64 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_1287
+  Date: 14/03/2026 21:00
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_1287
+  Age:            65 ans
+  Sexe:           M
+  Severite:       moderate
+  Cancer connu:   Colon
+
+--- PROFIL DE COMPATIBILITE CANCER ---
+  Cancer                   Compatibilite Genes supports
+  -----------------------------------------------------------------
+  Colon                           22.2%  KRAS, PIK3CA
+  Poumon                          22.2%  KRAS, PIK3CA
+  Pancreas                        11.1%  KRAS
+  Glioblastome                    11.1%  PIK3CA
+  Melanome                        11.1%  PIK3CA
+  Vessie                          11.1%  PIK3CA
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       4
+  Densité mutationnelle:   17.65 mut/Mb
+  Hotspots detectes:       2
+  Variants pathogeniques:  2
+  Oncogenes mutes:         2
+  Suppresseurs mutes:      2
+  Risque global:           ELEVE
+
+--- ALERTES ---
+  [!] Risque ELEVE pour Colon (score: 1.6)
+  [!] Risque ELEVE pour Poumon (score: 1.6)
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Allele             Type        Pos   Score Classification
+  -------------------------------------------------------------------
+  KRAS       G12S               SNP      193496   0.800 Pathogenic [*]
+  PIK3CA     E545K              SNP      212023   0.800 Pathogenic [*]
+  (* = hotspot connu)
+
+--- SIGNATURES MUTATIONNELLES (info secondaire) ---
+  SBS6 (MMR deficient)                similarite: 0.667
+  SBS2 (APOBEC)                       similarite: 0.667
+  SBS1 (age)                          similarite: 0.467
+
+--- PROFIL DE RISQUE NAIF (outil secondaire) ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Colon                   1.600 ELEVE           PIK3CA, KRAS
+  Poumon                  1.600 ELEVE           PIK3CA, KRAS
+  Pancreas                0.800 MODERE          KRAS
+  Glioblastome            0.800 MODERE          PIK3CA
+  Melanome                0.800 MODERE          PIK3CA
+
+--- RECOMMANDATIONS ---
+  -> Consultation oncogenetique recommandee
+  -> Surveillance renforcee des organes cibles
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

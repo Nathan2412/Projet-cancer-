@@ -1,0 +1,53 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_0690
+  Date: 14/03/2026 21:00
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_0690
+  Age:            61 ans
+  Sexe:           M
+  Severite:       moderate
+  Cancer connu:   Poumon
+
+--- PROFIL DE COMPATIBILITE CANCER ---
+  Cancer                   Compatibilite Genes supports
+  -----------------------------------------------------------------
+  Melanome                        50.0%  BRAF
+  Poumon                          50.0%  BRAF
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       4
+  Densité mutationnelle:   17.65 mut/Mb
+  Hotspots detectes:       1
+  Variants pathogeniques:  3
+  Oncogenes mutes:         2
+  Suppresseurs mutes:      2
+  Risque global:           FAIBLE
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Allele             Type        Pos   Score Classification
+  -------------------------------------------------------------------
+  BRAF       N581S              SNP      266134   0.900 Pathogenic [*]
+  TP53       S313Afs*32         DEL       91492   0.650 Likely_pathogenic
+  RB1        S443*              SNP      647419   0.600 Likely_pathogenic
+  (* = hotspot connu)
+
+--- SIGNATURES MUTATIONNELLES (info secondaire) ---
+  SBS13 (APOBEC)                      similarite: 0.867
+  SBS6 (MMR deficient)                similarite: 0.667
+  SBS2 (APOBEC)                       similarite: 0.667
+
+--- PROFIL DE RISQUE NAIF (outil secondaire) ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Melanome                0.900 MODERE          BRAF
+  Poumon                  0.900 MODERE          BRAF
+
+--- RECOMMANDATIONS ---
+  -> Depistage standard selon les recommandations
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

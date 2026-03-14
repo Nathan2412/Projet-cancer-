@@ -1,0 +1,70 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_1331
+  Date: 14/03/2026 21:00
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_1331
+  Age:            63 ans
+  Sexe:           F
+  Severite:       moderate
+  Cancer connu:   Colon
+
+--- PROFIL DE COMPATIBILITE CANCER ---
+  Cancer                   Compatibilite Genes supports
+  -----------------------------------------------------------------
+  Melanome                        18.2%  APC, TP53
+  Colon                           18.2%  APC, TP53
+  Glioblastome                     9.1%  TP53
+  Poumon                           9.1%  TP53
+  Ovaire                           9.1%  TP53
+  Vessie                           9.1%  TP53
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       3
+  Densité mutationnelle:   13.24 mut/Mb
+  Hotspots detectes:       2
+  Variants pathogeniques:  3
+  Oncogenes mutes:         0
+  Suppresseurs mutes:      3
+  Risque global:           TRES ELEVE
+
+--- ALERTES ---
+  [!] Risque TRES ELEVE pour Melanome (score: 2.0)
+  [!] Risque TRES ELEVE pour Colon (score: 2.0)
+  [!] Risque ELEVE pour Glioblastome (score: 1.0)
+  [!] Risque ELEVE pour Poumon (score: 1.0)
+  [!] Risque ELEVE pour Ovaire (score: 1.0)
+  [!] Risque ELEVE pour Vessie (score: 1.0)
+  [!] Risque ELEVE pour Foie (score: 1.0)
+  [!] Risque ELEVE pour Pancreas (score: 1.0)
+  [!] Risque ELEVE pour Sein (score: 1.0)
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Allele             Type        Pos   Score Classification
+  -------------------------------------------------------------------
+  TP53       R175H              SNP       89996   1.000 Pathogenic [*]
+  APC        R1114*             SNP      532867   1.000 Pathogenic [*]
+  APC        A239Qfs*54         DEL      579286   0.650 Likely_pathogenic
+  (* = hotspot connu)
+
+--- SIGNATURES MUTATIONNELLES (info secondaire) ---
+  SBS7 (UV)                           similarite: 0.400
+
+--- PROFIL DE RISQUE NAIF (outil secondaire) ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Melanome                2.000 TRES ELEVE      APC, TP53
+  Colon                   2.000 TRES ELEVE      APC, TP53
+  Glioblastome            1.000 ELEVE           TP53
+  Poumon                  1.000 ELEVE           TP53
+  Ovaire                  1.000 ELEVE           TP53
+
+--- RECOMMANDATIONS ---
+  -> Consultation oncogenetique recommandee
+  -> Surveillance renforcee des organes cibles
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

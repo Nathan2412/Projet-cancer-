@@ -1,0 +1,63 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_2598
+  Date: 14/03/2026 21:00
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_2598
+  Age:            55 ans
+  Sexe:           M
+  Severite:       high
+  Cancer connu:   Vessie
+
+--- PROFIL DE COMPATIBILITE CANCER ---
+  Cancer                   Compatibilite Genes supports
+  -----------------------------------------------------------------
+  Rein                            21.4%  BRCA2, PIK3CA
+  Vessie                          21.4%  BRCA2, PIK3CA
+  Glioblastome                    11.4%  PIK3CA
+  Prostate                        11.4%  PIK3CA
+  Poumon                          11.4%  PIK3CA
+  Foie                            11.4%  PIK3CA
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       8
+  Densité mutationnelle:   35.29 mut/Mb
+  Hotspots detectes:       2
+  Variants pathogeniques:  2
+  Oncogenes mutes:         2
+  Suppresseurs mutes:      6
+  Risque global:           MODERE
+
+--- ALERTES ---
+  [!] Risque ELEVE pour Rein (score: 1.5)
+  [!] Risque ELEVE pour Vessie (score: 1.5)
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Allele             Type        Pos   Score Classification
+  -------------------------------------------------------------------
+  PIK3CA     H1047R             SNP      196029   0.800 Pathogenic [*]
+  BRCA2      E832K              SNP      595512   0.700 Likely_pathogenic [*]
+  (* = hotspot connu)
+
+--- SIGNATURES MUTATIONNELLES (info secondaire) ---
+  SBS6 (MMR deficient)                similarite: 0.650
+  SBS2 (APOBEC)                       similarite: 0.650
+  SBS1 (age)                          similarite: 0.300
+
+--- PROFIL DE RISQUE NAIF (outil secondaire) ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Rein                    1.500 ELEVE           PIK3CA, BRCA2
+  Vessie                  1.500 ELEVE           PIK3CA, BRCA2
+  Glioblastome            0.800 MODERE          PIK3CA
+  Prostate                0.800 MODERE          PIK3CA
+  Poumon                  0.800 MODERE          PIK3CA
+
+--- RECOMMANDATIONS ---
+  -> Suivi regulier avec depistage standard
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

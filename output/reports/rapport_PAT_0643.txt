@@ -1,0 +1,60 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_0643
+  Date: 14/03/2026 21:00
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_0643
+  Age:            59 ans
+  Sexe:           F
+  Severite:       moderate
+  Cancer connu:   Sein
+
+--- PROFIL DE COMPATIBILITE CANCER ---
+  Cancer                   Compatibilite Genes supports
+  -----------------------------------------------------------------
+  Colon                           25.0%  PTEN
+  Melanome                        25.0%  PTEN
+  Sein                            25.0%  PTEN
+  Glioblastome                    25.0%  PTEN
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       1
+  Densité mutationnelle:   4.41 mut/Mb
+  Hotspots detectes:       1
+  Variants pathogeniques:  1
+  Oncogenes mutes:         0
+  Suppresseurs mutes:      1
+  Risque global:           ELEVE
+
+--- ALERTES ---
+  [!] Risque ELEVE pour Colon (score: 1.0)
+  [!] Risque ELEVE pour Melanome (score: 1.0)
+  [!] Risque ELEVE pour Sein (score: 1.0)
+  [!] Risque ELEVE pour Glioblastome (score: 1.0)
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Allele             Type        Pos   Score Classification
+  -------------------------------------------------------------------
+  PTEN       R130*              SNP     1829791   1.000 Pathogenic [*]
+  (* = hotspot connu)
+
+--- SIGNATURES MUTATIONNELLES (info secondaire) ---
+  SBS7 (UV)                           similarite: 0.400
+
+--- PROFIL DE RISQUE NAIF (outil secondaire) ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Colon                   1.000 ELEVE           PTEN
+  Melanome                1.000 ELEVE           PTEN
+  Sein                    1.000 ELEVE           PTEN
+  Glioblastome            1.000 ELEVE           PTEN
+
+--- RECOMMANDATIONS ---
+  -> Consultation oncogenetique recommandee
+  -> Surveillance renforcee des organes cibles
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================

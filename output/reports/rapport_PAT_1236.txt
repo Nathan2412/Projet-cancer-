@@ -1,0 +1,71 @@
+========================================================================
+  RAPPORT D'ANALYSE GENOMIQUE - PAT_1236
+  Date: 14/03/2026 21:00
+========================================================================
+
+--- INFORMATIONS PATIENT ---
+  Identifiant:    PAT_1236
+  Age:            68 ans
+  Sexe:           F
+  Severite:       high
+  Cancer connu:   Colon
+
+--- PROFIL DE COMPATIBILITE CANCER ---
+  Cancer                   Compatibilite Genes supports
+  -----------------------------------------------------------------
+  Glioblastome                    11.1%  TP53
+  Poumon                          11.1%  TP53
+  Melanome                        11.1%  TP53
+  Ovaire                          11.1%  TP53
+  Vessie                          11.1%  TP53
+  Foie                            11.1%  TP53
+
+--- RESUME MUTATIONNEL ---
+  Mutations totales:       4
+  Densité mutationnelle:   17.65 mut/Mb
+  Hotspots detectes:       1
+  Variants pathogeniques:  3
+  Oncogenes mutes:         0
+  Suppresseurs mutes:      4
+  Risque global:           ELEVE
+
+--- ALERTES ---
+  [!] Risque ELEVE pour Glioblastome (score: 1.0)
+  [!] Risque ELEVE pour Poumon (score: 1.0)
+  [!] Risque ELEVE pour Melanome (score: 1.0)
+  [!] Risque ELEVE pour Ovaire (score: 1.0)
+  [!] Risque ELEVE pour Vessie (score: 1.0)
+  [!] Risque ELEVE pour Foie (score: 1.0)
+  [!] Risque ELEVE pour Colon (score: 1.0)
+  [!] Risque ELEVE pour Pancreas (score: 1.0)
+  [!] Risque ELEVE pour Sein (score: 1.0)
+
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Allele             Type        Pos   Score Classification
+  -------------------------------------------------------------------
+  TP53       R175H              SNP       89996   1.000 Pathogenic [*]
+  APC        L479Ifs*6          INS      544669   0.650 Likely_pathogenic
+  APC        T1313Nfs*2         INS      532272   0.650 Likely_pathogenic
+  RB1        Y529*              DEL      651723   0.550 VUS
+  (* = hotspot connu)
+
+--- SIGNATURES MUTATIONNELLES (info secondaire) ---
+  SBS7 (UV)                           similarite: 0.400
+
+--- PROFIL DE RISQUE NAIF (outil secondaire) ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Glioblastome            1.000 ELEVE           TP53
+  Poumon                  1.000 ELEVE           TP53
+  Melanome                1.000 ELEVE           TP53
+  Ovaire                  1.000 ELEVE           TP53
+  Vessie                  1.000 ELEVE           TP53
+
+--- RECOMMANDATIONS ---
+  -> Consultation oncogenetique recommandee
+  -> Surveillance renforcee des organes cibles
+
+========================================================================
+  Ce rapport est genere a des fins de recherche uniquement.
+  Il ne constitue pas un diagnostic medical.
+========================================================================
