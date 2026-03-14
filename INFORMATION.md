@@ -188,10 +188,16 @@ Générées automatiquement selon le profil :
 - `mutation_matrix.json` : Matrice patients × gènes (JSON)
 
 ### output/plots/ (quand activé)
-- Heatmaps de mutations
-- Distribution des impacts
-- Spectres mutationnels
-- Courbes ROC ML
+- `cohort_heatmap.png` : Heatmap de mutations (patients × gènes)
+- `impact_distribution.png` : Distribution des impacts mutationnels
+- `ml_confusion_Gradient_Boosting.png` : Matrice de confusion (Gradient Boosting)
+- `ml_confusion_Random_Forest.png` : Matrice de confusion (Random Forest)
+- `ml_confusion_SVM_RBF.png` : Matrice de confusion (SVM RBF)
+- `ml_roc_curves.png` : Courbes ROC par classe de cancer
+- `ml_feature_importance.png` : Importance des features discriminantes
+- `ml_accuracy_by_cancer.png` : Accuracy du modèle par type de cancer
+- `ml_model_comparison.png` : Comparaison des performances des modèles
+- `ml_confidence_distribution.png` : Distribution des scores de confiance
 
 ---
 
@@ -218,13 +224,23 @@ Générées automatiquement selon le profil :
 
 ## DERNIÈRE MISE À JOUR
 
-**Date** : 7 mars 2026
+**Date** : 14 mars 2026
 
 **Derniers changements** :
-- Correction d'un bug majeur NameError lors du compte rendu lié au Machine Learning
-- Implémentation de la fonction d'export CSV `rapport_cohorte.csv` pour analyse externe (Excel)
-- Création d'une légende et d'un guide explicatif d'interprétation pour les données textuelles et HTML.
-- Ajout de la sélection automatique de modèles ML.
+- Exécution complète du pipeline avec l'ensemble des 3 674 patients TCGA
+- Correction d'un bug d'import (`generate_patient_html_report` n'existait plus dans `reporter.py`)
+- Correction de la numérotation incohérente des étapes du pipeline (maintenant [0/7] à [7/7])
+- Ajout du filtrage des patients invalides (incohérence sexe/cancer) dans le pipeline ML — 35 patients exclus
+- Ajout de la génération de graphiques et export JSON dans le pipeline synthétique
+- Génération de **10 graphiques** : confusion matrices (3 modèles), courbes ROC, importance des features, accuracy par cancer, comparaison des modèles, distribution de confiance, heatmap de cohorte, distribution des impacts
+
+**Résultats de l'analyse complète (14 mars 2026)** :
+- **3 639 patients** analysés (35 exclus pour incohérence sexe/cancer)
+- **12 types de cancers**, **12 gènes cibles**, **6 773 mutations** détectées
+- **Meilleur modèle** : Gradient Boosting (accuracy CV = 54.9%, top-3 accuracy = 81.0%, AUC = 0.885)
+- **Cancers les mieux prédits** : Colon (F1=0.82), Thyroïde (F1=0.82), Pancréas (F1=0.63)
+- **Features les plus discriminantes** : allele_score_Thyroide, mut_count_APC, âge, mut_bin_APC
+- **725 patients** classés à haut risque (ELEVE ou TRES ELEVE)
 
 ---
 

@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_2214
-  Date: 07/03/2026 22:33
+  Date: 14/03/2026 21:00
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -10,15 +10,44 @@
   Severite:       extreme
   Cancer connu:   Ovaire
 
+--- PROFIL DE COMPATIBILITE CANCER ---
+  Cancer                   Compatibilite Genes supports
+  -----------------------------------------------------------------
+  Glioblastome                    25.0%  PIK3CA
+  Vessie                          25.0%  PIK3CA
+  Foie                            25.0%  PIK3CA
+  Colon                           25.0%  PIK3CA
+
 --- RESUME MUTATIONNEL ---
   Mutations totales:       8
-  Densité mutationnelle (panel):    35.29 mut/Mb
+  Densité mutationnelle:   35.29 mut/Mb
+  Hotspots detectes:       1
+  Variants pathogeniques:  1
+  Oncogenes mutes:         4
+  Suppresseurs mutes:      4
   Risque global:           MODERE
 
 --- ALERTES ---
   [!] 8 variants a impact eleve detectes
 
---- PROFIL DE RISQUE CANCER ---
+--- VARIANTS A IMPACT ELEVE ---
+  Gene       Allele             Type        Pos   Score Classification
+  -------------------------------------------------------------------
+  PIK3CA     E545A              SNP      212022   0.900 Pathogenic [*]
+  TP53       F270Lfs*2          INS       91271   0.550 VUS
+  TP53       S260Lfs*4          INS       90899   0.550 VUS
+  BRCA2      T2517Hfs*22        INS      615202   0.550 VUS
+  BRCA2      V3283Afs*2         INS      657023   0.550 VUS
+  EGFR       T1074Nfs*6         INS      251249   0.550 VUS
+  ALK        C1006Lfs*4         INS       34199   0.550 VUS
+  ALK        S1001Tfs*9         INS       34213   0.550 VUS
+  (* = hotspot connu)
+
+--- SIGNATURES MUTATIONNELLES (info secondaire) ---
+  SBS6 (MMR deficient)                similarite: 0.400
+  SBS2 (APOBEC)                       similarite: 0.400
+
+--- PROFIL DE RISQUE NAIF (outil secondaire) ---
   Cancer                  Score Niveau          Genes
   -----------------------------------------------------------------
   Glioblastome            0.900 MODERE          PIK3CA
@@ -26,50 +55,8 @@
   Foie                    0.900 MODERE          PIK3CA
   Colon                   0.900 MODERE          PIK3CA
 
---- VARIANTS A IMPACT ELEVE ---
-  Gene       Type        Pos   Score Classification
-  -------------------------------------------------------
-  PIK3CA     SNP      212022   0.900 Pathogenic
-  TP53       INS       91271   0.550 VUS
-  TP53       INS       90899   0.550 VUS
-  BRCA2      INS      615202   0.550 VUS
-  BRCA2      INS      657023   0.550 VUS
-  EGFR       INS      251249   0.550 VUS
-  ALK        INS       34199   0.550 VUS
-  ALK        INS       34213   0.550 VUS
-
---- SIGNATURES MUTATIONNELLES ---
-  SBS6 (MMR deficient)                similarite: 0.400
-  SBS2 (APOBEC)                       similarite: 0.400
-
 --- RECOMMANDATIONS ---
   -> Suivi regulier avec depistage standard
-
-========================================================================
-  GUIDE D'INTERPRETATION DES RESULTATS
-========================================================================
-  Score de Pathogenicite:
-  >= 0.8 : Pathogene (cause reconnue de maladie)
-  0.6-0.8: Probablement pathogene
-  0.3-0.6: VUS (Variant de Signification Incertaine)
-  < 0.3  : Benin ou probablement benin
-
-  Densite Mutationnelle (panel) (mut/Mb):
-  > 100  : Tres elevee (ex: Melanome, Poumon)
-  50-100 : Elevee
-  20-50  : Moderee
-  < 20   : Faible
-  Note: cette metrique est calculee sur les genes du panel (12 genes),
-  et ne constitue pas une TMB (Tumor Mutation Burden) clinique.
-
-  Niveau de Risque Cancer:
-  TRES ELEVE : Prise en charge urgente (Score >= 1.5)
-  ELEVE      : Consultation oncogenetique conseillee (Score 1.0 - 1.49)
-  MODERE     : Suivi regulier (Score 0.5 - 0.99)
-  FAIBLE     : Profil mutationnel peu preoccupant (Score < 0.5)
-
-  Calcul du score de risque cancer:
-  Score = Somme(pathogenicity_score) pour chaque mutation du gene associe au cancer
 
 ========================================================================
   Ce rapport est genere a des fins de recherche uniquement.

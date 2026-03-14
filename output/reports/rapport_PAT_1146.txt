@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_1146
-  Date: 07/03/2026 22:33
+  Date: 14/03/2026 21:00
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -10,9 +10,23 @@
   Severite:       high
   Cancer connu:   Colon
 
+--- PROFIL DE COMPATIBILITE CANCER ---
+  Cancer                   Compatibilite Genes supports
+  -----------------------------------------------------------------
+  Colon                           29.6%  APC, PIK3CA, PTEN
+  Glioblastome                    19.6%  PIK3CA, PTEN, TP53
+  Melanome                        10.6%  APC, TP53
+  Prostate                        10.1%  APC, PIK3CA
+  Vessie                           9.5%  PIK3CA
+  Poumon                           5.3%  TP53
+
 --- RESUME MUTATIONNEL ---
   Mutations totales:       12
-  Densité mutationnelle (panel):    52.94 mut/Mb
+  Densité mutationnelle:   52.94 mut/Mb
+  Hotspots detectes:       6
+  Variants pathogeniques:  6
+  Oncogenes mutes:         4
+  Suppresseurs mutes:      8
   Risque global:           ELEVE
 
 --- ALERTES ---
@@ -27,63 +41,34 @@
   [!] Risque ELEVE pour Rein (score: 1.0)
   [!] 6 variants a impact eleve detectes
 
---- PROFIL DE RISQUE CANCER ---
-  Cancer                  Score Niveau          Genes
-  -----------------------------------------------------------------
-  Colon                   5.600 TRES ELEVE      PTEN, PIK3CA, TP53
-  Glioblastome            3.700 TRES ELEVE      PTEN, PIK3CA, TP53
-  Melanome                2.000 TRES ELEVE      TP53, APC
-  Prostate                1.900 ELEVE           PIK3CA, APC
-  Vessie                  1.800 ELEVE           PIK3CA
-  Poumon                  1.000 ELEVE           TP53
-  Pancreas                1.000 ELEVE           TP53
-  Rein                    1.000 ELEVE           TP53
-  Thyroide                0.900 MODERE          PIK3CA
-
 --- VARIANTS A IMPACT ELEVE ---
-  Gene       Type        Pos   Score Classification
-  -------------------------------------------------------
-  TP53       SNP       90190   1.000 Pathogenic
-  APC        SNP      532867   1.000 Pathogenic
-  PTEN       SNP     1857631   1.000 Pathogenic
-  PIK3CA     SNP      196040   0.900 Pathogenic
-  PIK3CA     SNP      231238   0.900 Pathogenic
-  PTEN       SNP     1829792   0.800 Pathogenic
+  Gene       Allele             Type        Pos   Score Classification
+  -------------------------------------------------------------------
+  TP53       R213*              SNP       90190   1.000 Pathogenic [*]
+  APC        R1114*             SNP      532867   1.000 Pathogenic [*]
+  PTEN       E299*              SNP     1857631   1.000 Pathogenic [*]
+  PIK3CA     M1043I             SNP      196040   0.900 Pathogenic [*]
+  PIK3CA     R88Q               SNP      231238   0.900 Pathogenic [*]
+  PTEN       R130Q              SNP     1829792   0.800 Pathogenic [*]
+  (* = hotspot connu)
 
---- SIGNATURES MUTATIONNELLES ---
+--- SIGNATURES MUTATIONNELLES (info secondaire) ---
   SBS6 (MMR deficient)                similarite: 0.567
   SBS2 (APOBEC)                       similarite: 0.567
   SBS4 (tabac)                        similarite: 0.367
 
+--- PROFIL DE RISQUE NAIF (outil secondaire) ---
+  Cancer                  Score Niveau          Genes
+  -----------------------------------------------------------------
+  Colon                   5.600 TRES ELEVE      APC, PTEN, PIK3CA
+  Glioblastome            3.700 TRES ELEVE      PTEN, PIK3CA, TP53
+  Melanome                2.000 TRES ELEVE      APC, TP53
+  Prostate                1.900 ELEVE           APC, PIK3CA
+  Vessie                  1.800 ELEVE           PIK3CA
+
 --- RECOMMANDATIONS ---
   -> Consultation oncogenetique recommandee
   -> Surveillance renforcee des organes cibles
-
-========================================================================
-  GUIDE D'INTERPRETATION DES RESULTATS
-========================================================================
-  Score de Pathogenicite:
-  >= 0.8 : Pathogene (cause reconnue de maladie)
-  0.6-0.8: Probablement pathogene
-  0.3-0.6: VUS (Variant de Signification Incertaine)
-  < 0.3  : Benin ou probablement benin
-
-  Densite Mutationnelle (panel) (mut/Mb):
-  > 100  : Tres elevee (ex: Melanome, Poumon)
-  50-100 : Elevee
-  20-50  : Moderee
-  < 20   : Faible
-  Note: cette metrique est calculee sur les genes du panel (12 genes),
-  et ne constitue pas une TMB (Tumor Mutation Burden) clinique.
-
-  Niveau de Risque Cancer:
-  TRES ELEVE : Prise en charge urgente (Score >= 1.5)
-  ELEVE      : Consultation oncogenetique conseillee (Score 1.0 - 1.49)
-  MODERE     : Suivi regulier (Score 0.5 - 0.99)
-  FAIBLE     : Profil mutationnel peu preoccupant (Score < 0.5)
-
-  Calcul du score de risque cancer:
-  Score = Somme(pathogenicity_score) pour chaque mutation du gene associe au cancer
 
 ========================================================================
   Ce rapport est genere a des fins de recherche uniquement.
