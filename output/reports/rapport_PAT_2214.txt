@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_2214
-  Date: 14/03/2026 22:57
+  Date: 15/03/2026 07:54
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -9,21 +9,6 @@
   Sexe:           M
   Severite:       extreme
   Cancer connu:   Ovaire
-
---- CLASSIFICATION ML — CANCER PROBABLE ---
-  Cancer predit:       Sein
-  Confiance:           47.61%
-  Modele:              Gradient Boosting
-  Top-3 cancers probables:
-    1. Sein                 47.61%
-    2. Poumon               33.31%
-    3. Glioblastome         7.63%
-  Features determinantes:
-    - age                                 importance=0.0736 valeur=38.0
-    - burden                              importance=0.0321 valeur=35.29
-    - total_mut                           importance=0.0333 valeur=8.0
-    - n_suppressors                       importance=0.0418 valeur=4.0
-    - imp_HIGH                            importance=0.0252 valeur=7.0
 
 --- PROFIL DE COMPATIBILITE CANCER ---
   Cancer                   Compatibilite Genes supports

@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_1153
-  Date: 14/03/2026 22:57
+  Date: 15/03/2026 07:54
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -12,18 +12,18 @@
 
 --- CLASSIFICATION ML — CANCER PROBABLE ---
   Cancer predit:       Colon
-  Confiance:           96.68%
+  Confiance:           97.88%
   Modele:              Gradient Boosting
   Top-3 cancers probables:
-    1. Colon                96.68%
-    2. Sein                 1.05%
-    3. Vessie               0.99%
+    1. Colon                97.88%
+    2. Vessie               0.76%
+    3. Sein                 0.49%
   Features determinantes:
-    - age                                 importance=0.0736 valeur=71.0
-    - burden                              importance=0.0321 valeur=35.29
-    - total_mut                           importance=0.0333 valeur=8.0
-    - n_suppressors                       importance=0.0418 valeur=6.0
-    - SNP                                 importance=0.0276 valeur=8.0
+    - age                                 importance=0.2205 valeur=71.0
+    - burden                              importance=0.0234 valeur=35.29
+    - n_pathogenic                        importance=0.0338 valeur=6.0
+    - SNP                                 importance=0.0259 valeur=8.0
+    - total_mut                           importance=0.0241 valeur=8.0
 
 --- PROFIL DE COMPATIBILITE CANCER ---
   Cancer                   Compatibilite Genes supports
@@ -71,11 +71,11 @@
 --- PROFIL DE RISQUE NAIF (outil secondaire) ---
   Cancer                  Score Niveau          Genes
   -----------------------------------------------------------------
-  Colon                   5.600 TRES ELEVE      PTEN, APC, PIK3CA
-  Glioblastome            3.800 TRES ELEVE      PTEN, PIK3CA, KRAS
-  Melanome                1.900 ELEVE           PTEN, KRAS
-  Prostate                1.800 ELEVE           PIK3CA, KRAS
-  Vessie                  1.800 ELEVE           PIK3CA, KRAS
+  Colon                   5.600 TRES ELEVE      APC, KRAS, PIK3CA
+  Glioblastome            3.800 TRES ELEVE      KRAS, PIK3CA, PTEN
+  Melanome                1.900 ELEVE           KRAS, PTEN
+  Prostate                1.800 ELEVE           KRAS, PIK3CA
+  Vessie                  1.800 ELEVE           KRAS, PIK3CA
 
 --- RECOMMANDATIONS ---
   -> Suivi regulier avec depistage standard

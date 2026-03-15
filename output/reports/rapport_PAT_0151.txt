@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_0151
-  Date: 14/03/2026 22:57
+  Date: 15/03/2026 07:54
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -11,19 +11,19 @@
   Cancer connu:   Sein
 
 --- CLASSIFICATION ML — CANCER PROBABLE ---
-  Cancer predit:       Colon
-  Confiance:           23.33%
+  Cancer predit:       Ovaire
+  Confiance:           19.48%
   Modele:              Gradient Boosting
   Top-3 cancers probables:
-    1. Colon                23.33%
-    2. Poumon               19.46%
-    3. Ovaire               15.12%
+    1. Ovaire               19.48%
+    2. Colon                18.63%
+    3. Poumon               16.15%
   Features determinantes:
-    - age                                 importance=0.0736 valeur=58.0
-    - burden                              importance=0.0321 valeur=8.82
-    - n_suppressors                       importance=0.0418 valeur=2.0
-    - total_mut                           importance=0.0333 valeur=2.0
-    - mut_count_APC                       importance=0.0454 valeur=1.0
+    - age                                 importance=0.2205 valeur=58.0
+    - burden                              importance=0.0234 valeur=8.82
+    - n_suppressors                       importance=0.0261 valeur=2.0
+    - SNP                                 importance=0.0259 valeur=2.0
+    - total_mut                           importance=0.0241 valeur=2.0
 
 --- PROFIL DE COMPATIBILITE CANCER ---
   Cancer                   Compatibilite Genes supports

@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_0804
-  Date: 14/03/2026 22:57
+  Date: 15/03/2026 07:54
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -11,19 +11,19 @@
   Cancer connu:   Poumon
 
 --- CLASSIFICATION ML — CANCER PROBABLE ---
-  Cancer predit:       Sein
-  Confiance:           41.36%
+  Cancer predit:       Vessie
+  Confiance:           27.60%
   Modele:              Gradient Boosting
   Top-3 cancers probables:
-    1. Sein                 41.36%
-    2. Vessie               24.35%
-    3. Poumon               14.70%
+    1. Vessie               27.60%
+    2. Sein                 25.17%
+    3. Ovaire               9.48%
   Features determinantes:
-    - age                                 importance=0.0736 valeur=64.0
-    - burden                              importance=0.0321 valeur=8.82
-    - total_mut                           importance=0.0333 valeur=2.0
-    - n_genes                             importance=0.0302 valeur=2.0
-    - n_suppressors                       importance=0.0418 valeur=1.0
+    - age                                 importance=0.2205 valeur=64.0
+    - burden                              importance=0.0234 valeur=8.82
+    - SNP                                 importance=0.0259 valeur=2.0
+    - total_mut                           importance=0.0241 valeur=2.0
+    - n_genes                             importance=0.0203 valeur=2.0
 
 --- RESUME MUTATIONNEL ---
   Mutations totales:       2

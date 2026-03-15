@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_1830
-  Date: 14/03/2026 22:57
+  Date: 15/03/2026 07:54
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -12,18 +12,18 @@
 
 --- CLASSIFICATION ML — CANCER PROBABLE ---
   Cancer predit:       Pancreas
-  Confiance:           44.03%
+  Confiance:           79.02%
   Modele:              Gradient Boosting
   Top-3 cancers probables:
-    1. Pancreas             44.03%
-    2. Colon                19.44%
-    3. Poumon               16.70%
+    1. Pancreas             79.02%
+    2. Colon                6.09%
+    3. Poumon               5.39%
   Features determinantes:
-    - age                                 importance=0.0736 valeur=41.0
-    - burden                              importance=0.0321 valeur=8.82
-    - mut_bin_KRAS                        importance=0.0612 valeur=1.0
-    - total_mut                           importance=0.0333 valeur=2.0
-    - n_pathogenic                        importance=0.0328 valeur=2.0
+    - age                                 importance=0.2205 valeur=41.0
+    - burden                              importance=0.0234 valeur=8.82
+    - n_pathogenic                        importance=0.0338 valeur=2.0
+    - total_mut                           importance=0.0241 valeur=2.0
+    - n_genes                             importance=0.0203 valeur=2.0
 
 --- PROFIL DE COMPATIBILITE CANCER ---
   Cancer                   Compatibilite Genes supports

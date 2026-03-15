@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_3189
-  Date: 14/03/2026 22:57
+  Date: 15/03/2026 07:54
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -12,18 +12,18 @@
 
 --- CLASSIFICATION ML — CANCER PROBABLE ---
   Cancer predit:       Rein
-  Confiance:           84.86%
+  Confiance:           51.33%
   Modele:              Gradient Boosting
   Top-3 cancers probables:
-    1. Rein                 84.86%
-    2. Prostate             6.66%
-    3. Glioblastome         2.93%
+    1. Rein                 51.33%
+    2. Prostate             15.50%
+    3. Glioblastome         11.82%
   Features determinantes:
-    - age                                 importance=0.0736 valeur=68.0
-    - burden                              importance=0.0321 valeur=8.82
-    - n_suppressors                       importance=0.0418 valeur=2.0
-    - total_mut                           importance=0.0333 valeur=2.0
-    - n_genes                             importance=0.0302 valeur=2.0
+    - age                                 importance=0.2205 valeur=68.0
+    - burden                              importance=0.0234 valeur=8.82
+    - n_suppressors                       importance=0.0261 valeur=2.0
+    - total_mut                           importance=0.0241 valeur=2.0
+    - imp_HIGH                            importance=0.0214 valeur=2.0
 
 --- RESUME MUTATIONNEL ---
   Mutations totales:       2

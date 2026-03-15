@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_3547
-  Date: 14/03/2026 22:57
+  Date: 15/03/2026 07:55
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -12,18 +12,18 @@
 
 --- CLASSIFICATION ML — CANCER PROBABLE ---
   Cancer predit:       Glioblastome
-  Confiance:           75.93%
+  Confiance:           47.54%
   Modele:              Gradient Boosting
   Top-3 cancers probables:
-    1. Glioblastome         75.93%
-    2. Sein                 11.16%
-    3. Foie                 6.49%
+    1. Glioblastome         47.54%
+    2. Rein                 23.26%
+    3. Foie                 13.98%
   Features determinantes:
-    - age                                 importance=0.0736 valeur=47.0
-    - burden                              importance=0.0321 valeur=8.82
-    - n_suppressors                       importance=0.0418 valeur=2.0
-    - total_mut                           importance=0.0333 valeur=2.0
-    - n_pathogenic                        importance=0.0328 valeur=2.0
+    - age                                 importance=0.2205 valeur=47.0
+    - burden                              importance=0.0234 valeur=8.82
+    - n_pathogenic                        importance=0.0338 valeur=2.0
+    - n_suppressors                       importance=0.0261 valeur=2.0
+    - total_mut                           importance=0.0241 valeur=2.0
 
 --- RESUME MUTATIONNEL ---
   Mutations totales:       2

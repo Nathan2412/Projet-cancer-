@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_0701
-  Date: 14/03/2026 22:57
+  Date: 15/03/2026 07:54
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -12,18 +12,18 @@
 
 --- CLASSIFICATION ML — CANCER PROBABLE ---
   Cancer predit:       Poumon
-  Confiance:           68.32%
+  Confiance:           51.67%
   Modele:              Gradient Boosting
   Top-3 cancers probables:
-    1. Poumon               68.32%
-    2. Melanome             12.64%
-    3. Vessie               7.08%
+    1. Poumon               51.67%
+    2. Vessie               15.20%
+    3. Melanome             12.01%
   Features determinantes:
-    - age                                 importance=0.0736 valeur=83.0
-    - burden                              importance=0.0321 valeur=17.65
-    - n_suppressors                       importance=0.0418 valeur=3.0
-    - total_mut                           importance=0.0333 valeur=4.0
-    - n_genes                             importance=0.0302 valeur=4.0
+    - age                                 importance=0.2205 valeur=83.0
+    - burden                              importance=0.0234 valeur=17.65
+    - SNP                                 importance=0.0259 valeur=4.0
+    - total_mut                           importance=0.0241 valeur=4.0
+    - imp_MOD                             importance=0.0226 valeur=4.0
 
 --- PROFIL DE COMPATIBILITE CANCER ---
   Cancer                   Compatibilite Genes supports

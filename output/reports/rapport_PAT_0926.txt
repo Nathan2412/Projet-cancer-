@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_0926
-  Date: 14/03/2026 22:57
+  Date: 15/03/2026 07:54
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -12,18 +12,18 @@
 
 --- CLASSIFICATION ML — CANCER PROBABLE ---
   Cancer predit:       Foie
-  Confiance:           22.55%
+  Confiance:           23.66%
   Modele:              Gradient Boosting
   Top-3 cancers probables:
-    1. Foie                 22.55%
-    2. Poumon               21.08%
-    3. Sein                 20.34%
+    1. Foie                 23.66%
+    2. Prostate             22.42%
+    3. Pancreas             14.77%
   Features determinantes:
-    - age                                 importance=0.0736 valeur=69.0
-    - burden                              importance=0.0321 valeur=4.41
-    - n_suppressors                       importance=0.0418 valeur=1.0
-    - total_mut                           importance=0.0333 valeur=1.0
-    - mut_count_TP53                      importance=0.0312 valeur=1.0
+    - age                                 importance=0.2205 valeur=69.0
+    - burden                              importance=0.0234 valeur=4.41
+    - n_suppressors                       importance=0.0261 valeur=1.0
+    - total_mut                           importance=0.0241 valeur=1.0
+    - mut_count_TP53                      importance=0.0228 valeur=1.0
 
 --- RESUME MUTATIONNEL ---
   Mutations totales:       1

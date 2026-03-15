@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_2689
-  Date: 14/03/2026 22:57
+  Date: 15/03/2026 07:54
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -12,18 +12,18 @@
 
 --- CLASSIFICATION ML — CANCER PROBABLE ---
   Cancer predit:       Vessie
-  Confiance:           31.01%
+  Confiance:           25.22%
   Modele:              Gradient Boosting
   Top-3 cancers probables:
-    1. Vessie               31.01%
-    2. Sein                 23.09%
-    3. Poumon               15.35%
+    1. Vessie               25.22%
+    2. Prostate             19.12%
+    3. Glioblastome         18.98%
   Features determinantes:
-    - age                                 importance=0.0736 valeur=64.0
-    - burden                              importance=0.0321 valeur=8.82
-    - n_suppressors                       importance=0.0418 valeur=2.0
-    - total_mut                           importance=0.0333 valeur=2.0
-    - mut_count_TP53                      importance=0.0312 valeur=2.0
+    - age                                 importance=0.2205 valeur=64.0
+    - burden                              importance=0.0234 valeur=8.82
+    - n_suppressors                       importance=0.0261 valeur=2.0
+    - SNP                                 importance=0.0259 valeur=2.0
+    - total_mut                           importance=0.0241 valeur=2.0
 
 --- PROFIL DE COMPATIBILITE CANCER ---
   Cancer                   Compatibilite Genes supports

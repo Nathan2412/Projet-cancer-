@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_2902
-  Date: 14/03/2026 22:57
+  Date: 15/03/2026 07:54
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -11,19 +11,19 @@
   Cancer connu:   Thyroide
 
 --- CLASSIFICATION ML — CANCER PROBABLE ---
-  Cancer predit:       Sein
-  Confiance:           42.51%
+  Cancer predit:       Glioblastome
+  Confiance:           23.26%
   Modele:              Gradient Boosting
   Top-3 cancers probables:
-    1. Sein                 42.51%
-    2. Thyroide             21.53%
-    3. Glioblastome         14.40%
+    1. Glioblastome         23.26%
+    2. Thyroide             20.92%
+    3. Rein                 20.71%
   Features determinantes:
-    - age                                 importance=0.0736 valeur=55.0
-    - burden                              importance=0.0321 valeur=8.82
-    - n_suppressors                       importance=0.0418 valeur=2.0
-    - total_mut                           importance=0.0333 valeur=2.0
-    - imp_HIGH                            importance=0.0252 valeur=2.0
+    - age                                 importance=0.2205 valeur=55.0
+    - burden                              importance=0.0234 valeur=8.82
+    - n_suppressors                       importance=0.0261 valeur=2.0
+    - total_mut                           importance=0.0241 valeur=2.0
+    - n_pathogenic                        importance=0.0338 valeur=1.0
 
 --- RESUME MUTATIONNEL ---
   Mutations totales:       2

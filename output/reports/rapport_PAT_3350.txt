@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_3350
-  Date: 14/03/2026 22:57
+  Date: 15/03/2026 07:55
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -12,18 +12,18 @@
 
 --- CLASSIFICATION ML — CANCER PROBABLE ---
   Cancer predit:       Prostate
-  Confiance:           21.18%
+  Confiance:           31.21%
   Modele:              Gradient Boosting
   Top-3 cancers probables:
-    1. Prostate             21.18%
-    2. Poumon               20.11%
-    3. Sein                 16.27%
+    1. Prostate             31.21%
+    2. Foie                 18.35%
+    3. Pancreas             13.62%
   Features determinantes:
-    - age                                 importance=0.0736 valeur=67.0
-    - burden                              importance=0.0321 valeur=4.41
-    - n_suppressors                       importance=0.0418 valeur=1.0
-    - total_mut                           importance=0.0333 valeur=1.0
-    - mut_count_TP53                      importance=0.0312 valeur=1.0
+    - age                                 importance=0.2205 valeur=67.0
+    - burden                              importance=0.0234 valeur=4.41
+    - n_suppressors                       importance=0.0261 valeur=1.0
+    - SNP                                 importance=0.0259 valeur=1.0
+    - total_mut                           importance=0.0241 valeur=1.0
 
 --- RESUME MUTATIONNEL ---
   Mutations totales:       1

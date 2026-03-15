@@ -1,74 +1,79 @@
-y================================================================
+================================================================
   RAPPORT ML - CLASSIFICATION DU CANCER
-  14/03/2026 22:57  |  3674 patients labellises  |  12 classes
+  15/03/2026 07:54  |  3639 patients labellises  |  12 classes
 ================================================================
 
   SIGNATURES D'ALLELES PAR CANCER (discriminantes)
   --------------------------------------------------
-  Sein: 0 alleles discriminants (sur 669 patients)
-  Poumon: 0 alleles discriminants (sur 469 patients)
-  Colon: 0 alleles discriminants (sur 489 patients)
+  Sein: 3 alleles discriminants (sur 663 patients)
+    - PIK3CA H1047R (enrich=16.42x, freq_in=0.1931, freq_out=0.0118)
+    - PIK3CA E542K (enrich=4.95x, freq_in=0.0649, freq_out=0.0131)
+    - PIK3CA E545K (enrich=3.67x, freq_in=0.095, freq_out=0.0259)
+  Poumon: 2 alleles discriminants (sur 469 patients)
+    - KRAS G12C (enrich=21.51x, freq_in=0.1493, freq_out=0.0069)
+    - KRAS G12V (enrich=2.94x, freq_in=0.0853, freq_out=0.029)
+  Colon: 6 alleles discriminants (sur 489 patients)
+    - APC R1450* (enrich=69529.65x, freq_in=0.0695, freq_out=0.0)
+    - KRAS G13D (enrich=39.72x, freq_in=0.0757, freq_out=0.0019)
+    - KRAS G12D (enrich=4.5x, freq_in=0.1186, freq_out=0.0263)
+    - KRAS G12V (enrich=3.8x, freq_in=0.1002, freq_out=0.0263)
+    - TP53 R175H (enrich=3.49x, freq_in=0.0654, freq_out=0.0187)
+    ... +1 autres
   Prostate: 0 alleles discriminants (sur 109 patients)
-  Pancreas: 0 alleles discriminants (sur 135 patients)
-  Melanome: 0 alleles discriminants (sur 342 patients)
-  Ovaire: 0 alleles discriminants (sur 383 patients)
-  Vessie: 0 alleles discriminants (sur 295 patients)
+  Pancreas: 3 alleles discriminants (sur 135 patients)
+    - KRAS G12R (enrich=108.15x, freq_in=0.1852, freq_out=0.0017)
+    - KRAS G12D (enrich=13.82x, freq_in=0.363, freq_out=0.0263)
+    - KRAS G12V (enrich=8.65x, freq_in=0.2444, freq_out=0.0283)
+  Melanome: 2 alleles discriminants (sur 342 patients)
+    - BRAF V600K (enrich=102339.18x, freq_in=0.1023, freq_out=0.0)
+    - BRAF V600E (enrich=4.4x, freq_in=0.462, freq_out=0.1049)
+  Ovaire: 0 alleles discriminants (sur 354 patients)
+  Vessie: 3 alleles discriminants (sur 295 patients)
+    - TP53 R248Q (enrich=3.93x, freq_in=0.0576, freq_out=0.0147)
+    - PIK3CA E542K (enrich=3.19x, freq_in=0.061, freq_out=0.0191)
+    - PIK3CA E545K (enrich=2.96x, freq_in=0.0983, freq_out=0.0332)
   Thyroide: 1 alleles discriminants (sur 296 patients)
-    - BRAF V600E (enrich=14.61x, freq_in=0.9561, freq_out=0.0654)
+    - BRAF V600E (enrich=14.46x, freq_in=0.9561, freq_out=0.0661)
   Rein: 0 alleles discriminants (sur 51 patients)
-  Foie: 0 alleles discriminants (sur 165 patients)
-  Glioblastome: 0 alleles discriminants (sur 271 patients)
+  Foie: 1 alleles discriminants (sur 165 patients)
+    - TP53 R249S (enrich=57.9x, freq_in=0.0667, freq_out=0.0012)
+  Glioblastome: 2 alleles discriminants (sur 271 patients)
+    - EGFR G598V (enrich=51660.52x, freq_in=0.0517, freq_out=0.0)
+    - EGFR A289V (enrich=198.85x, freq_in=0.059, freq_out=0.0003)
 
-  Entrainement : 598.27s
+  Entrainement : 1104.98s
   Modele                   CV Acc   Top-3   CV F1  Train Acc     AUC
   -------------------------------------------------------------------
-  Random Forest            0.5220  0.7608  0.5175     0.5833  0.8774
-    params={'max_depth': 8, 'min_samples_split': 5, 'n_estimators': 150} | gap (train-CV) acc=+0.0612 f1=+0.0665
-  Gradient Boosting        0.5444  0.8046  0.5296     0.6170  0.8846 *
-    params={'learning_rate': 0.05, 'max_depth': 3, 'n_estimators': 100, 'subsample': 1.0} | gap (train-CV) acc=+0.0727 f1=+0.0772
-  SVM (RBF)                0.4935  0.7945  0.4996     0.5915  0.8732
-    params={'C': 10, 'gamma': 0.01} | gap (train-CV) acc=+0.0980 f1=+0.1008
+  Random Forest            0.5169  0.7656  0.5236     0.7194  0.8736
+    params={'max_depth': 15, 'min_samples_split': 5, 'n_estimators': 150} | gap (train-CV) acc=+0.2025 f1=+0.2040
+  Gradient Boosting        0.5229  0.7835  0.5367     0.5732  0.8870 *
+    params={'l2_regularization': 0.1, 'learning_rate': 0.05, 'max_depth': 3, 'max_iter': 100} | gap (train-CV) acc=+0.0503 f1=+0.0490
+  SVM (RBF)                0.5007  0.7931  0.5082     0.5955  0.8735
+    params={'C': 10, 'gamma': 0.01} | gap (train-CV) acc=+0.0948 f1=+0.0991
 
-  Meilleur : Gradient Boosting (acc CV=0.5444 | top-3=0.8046 -- metrique principale)
+  Meilleur : Gradient Boosting (acc CV=0.5229 | top-3=0.7835 -- metrique principale)
   Classe                Prec     Rec      F1     N
   --------------------------------------------
-  Colon               0.8131  0.8098  0.8115   489
-  Foie                0.1765  0.0364  0.0603   165
-  Glioblastome        0.5350  0.5646  0.5494   271
-  Melanome            0.5233  0.4591  0.4891   342
-  Ovaire              0.3401  0.6997  0.4577   383
-  Pancreas            0.6429  0.6000  0.6207   135
-  Poumon              0.5234  0.4286  0.4713   469
-  Prostate            0.2553  0.1101  0.1538   109
-  Rein                0.1250  0.0392  0.0597    51
-  Sein                0.5754  0.5531  0.5640   669
-  Thyroide            0.7367  0.8885  0.8055   296
-  Vessie              0.4417  0.3085  0.3633   295
+  Colon               0.8667  0.7975  0.8307   489
+  Foie                0.1278  0.1030  0.1141   165
+  Glioblastome        0.5343  0.5461  0.5401   271
+  Melanome            0.5985  0.4532  0.5158   342
+  Ovaire              0.3447  0.5734  0.4305   354
+  Pancreas            0.5489  0.7481  0.6332   135
+  Poumon              0.6442  0.3667  0.4674   469
+  Prostate            0.1368  0.3578  0.1980   109
+  Rein                0.0878  0.3529  0.1406    51
+  Sein                0.7601  0.4253  0.5455   663
+  Thyroide            0.7473  0.9189  0.8242   296
+  Vessie              0.4157  0.3593  0.3855   295
 
-  TOP FEATURES DISCRIMINANTES (importance modele):
-    allele_score_Thyroide                    0.12668
-    mut_bin_APC                              0.10301
-    mut_count_APC                            0.07491
-    age                                      0.07364
-    n_oncogenes                              0.05512
-    mut_bin_PIK3CA                           0.04739
-    n_genes                                  0.04582
-    n_pathogenic                             0.03481
-    mut_count_BRAF                           0.03031
-    SNP                                      0.02962
-    imp_HIGH                                 0.02689
-    mut_bin_BRAF                             0.02453
-    mut_count_TP53                           0.02448
-    mut_bin_KRAS                             0.02439
-    mut_count_PIK3CA                         0.02400
-
-  Score de resubstitution (entrainement, BIAISE) : 2280/3674 correctes (62.1%)
+  Score de resubstitution (entrainement, BIAISE) : 2198/3639 correctes (60.4%)
   [Utiliser le score de validation croisee (CV) comme metrique principale]
-  Confiance moy : 0.569
+  Confiance moy : 0.544
 
   Sectorisation (clustering)
-  - k optimal: 2 | silhouette: 0.3417
-  - Coherence labels cancer: ARI=0.0232 NMI=0.0891
-    Sector_01: n=620 dominant=Colon
-    Sector_02: n=3054 dominant=Sein
+  - k optimal: 2 | silhouette: 0.3384
+  - Coherence labels cancer: ARI=0.023 NMI=0.0897
+    Sector_01: n=623 dominant=Colon
+    Sector_02: n=3016 dominant=Sein
 ================================================================

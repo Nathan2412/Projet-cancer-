@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_2017
-  Date: 14/03/2026 22:57
+  Date: 15/03/2026 07:54
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -12,18 +12,18 @@
 
 --- CLASSIFICATION ML — CANCER PROBABLE ---
   Cancer predit:       Sein
-  Confiance:           60.46%
+  Confiance:           36.23%
   Modele:              Gradient Boosting
   Top-3 cancers probables:
-    1. Sein                 60.46%
-    2. Melanome             11.57%
-    3. Vessie               8.26%
+    1. Sein                 36.23%
+    2. Melanome             24.97%
+    3. Foie                 8.22%
   Features determinantes:
-    - age                                 importance=0.0736 valeur=53.0
-    - burden                              importance=0.0321 valeur=8.82
-    - total_mut                           importance=0.0333 valeur=2.0
-    - n_genes                             importance=0.0302 valeur=2.0
-    - SNP                                 importance=0.0276 valeur=2.0
+    - age                                 importance=0.2205 valeur=53.0
+    - burden                              importance=0.0234 valeur=8.82
+    - SNP                                 importance=0.0259 valeur=2.0
+    - total_mut                           importance=0.0241 valeur=2.0
+    - imp_MOD                             importance=0.0226 valeur=2.0
 
 --- PROFIL DE COMPATIBILITE CANCER ---
   Cancer                   Compatibilite Genes supports

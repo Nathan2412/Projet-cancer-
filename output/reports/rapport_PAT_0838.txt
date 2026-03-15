@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_0838
-  Date: 14/03/2026 22:57
+  Date: 15/03/2026 07:54
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -12,18 +12,18 @@
 
 --- CLASSIFICATION ML — CANCER PROBABLE ---
   Cancer predit:       Poumon
-  Confiance:           31.02%
+  Confiance:           24.23%
   Modele:              Gradient Boosting
   Top-3 cancers probables:
-    1. Poumon               31.02%
-    2. Sein                 20.37%
-    3. Ovaire               19.27%
+    1. Poumon               24.23%
+    2. Ovaire               23.61%
+    3. Glioblastome         13.10%
   Features determinantes:
-    - age                                 importance=0.0736 valeur=42.0
-    - burden                              importance=0.0321 valeur=8.82
-    - total_mut                           importance=0.0333 valeur=2.0
-    - n_genes                             importance=0.0302 valeur=2.0
-    - n_suppressors                       importance=0.0418 valeur=1.0
+    - age                                 importance=0.2205 valeur=42.0
+    - burden                              importance=0.0234 valeur=8.82
+    - SNP                                 importance=0.0259 valeur=2.0
+    - total_mut                           importance=0.0241 valeur=2.0
+    - imp_MOD                             importance=0.0226 valeur=2.0
 
 --- RESUME MUTATIONNEL ---
   Mutations totales:       2

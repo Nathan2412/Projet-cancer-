@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_1303
-  Date: 14/03/2026 22:57
+  Date: 15/03/2026 07:54
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -12,18 +12,18 @@
 
 --- CLASSIFICATION ML — CANCER PROBABLE ---
   Cancer predit:       Colon
-  Confiance:           97.33%
+  Confiance:           97.85%
   Modele:              Gradient Boosting
   Top-3 cancers probables:
-    1. Colon                97.33%
-    2. Sein                 1.09%
-    3. Poumon               0.41%
+    1. Colon                97.85%
+    2. Melanome             0.50%
+    3. Pancreas             0.42%
   Features determinantes:
-    - age                                 importance=0.0736 valeur=41.0
-    - burden                              importance=0.0321 valeur=17.65
-    - total_mut                           importance=0.0333 valeur=4.0
-    - SNP                                 importance=0.0276 valeur=4.0
-    - mut_count_APC                       importance=0.0454 valeur=2.0
+    - age                                 importance=0.2205 valeur=41.0
+    - burden                              importance=0.0234 valeur=17.65
+    - SNP                                 importance=0.0259 valeur=4.0
+    - total_mut                           importance=0.0241 valeur=4.0
+    - n_pathogenic                        importance=0.0338 valeur=2.0
 
 --- PROFIL DE COMPATIBILITE CANCER ---
   Cancer                   Compatibilite Genes supports
@@ -70,11 +70,11 @@
 --- PROFIL DE RISQUE NAIF (outil secondaire) ---
   Cancer                  Score Niveau          Genes
   -----------------------------------------------------------------
-  Poumon                  1.800 ELEVE           PIK3CA, KRAS
-  Vessie                  1.800 ELEVE           PIK3CA, KRAS
-  Foie                    1.800 ELEVE           PIK3CA, KRAS
-  Colon                   1.800 ELEVE           PIK3CA, KRAS
-  Sein                    1.800 ELEVE           PIK3CA, KRAS
+  Poumon                  1.800 ELEVE           KRAS, PIK3CA
+  Vessie                  1.800 ELEVE           KRAS, PIK3CA
+  Foie                    1.800 ELEVE           KRAS, PIK3CA
+  Colon                   1.800 ELEVE           KRAS, PIK3CA
+  Sein                    1.800 ELEVE           KRAS, PIK3CA
 
 --- RECOMMANDATIONS ---
   -> Consultation oncogenetique recommandee

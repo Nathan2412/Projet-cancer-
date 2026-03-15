@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_1632
-  Date: 14/03/2026 22:57
+  Date: 15/03/2026 07:54
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -11,19 +11,19 @@
   Cancer connu:   Prostate
 
 --- CLASSIFICATION ML — CANCER PROBABLE ---
-  Cancer predit:       Poumon
-  Confiance:           26.35%
+  Cancer predit:       Vessie
+  Confiance:           24.91%
   Modele:              Gradient Boosting
   Top-3 cancers probables:
-    1. Poumon               26.35%
-    2. Vessie               24.66%
-    3. Sein                 18.81%
+    1. Vessie               24.91%
+    2. Prostate             21.54%
+    3. Poumon               15.55%
   Features determinantes:
-    - age                                 importance=0.0736 valeur=63.0
-    - burden                              importance=0.0321 valeur=8.82
-    - n_suppressors                       importance=0.0418 valeur=2.0
-    - total_mut                           importance=0.0333 valeur=2.0
-    - mut_count_TP53                      importance=0.0312 valeur=2.0
+    - age                                 importance=0.2205 valeur=63.0
+    - burden                              importance=0.0234 valeur=8.82
+    - n_suppressors                       importance=0.0261 valeur=2.0
+    - SNP                                 importance=0.0259 valeur=2.0
+    - total_mut                           importance=0.0241 valeur=2.0
 
 --- RESUME MUTATIONNEL ---
   Mutations totales:       2

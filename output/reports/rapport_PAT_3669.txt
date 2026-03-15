@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_3669
-  Date: 14/03/2026 22:57
+  Date: 15/03/2026 07:55
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -11,19 +11,19 @@
   Cancer connu:   Glioblastome
 
 --- CLASSIFICATION ML — CANCER PROBABLE ---
-  Cancer predit:       Sein
-  Confiance:           37.68%
+  Cancer predit:       Foie
+  Confiance:           23.85%
   Modele:              Gradient Boosting
   Top-3 cancers probables:
-    1. Sein                 37.68%
-    2. Foie                 16.02%
-    3. Glioblastome         13.44%
+    1. Foie                 23.85%
+    2. Rein                 16.25%
+    3. Sein                 14.43%
   Features determinantes:
-    - age                                 importance=0.0736 valeur=52.0
-    - burden                              importance=0.0321 valeur=4.41
-    - n_suppressors                       importance=0.0418 valeur=1.0
-    - total_mut                           importance=0.0333 valeur=1.0
-    - n_pathogenic                        importance=0.0328 valeur=1.0
+    - age                                 importance=0.2205 valeur=52.0
+    - burden                              importance=0.0234 valeur=4.41
+    - n_pathogenic                        importance=0.0338 valeur=1.0
+    - n_suppressors                       importance=0.0261 valeur=1.0
+    - n_hotspots                          importance=0.0259 valeur=1.0
 
 --- PROFIL DE COMPATIBILITE CANCER ---
   Cancer                   Compatibilite Genes supports

@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_3072
-  Date: 14/03/2026 22:57
+  Date: 15/03/2026 07:54
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -12,18 +12,18 @@
 
 --- CLASSIFICATION ML — CANCER PROBABLE ---
   Cancer predit:       Thyroide
-  Confiance:           55.07%
+  Confiance:           58.88%
   Modele:              Gradient Boosting
   Top-3 cancers probables:
-    1. Thyroide             55.07%
-    2. Melanome             27.55%
-    3. Colon                5.63%
+    1. Thyroide             58.88%
+    2. Melanome             26.83%
+    3. Rein                 3.98%
   Features determinantes:
-    - age                                 importance=0.0736 valeur=75.0
-    - burden                              importance=0.0321 valeur=4.41
-    - allele_score_Thyroide               importance=0.0742 valeur=1.0
-    - mut_count_BRAF                      importance=0.0591 valeur=1.0
-    - mut_bin_BRAF                        importance=0.0464 valeur=1.0
+    - age                                 importance=0.2205 valeur=75.0
+    - burden                              importance=0.0234 valeur=4.41
+    - n_pathogenic                        importance=0.0338 valeur=1.0
+    - allele_score_Thyroide               importance=0.0311 valeur=1.0
+    - mut_count_BRAF                      importance=0.0292 valeur=1.0
 
 --- PROFIL DE COMPATIBILITE CANCER ---
   Cancer                   Compatibilite Genes supports

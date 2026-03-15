@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_2083
-  Date: 14/03/2026 22:57
+  Date: 15/03/2026 07:54
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -11,19 +11,19 @@
   Cancer connu:   Melanome
 
 --- CLASSIFICATION ML — CANCER PROBABLE ---
-  Cancer predit:       Poumon
-  Confiance:           38.76%
+  Cancer predit:       Rein
+  Confiance:           42.04%
   Modele:              Gradient Boosting
   Top-3 cancers probables:
-    1. Poumon               38.76%
-    2. Foie                 10.18%
-    3. Colon                9.28%
+    1. Rein                 42.04%
+    2. Poumon               19.86%
+    3. Foie                 16.73%
   Features determinantes:
-    - age                                 importance=0.0736 valeur=48.0
-    - burden                              importance=0.0321 valeur=4.41
-    - mut_bin_KRAS                        importance=0.0612 valeur=1.0
-    - mut_count_KRAS                      importance=0.0481 valeur=1.0
-    - total_mut                           importance=0.0333 valeur=1.0
+    - age                                 importance=0.2205 valeur=48.0
+    - burden                              importance=0.0234 valeur=4.41
+    - mut_bin_KRAS                        importance=0.0283 valeur=1.0
+    - SNP                                 importance=0.0259 valeur=1.0
+    - total_mut                           importance=0.0241 valeur=1.0
 
 --- RESUME MUTATIONNEL ---
   Mutations totales:       1

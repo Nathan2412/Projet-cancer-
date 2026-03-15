@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_0001
-  Date: 14/03/2026 22:57
+  Date: 15/03/2026 07:54
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -11,19 +11,19 @@
   Cancer connu:   Sein
 
 --- CLASSIFICATION ML — CANCER PROBABLE ---
-  Cancer predit:       Sein
-  Confiance:           46.85%
+  Cancer predit:       Colon
+  Confiance:           62.03%
   Modele:              Gradient Boosting
   Top-3 cancers probables:
-    1. Sein                 46.85%
-    2. Colon                30.43%
-    3. Vessie               11.58%
+    1. Colon                62.03%
+    2. Vessie               12.44%
+    3. Sein                 8.82%
   Features determinantes:
-    - age                                 importance=0.0736 valeur=68.0
-    - burden                              importance=0.0321 valeur=75.0
-    - n_suppressors                       importance=0.0418 valeur=14.0
-    - total_mut                           importance=0.0333 valeur=17.0
-    - SNP                                 importance=0.0276 valeur=17.0
+    - age                                 importance=0.2205 valeur=68.0
+    - burden                              importance=0.0234 valeur=75.0
+    - SNP                                 importance=0.0259 valeur=17.0
+    - total_mut                           importance=0.0241 valeur=17.0
+    - n_suppressors                       importance=0.0261 valeur=14.0
 
 --- PROFIL DE COMPATIBILITE CANCER ---
   Cancer                   Compatibilite Genes supports
@@ -65,8 +65,8 @@
 --- PROFIL DE RISQUE NAIF (outil secondaire) ---
   Cancer                  Score Niveau          Genes
   -----------------------------------------------------------------
-  Colon                   1.600 ELEVE           PTEN, ALK
-  Sein                    1.600 ELEVE           PTEN, ALK
+  Colon                   1.600 ELEVE           ALK, PTEN
+  Sein                    1.600 ELEVE           ALK, PTEN
   Glioblastome            0.900 MODERE          PTEN
 
 --- RECOMMANDATIONS ---

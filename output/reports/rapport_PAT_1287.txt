@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_1287
-  Date: 14/03/2026 22:57
+  Date: 15/03/2026 07:54
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -12,18 +12,18 @@
 
 --- CLASSIFICATION ML — CANCER PROBABLE ---
   Cancer predit:       Colon
-  Confiance:           96.92%
+  Confiance:           96.82%
   Modele:              Gradient Boosting
   Top-3 cancers probables:
-    1. Colon                96.92%
-    2. Vessie               0.87%
-    3. Sein                 0.71%
+    1. Colon                96.82%
+    2. Vessie               1.21%
+    3. Poumon               0.57%
   Features determinantes:
-    - age                                 importance=0.0736 valeur=65.0
-    - burden                              importance=0.0321 valeur=17.65
-    - total_mut                           importance=0.0333 valeur=4.0
-    - mut_count_APC                       importance=0.0454 valeur=2.0
-    - n_suppressors                       importance=0.0418 valeur=2.0
+    - age                                 importance=0.2205 valeur=65.0
+    - burden                              importance=0.0234 valeur=17.65
+    - total_mut                           importance=0.0241 valeur=4.0
+    - SNP                                 importance=0.0259 valeur=3.0
+    - n_pathogenic                        importance=0.0338 valeur=2.0
 
 --- PROFIL DE COMPATIBILITE CANCER ---
   Cancer                   Compatibilite Genes supports
@@ -63,8 +63,8 @@
 --- PROFIL DE RISQUE NAIF (outil secondaire) ---
   Cancer                  Score Niveau          Genes
   -----------------------------------------------------------------
-  Colon                   1.600 ELEVE           PIK3CA, KRAS
-  Poumon                  1.600 ELEVE           PIK3CA, KRAS
+  Colon                   1.600 ELEVE           KRAS, PIK3CA
+  Poumon                  1.600 ELEVE           KRAS, PIK3CA
   Pancreas                0.800 MODERE          KRAS
   Glioblastome            0.800 MODERE          PIK3CA
   Melanome                0.800 MODERE          PIK3CA

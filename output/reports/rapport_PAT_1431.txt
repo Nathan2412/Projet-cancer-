@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_1431
-  Date: 14/03/2026 22:57
+  Date: 15/03/2026 07:54
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -12,18 +12,18 @@
 
 --- CLASSIFICATION ML — CANCER PROBABLE ---
   Cancer predit:       Colon
-  Confiance:           72.35%
+  Confiance:           68.88%
   Modele:              Gradient Boosting
   Top-3 cancers probables:
-    1. Colon                72.35%
-    2. Sein                 16.96%
-    3. Pancreas             3.61%
+    1. Colon                68.88%
+    2. Sein                 19.01%
+    3. Pancreas             5.63%
   Features determinantes:
-    - age                                 importance=0.0736 valeur=45.0
-    - burden                              importance=0.0321 valeur=13.24
-    - total_mut                           importance=0.0333 valeur=3.0
-    - n_pathogenic                        importance=0.0328 valeur=3.0
-    - n_hotspots                          importance=0.0307 valeur=3.0
+    - age                                 importance=0.2205 valeur=45.0
+    - burden                              importance=0.0234 valeur=13.24
+    - n_pathogenic                        importance=0.0338 valeur=3.0
+    - n_hotspots                          importance=0.0259 valeur=3.0
+    - SNP                                 importance=0.0259 valeur=3.0
 
 --- PROFIL DE COMPATIBILITE CANCER ---
   Cancer                   Compatibilite Genes supports
@@ -69,9 +69,9 @@
 --- PROFIL DE RISQUE NAIF (outil secondaire) ---
   Cancer                  Score Niveau          Genes
   -----------------------------------------------------------------
-  Vessie                  2.800 TRES ELEVE      PIK3CA, KRAS
-  Colon                   2.800 TRES ELEVE      PIK3CA, KRAS
-  Poumon                  1.900 ELEVE           PIK3CA, KRAS
+  Vessie                  2.800 TRES ELEVE      KRAS, PIK3CA
+  Colon                   2.800 TRES ELEVE      KRAS, PIK3CA
+  Poumon                  1.900 ELEVE           KRAS, PIK3CA
   Glioblastome            1.800 ELEVE           PIK3CA
   Foie                    1.800 ELEVE           PIK3CA
 

@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_2029
-  Date: 14/03/2026 22:57
+  Date: 15/03/2026 07:54
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -11,19 +11,19 @@
   Cancer connu:   Melanome
 
 --- CLASSIFICATION ML — CANCER PROBABLE ---
-  Cancer predit:       Vessie
-  Confiance:           30.23%
+  Cancer predit:       Rein
+  Confiance:           37.92%
   Modele:              Gradient Boosting
   Top-3 cancers probables:
-    1. Vessie               30.23%
-    2. Poumon               23.38%
-    3. Melanome             17.78%
+    1. Rein                 37.92%
+    2. Vessie               20.05%
+    3. Melanome             15.47%
   Features determinantes:
-    - age                                 importance=0.0736 valeur=78.0
-    - burden                              importance=0.0321 valeur=8.82
-    - mut_count_APC                       importance=0.0454 valeur=2.0
-    - n_suppressors                       importance=0.0418 valeur=2.0
-    - total_mut                           importance=0.0333 valeur=2.0
+    - age                                 importance=0.2205 valeur=78.0
+    - burden                              importance=0.0234 valeur=8.82
+    - mut_count_APC                       importance=0.0299 valeur=2.0
+    - n_suppressors                       importance=0.0261 valeur=2.0
+    - SNP                                 importance=0.0259 valeur=2.0
 
 --- RESUME MUTATIONNEL ---
   Mutations totales:       2

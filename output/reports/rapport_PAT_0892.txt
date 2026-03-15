@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_0892
-  Date: 14/03/2026 22:57
+  Date: 15/03/2026 07:54
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -12,18 +12,18 @@
 
 --- CLASSIFICATION ML — CANCER PROBABLE ---
   Cancer predit:       Colon
-  Confiance:           62.95%
+  Confiance:           50.13%
   Modele:              Gradient Boosting
   Top-3 cancers probables:
-    1. Colon                62.95%
-    2. Melanome             13.96%
-    3. Poumon               6.30%
+    1. Colon                50.13%
+    2. Melanome             25.00%
+    3. Vessie               6.18%
   Features determinantes:
-    - age                                 importance=0.0736 valeur=76.0
-    - burden                              importance=0.0321 valeur=8.82
-    - total_mut                           importance=0.0333 valeur=2.0
-    - mut_count_APC                       importance=0.0454 valeur=1.0
-    - n_genes                             importance=0.0302 valeur=2.0
+    - age                                 importance=0.2205 valeur=76.0
+    - burden                              importance=0.0234 valeur=8.82
+    - total_mut                           importance=0.0241 valeur=2.0
+    - n_pathogenic                        importance=0.0338 valeur=1.0
+    - n_genes                             importance=0.0203 valeur=2.0
 
 --- RESUME MUTATIONNEL ---
   Mutations totales:       2

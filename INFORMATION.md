@@ -62,13 +62,10 @@ Ce document récapitule l'état d'avancement du projet, ce qui a été réalisé
 
 ## CE QUI RESTE À FAIRE
 
-### 1. PRIORITAIRE — Relancer le pipeline avec les corrections
-- [ ] **Lancer `python main.py --real-data`** avec les nouveaux seuils (ALLELE_MIN_FREQUENCY=0.05, HistGradientBoosting)
-  - Attendre ~10-15 min, vérifier le rapport `output/reports/rapport_ml.txt`
-  - Vérifier que chaque cancer a maintenant des allèles discriminants (objectif : >0 pour tous les 12 cancers)
-  - Comparer les F1-scores des petites classes (Rein, Foie, Prostate) avec les anciens résultats
-- [ ] **Vérifier les allèles détectés** : BRAF V600E mélanome, KRAS G12D pancréas, APC colon doivent apparaître
-- [ ] **Mettre à jour INFORMATION.md** avec les nouveaux résultats chiffrés
+### 1. ~~PRIORITAIRE — Relancer le pipeline avec les corrections~~ ✅ FAIT
+- [x] Pipeline relancé le 15/03/2026 avec ALLELE_MIN_FREQUENCY=0.05 et HistGradientBoosting
+- [x] 23 allèles discriminants identifiés (9/12 cancers), KRAS G12D pancréas ✓, BRAF mélanome ✓, APC colon ✓
+- [x] F1 amélioré sur toutes les petites classes (Rein ×2.4, Foie ×2, Prostate +0.04)
 
 ### 2. Améliorations ML (après validation des nouvelles corrections)
 - [ ] **Feature selection** : supprimer les features d'importance < 0.01 pour réduire le bruit
@@ -251,15 +248,25 @@ Générées automatiquement selon le profil :
   - Amélioration attendue sur Rein (F1=0.06→?), Foie (F1=0.06→?), Prostate (F1=0.15→?)
   - Plus rapide (algorithme basé sur histogrammes)
 
-**Résultats de l'analyse précédente (14 mars 2026, avant corrections)** :
+**Résultats après corrections (15 mars 2026)** :
 - **3 639 patients** analysés (35 exclus pour incohérence sexe/cancer)
 - **12 types de cancers**, **12 gènes cibles**, **6 773 mutations** détectées
-- **Meilleur modèle** : Gradient Boosting (accuracy CV = 54.4%, top-3 accuracy = 80.5%, AUC = 0.885)
-- **Problèmes identifiés** : 0 allèles discriminants pour 11/12 cancers, Rein/Foie/Prostate F1 < 0.16, clustering ARI=0.023
-- **Cancers les mieux prédits** : Colon (F1=0.81), Thyroïde (F1=0.81), Pancréas (F1=0.62)
+- **Meilleur modèle** : Gradient Boosting / HistGradientBoosting (accuracy CV = 52.3%, top-3 = 78.4%, AUC = 0.887)
+- **Overfitting gap réduit** : +0.072 → **+0.050** (meilleure généralisation)
+- **23 allèles discriminants** identifiés au total (vs 1 avant) — 9 cancers sur 12 couverts :
+  - Sein : PIK3CA H1047R (×16), E542K (×5), E545K (×4)
+  - Colon : APC R1450* (×69 000 !), KRAS G13D (×40), G12D (×5), ...
+  - Pancréas : KRAS G12R (×108), G12D (×14), G12V (×9)
+  - Mélanome : BRAF V600K (×100 000 !), V600E (×4)
+  - Glioblastome : EGFR G598V (×50 000 !), A289V (×199)
+  - Poumon, Foie, Vessie, Thyroïde : allèles spécifiques identifiés
+- **Améliorations F1** : Colon 0.811→0.831, Thyroïde 0.806→0.824, Mélanome 0.489→0.516, Rein 0.060→0.141 (×2.4)
+- **Cancers sans allèles** : Prostate (109 patients), Rein (51 patients), Ovaire — cohortes trop petites
 - **725 patients** classés à haut risque (ELEVE ou TRES ELEVE)
 
-> **PROCHAINE ÉTAPE** : relancer `python main.py --real-data` avec les corrections pour obtenir les nouveaux résultats.
+**Résultats AVANT corrections (14 mars 2026, pour référence)** :
+- Gradient Boosting (accuracy CV = 54.4%, top-3 = 80.5%, AUC = 0.885)
+- 0 allèles discriminants pour 11/12 cancers (seuil ALLELE_MIN_FREQUENCY = 40% trop strict)
 
 ---
 

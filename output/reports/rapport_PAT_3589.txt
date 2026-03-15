@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_3589
-  Date: 14/03/2026 22:57
+  Date: 15/03/2026 07:55
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -12,18 +12,18 @@
 
 --- CLASSIFICATION ML — CANCER PROBABLE ---
   Cancer predit:       Glioblastome
-  Confiance:           55.50%
+  Confiance:           61.14%
   Modele:              Gradient Boosting
   Top-3 cancers probables:
-    1. Glioblastome         55.50%
-    2. Poumon               11.57%
-    3. Sein                 7.84%
+    1. Glioblastome         61.14%
+    2. Foie                 8.69%
+    3. Poumon               8.34%
   Features determinantes:
-    - age                                 importance=0.0736 valeur=37.0
-    - burden                              importance=0.0321 valeur=4.41
-    - total_mut                           importance=0.0333 valeur=1.0
-    - n_pathogenic                        importance=0.0328 valeur=1.0
-    - n_hotspots                          importance=0.0307 valeur=1.0
+    - age                                 importance=0.2205 valeur=37.0
+    - burden                              importance=0.0234 valeur=4.41
+    - n_pathogenic                        importance=0.0338 valeur=1.0
+    - n_hotspots                          importance=0.0259 valeur=1.0
+    - SNP                                 importance=0.0259 valeur=1.0
 
 --- PROFIL DE COMPATIBILITE CANCER ---
   Cancer                   Compatibilite Genes supports

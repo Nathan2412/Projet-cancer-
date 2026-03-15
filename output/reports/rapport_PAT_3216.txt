@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_3216
-  Date: 14/03/2026 22:57
+  Date: 15/03/2026 07:54
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -11,19 +11,19 @@
   Cancer connu:   Rein
 
 --- CLASSIFICATION ML — CANCER PROBABLE ---
-  Cancer predit:       Sein
-  Confiance:           34.37%
+  Cancer predit:       Rein
+  Confiance:           39.22%
   Modele:              Gradient Boosting
   Top-3 cancers probables:
-    1. Sein                 34.37%
-    2. Rein                 25.95%
-    3. Vessie               12.75%
+    1. Rein                 39.22%
+    2. Sein                 20.01%
+    3. Foie                 15.25%
   Features determinantes:
-    - age                                 importance=0.0736 valeur=61.0
-    - burden                              importance=0.0321 valeur=4.41
-    - total_mut                           importance=0.0333 valeur=1.0
-    - n_genes                             importance=0.0302 valeur=1.0
-    - SNP                                 importance=0.0276 valeur=1.0
+    - age                                 importance=0.2205 valeur=61.0
+    - burden                              importance=0.0234 valeur=4.41
+    - SNP                                 importance=0.0259 valeur=1.0
+    - total_mut                           importance=0.0241 valeur=1.0
+    - imp_HIGH                            importance=0.0214 valeur=1.0
 
 --- RESUME MUTATIONNEL ---
   Mutations totales:       1

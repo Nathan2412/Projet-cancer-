@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_1298
-  Date: 14/03/2026 22:57
+  Date: 15/03/2026 07:54
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -12,18 +12,18 @@
 
 --- CLASSIFICATION ML — CANCER PROBABLE ---
   Cancer predit:       Colon
-  Confiance:           97.70%
+  Confiance:           99.25%
   Modele:              Gradient Boosting
   Top-3 cancers probables:
-    1. Colon                97.70%
-    2. Vessie               0.96%
-    3. Sein                 0.49%
+    1. Colon                99.25%
+    2. Vessie               0.40%
+    3. Sein                 0.15%
   Features determinantes:
-    - age                                 importance=0.0736 valeur=84.0
-    - burden                              importance=0.0321 valeur=17.65
-    - total_mut                           importance=0.0333 valeur=4.0
-    - SNP                                 importance=0.0276 valeur=4.0
-    - mut_count_APC                       importance=0.0454 valeur=2.0
+    - age                                 importance=0.2205 valeur=84.0
+    - burden                              importance=0.0234 valeur=17.65
+    - n_pathogenic                        importance=0.0338 valeur=3.0
+    - SNP                                 importance=0.0259 valeur=4.0
+    - total_mut                           importance=0.0241 valeur=4.0
 
 --- PROFIL DE COMPATIBILITE CANCER ---
   Cancer                   Compatibilite Genes supports
@@ -67,10 +67,10 @@
 --- PROFIL DE RISQUE NAIF (outil secondaire) ---
   Cancer                  Score Niveau          Genes
   -----------------------------------------------------------------
-  Colon                   2.600 TRES ELEVE      APC, PIK3CA, KRAS
-  Melanome                1.700 ELEVE           PIK3CA, KRAS
-  Poumon                  1.700 ELEVE           PIK3CA, KRAS
-  Vessie                  1.700 ELEVE           PIK3CA, KRAS
+  Colon                   2.600 TRES ELEVE      APC, KRAS, PIK3CA
+  Melanome                1.700 ELEVE           KRAS, PIK3CA
+  Poumon                  1.700 ELEVE           KRAS, PIK3CA
+  Vessie                  1.700 ELEVE           KRAS, PIK3CA
   Foie                    0.900 MODERE          KRAS
 
 --- RECOMMANDATIONS ---

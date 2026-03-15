@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_2222
-  Date: 14/03/2026 22:57
+  Date: 15/03/2026 07:54
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -11,19 +11,19 @@
   Cancer connu:   Ovaire
 
 --- CLASSIFICATION ML — CANCER PROBABLE ---
-  Cancer predit:       Ovaire
-  Confiance:           43.61%
+  Cancer predit:       Glioblastome
+  Confiance:           64.63%
   Modele:              Gradient Boosting
   Top-3 cancers probables:
-    1. Ovaire               43.61%
-    2. Glioblastome         38.60%
-    3. Vessie               8.23%
+    1. Glioblastome         64.63%
+    2. Ovaire               15.85%
+    3. Vessie               6.98%
   Features determinantes:
-    - age                                 importance=0.0736 valeur=66.0
-    - burden                              importance=0.0321 valeur=13.24
-    - n_suppressors                       importance=0.0418 valeur=3.0
-    - total_mut                           importance=0.0333 valeur=3.0
-    - n_pathogenic                        importance=0.0328 valeur=3.0
+    - age                                 importance=0.2205 valeur=66.0
+    - burden                              importance=0.0234 valeur=13.24
+    - n_pathogenic                        importance=0.0338 valeur=3.0
+    - n_suppressors                       importance=0.0261 valeur=3.0
+    - total_mut                           importance=0.0241 valeur=3.0
 
 --- RESUME MUTATIONNEL ---
   Mutations totales:       3

@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_3334
-  Date: 14/03/2026 22:57
+  Date: 15/03/2026 07:55
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -11,19 +11,19 @@
   Cancer connu:   Foie
 
 --- CLASSIFICATION ML — CANCER PROBABLE ---
-  Cancer predit:       Sein
-  Confiance:           28.22%
+  Cancer predit:       Prostate
+  Confiance:           26.97%
   Modele:              Gradient Boosting
   Top-3 cancers probables:
-    1. Sein                 28.22%
-    2. Poumon               21.10%
-    3. Foie                 15.54%
+    1. Prostate             26.97%
+    2. Foie                 22.32%
+    3. Poumon               12.00%
   Features determinantes:
-    - age                                 importance=0.0736 valeur=58.0
-    - burden                              importance=0.0321 valeur=4.41
-    - n_suppressors                       importance=0.0418 valeur=1.0
-    - total_mut                           importance=0.0333 valeur=1.0
-    - mut_count_TP53                      importance=0.0312 valeur=1.0
+    - age                                 importance=0.2205 valeur=58.0
+    - burden                              importance=0.0234 valeur=4.41
+    - n_suppressors                       importance=0.0261 valeur=1.0
+    - SNP                                 importance=0.0259 valeur=1.0
+    - total_mut                           importance=0.0241 valeur=1.0
 
 --- RESUME MUTATIONNEL ---
   Mutations totales:       1

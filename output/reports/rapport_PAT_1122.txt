@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_1122
-  Date: 14/03/2026 22:57
+  Date: 15/03/2026 07:54
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -11,19 +11,19 @@
   Cancer connu:   Poumon
 
 --- CLASSIFICATION ML — CANCER PROBABLE ---
-  Cancer predit:       Colon
-  Confiance:           17.14%
+  Cancer predit:       Rein
+  Confiance:           46.71%
   Modele:              Gradient Boosting
   Top-3 cancers probables:
-    1. Colon                17.14%
-    2. Rein                 16.93%
-    3. Foie                 14.74%
+    1. Rein                 46.71%
+    2. Foie                 18.39%
+    3. Vessie               7.54%
   Features determinantes:
-    - age                                 importance=0.0736 valeur=63.0
-    - burden                              importance=0.0321 valeur=4.41
-    - mut_count_APC                       importance=0.0454 valeur=1.0
-    - n_suppressors                       importance=0.0418 valeur=1.0
-    - mut_bin_APC                         importance=0.0378 valeur=1.0
+    - age                                 importance=0.2205 valeur=63.0
+    - burden                              importance=0.0234 valeur=4.41
+    - mut_count_APC                       importance=0.0299 valeur=1.0
+    - mut_bin_APC                         importance=0.0283 valeur=1.0
+    - n_suppressors                       importance=0.0261 valeur=1.0
 
 --- RESUME MUTATIONNEL ---
   Mutations totales:       1

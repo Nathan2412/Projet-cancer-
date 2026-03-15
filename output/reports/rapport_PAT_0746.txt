@@ -1,6 +1,6 @@
 ========================================================================
   RAPPORT D'ANALYSE GENOMIQUE - PAT_0746
-  Date: 14/03/2026 22:57
+  Date: 15/03/2026 07:54
 ========================================================================
 
 --- INFORMATIONS PATIENT ---
@@ -12,18 +12,18 @@
 
 --- CLASSIFICATION ML — CANCER PROBABLE ---
   Cancer predit:       Poumon
-  Confiance:           56.18%
+  Confiance:           40.32%
   Modele:              Gradient Boosting
   Top-3 cancers probables:
-    1. Poumon               56.18%
-    2. Melanome             28.91%
-    3. Sein                 3.86%
+    1. Poumon               40.32%
+    2. Melanome             22.55%
+    3. Prostate             12.31%
   Features determinantes:
-    - age                                 importance=0.0736 valeur=60.0
-    - burden                              importance=0.0321 valeur=13.24
-    - mut_count_BRAF                      importance=0.0591 valeur=2.0
-    - total_mut                           importance=0.0333 valeur=3.0
-    - SNP                                 importance=0.0276 valeur=3.0
+    - age                                 importance=0.2205 valeur=60.0
+    - burden                              importance=0.0234 valeur=13.24
+    - SNP                                 importance=0.0259 valeur=3.0
+    - total_mut                           importance=0.0241 valeur=3.0
+    - imp_MOD                             importance=0.0226 valeur=3.0
 
 --- RESUME MUTATIONNEL ---
   Mutations totales:       3
