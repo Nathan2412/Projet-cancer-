@@ -17,7 +17,7 @@ import urllib.parse
 from collections import defaultdict, Counter
 from config import (
     DATA_DIR, SAMPLES_DIR, KNOWN_MUTATIONS_FILE,
-    REFERENCE_GENOME_FILE, CANCER_GENES
+    REFERENCE_GENOME_FILE, CANCER_GENES, CANCER_LABEL_MAPPING
 )
 
 # =============================================================================
@@ -26,27 +26,68 @@ from config import (
 
 CBIOPORTAL_API = "https://www.cbioportal.org/api"
 
-# Etudes TCGA PanCancer Atlas couvrant differents types de cancer
+# =============================================================================
+# Études TCGA PanCancer Atlas — COMPLET (33 types de cancer)
+# =============================================================================
 TCGA_STUDIES = {
-    "brca_tcga_pan_can_atlas_2018": "Sein",
-    "luad_tcga_pan_can_atlas_2018": "Poumon",
-    "coadread_tcga_pan_can_atlas_2018": "Colon",
-    "prad_tcga_pan_can_atlas_2018": "Prostate",
-    "paad_tcga_pan_can_atlas_2018": "Pancreas",
-    "skcm_tcga_pan_can_atlas_2018": "Melanome",
-    "ov_tcga_pan_can_atlas_2018": "Ovaire",
-    "blca_tcga_pan_can_atlas_2018": "Vessie",
-    "thca_tcga_pan_can_atlas_2018": "Thyroide",
-    "kirc_tcga_pan_can_atlas_2018": "Rein",
-    "lihc_tcga_pan_can_atlas_2018": "Foie",
-    "gbm_tcga_pan_can_atlas_2018": "Glioblastome",
+    # ── Cohorte originale (12 études) ────────────────────────────────────────
+    "brca_tcga_pan_can_atlas_2018":    "Sein",
+    "luad_tcga_pan_can_atlas_2018":    "Poumon",
+    "coadread_tcga_pan_can_atlas_2018":"Colon",
+    "prad_tcga_pan_can_atlas_2018":    "Prostate",
+    "paad_tcga_pan_can_atlas_2018":    "Pancreas",
+    "skcm_tcga_pan_can_atlas_2018":    "Melanome",
+    "ov_tcga_pan_can_atlas_2018":      "Ovaire",
+    "blca_tcga_pan_can_atlas_2018":    "Vessie",
+    "thca_tcga_pan_can_atlas_2018":    "Thyroide",
+    "kirc_tcga_pan_can_atlas_2018":    "Rein",
+    "lihc_tcga_pan_can_atlas_2018":    "Foie",
+    "gbm_tcga_pan_can_atlas_2018":     "Glioblastome",
+    # ── Nouveaux types de cancer TCGA ────────────────────────────────────────
+    "ucec_tcga_pan_can_atlas_2018":    "Uterus",        # ~530 patients
+    "hnsc_tcga_pan_can_atlas_2018":    "TeteEtCou",     # ~520 patients
+    "stad_tcga_pan_can_atlas_2018":    "Estomac",       # ~440 patients
+    "lusc_tcga_pan_can_atlas_2018":    "Poumon",        # ~500 (adéno+squameux)
+    "cesc_tcga_pan_can_atlas_2018":    "Cervical",      # ~310 patients
+    "lgg_tcga_pan_can_atlas_2018":     "Gliome",        # ~515 patients
+    "kirp_tcga_pan_can_atlas_2018":    "Rein",          # ~290 (rein papillaire)
+    "esca_tcga_pan_can_atlas_2018":    "Oesophage",     # ~185 patients
+    "sarc_tcga_pan_can_atlas_2018":    "Sarcome",       # ~265 patients
+    "laml_tcga_pan_can_atlas_2018":    "Leucemie",      # ~200 patients
+    "dlbc_tcga_pan_can_atlas_2018":    "Lymphome",      # ~48 patients
+    "meso_tcga_pan_can_atlas_2018":    "Mesotheliome",  # ~87 patients
+    "ucs_tcga_pan_can_atlas_2018":     "Uterus",        # ~57 (carcinosarcome utérin)
+    "kich_tcga_pan_can_atlas_2018":    "Rein",          # ~66 (rein chromophobe)
 }
 
-# Identifiants Entrez (NCBI) pour nos genes cibles
+# =============================================================================
+# Études à cohorte mixte — cancer type extrait des données cliniques par patient
+# =============================================================================
+MIXED_COHORT_STUDIES = {
+    "msk_impact_2017": None,   # 10 945 patients, 341 gènes, Memorial Sloan Kettering
+}
+
+# Identifiants Entrez (NCBI) pour tous les gènes cibles
 GENE_ENTREZ_IDS = {
-    "TP53": 7157, "BRCA1": 672, "BRCA2": 675, "KRAS": 3845,
-    "EGFR": 1956, "PIK3CA": 5290, "APC": 324, "PTEN": 5728,
-    "RB1": 5925, "MYC": 4609, "ALK": 238, "BRAF": 673
+    # Gènes originaux
+    "TP53": 7157, "BRCA1": 672,   "BRCA2": 675,  "KRAS": 3845,
+    "EGFR": 1956, "PIK3CA": 5290, "APC":   324,  "PTEN": 5728,
+    "RB1":  5925, "MYC":   4609,  "ALK":   238,  "BRAF": 673,
+    # Nouveaux gènes
+    "CDH1":   999,    # E-cadhérine
+    "VHL":    7428,   # Von Hippel-Lindau
+    "CDKN2A": 1029,   # p16/p14ARF
+    "MLH1":   4292,   # MutL Homolog 1 (Lynch)
+    "MSH2":   4436,   # MutS Homolog 2 (Lynch)
+    "NF1":    4763,   # Neurofibromine
+    "STK11":  6794,   # LKB1 (Peutz-Jeghers)
+    "IDH1":   3417,   # Isocitrate dehydrogenase 1
+    "IDH2":   3418,   # Isocitrate dehydrogenase 2
+    "SMAD4":  4089,   # DPC4 (TGF-β pathway)
+    "RET":    5979,   # Proto-oncogène (MEN2, thyroïde)
+    "ERBB2":  2064,   # HER2/neu
+    "ARID1A": 8289,   # SWI/SNF chromatin remodeling
+    "FBXW7":  55294,  # F-box protein (ubiquitin ligase)
 }
 
 # Pas de limite: on recupere TOUS les patients avec mutations dans nos genes
@@ -58,6 +99,7 @@ ENTREZ_TO_GENE = {v: k for k, v in GENE_ENTREZ_IDS.items()}
 
 REAL_DATA_DIR = os.path.join(DATA_DIR, "real")
 REAL_SAMPLES_DIR = os.path.join(REAL_DATA_DIR, "samples")
+CHECKPOINT_DIR = os.path.join(REAL_DATA_DIR, "checkpoints")
 
 
 # =============================================================================
@@ -304,6 +346,29 @@ def process_mutations_for_patient(raw_mutations, patient_id, cancer_type):
     return formatted
 
 
+def extract_cancer_type_from_clinical(clinical_data):
+    """
+    Extrait et normalise le type de cancer depuis les données cliniques.
+    Utilisé pour les cohortes mixtes (ex: MSK-IMPACT) où chaque patient
+    a son propre type de cancer dans les attributs cliniques.
+    """
+    for attr in clinical_data:
+        attr_id = attr.get("clinicalAttributeId", "")
+        value = attr.get("value", "").strip().lower()
+        if attr_id in ("CANCER_TYPE", "CANCER_TYPE_DETAILED", "PRIMARY_SITE",
+                       "CANCER_TYPE_ACRONYM"):
+            if value and value not in ("na", "n/a", "", "unknown"):
+                # Essayer le mapping direct
+                mapped = CANCER_LABEL_MAPPING.get(value)
+                if mapped:
+                    return mapped
+                # Essayer un matching partiel
+                for key, label in CANCER_LABEL_MAPPING.items():
+                    if key in value or value in key:
+                        return label
+    return None
+
+
 def build_patient_metadata(patient_id, clinical_data, cancer_type_fr, mutations):
     """Construit le fichier metadata pour un patient."""
     age = None
@@ -454,21 +519,147 @@ def generate_reference_for_real_data():
 
 
 # =============================================================================
-# Pipeline principal de telechargement
+# Système de checkpoint — reprise automatique si le PC s'éteint
+# =============================================================================
+
+def checkpoint_path(study_id):
+    return os.path.join(CHECKPOINT_DIR, f"{study_id}.json")
+
+
+def is_study_done(study_id):
+    """Vérifie si l'étude a déjà été téléchargée (checkpoint existant)."""
+    return os.path.exists(checkpoint_path(study_id))
+
+
+def save_study_checkpoint(study_id, patients_dict, mutations_by_gene_dict):
+    """Sauvegarde les données d'une étude sur disque après téléchargement."""
+    os.makedirs(CHECKPOINT_DIR, exist_ok=True)
+    payload = {
+        "study_id": study_id,
+        "patients": patients_dict,
+        "mutations_by_gene": mutations_by_gene_dict,
+    }
+    tmp = checkpoint_path(study_id) + ".tmp"
+    with open(tmp, "w", encoding="utf-8") as f:
+        json.dump(payload, f)
+    os.replace(tmp, checkpoint_path(study_id))  # Écriture atomique
+    print(f"    [CHECKPOINT] {study_id} sauvegarde ({len(patients_dict)} patients)")
+
+
+def load_all_checkpoints():
+    """Charge tous les checkpoints existants depuis le disque."""
+    all_patients = {}
+    all_mutations_by_gene = defaultdict(list)
+    if not os.path.exists(CHECKPOINT_DIR):
+        return all_patients, all_mutations_by_gene
+
+    loaded = 0
+    for fname in os.listdir(CHECKPOINT_DIR):
+        if not fname.endswith(".json"):
+            continue
+        fpath = os.path.join(CHECKPOINT_DIR, fname)
+        try:
+            with open(fpath, "r", encoding="utf-8") as f:
+                payload = json.load(f)
+            all_patients.update(payload.get("patients", {}))
+            for gene, muts in payload.get("mutations_by_gene", {}).items():
+                all_mutations_by_gene[gene].extend(muts)
+            loaded += 1
+        except Exception as e:
+            print(f"  [AVERTISSEMENT] Checkpoint corrompu {fname}: {e}")
+
+    if loaded:
+        print(f"  [REPRISE] {loaded} etudes chargees depuis les checkpoints "
+              f"({len(all_patients)} patients recuperes)")
+    return all_patients, all_mutations_by_gene
+
+
+def _process_study_patients(study_id, mutations, clinical_data, cancer_fr_fixed=None):
+    """
+    Traite les mutations et données cliniques d'une étude.
+    Si cancer_fr_fixed est None → extrait le cancer type depuis les données cliniques (MSK-IMPACT).
+    Retourne (patients_dict, mutations_by_gene_dict, n_skipped).
+    """
+    clinical_by_patient = defaultdict(list)
+    for entry in clinical_data:
+        pid = entry.get("patientId", "")
+        if pid:
+            clinical_by_patient[pid].append(entry)
+
+    mutations_by_patient = defaultdict(list)
+    for mut in mutations:
+        pid = mut.get("patientId", "")
+        if pid:
+            mutations_by_patient[pid].append(mut)
+
+    patients_dict = {}
+    mutations_by_gene_dict = defaultdict(list)
+    skipped = 0
+
+    sorted_patients = sorted(mutations_by_patient.items(),
+                              key=lambda x: len(x[1]), reverse=True)
+
+    for pid, patient_muts in sorted_patients:
+        if MAX_PATIENTS_PER_STUDY is not None and len(patients_dict) >= MAX_PATIENTS_PER_STUDY:
+            break
+        if not patient_muts:
+            continue
+
+        patient_key = f"{study_id}_{pid}"
+        clin = clinical_by_patient.get(pid, [])
+
+        if cancer_fr_fixed is not None:
+            cancer_fr = cancer_fr_fixed
+        else:
+            cancer_fr = extract_cancer_type_from_clinical(clin)
+            if cancer_fr is None:
+                skipped += 1
+                continue
+
+        patients_dict[patient_key] = {
+            "original_id": pid,
+            "study_id": study_id,
+            "cancer_type": cancer_fr,
+            "mutations": patient_muts,
+            "clinical": clin,
+        }
+
+        for mut in patient_muts:
+            entrez_id = mut.get("entrezGeneId", 0)
+            gene_sym = ENTREZ_TO_GENE.get(entrez_id, "")
+            if gene_sym:
+                mutations_by_gene_dict[gene_sym].append({
+                    "patient": patient_key,
+                    "cancer_type": cancer_fr,
+                    "protein_change": mut.get("proteinChange", ""),
+                    "mutation_type": mut.get("mutationType", ""),
+                    "position": mut.get("startPosition", 0),
+                })
+
+    return dict(patients_dict), dict(mutations_by_gene_dict), skipped
+
+
+# =============================================================================
+# Pipeline principal de telechargement (avec checkpoint/reprise)
 # =============================================================================
 
 def download_all():
-    """Pipeline principal: telecharge et formate toutes les donnees reelles."""
-
+    """
+    Pipeline principal avec reprise automatique par checkpoint.
+    Si le PC s'éteint en cours de route, relancer le script reprend
+    exactement là où ça s'était arrêté (étude par étude).
+    """
     print("=" * 60)
-    print("  TELECHARGEMENT DONNEES REELLES (TCGA via cBioPortal)")
+    print("  TELECHARGEMENT DONNEES REELLES (TCGA + MSK-IMPACT)")
+    print(f"  {len(TCGA_STUDIES)} etudes TCGA + {len(MIXED_COHORT_STUDIES)} cohorte mixte")
+    print(f"  {len(GENE_ENTREZ_IDS)} genes cibles")
     print("=" * 60)
 
-    # Creer les repertoires
     os.makedirs(REAL_DATA_DIR, exist_ok=True)
     os.makedirs(REAL_SAMPLES_DIR, exist_ok=True)
+    os.makedirs(CHECKPOINT_DIR, exist_ok=True)
 
-    # Verifier la connexion
+    # ── Étape 1 : connexion ───────────────────────────────────────────────────
     print("\n[1/5] Test de connexion a cBioPortal...")
     time.sleep(2)
     test = api_get("/cancer-types", {"pageSize": 1})
@@ -478,98 +669,106 @@ def download_all():
         sys.exit(1)
     print("  Connexion OK")
 
-    # Collecter toutes les mutations par etude
-    print("\n[2/5] Telechargement des mutations par etude TCGA...")
-    all_patients = {}      # patient_id -> {mutations, clinical, cancer_type}
-    all_mutations_by_gene = defaultdict(list)
+    # ── Étape 2 : téléchargement par étude avec checkpoint ───────────────────
+    n_total = len(TCGA_STUDIES) + len(MIXED_COHORT_STUDIES)
+    print(f"\n[2/5] Telechargement ({n_total} etudes) — reprise automatique activee...")
 
+    # Charger les checkpoints déjà existants (reprise après coupure)
+    all_patients, all_mutations_by_gene = load_all_checkpoints()
+    already_done = {
+        sid for sid in list(TCGA_STUDIES) + list(MIXED_COHORT_STUDIES)
+        if is_study_done(sid)
+    }
+    if already_done:
+        print(f"  [REPRISE] {len(already_done)} etudes deja telechargees, on continue...")
+
+    study_num = 0
+
+    # ── TCGA (cancer type fixe par étude) ─────────────────────────────────────
     for study_id, cancer_fr in TCGA_STUDIES.items():
-        print(f"\n  --- {study_id} ({cancer_fr}) ---")
+        study_num += 1
 
-        # Telecharger les mutations
-        print(f"    Telechargement des mutations...")
+        if is_study_done(study_id):
+            print(f"\n  [{study_num}/{n_total}] {study_id} — DEJA FAIT (checkpoint)")
+            continue
+
+        print(f"\n  [{study_num}/{n_total}] {study_id} ({cancer_fr})")
+
+        print(f"    Telechargement des mutations ({len(GENE_ENTREZ_IDS)} genes)...")
         mutations = fetch_mutations_for_study(study_id, GENE_ENTREZ_IDS)
         if not mutations:
-            print(f"    Aucune mutation trouvee, passe a l'etude suivante")
+            print(f"    Aucune mutation trouvee, passe")
+            # Sauvegarder un checkpoint vide pour ne pas retélécharger
+            save_study_checkpoint(study_id, {}, {})
             continue
         print(f"    {len(mutations)} mutations brutes telechargees")
 
-        # Telecharger les donnees cliniques
         print(f"    Telechargement des donnees cliniques...")
         clinical_data = fetch_clinical_data(study_id)
         print(f"    {len(clinical_data)} entrees cliniques")
 
-        # Organiser les donnees cliniques par patient
-        clinical_by_patient = defaultdict(list)
-        for entry in clinical_data:
-            pid = entry.get("patientId", "")
-            if pid:
-                clinical_by_patient[pid].append(entry)
-
-        # Grouper les mutations par patient
-        mutations_by_patient = defaultdict(list)
-        for mut in mutations:
-            pid = mut.get("patientId", "")
-            if pid:
-                mutations_by_patient[pid].append(mut)
-
-        # Selectionner les patients avec le plus de mutations (plus interessants)
-        sorted_patients = sorted(
-            mutations_by_patient.items(),
-            key=lambda x: len(x[1]),
-            reverse=True
+        patients_dict, muts_by_gene_dict, _ = _process_study_patients(
+            study_id, mutations, clinical_data, cancer_fr_fixed=cancer_fr
         )
+        print(f"    {len(patients_dict)} patients selectionnes")
 
-        selected = 0
-        for pid, patient_muts in sorted_patients:
-            if MAX_PATIENTS_PER_STUDY is not None and selected >= MAX_PATIENTS_PER_STUDY:
-                break
-            if len(patient_muts) < 1:
-                continue
+        # Sauvegarder sur disque IMMEDIATEMENT (protection contre coupure)
+        save_study_checkpoint(study_id, patients_dict, muts_by_gene_dict)
 
-            # Eviter les doublons (un patient peut etre dans plusieurs etudes)
-            patient_key = f"{study_id}_{pid}"
-            if patient_key in all_patients:
-                continue
+        # Accumuler en mémoire
+        all_patients.update(patients_dict)
+        for gene, muts in muts_by_gene_dict.items():
+            all_mutations_by_gene[gene].extend(muts)
 
-            all_patients[patient_key] = {
-                "original_id": pid,
-                "study_id": study_id,
-                "cancer_type": cancer_fr,
-                "mutations": patient_muts,
-                "clinical": clinical_by_patient.get(pid, [])
-            }
-            selected += 1
+        time.sleep(1.5)
 
-            # Accumuler les mutations par gene
-            for mut in patient_muts:
-                entrez_id = mut.get("entrezGeneId", 0)
-                gene_sym = ENTREZ_TO_GENE.get(entrez_id, "")
-                if gene_sym:
-                    all_mutations_by_gene[gene_sym].append({
-                        "patient": patient_key,
-                        "cancer_type": cancer_fr,
-                        "protein_change": mut.get("proteinChange", ""),
-                        "mutation_type": mut.get("mutationType", ""),
-                        "position": mut.get("startPosition", 0),
-                    })
+    # ── MSK-IMPACT et cohortes mixtes ─────────────────────────────────────────
+    for study_id in MIXED_COHORT_STUDIES:
+        study_num += 1
 
-        print(f"    {selected} patients selectionnes")
-        time.sleep(1.5)  # Pause entre etudes
+        if is_study_done(study_id):
+            print(f"\n  [{study_num}/{n_total}] {study_id} — DEJA FAIT (checkpoint)")
+            continue
 
+        print(f"\n  [{study_num}/{n_total}] {study_id} (cohorte mixte — cancer par patient)")
+
+        print(f"    Telechargement des mutations ({len(GENE_ENTREZ_IDS)} genes)...")
+        mutations = fetch_mutations_for_study(study_id, GENE_ENTREZ_IDS)
+        if not mutations:
+            print(f"    Aucune mutation trouvee, passe")
+            save_study_checkpoint(study_id, {}, {})
+            continue
+        print(f"    {len(mutations)} mutations brutes telechargees")
+
+        print(f"    Telechargement des donnees cliniques...")
+        clinical_data = fetch_clinical_data(study_id)
+        print(f"    {len(clinical_data)} entrees cliniques")
+
+        patients_dict, muts_by_gene_dict, skipped = _process_study_patients(
+            study_id, mutations, clinical_data, cancer_fr_fixed=None
+        )
+        print(f"    {len(patients_dict)} patients selectionnes "
+              f"({skipped} ignores — cancer type non reconnu)")
+
+        save_study_checkpoint(study_id, patients_dict, muts_by_gene_dict)
+
+        all_patients.update(patients_dict)
+        for gene, muts in muts_by_gene_dict.items():
+            all_mutations_by_gene[gene].extend(muts)
+
+        time.sleep(1.5)
+
+    # ── Étape 3 : écriture des fichiers patients ───────────────────────────────
     if not all_patients:
         print("\nERREUR: Aucune donnee patient telechargee.")
         print("Verifiez votre connexion ou reessayez plus tard.")
         sys.exit(1)
 
-    # Tous les patients recuperes
     patient_keys = list(all_patients.keys())
-    if TARGET_TOTAL_PATIENTS is not None and len(patient_keys) > TARGET_TOTAL_PATIENTS:
+    if TARGET_TOTAL_PATIENTS is not None:
         patient_keys = patient_keys[:TARGET_TOTAL_PATIENTS]
 
     print(f"\n  Total: {len(patient_keys)} patients selectionnes")
-
-    # Creer les fichiers patient
     print("\n[3/5] Creation des fichiers patients...")
     cohort_summary = []
 
@@ -579,14 +778,12 @@ def download_all():
         patient_dir = os.path.join(REAL_SAMPLES_DIR, our_patient_id)
         os.makedirs(patient_dir, exist_ok=True)
 
-        # Convertir les mutations
         formatted_mutations = process_mutations_for_patient(
             patient_data["mutations"],
             our_patient_id,
             patient_data["cancer_type"]
         )
 
-        # Creer le metadata
         metadata = build_patient_metadata(
             our_patient_id,
             patient_data["clinical"],
@@ -596,55 +793,52 @@ def download_all():
         metadata["original_patient_id"] = patient_data["original_id"]
         metadata["original_study"] = patient_data["study_id"]
 
-        # Sauvegarder
         with open(os.path.join(patient_dir, "metadata.json"), "w") as f:
             json.dump(metadata, f, indent=2)
-
         with open(os.path.join(patient_dir, "detected_mutations.json"), "w") as f:
             json.dump(formatted_mutations, f, indent=2)
 
         cohort_summary.append(metadata)
-        print(f"  {our_patient_id} ({patient_data['cancer_type']}) - "
-              f"{len(formatted_mutations)} mutations "
-              f"[{patient_data['original_id']}]")
+        if (i + 1) % 500 == 0 or i == 0:
+            print(f"  ... {i+1}/{len(patient_keys)} patients ecrits")
 
-    # Construire la base de mutations connues
+    # ── Étape 4 : base de mutations connues ───────────────────────────────────
     print("\n[4/5] Construction de la base de mutations connues...")
     known_db = build_known_mutations_db(all_mutations_by_gene)
     known_file = os.path.join(REAL_DATA_DIR, "known_mutations.json")
     with open(known_file, "w") as f:
         json.dump(known_db, f, indent=2)
-
     total_hotspots = sum(len(v.get("hotspots", [])) for v in known_db.values())
     print(f"  {len(known_db)} genes, {total_hotspots} hotspots identifies")
 
-    # Generer la reference
+    # ── Étape 5 : génome de référence ─────────────────────────────────────────
     print("\n[5/5] Generation de la reference genome...")
     ref_file, _ = generate_reference_for_real_data()
     print(f"  Reference: {ref_file}")
 
-    # Sauvegarder le resume de cohorte
     summary_file = os.path.join(REAL_DATA_DIR, "cohort_summary.json")
     with open(summary_file, "w") as f:
         json.dump(cohort_summary, f, indent=2)
 
-    # Statistiques finales
+    # ── Statistiques finales ──────────────────────────────────────────────────
     print("\n" + "=" * 60)
     print("  TELECHARGEMENT TERMINE")
     print("=" * 60)
 
-    severity_counts = Counter(p["severity"] for p in cohort_summary)
     cancer_counts = Counter(p["cancer_type"] for p in cohort_summary)
+    severity_counts = Counter(p["severity"] for p in cohort_summary)
 
     print(f"\n  Patients: {len(cohort_summary)}")
+    print(f"  Genes: {len(GENE_ENTREZ_IDS)}")
+    print(f"  Sources: TCGA ({len(TCGA_STUDIES)} etudes) + MSK-IMPACT")
     print(f"  Donnees dans: {REAL_DATA_DIR}")
+    print(f"\n  Repartition par cancer ({len(cancer_counts)} types):")
+    for cancer, count in sorted(cancer_counts.items(), key=lambda x: -x[1]):
+        print(f"    {cancer}: {count}")
     print(f"\n  Repartition par severite:")
     for sev, count in sorted(severity_counts.items()):
         print(f"    {sev}: {count}")
-    print(f"\n  Repartition par cancer:")
-    for cancer, count in sorted(cancer_counts.items()):
-        print(f"    {cancer}: {count}")
-    print(f"\n  Pour lancer l'analyse avec les donnees reelles:")
+    print(f"\n  Pour lancer l'analyse:")
     print(f"    python main.py --real-data")
     print("=" * 60)
 

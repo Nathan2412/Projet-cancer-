@@ -26,6 +26,7 @@ MIN_QUALITY_SCORE = 20
 MUTATION_FREQ_THRESHOLD = 0.05
 
 CANCER_GENES = {
+    # ── Gènes originaux ──────────────────────────────────────────────────────
     "TP53": {
         "chromosome": "chr17",
         "start": 7668402,
@@ -97,7 +98,92 @@ CANCER_GENES = {
         "start": 140719327,
         "end": 140924929,
         "description": "Kinase MAPK, melanome, cancer de la thyroide"
-    }
+    },
+    # ── Nouveaux gènes (expansion MSK-IMPACT / COSMIC Gene Census) ───────────
+    "CDH1": {
+        "chromosome": "chr16",
+        "start": 68771195,
+        "end": 68874048,
+        "description": "E-cadhérine, suppresseur invasion, cancer gastrique et sein lobulaire"
+    },
+    "VHL": {
+        "chromosome": "chr3",
+        "start": 10183318,
+        "end": 10195353,
+        "description": "Suppresseur de tumeur, carcinome rénal à cellules claires"
+    },
+    "CDKN2A": {
+        "chromosome": "chr9",
+        "start": 21967752,
+        "end": 21995301,
+        "description": "Inhibiteur CDK4/6 (p16), melanome, pancreas, poumon"
+    },
+    "MLH1": {
+        "chromosome": "chr3",
+        "start": 36993275,
+        "end": 37050919,
+        "description": "Reparation mésappariements (MMR), syndrome de Lynch, colon"
+    },
+    "MSH2": {
+        "chromosome": "chr2",
+        "start": 47630109,
+        "end": 47789026,
+        "description": "Reparation mésappariements (MMR), syndrome de Lynch, colon"
+    },
+    "NF1": {
+        "chromosome": "chr17",
+        "start": 29421944,
+        "end": 30144432,
+        "description": "Neurofibromine, suppresseur RAS, neurofibromatose, melanome, GIST"
+    },
+    "STK11": {
+        "chromosome": "chr19",
+        "start": 1205797,
+        "end": 1228434,
+        "description": "Sérine/thréonine kinase, syndrome Peutz-Jeghers, poumon adéno"
+    },
+    "IDH1": {
+        "chromosome": "chr2",
+        "start": 209105177,
+        "end": 209121087,
+        "description": "Isocitrate déshydrogénase 1, gliome de bas grade, leucémie myéloïde"
+    },
+    "IDH2": {
+        "chromosome": "chr15",
+        "start": 90088702,
+        "end": 90100340,
+        "description": "Isocitrate déshydrogénase 2, leucémie myéloïde aiguë, angioimmunoblastique"
+    },
+    "SMAD4": {
+        "chromosome": "chr18",
+        "start": 48556583,
+        "end": 48611412,
+        "description": "Médiateur TGF-β, suppresseur, cancer du pancréas et colorectal"
+    },
+    "RET": {
+        "chromosome": "chr10",
+        "start": 43572516,
+        "end": 43625797,
+        "description": "Récepteur tyrosine kinase, cancer médullaire thyroïde, NEM2"
+    },
+    "ERBB2": {
+        "chromosome": "chr17",
+        "start": 37844167,
+        "end": 37884915,
+        "description": "HER2/neu, amplification dans cancer du sein, gastrique, poumon"
+    },
+    "ARID1A": {
+        "chromosome": "chr1",
+        "start": 27022521,
+        "end": 27108601,
+        "description": "Remodelage chromatine SWI/SNF, cancer ovarien, endométrial, gastrique"
+    },
+    "FBXW7": {
+        "chromosome": "chr4",
+        "start": 153242410,
+        "end": 153456204,
+        "description": "Ubiquitine ligase, dégradation oncogènes (MYC, NOTCH), colon, leucémie T"
+    },
 }
 
 MUTATION_TYPES = {
@@ -117,9 +203,13 @@ IMPACT_LEVELS = {
 }
 
 CANCER_TYPES = [
+    # Types originaux
     "Poumon", "Sein", "Colon", "Prostate", "Pancreas",
     "Melanome", "Leucemie", "Lymphome", "Glioblastome",
-    "Ovaire", "Vessie", "Thyroide", "Rein", "Foie"
+    "Ovaire", "Vessie", "Thyroide", "Rein", "Foie",
+    # Nouveaux types (TCGA complet + MSK-IMPACT)
+    "Uterus", "TeteEtCou", "Estomac", "Cervical",
+    "Gliome", "Oesophage", "Sarcome", "Mesotheliome",
 ]
 
 # ============================================================================
@@ -188,6 +278,7 @@ TOP_K_GENES = 50
 # ============================================================================
 
 GENE_ROLES = {
+    # Gènes originaux
     "TP53":   "suppressor",
     "BRCA1":  "suppressor",
     "BRCA2":  "suppressor",
@@ -200,6 +291,21 @@ GENE_ROLES = {
     "MYC":    "oncogene",
     "ALK":    "oncogene",
     "BRAF":   "oncogene",
+    # Nouveaux gènes
+    "CDH1":   "suppressor",
+    "VHL":    "suppressor",
+    "CDKN2A": "suppressor",
+    "MLH1":   "suppressor",
+    "MSH2":   "suppressor",
+    "NF1":    "suppressor",
+    "STK11":  "suppressor",
+    "IDH1":   "oncogene",
+    "IDH2":   "oncogene",
+    "SMAD4":  "suppressor",
+    "RET":    "oncogene",
+    "ERBB2":  "oncogene",
+    "ARID1A": "suppressor",
+    "FBXW7":  "suppressor",
 }
 
 # ============================================================================
@@ -272,11 +378,78 @@ CANCER_LABEL_MAPPING = {
     "foie": "Foie",
     # Estomac
     "stomach": "Estomac",
+    "gastric": "Estomac",
     "gastric adenocarcinoma": "Estomac",
+    "stomach adenocarcinoma": "Estomac",
     "estomac": "Estomac",
     # Endomètre / Utérus
     "uterine": "Uterus",
     "uterine corpus endometrial carcinoma": "Uterus",
     "endometrial": "Uterus",
+    "endometrial carcinoma": "Uterus",
     "uterus": "Uterus",
+    "uterine carcinosarcoma": "Uterus",
+    # Tête et Cou
+    "head and neck": "TeteEtCou",
+    "head & neck": "TeteEtCou",
+    "head neck squamous cell carcinoma": "TeteEtCou",
+    "head/neck": "TeteEtCou",
+    "tete et cou": "TeteEtCou",
+    "hnsc": "TeteEtCou",
+    "squamous cell carcinoma of the head and neck": "TeteEtCou",
+    # Cervical / Col de l'utérus
+    "cervical": "Cervical",
+    "cervix": "Cervical",
+    "cervical squamous cell carcinoma": "Cervical",
+    "cervical adenocarcinoma": "Cervical",
+    "col": "Cervical",
+    "cesc": "Cervical",
+    # Gliome (bas grade, distingué du Glioblastome grade IV)
+    "glioma": "Gliome",
+    "lower grade glioma": "Gliome",
+    "low grade glioma": "Gliome",
+    "diffuse glioma": "Gliome",
+    "astrocytoma": "Gliome",
+    "oligodendroglioma": "Gliome",
+    "gliome": "Gliome",
+    # Œsophage
+    "esophageal": "Oesophage",
+    "esophagus": "Oesophage",
+    "esophageal adenocarcinoma": "Oesophage",
+    "esophageal squamous cell carcinoma": "Oesophage",
+    "oesophage": "Oesophage",
+    "oesophageal": "Oesophage",
+    # Sarcome
+    "sarcoma": "Sarcome",
+    "sarcome": "Sarcome",
+    "soft tissue sarcoma": "Sarcome",
+    "leiomyosarcoma": "Sarcome",
+    "liposarcoma": "Sarcome",
+    "undifferentiated pleomorphic sarcoma": "Sarcome",
+    # Mésothéliome
+    "mesothelioma": "Mesotheliome",
+    "mesotheliome": "Mesotheliome",
+    "pleural mesothelioma": "Mesotheliome",
+    # Mappings supplémentaires MSK-IMPACT
+    "non-small cell lung cancer": "Poumon",
+    "nsclc": "Poumon",
+    "colorectal cancer": "Colon",
+    "crc": "Colon",
+    "breast cancer": "Sein",
+    "invasive breast carcinoma": "Sein",
+    "renal cell carcinoma": "Rein",
+    "kidney renal papillary cell carcinoma": "Rein",
+    "kidney chromophobe": "Rein",
+    "hepatocellular carcinoma": "Foie",
+    "cholangiocarcinoma": "Foie",
+    "intrahepatic cholangiocarcinoma": "Foie",
+    "acute myeloid leukemia": "Leucemie",
+    "chronic myelogenous leukemia": "Leucemie",
+    "chronic lymphocytic leukemia": "Leucemie",
+    "b-cell lymphoma": "Lymphome",
+    "diffuse large b-cell lymphoma": "Lymphome",
+    "follicular lymphoma": "Lymphome",
+    "non-hodgkin lymphoma": "Lymphome",
+    "hodgkin lymphoma": "Lymphome",
+    "multiple myeloma": "Lymphome",
 }
