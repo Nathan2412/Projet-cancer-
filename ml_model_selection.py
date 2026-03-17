@@ -3,13 +3,14 @@ Sélection de modèles ML avec nested CV pour limiter l'overfitting.
 """
 
 import warnings
-from collections import Counter
 
 import numpy as np
 from sklearn.base import clone
-from sklearn.ensemble import GradientBoostingClassifier, HistGradientBoostingClassifier, RandomForestClassifier
+from sklearn.ensemble import HistGradientBoostingClassifier, RandomForestClassifier
+from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import (
     accuracy_score,
+    balanced_accuracy_score,
     classification_report,
     confusion_matrix,
     f1_score,
@@ -20,7 +21,7 @@ from sklearn.metrics import (
 )
 from sklearn.model_selection import GridSearchCV, StratifiedKFold
 from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import label_binarize
+from sklearn.preprocessing import StandardScaler, label_binarize
 from sklearn.svm import SVC
 
 
@@ -41,6 +42,24 @@ def _add_fold_allele_features(X, patient_results, fold_signatures):
 
 def get_model_specs(random_state=42):
     return {
+        # ── Baseline linéaire (référence simple) ──────────────────────────────
+        "Logistic Regression": {
+            "estimator": Pipeline([
+                ("scaler", StandardScaler()),
+                ("model", LogisticRegression(
+                    class_weight="balanced",
+                    max_iter=1000,
+                    random_state=random_state,
+                    solver="saga",
+                    n_jobs=-1,
+                )),
+            ]),
+            "param_grid": {
+                "model__C": [0.1, 1, 10],
+                "model__penalty": ["l2"],
+            },
+        },
+        # ── Modèles ensemblistes ──────────────────────────────────────────────
         "Random Forest": {
             "estimator": RandomForestClassifier(
                 class_weight="balanced", random_state=random_state, n_jobs=-1
@@ -117,14 +136,35 @@ def _safe_roc_auc(y_true, y_prob, classes):
 
 
 def _feature_importance_from_pipeline(pipeline, feature_names):
-    model = pipeline.named_steps["model"]
-    if not hasattr(model, "feature_importances_"):
-        return {}
-    fi = {
-        fn: round(float(model.feature_importances_[i]), 5)
-        for i, fn in enumerate(feature_names)
-    }
-    return dict(sorted(fi.items(), key=lambda x: x[1], reverse=True))
+    """Extrait les importances de features depuis un pipeline sklearn.
+    Supporte RandomForest/GradientBoosting (feature_importances_),
+    LogisticRegression (coef_), SVM (pas d'importance → dict vide).
+    """
+    # Cas pipeline imbriqué (ex: Logistic Regression avec scaler)
+    if hasattr(pipeline, "named_steps") and "model" in pipeline.named_steps:
+        model = pipeline.named_steps["model"]
+    else:
+        model = pipeline
+
+    if hasattr(model, "feature_importances_"):
+        fi = {
+            fn: round(float(model.feature_importances_[i]), 5)
+            for i, fn in enumerate(feature_names)
+        }
+        return dict(sorted(fi.items(), key=lambda x: x[1], reverse=True))
+
+    if hasattr(model, "coef_"):
+        # Logistic Regression : moyenne des valeurs absolues des coefs sur toutes les classes
+        coefs = np.abs(model.coef_)
+        mean_coef = coefs.mean(axis=0)
+        fi = {
+            fn: round(float(mean_coef[i]), 5)
+            for i, fn in enumerate(feature_names)
+            if i < len(mean_coef)
+        }
+        return dict(sorted(fi.items(), key=lambda x: x[1], reverse=True))
+
+    return {}
 
 
 def evaluate_models_nested_cv(X, y_enc, class_names, feature_names,
@@ -212,9 +252,13 @@ def evaluate_models_nested_cv(X, y_enc, class_names, feature_names,
                         shuffle=True, random_state=random_state
                     )
 
-                pipe = Pipeline([
-                    ("model", clone(spec["estimator"])),
-                ])
+                # Si l'estimateur est déjà un Pipeline (ex: LR avec scaler),
+                # l'utiliser directement pour éviter le double-wrapping.
+                est_clone = clone(spec["estimator"])
+                if isinstance(est_clone, Pipeline):
+                    pipe = est_clone
+                else:
+                    pipe = Pipeline([("model", est_clone)])
 
                 grid = GridSearchCV(
                     estimator=pipe,
@@ -242,9 +286,8 @@ def evaluate_models_nested_cv(X, y_enc, class_names, feature_names,
                 fold_acc.append(accuracy_score(y_test, y_hat))
 
             # Refit global best config for serving/predict + train metrics
-            pipe_full = Pipeline([
-                ("model", clone(spec["estimator"])),
-            ])
+            est_full = clone(spec["estimator"])
+            pipe_full = est_full if isinstance(est_full, Pipeline) else Pipeline([("model", est_full)])
             grid_full = GridSearchCV(
                 estimator=pipe_full,
                 param_grid=spec["param_grid"],
@@ -258,9 +301,11 @@ def evaluate_models_nested_cv(X, y_enc, class_names, feature_names,
             y_train_pred = best_model_full.predict(X_full)
 
             acc = accuracy_score(y_enc, oof_pred)
+            bal_acc = balanced_accuracy_score(y_enc, oof_pred)
             prec = precision_score(y_enc, oof_pred, average="weighted", zero_division=0)
             rec = recall_score(y_enc, oof_pred, average="weighted", zero_division=0)
             f1w = f1_score(y_enc, oof_pred, average="weighted", zero_division=0)
+            f1_macro = f1_score(y_enc, oof_pred, average="macro", zero_division=0)
             cm = confusion_matrix(y_enc, oof_pred)
 
             # Top-3 accuracy (si probas disponibles et assez de classes)
@@ -274,7 +319,9 @@ def evaluate_models_nested_cv(X, y_enc, class_names, feature_names,
                     top3_acc = None
 
             train_acc = accuracy_score(y_enc, y_train_pred)
+            train_bal_acc = balanced_accuracy_score(y_enc, y_train_pred)
             train_f1 = f1_score(y_enc, y_train_pred, average="weighted", zero_division=0)
+            train_f1_macro = f1_score(y_enc, y_train_pred, average="macro", zero_division=0)
 
             y_prob = oof_prob if has_prob else None
             roc_w, roc_cls = _safe_roc_auc(y_enc, y_prob, class_names)
@@ -297,10 +344,14 @@ def evaluate_models_nested_cv(X, y_enc, class_names, feature_names,
 
             model_result = {
                 "accuracy": round(float(acc), 4),
+                # balanced_accuracy est la métrique principale pour données déséquilibrées
+                "balanced_accuracy": round(float(bal_acc), 4),
                 "top3_accuracy": top3_acc,
                 "precision_weighted": round(float(prec), 4),
                 "recall_weighted": round(float(rec), 4),
                 "f1_weighted": round(float(f1w), 4),
+                # f1_macro pénalise équitablement les petites classes (Rein=51, etc.)
+                "f1_macro": round(float(f1_macro), 4),
                 "roc_auc_weighted": round(float(roc_w), 4) if roc_w is not None else None,
                 "roc_auc_per_class": roc_cls,
                 "confusion_matrix": cm.tolist(),
@@ -317,8 +368,11 @@ def evaluate_models_nested_cv(X, y_enc, class_names, feature_names,
                 "cv_f1_mean": round(float(np.mean(fold_f1)), 4),
                 "cv_acc_mean": round(float(np.mean(fold_acc)), 4),
                 "train_accuracy": round(float(train_acc), 4),
+                "train_balanced_accuracy": round(float(train_bal_acc), 4),
                 "train_f1_weighted": round(float(train_f1), 4),
+                "train_f1_macro": round(float(train_f1_macro), 4),
                 "overfit_gap_accuracy": round(float(train_acc - acc), 4),
+                "overfit_gap_balanced": round(float(train_bal_acc - bal_acc), 4),
                 "overfit_gap_f1": round(float(train_f1 - f1w), 4),
                 "overfit_warning": bool((train_acc - acc) > 0.08 or (train_f1 - f1w) > 0.08),
                 "stable_best_params": most_common_params,
@@ -328,16 +382,23 @@ def evaluate_models_nested_cv(X, y_enc, class_names, feature_names,
 
             if verbose:
                 print(
-                    f"acc={acc:.3f} f1={f1w:.3f} "
+                    f"acc={acc:.3f} bal_acc={bal_acc:.3f} "
+                    f"f1_macro={f1_macro:.3f} f1_w={f1w:.3f} "
                     f"(train-cv gap={train_f1 - f1w:+.3f})"
                 )
 
-            if acc > best_acc:
-                best_acc = float(acc)
+            # Sélection principale sur f1_macro (pénalise les erreurs sur petites classes)
+            # balanced_accuracy est gardée comme critère secondaire dans les résultats
+            if f1_macro > best_acc:
+                best_acc = float(f1_macro)
                 best_name = model_name
+
+    # Identifier aussi le meilleur modèle selon balanced_accuracy
+    best_bal_name = max(results, key=lambda n: results[n]["balanced_accuracy"]) if results else None
 
     return {
         "models": results,
-        "best_model_name": best_name,
-        "best_accuracy": round(best_acc, 4),
+        "best_model_name": best_name,           # critère principal : f1_macro
+        "best_f1_macro": round(best_acc, 4),
+        "best_model_balanced_acc": best_bal_name,  # critère secondaire : balanced_accuracy
     }

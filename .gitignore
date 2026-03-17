@@ -1,34 +1,57 @@
 
-# NOTE: data/ et output/ ne sont plus exclus pour conserver les résultats sur git
-# Décommenter les lignes ci-dessous pour les exclure à nouveau:
-# data/real/
-# data/samples/
-# data/reference.fasta
-# data/known_mutations.json
-# data/cohort_summary.json
-# output/reports/
-# output/plots/
+# ── Données patients TCGA (700+ fichiers, régénérables avec download_real_data.py) ──
+data/real/samples/
 
-# Python cache
+# ── Données synthétiques générées à la volée ──
+data/samples/
+
+# ── Sorties générées (rapports, graphiques, CSV) ──
+output/
+
+# ── Modèles ML persistés ──
+*.pkl
+*.joblib
+
+# ── Python ──
 __pycache__/
 *.pyc
 *.pyo
-.venv/
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
 
-# IDE
+# ── Environnements virtuels ──
+.venv/
+venv/
+env/
+
+# ── Variables d'environnement ──
+.env
+.env.*
+
+# ── IDE ──
 .vscode/
 .idea/
 *.swp
 *.swo
 *~
 
-# OS
+# ── OS ──
 .DS_Store
 Thumbs.db
 desktop.ini
 
-# Divers
+# ── Divers ──
 *.log
 *.tmp
 _debug_*.py
 _stats.py
+
+# ── Stubs de type (générés automatiquement) ──
+.stubs/
+
+# ── Jupyter ──
+.ipynb_checkpoints/
+*.ipynb

@@ -20,7 +20,10 @@ from loader import (
     get_patient_list_real, load_patient_data_real
 )
 from sequencer import analyze_gene_sequencing, compute_per_position_coverage
-from mutations import analyze_gene_mutations
+from mutations import (
+    analyze_gene_mutations, classify_mutation_impact,
+    compute_mutation_spectrum, compute_mutation_density, find_mutation_hotspots
+)
 from annotator import annotate_gene_mutations, summarize_annotations
 from correlator import (
     generate_patient_risk_report,
@@ -99,7 +102,7 @@ def analyze_single_patient(patient_id, reference, known_db, verbose=True):
     }
 
 
-def analyze_single_patient_real(patient_id, reference, known_db, verbose=True):
+def analyze_single_patient_real(patient_id, reference, known_db, verbose=True, patient_data=None):
     """
     Analyse un patient avec des mutations reelles pre-detectees (TCGA).
     Pas de FASTQ ni de detection de mutations - on utilise directement
@@ -108,7 +111,8 @@ def analyze_single_patient_real(patient_id, reference, known_db, verbose=True):
     if verbose:
         print(f"\n--- Analyse de {patient_id} (donnees reelles TCGA) ---")
 
-    patient_data = load_patient_data_real(patient_id)
+    if patient_data is None:
+        patient_data = load_patient_data_real(patient_id)
     metadata = patient_data["metadata"]
     raw_mutations = patient_data["mutations"]
 
@@ -138,8 +142,6 @@ def analyze_single_patient_real(patient_id, reference, known_db, verbose=True):
         deletions = [m for m in gene_mutations if m.get("type") == "DEL"]
 
         # Ajouter impact si manquant
-        from mutations import classify_mutation_impact, compute_mutation_spectrum
-        from mutations import compute_mutation_density, find_mutation_hotspots
         for m in gene_mutations:
             if "impact" not in m:
                 m["impact"] = classify_mutation_impact(m)
@@ -395,14 +397,25 @@ def run_real_data_analysis(max_patients=None, generate_plots=True, verbose=True)
         patient_list = patient_list[:max_patients]
     print(f"  {len(patient_list)} patients a analyser")
 
+    print("\n[3/7] Chargement de toutes les donnees patients en memoire...")
+    all_patient_data = {}
+    for i, pid in enumerate(patient_list):
+        if i % 500 == 0:
+            print(f"  Chargement {i}/{len(patient_list)}...")
+        try:
+            all_patient_data[pid] = load_patient_data_real(pid)
+        except Exception:
+            all_patient_data[pid] = {"patient_id": pid, "reads": {}, "mutations": [], "metadata": {}}
+    print(f"  {len(all_patient_data)} patients charges en memoire")
+
     print("\n[3/7] Analyse individuelle des patients (donnees reelles)...")
     all_results = []
     for i, pid in enumerate(patient_list):
-        if verbose:
+        if (i + 1) % 100 == 0 or i == 0:
             progress = (i + 1) / len(patient_list) * 100
-            print(f"\n  [{i+1}/{len(patient_list)}] ({progress:.0f}%)")
+            print(f"  [{i+1}/{len(patient_list)}] ({progress:.0f}%)")
 
-        result = analyze_single_patient_real(pid, reference, known_db, verbose)
+        result = analyze_single_patient_real(pid, reference, known_db, verbose=False, patient_data=all_patient_data[pid])
         all_results.append(result)
 
     print("\n\n[4/7] Analyse de cohorte...")

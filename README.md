@@ -1,66 +1,84 @@
 # DNA Cancer Analysis Pipeline
 
-Pipeline d'analyse génomique complet : détection de mutations dans l'ADN et corrélation avec les cancers, utilisant des **vraies données cliniques** issues du projet TCGA (The Cancer Genome Atlas).
+Pipeline bioinformatique de **classification du type tumoral** à partir de profils de variants somatiques, utilisant des **vraies données cliniques** issues du projet TCGA (The Cancer Genome Atlas).
+
+> Ce projet classifie le type de tumeur à partir de mutations somatiques. Il ne constitue pas un outil de dépistage ni de diagnostic médical.
 
 ---
 
 ## Contexte du projet
 
-Ce projet a été développé dans le cadre d'un projet ING2. L'objectif est de construire un pipeline bioinformatique capable d'analyser des mutations somatiques réelles et d'évaluer leur corrélation avec différents types de cancers.
+Développé dans le cadre d'un projet ING2. L'objectif est de construire un pipeline bioinformatique capable d'analyser des variants somatiques réels et d'identifier des **signatures mutationnelles discriminantes** associées à chaque type de cancer, puis de prédire le type tumoral par apprentissage automatique.
 
 ### Ce qui a été réalisé
 
 - **Intégration de données réelles TCGA** : 3 674 patients provenant de 12 études TCGA PanCancer Atlas
-- **Pipeline d'analyse complet** : téléchargement → détection → annotation → scoring → corrélation → ML → rapports
-- **Machine Learning** : prédiction du type de cancer basée sur le profil mutationnel (Random Forest, HistGradientBoosting avec class_weight, SVM)
-- **Signatures alléliques discriminantes** : identification des mutations caractéristiques de chaque cancer (seuil corrigé à 5% de fréquence minimum)
-- **104 hotspots mutationnels** identifiés automatiquement
-- **Export CSV** : génération d'un `rapport_cohorte.csv` synthétisant toutes les données pour l'analyse externe
-- **Correction du bug ALLELE_MIN_FREQUENCY** : seuil abaissé de 40% → 5% (seul BRAF V600E thyroïde était détecté avant)
-- **Correction du déséquilibre de classes** : HistGradientBoosting avec class_weight='balanced' (Rein=51 vs Sein=669)
-- Le mode synthétique est conservé comme fallback pour fonctionner sans internet
+- **Pipeline d'analyse complet** : téléchargement → annotation → scoring → corrélation → ML → rapports
+- **Machine Learning** : classification multi-classe du type tumoral (Random Forest, HistGradientBoosting avec class_weight, SVM, Logistic Regression comme baseline)
+- **Variants somatiques discriminants** : identification des mutations caractéristiques de chaque cancer avec critères multi-facteurs (fréquence ≥5%, enrichissement ≥2×, hors-cancer ≤15%)
+- **104 hotspots mutationnels** identifiés automatiquement depuis les données TCGA
+- **Export CSV** : génération d'un `rapport_cohorte.csv` synthétisant toutes les données
+- **Anti-data-leakage** : les signatures discriminantes sont recalculées uniquement sur les folds d'entraînement (nested CV)
+- **Métriques robustes** : balanced accuracy, macro-F1, F1 par classe, matrice de confusion (pertinent face au déséquilibre Rein=51 vs Sein=669)
 
-> **Prochaine étape** : relancer `python main.py --real-data` pour obtenir les résultats corrigés. Voir [INFORMATION.md](INFORMATION.md).
+### Positionnement honnête
 
-> 📋 Voir [INFORMATION.md](INFORMATION.md) pour le détail complet de ce qui a été fait et ce qui reste à faire.
+| Force | Limite |
+|-------|--------|
+| Pipeline complet et interprétable | Panel de 26 gènes (vs milliers en état de l'art) |
+| Vraies données TCGA (3 674 patients) | Pas de données multi-omics (CNA, ARN) |
+| Nested CV sans fuite de données | Pas de validation externe indépendante |
+| Variants somatiques biologiquement plausibles | TMB panel ≠ TMB exome/génome entier |
 
 ---
 
-## Donnees reelles utilisees
+## Données réelles utilisées
 
 Source : **TCGA PanCancer Atlas** via l'API publique **cBioPortal** (https://www.cbioportal.org/).
 
-| Type de cancer  | Patients | Etude TCGA |
+| Type de cancer  | Patients | Étude TCGA |
 |-----------------|----------|------------|
 | Sein            | 669      | brca_tcga_pan_can_atlas_2018 |
 | Colon           | 489      | coadread_tcga_pan_can_atlas_2018 |
 | Poumon          | 469      | luad_tcga_pan_can_atlas_2018 |
 | Ovaire          | 383      | ov_tcga_pan_can_atlas_2018 |
-| Melanome        | 342      | skcm_tcga_pan_can_atlas_2018 |
-| Thyroide        | 296      | thca_tcga_pan_can_atlas_2018 |
+| Mélanome        | 342      | skcm_tcga_pan_can_atlas_2018 |
+| Thyroïde        | 296      | thca_tcga_pan_can_atlas_2018 |
 | Vessie          | 295      | blca_tcga_pan_can_atlas_2018 |
 | Glioblastome    | 271      | gbm_tcga_pan_can_atlas_2018 |
 | Foie            | 165      | lihc_tcga_pan_can_atlas_2018 |
-| Pancreas        | 135      | paad_tcga_pan_can_atlas_2018 |
+| Pancréas        | 135      | paad_tcga_pan_can_atlas_2018 |
 | Prostate        | 109      | prad_tcga_pan_can_atlas_2018 |
 | Rein            | 51       | kirc_tcga_pan_can_atlas_2018 |
-| **Total**       | **3 674**| **12 etudes** |
+| **Total**       | **3 674**| **12 études** |
 
-### 12 genes cibles
+### 26 gènes analysés (panel MSK-IMPACT + drivers TCGA)
 
-| Gene | Role | Cancers associes |
+| Gène | Rôle | Cancers associés |
 |------|------|------------------|
-| TP53 | Suppresseur de tumeur | +50% des cancers |
-| BRCA1/2 | Reparation ADN | Sein, ovaire, pancreas |
-| KRAS | Oncogene | Poumon, colon, pancreas |
-| EGFR | Recepteur de croissance | Poumon |
-| PIK3CA | Voie PI3K | Sein, colon |
-| BRAF | Kinase MAPK | Melanome, thyroide |
+| TP53 | Suppresseur de tumeur | >50% des cancers |
+| BRCA1/2 | Réparation ADN | Sein, ovaire, pancréas |
+| KRAS | Oncogène | Poumon, côlon, pancréas |
+| EGFR | Récepteur de croissance | Poumon |
+| PIK3CA | Voie PI3K | Sein, côlon |
+| BRAF | Kinase MAPK | Mélanome, thyroïde |
 | APC | Suppresseur | Colorectal |
 | PTEN | Suppresseur | Glioblastome, prostate |
-| RB1 | Suppresseur | Retinoblastome |
-| MYC | Oncogene | Lymphome, nombreux cancers |
-| ALK | Kinase | Lymphome, poumon |
+| RB1 | Suppresseur | Rétinoblastome |
+| MYC | Oncogène | Lymphome |
+| ALK | Kinase | Poumon |
+| CDH1 | Suppresseur | Sein lobulaire, estomac |
+| VHL | Suppresseur | Rein à cellules claires |
+| CDKN2A | Suppresseur du cycle | Mélanome, poumon |
+| MLH1 / MSH2 | Réparation mésappariement | Côlon MSI-H |
+| NF1 | Suppresseur RAS | Mélanome, gliome |
+| STK11 | Suppresseur | Poumon (KRAS co-mut.) |
+| IDH1 / IDH2 | Métabolisme | Gliome, LMA |
+| SMAD4 | Voie TGF-β | Pancréas, côlon |
+| RET | Kinase | Thyroïde |
+| ERBB2 | Récepteur HER2 | Sein HER2+ |
+| ARID1A | Remodelage chromatine | Ovaire, côlon |
+| FBXW7 | Ubiquitine ligase | Côlon, lymphome |
 
 ---
 
@@ -68,104 +86,104 @@ Source : **TCGA PanCancer Atlas** via l'API publique **cBioPortal** (https://www
 
 ```
 dna-cancer-analysis/
-├── config.py               # Configuration, gènes cibles, seuils
+├── config.py               # Configuration, 26 gènes cibles, seuils
 ├── download_real_data.py   # Téléchargement données TCGA (cBioPortal API)
 ├── generate_data.py        # Générateur de données synthétiques (fallback)
 ├── loader.py               # Chargement des fichiers (FASTA, FASTQ, JSON)
 ├── sequencer.py            # Analyse qualité et couverture des reads
 ├── mutations.py            # Détection et classification des mutations
 ├── annotator.py            # Annotation et scoring de pathogénicité
-├── correlator.py           # Corrélation mutations <-> cancers
+├── correlator.py           # Corrélation variants <-> cancers
 ├── visualizer.py           # Graphiques et visualisations
-├── reporter.py             # Rapports texte et HTML
+├── reporter.py             # Rapports texte
 ├── ml_predictor.py         # Pipeline Machine Learning principal
-├── ml_model_selection.py   # Comparaison et sélection de modèles
+├── ml_model_selection.py   # Comparaison et sélection de modèles (nested CV)
 ├── ml_sectorization.py     # Clustering des profils patients
-├── allele_analyzer.py      # Signatures alléliques discriminantes
+├── allele_analyzer.py      # Variants somatiques discriminants par cancer
 ├── main.py                 # Pipeline principal (orchestre tout)
 ├── requirements.txt        # Dépendances Python
 ├── INSTRUCTIONS.md         # Guide d'utilisation détaillé
 ├── INFORMATION.md          # État du projet et documentation technique
-├── .gitignore              # Fichiers exclus du dépôt
 │
-├── data/                   # Données
-│   ├── real/               #   Données TCGA téléchargées
-│   └── samples/            #   Données synthétiques
+├── data/
+│   ├── real/               # Données TCGA (reference.fasta, known_mutations.json)
+│   │   └── samples/        # (ignoré par git — régénérer avec download_real_data.py)
+│   └── samples/            # (ignoré par git — données synthétiques)
 │
-└── output/                 # Résultats
-    ├── reports/            #   Rapports .txt et .html
-    └── plots/              #   Graphiques .png
+└── output/                 # (ignoré par git — rapports et graphiques générés)
+    ├── reports/
+    └── plots/
 ```
-
-> 📋 Voir [INFORMATION.md](INFORMATION.md) pour la documentation détaillée.
 
 ---
 
-## Demarrage rapide
+## Démarrage rapide
 
 ```bash
-# Cloner le depot
+# Cloner le dépôt
 git clone https://github.com/Nathan2412/Projet-cancer-.git
-cd Projet-cancer-
+cd dna-cancer-analysis
 
-# Installer les dependances
+# Installer les dépendances
 pip install -r requirements.txt
 
-# Telecharger les donnees reelles TCGA (3674 patients, necessite internet)
+# Télécharger les données réelles TCGA (3 674 patients, nécessite internet)
 python download_real_data.py
 
-# Lancer l'analyse complete
+# Lancer l'analyse complète
 python main.py --real-data
 ```
 
 ### Autres options
 
 ```bash
-python main.py --real-data --max 100   # Limiter a 100 patients
+python main.py --real-data --max 100   # Limiter à 100 patients
 python main.py --real-data --no-plots  # Sans graphiques (plus rapide)
-python main.py                         # Mode synthetique (20 patients)
+python main.py                         # Mode synthétique (20 patients)
 python main.py --patient PAT_0001      # Analyser un seul patient
 ```
 
-Les resultats apparaissent dans `output/reports/` et `output/plots/`.
+Les résultats apparaissent dans `output/reports/` et `output/plots/`.
 
 ---
 
 ## Architecture du pipeline
 
 ```
-download_real_data.py   -- telecharge mutations TCGA via API cBioPortal
+download_real_data.py   -- télécharge mutations TCGA via API cBioPortal
         |
         v
-    data/real/           -- mutations reelles, metadata cliniques, hotspots
+    data/real/           -- variants somatiques réels, métadonnées cliniques, hotspots
         |
         v
-    loader.py            -- charge references, patients, mutations connues
+    loader.py            -- charge références, patients, mutations connues
         |
-        +---> annotator.py   -- annotation hotspots, scoring pathogenicite
-        +---> correlator.py  -- charge mutationnelle, profil risque cancer
-        +---> visualizer.py  -- graphiques qualite, heatmaps, spectres
-        +---> reporter.py    -- rapports texte et HTML
+        +---> annotator.py       -- annotation hotspots, scoring pathogénicité
+        +---> correlator.py      -- charge mutationnelle, profil de vraisemblance
+        +---> allele_analyzer.py -- variants somatiques discriminants par cancer
+        +---> ml_predictor.py    -- classification ML du type tumoral (nested CV)
+        +---> visualizer.py      -- graphiques qualité, heatmaps, spectres
+        +---> reporter.py        -- rapports texte
         |
         v
     main.py              -- orchestre le pipeline complet
 ```
 
 **Deux modes** :
-- `--real-data` : mutations reelles TCGA -> annotation -> correlation -> rapports
-- (defaut) : donnees synthetiques -> detection depuis FASTQ -> annotation -> rapports
+- `--real-data` : variants somatiques TCGA → annotation → classification ML → rapports
+- (défaut) : données synthétiques → détection depuis FASTQ → annotation → rapports
 
 ---
 
-## Resultats produits
+## Résultats produits
 
-**Par patient** : rapport texte + HTML contenant les informations cliniques, le nombre de mutations, la charge mutationnelle, le niveau de risque global, le profil de risque par cancer, les variants a impact eleve, les signatures COSMIC matchees, et les recommandations. Inclut des légendes documentées pour le guide d'interprétation.
+**Par patient** : rapport texte contenant les informations cliniques, le nombre de variants somatiques, la charge mutationnelle panel, le niveau de risque global, le profil de compatibilité par cancer, les variants à impact élevé, les signatures mutationnelles matchées, et les recommandations.
 
-**Par cohorte** : rapport texte global, export complet au format CSV (`rapport_cohorte.csv`), matrice mutations (patients x genes), correlations gene-cancer, heatmap globale, distribution des impacts.
+**Par cohorte** : rapport texte global, export CSV complet (`rapport_cohorte.csv`), matrice variants (patients × gènes), heatmap globale, courbes ROC, matrice de confusion, importance des features, comparaison des modèles.
 
 ---
 
-## References
+## Références
 
 - Cerami et al. *The cBio Cancer Genomics Portal.* Cancer Discovery, 2012.
 - Gao et al. *Integrative Analysis of Complex Cancer Genomics and Clinical Profiles Using the cBioPortal.* Sci. Signal., 2013.
@@ -177,5 +195,10 @@ download_real_data.py   -- telecharge mutations TCGA via API cBioPortal
 
 ## Limitations
 
-- Le scoring de pathogenicite est simplifie par rapport aux outils cliniques (ClinVar, InterVar)
-- Les donnees TCGA sont publiques et anonymisees
+- **Données TCGA uniquement tumorales** : ce projet est une classification inter-cancers, pas un dépistage sain/malade. Les données TCGA ne contiennent que des échantillons tumoraux.
+- **Panel réduit** : 26 gènes analysés vs plusieurs milliers dans les études état-de-l'art (ex: CPEM sur 22 421 profils mutationnels).
+- **Pas de multi-omics** : pas de CNA, ARN-seq, méthylation. Les meilleures performances en littérature viennent de l'intégration multi-omics.
+- **TMB panel ≠ TMB réel** : la densité mutationnelle calculée sur 26 gènes n'est pas comparable au TMB exome/génome entier.
+- **Pas de validation externe** : le modèle est validé en nested CV sur TCGA uniquement.
+- Le scoring de pathogénicité est simplifié par rapport aux outils cliniques (ClinVar, InterVar).
+- Les données TCGA sont publiques et anonymisées.

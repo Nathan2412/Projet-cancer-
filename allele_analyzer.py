@@ -1,14 +1,21 @@
 """
-Analyse des alleles communs par type de cancer.
+Identification des variants somatiques discriminants par type de cancer.
 
 Principe :
-  1. Pour chaque cancer connu, on recense les mutations (gene+position+type)
-     presentes chez les patients diagnostiques.
-  2. On ne retient que les alleles recurents (>= min_patients) et discriminants
+  1. Pour chaque cancer connu, on recense les variants somatiques (gene+position+type)
+     présents chez les patients diagnostiqués.
+  2. On ne retient que les variants récurrents (>= min_patients) et discriminants
      (enrichis dans ce cancer par rapport aux autres).
   3. Pour les patients dont le cancer est inconnu, on compare leur profil
      mutationnel aux signatures et on calcule un score de ressemblance.
-  4. On fournit une matrice binaire allele-presence pour le clustering.
+  4. On fournit une matrice binaire variant-présence pour le clustering.
+
+Note terminologique :
+  Le terme "allèle" au sens génétique classique désigne la forme d'un gène
+  à un locus donné. Dans ce module, les éléments identifiés sont des
+  variants somatiques discriminants (mutations récurrentes enrichies dans
+  un type tumoral). Les noms de fonctions conservent "allele" pour
+  rétrocompatibilité, mais la documentation utilise "variant somatique".
 """
 
 from collections import defaultdict
@@ -75,23 +82,23 @@ def build_cancer_allele_signatures(
     max_alleles_per_cancer: int = None,
 ) -> dict[str, dict]:
     """
-    Pour chaque type de cancer, identifie les alleles partagés, discriminants
-    et enrichis dans ce cancer par rapport aux autres.
+    Pour chaque type de cancer, identifie les variants somatiques discriminants :
+    récurrents et enrichis dans ce cancer par rapport aux autres types tumoraux.
 
-    Critères de sélection (tous doivent être satisfaits):
-    - count_in_cancer >= min_patients
-    - freq_in_cancer >= min_frequency
-    - freq_outside_cancer <= max_outside_frequency
-    - enrichment >= min_enrichment
-    
-    Les allèles sont ensuite triés par enrichissement décroissant et
-    seuls les max_alleles_per_cancer meilleurs sont conservés.
+    Critères de sélection (tous doivent être satisfaits) :
+    - count_in_cancer >= min_patients        (récurrence minimale)
+    - freq_in_cancer >= min_frequency        (≥5% dans le cancer cible)
+    - freq_outside_cancer <= max_outside_frequency  (≤15% hors cancer cible)
+    - enrichment >= min_enrichment           (enrichissement ≥2×)
+
+    Les variants sont triés par enrichissement décroissant et seuls les
+    max_alleles_per_cancer meilleurs sont conservés par cancer.
 
     Retourne :
         {cancer_type: {
-            "alleles": {allele_key: {
-                "count": int, 
-                "freq_in_cancer": float, 
+            "alleles": {variant_key: {
+                "count": int,
+                "freq_in_cancer": float,
                 "freq_outside_cancer": float,
                 "enrichment": float,
                 ...
@@ -320,13 +327,13 @@ def build_allele_matrix(
 # ════════════════════════════════════════════════════════════════════════
 
 def format_signatures_summary(signatures: dict[str, dict]) -> str:
-    """Résumé lisible des signatures d'alleles par cancer."""
-    lines = ["  SIGNATURES D'ALLELES PAR CANCER (discriminantes)"]
+    """Résumé lisible des variants somatiques discriminants par cancer."""
+    lines = ["  VARIANTS SOMATIQUES DISCRIMINANTS PAR CANCER"]
     lines.append("  " + "-" * 50)
     for cancer, sig in signatures.items():
-        n_alleles = len(sig["alleles"])
+        n_variants = len(sig["alleles"])
         n_pat = sig["n_patients"]
-        lines.append(f"  {cancer}: {n_alleles} alleles discriminants "
+        lines.append(f"  {cancer}: {n_variants} variants discriminants "
                      f"(sur {n_pat} patients)")
         for key, info in list(sig["alleles"].items())[:5]:
             gene = info.get('gene', '?')
@@ -335,19 +342,18 @@ def format_signatures_summary(signatures: dict[str, dict]) -> str:
             enrich = info.get('enrichment', 0)
             freq_in = info.get('freq_in_cancer', 0)
             freq_out = info.get('freq_outside_cancer', 0)
-            
-            # Affichage condensé avec protein_change si disponible
+
             if prot:
                 desc = f"{gene} {prot}"
             elif hotspot:
                 desc = f"{gene} {hotspot}"
             else:
                 desc = f"{gene} pos={info.get('position', '?')} {info.get('type', '?')}"
-            
+
             lines.append(f"    - {desc} "
                          f"(enrich={enrich}x, freq_in={freq_in}, freq_out={freq_out})")
-        if n_alleles > 5:
-            lines.append(f"    ... +{n_alleles - 5} autres")
+        if n_variants > 5:
+            lines.append(f"    ... +{n_variants - 5} autres")
     return "\n".join(lines)
 
 

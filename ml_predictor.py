@@ -1,11 +1,13 @@
 """
-Module ML : prediction du type de cancer a partir des profils mutationnels.
-Modeles : Random Forest, Gradient Boosting, SVM (RBF).
+Module ML : classification du type tumoral à partir de profils de variants somatiques.
+Modèles : Logistic Regression (baseline), Random Forest, Gradient Boosting, SVM (RBF).
 
-Nouvelle architecture :
-- Features : gènes binaires + allèles hotspot + métriques globales
-- Tâche : classification multi-classe (type de cancer)
-- Sortie : cancer prédit, top-3, probabilités, features responsables
+Architecture :
+- Features : gènes binaires + variants hotspot connus + scores signatures discriminantes
+            + métriques globales (charge mutationnelle, impacts, etc.)
+- Tâche : classification multi-classe (type tumoral — données TCGA uniquement tumorales)
+- Sortie : type tumoral prédit, top-3, probabilités, features responsables
+- Évaluation : balanced accuracy + macro-F1 (robustes au déséquilibre de classes)
 """
 
 import os, json, time
@@ -34,7 +36,7 @@ from sklearn.metrics import (
 
 GENE_LIST = sorted(CANCER_GENES.keys())
 
-# Allèles hotspot connus les plus discriminants (GENE_ALLELE)
+# Variants hotspot somatiques connus — les plus discriminants par type tumoral
 KNOWN_HOTSPOT_ALLELES = [
     ("BRAF", "V600E"),
     ("KRAS", "G12D"),
@@ -124,7 +126,7 @@ def _extract_row(r):
             row.append(count)           # nombre de mutations
             row.append(1 if count > 0 else 0)   # binaire muté
 
-    # -- 3. Allèles hotspot connus --────────────
+    # -- 3. Variants hotspot somatiques connus --
     if USE_ALLELE_FEATURES and USE_HOTSPOT_FEATURES:
         patient_hotspots = _collect_patient_hotspot_alleles(r)
         for gene, allele in KNOWN_HOTSPOT_ALLELES:
@@ -232,7 +234,8 @@ def train_and_evaluate(X, y, feature_names, labeled_results=None, allele_params=
 
     res = dict(class_names=classes, n_samples=len(y), n_features=X.shape[1],
                feature_names=feature_names, class_distribution=dict(Counter(y)),
-               models={}, best_model_name=None, best_accuracy=0.0,
+               models={}, best_model_name=None, best_f1_macro=0.0,
+               best_model_balanced_acc=None,
                _label_encoder=le, _y_encoded=y_enc.tolist())
 
     eval_out = evaluate_models_nested_cv(
@@ -249,7 +252,8 @@ def train_and_evaluate(X, y, feature_names, labeled_results=None, allele_params=
 
     res["models"] = eval_out["models"]
     res["best_model_name"] = eval_out["best_model_name"]
-    res["best_accuracy"] = eval_out["best_accuracy"]
+    res["best_f1_macro"] = eval_out["best_f1_macro"]
+    res["best_model_balanced_acc"] = eval_out["best_model_balanced_acc"]
     res["_best_model"] = res["models"][res["best_model_name"]]["_model"]
 
     res["training_time_seconds"] = round(time.time() - t0, 2)
@@ -530,29 +534,32 @@ def _report_text(ml, predictions_known, predictions_unknown=None, signatures=Non
              f"{ml['n_samples']} patients labellises  |  {len(ml['class_names'])} classes")
     L.append(sep)
 
-    # Signatures d'alleles
+    # Variants somatiques discriminants par cancer
     if signatures:
         L.append("")
         L.append(format_signatures_summary(signatures))
 
     L.append(f"\n  Entrainement : {ml['training_time_seconds']}s")
-    L.append(f"  {'Modele':<22} {'CV Acc':>8} {'Top-3':>7} {'CV F1':>7} {'Train Acc':>10} {'AUC':>7}")
-    L.append("  " + "-" * 67)
+    L.append(f"  {'Modele':<22} {'Bal.Acc':>8} {'F1-macro':>9} {'F1-w':>7} {'Top-3':>7} {'AUC':>7}")
+    L.append("  " + "-" * 72)
     for n, d in ml["models"].items():
         tag = " *" if n == ml["best_model_name"] else ""
         roc = f"{d['roc_auc_weighted']:.4f}" if d["roc_auc_weighted"] else "  N/A"
         top3_acc = f"{d['top3_accuracy']:.4f}" if d.get("top3_accuracy") is not None else "  N/A"
-        L.append(f"  {n:<22} {d['accuracy']:>8.4f} {top3_acc:>7} {d['f1_weighted']:>7.4f} "
-                 f"{d.get('train_accuracy', 0):>10.4f} "
-                 f"{roc:>7}{tag}")
+        bal_acc = d.get("balanced_accuracy", d["accuracy"])
+        f1m = d.get("f1_macro", 0)
+        L.append(f"  {n:<22} {bal_acc:>8.4f} {f1m:>9.4f} {d['f1_weighted']:>7.4f} "
+                 f"{top3_acc:>7} {roc:>7}{tag}")
         L.append(f"    params={d.get('best_params', {})} | "
-                 f"gap (train-CV) acc={d.get('overfit_gap_accuracy', 0):+.4f} "
+                 f"gap bal_acc={d.get('overfit_gap_balanced', 0):+.4f} "
                  f"f1={d.get('overfit_gap_f1', 0):+.4f}")
 
     best = ml["models"][ml["best_model_name"]]
-    L.append(f"\n  Meilleur : {ml['best_model_name']} "
-             f"(acc CV={best["accuracy"]:.4f} | top-3={best.get("top3_accuracy", "N/A")} -- "
-             f"metrique principale)")
+    bal = best.get("balanced_accuracy", best["accuracy"])
+    f1m = best.get("f1_macro", 0)
+    L.append(f"\n  Meilleur (f1_macro) : {ml['best_model_name']}  |  Meilleur (balanced_acc) : {ml.get('best_model_balanced_acc', ml['best_model_name'])}")
+    L.append(f"  balanced_acc={bal:.4f} | f1_macro={f1m:.4f} | "
+             f"top-3={best.get('top3_accuracy', 'N/A')}")
     L.append(f"  {'Classe':<18} {'Prec':>7} {'Rec':>7} {'F1':>7} {'N':>5}")
     L.append("  " + "-" * 44)
     for c, m in best["per_class_metrics"].items():
@@ -902,8 +909,8 @@ def run_ml_pipeline(all_results, generate_plots=True, verbose=True):
     ml["sectorization"] = sectorization
     ml["_signatures"] = signatures
     if verbose:
-        print(f"\n    Best: {ml['best_model_name']} "
-              f"(acc={ml['best_accuracy']:.4f})")
+        print(f"\n    Best (f1_macro): {ml['best_model_name']} "
+              f"(f1_macro={ml['best_f1_macro']:.4f})")
 
     # -- 5. Predictions --────────────
     if verbose:
@@ -968,7 +975,8 @@ def run_ml_pipeline(all_results, generate_plots=True, verbose=True):
 
     json_data = dict(
         best_model=ml["best_model_name"],
-        best_accuracy=ml["best_accuracy"],
+        best_f1_macro=ml["best_f1_macro"],
+        best_model_balanced_acc=ml.get("best_model_balanced_acc"),
         n_samples_labeled=n_labeled,
         n_samples_total=n_total,
         n_features=ml["n_features"],
@@ -1020,7 +1028,7 @@ def run_ml_pipeline(all_results, generate_plots=True, verbose=True):
         print(f"    JSON : {json_path}")
         print("\n" + "=" * 60)
         print(f"  ML OK — {ml['best_model_name']} "
-              f"acc={ml['best_accuracy']:.4f}")
+              f"f1_macro={ml['best_f1_macro']:.4f}")
         if predictions_unknown:
             print(f"  {len(predictions_unknown)} patients inconnus predits")
         print("=" * 60)
