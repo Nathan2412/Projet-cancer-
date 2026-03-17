@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python main.py --real-data --no-plots)",
+      "Bash(.venv/Scripts/python main.py --real-data --no-plots)",
+      "Bash(tasklist)",
+      "Bash(wmic process:*)",
+      "Bash(taskkill /F /IM python.exe)",
+      "Bash(taskkill /F /IM python.exe /T)",
+      "Bash(cmd.exe /c 'taskkill /F /IM python.exe /T')",
+      "Bash(powershell.exe -Command \"Get-Process python | Stop-Process -Force\")"
+    ]
+  }
+}
