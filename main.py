@@ -5,6 +5,7 @@ Orchestre tous les modules pour une analyse complete.
 
 import sys
 import os
+import logging
 import warnings
 os.environ["PYTHONWARNINGS"] = "ignore"
 warnings.filterwarnings("ignore")
@@ -12,6 +13,25 @@ import shutil
 import time
 import json
 from collections import defaultdict
+
+# ── Logging ──────────────────────────────────────────────────────────────────
+_LOG_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "output", "logs")
+os.makedirs(_LOG_DIR, exist_ok=True)
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S",
+    handlers=[
+        logging.FileHandler(os.path.join(_LOG_DIR, "pipeline.log"), encoding="utf-8"),
+        logging.StreamHandler(sys.stdout),
+    ],
+)
+# Réduire le bruit des bibliothèques tierces
+logging.getLogger("sklearn").setLevel(logging.WARNING)
+logging.getLogger("matplotlib").setLevel(logging.WARNING)
+logging.getLogger("urllib3").setLevel(logging.WARNING)
+
+logger = logging.getLogger("main")
 from config import REPORTS_DIR, PLOTS_DIR
 from loader import (
     load_reference, load_patient_data, load_all_patients,

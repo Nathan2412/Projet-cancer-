@@ -143,6 +143,40 @@ Les cancers **sans variant spécifique sur ce panel de 26 gènes** restent diffi
 
 ---
 
+## Analyse des erreurs et confusions majeures
+
+### Pourquoi ces cancers échouent
+
+| Cancer | F1 | N | Cause principale |
+|--------|-----|---|-----------------|
+| Mésotheliome | 0.005 | 22 | Trop peu d'exemples — absorbé par Poumon/Estomac |
+| Lymphome | 0.026 | 17 | Trop peu d'exemples — aucun variant discriminant fort |
+| Oesophage | 0.088 | 174 | Profil TP53 partagé avec Poumon/Tête&Cou/Estomac |
+| Foie | 0.140 | 208 | TP53 R249S spécifique mais fréquence faible (5.3%) |
+| Sarcome | 0.103 | 113 | Pas de driver ponctuel dominant sur ce panel |
+| Prostate | 0.150 | 124 | Mutations diffuses, pas de hotspot sur les 26 gènes |
+| Estomac | 0.240 | 370 | Profil PIK3CA/TP53 non spécifique, confondu avec Sein/Côlon |
+
+### Confusions majeures identifiées
+
+- **Poumon** → souvent prédit Tête & Cou, Estomac, Oesophage — profils PIK3CA/TP53 ubiquitaires, faible rappel (0.24) malgré 942 patients
+- **Ovaire** → souvent prédit Utérus — partage de la voie PI3K (PIK3CA), pas de variant ovaire-spécifique sur ce panel
+- **Sein** → souvent prédit Utérus ou Cervical — même voie PIK3CA (E545K, E542K) discriminante pour les deux
+- **Prostate / Sarcome / Mésotheliome** → absorbés par classes fréquentes (Poumon, Estomac) — classes rares sans signature propre
+- **Glioblastome vs Gliome** — confusion attendue entre les deux tumeurs cérébrales (profils IDH similaires en partie)
+
+### Ce qui fonctionne et pourquoi
+
+| Cancer | F1 | Raison |
+|--------|-----|--------|
+| Gliome | 0.876 | IDH1 R132H quasi-pathognomonique (73.8%, enrich. 162×) |
+| Thyroïde | 0.834 | BRAF V600E présent dans 94.7% des cas (enrich. 29×) |
+| Colon | 0.765 | Combinaison APC R1450* (enrich. 46×) + KRAS multiples |
+| Pancréas | 0.579 | KRAS G12R hyper-spécifique (enrich. 207×) |
+| Mélanome | 0.534 | BRAF V600E/K très enrichi (enrich. 93 333×) |
+
+---
+
 ## Limites identifiées
 
 - Panel réduit : 26 gènes vs milliers dans les études état-de-l'art

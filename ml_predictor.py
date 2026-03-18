@@ -10,9 +10,11 @@ Architecture :
 - Évaluation : balanced accuracy + macro-F1 (robustes au déséquilibre de classes)
 """
 
-import os, json, time
+import os, json, time, logging
 import numpy as np
 from collections import Counter, defaultdict
+
+logger = logging.getLogger("ml_predictor")
 from config import (
     CANCER_GENES, GENE_ROLES, REPORTS_DIR, PLOTS_DIR,
     ALLELE_MIN_PATIENTS, ALLELE_MIN_FREQUENCY,
@@ -150,6 +152,14 @@ def _extract_row(r):
     n_oncogenes = risk_report.get("n_oncogenes_mutated", 0)
     n_suppressors = risk_report.get("n_suppressors_mutated", 0)
 
+    # Features agrégées — ratios et multi-hits
+    n_multi_hit_genes = sum(1 for g in GENE_LIST if ga.get(g, {}).get("total_mutations", 0) > 1)
+    hotspot_ratio     = n_hotspots / max(total, 1)
+    high_impact_ratio = impacts["HIGH"] / max(total, 1)
+    pathogenic_ratio  = n_pathogenic / max(total, 1)
+    del_ratio         = dl / max(total, 1)
+    ins_ratio         = ins / max(total, 1)
+
     row += [
         total, snp, ins, dl,
         impacts["HIGH"], impacts["MODERATE"], impacts["LOW"], impacts["MODIFIER"],
@@ -157,6 +167,13 @@ def _extract_row(r):
         n_hotspots, n_pathogenic, n_oncogenes, n_suppressors,
         int(impacts["HIGH"] > 0),
         snp / max(total, 1),
+        # -- nouvelles features agrégées --
+        n_multi_hit_genes,
+        hotspot_ratio,
+        high_impact_ratio,
+        pathogenic_ratio,
+        del_ratio,
+        ins_ratio,
     ]
 
     # -- 5. Âge --───────────────────────────────
@@ -188,6 +205,8 @@ def _build_feature_names():
         "n_genes", "burden",
         "n_hotspots", "n_pathogenic", "n_oncogenes", "n_suppressors",
         "has_HIGH", "snp_ratio",
+        "n_multi_hit_genes", "hotspot_ratio", "high_impact_ratio",
+        "pathogenic_ratio", "del_ratio", "ins_ratio",
     ]
     if USE_AGE_FEATURES:
         names.append("age")
@@ -1021,6 +1040,27 @@ def run_ml_pipeline(all_results, generate_plots=True, verbose=True):
     json_path = os.path.join(REPORTS_DIR, "ml_results.json")
     with open(json_path, "w", encoding="utf-8") as f:
         json.dump(json_data, f, indent=2, ensure_ascii=False, default=str)
+
+    # -- Persistance du meilleur modèle (évite de relancer 8000s) --
+    try:
+        import joblib
+        models_dir = os.path.join(os.path.dirname(REPORTS_DIR), "models")
+        os.makedirs(models_dir, exist_ok=True)
+        model_path = os.path.join(models_dir, "best_model.pkl")
+        joblib.dump({
+            "model":          ml["_best_model"],
+            "label_encoder":  ml["_label_encoder"],
+            "feature_names":  ml["feature_names"],
+            "class_names":    ml["class_names"],
+            "signatures":     signatures,
+            "best_model_name": ml["best_model_name"],
+            "f1_macro":       ml["best_f1_macro"],
+        }, model_path)
+        if verbose:
+            print(f"    MODEL: {model_path}")
+        logger.info("Modèle sauvegardé : %s", model_path)
+    except Exception as _e:
+        logger.warning("Impossible de sauvegarder le modèle : %s", _e)
 
     if verbose:
         print(f"    TXT  : {txt_path}")

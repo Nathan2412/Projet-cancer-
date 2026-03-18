@@ -2,13 +2,13 @@
 
 Pipeline bioinformatique de **classification du type tumoral** à partir de profils de variants somatiques, utilisant des **vraies données cliniques** issues du projet TCGA (The Cancer Genome Atlas).
 
-> Ce projet classifie le type de tumeur à partir de mutations somatiques. Il ne constitue pas un outil de dépistage ni de diagnostic médical.
+> Ce projet est une **preuve de concept bioinformatique** : il classifie le type de tumeur à partir de mutations somatiques. Il ne constitue pas un outil de dépistage ni de diagnostic médical.
 
 ---
 
 ## Contexte du projet
 
-Développé dans le cadre d'un projet ING2. L'objectif est de construire un pipeline bioinformatique capable d'analyser des variants somatiques réels et d'identifier des **signatures mutationnelles discriminantes** associées à chaque type de cancer, puis de prédire le type tumoral par apprentissage automatique.
+Développé dans le cadre d'un projet ING2. L'objectif est de construire un pipeline bioinformatique capable d'analyser des variants somatiques réels et d'identifier des **variants somatiques discriminants** associés à chaque type de cancer, puis de prédire le type tumoral par apprentissage automatique.
 
 ### Ce qui a été réalisé
 
@@ -16,7 +16,7 @@ Développé dans le cadre d'un projet ING2. L'objectif est de construire un pipe
 - **Pipeline d'analyse complet** : téléchargement → annotation → scoring → corrélation → ML → rapports
 - **Machine Learning** : classification multi-classe du type tumoral (Gradient Boosting, Random Forest, SVM, Logistic Regression) avec nested cross-validation 5-fold
 - **Variants somatiques discriminants** : identification des mutations caractéristiques de chaque cancer avec critères multi-facteurs (fréquence ≥5%, enrichissement ≥2×, hors-cancer ≤15%)
-- **34 allèles-signature** identifiés automatiquement depuis les données TCGA
+- **34 variants somatiques discriminants** identifiés automatiquement depuis les données TCGA
 - **Export CSV** : génération d'un `rapport_cohorte.csv` synthétisant toutes les données
 - **Anti-data-leakage** : les signatures discriminantes sont recalculées uniquement sur les folds d'entraînement (nested CV)
 - **Métriques robustes** : f1_macro (critère principal), balanced accuracy, F1 par classe, AUC, top-3 accuracy (pertinent face au déséquilibre Lymphome=17 vs Poumon=942)
@@ -87,19 +87,25 @@ Source : **TCGA PanCancer Atlas** via l'API publique **cBioPortal** (https://www
 
 **Cohorte** : 7 089 patients TCGA · 22 types de cancer · 107 features · nested CV 5-fold
 
+> **En une phrase** : le pipeline classe correctement certains cancers à signature mutationnelle forte (Gliome, Thyroïde, Côlon), mais reste limité pour les cancers rares ou peu distinctifs sur ce panel de 26 gènes. Les performances globales reflètent un **bon signal biologique**, pas un outil de classification universel.
+
 ### Comparaison des modèles
 
-| Modèle | Bal. Acc | **f1_macro** | f1_weighted | Top-3 | AUC |
-|--------|----------|------------|-------------|-------|-----|
-| Logistic Regression | 0.406 | 0.376 | 0.445 | 0.641 | 0.875 |
-| Random Forest | 0.405 | 0.384 | 0.464 | 0.665 | 0.867 |
-| **Gradient Boosting ★** | **0.411** | **0.388** | **0.466** | 0.661 | **0.881** |
-| SVM (RBF) | 0.382 | 0.358 | 0.431 | **0.704** | 0.868 |
+| Modèle | Bal. Acc | **f1_macro** | f1_weighted | Top-3 | AUC | Gap train/test |
+|--------|----------|------------|-------------|-------|-----|----------------|
+| Baseline (classe majoritaire) | ~0.045 | ~0.003 | ~0.133 | — | — | — |
+| Logistic Regression | 0.406 | 0.376 | 0.445 | 0.641 | 0.875 | faible (+0.032) |
+| Random Forest | 0.405 | 0.384 | 0.464 | 0.665 | 0.867 | élevé (+0.194) |
+| **Gradient Boosting ★** | **0.411** | **0.388** | **0.466** | 0.661 | **0.881** | modéré (+0.096) |
+| SVM (RBF) | 0.382 | 0.358 | 0.431 | **0.704** | 0.868 | modéré (+0.139) |
 
 > Critère de sélection : **f1_macro** (pénalise les erreurs sur classes rares). Gradient Boosting sélectionné.
-> Durée d'entraînement (nested CV + tuning) : ~6748 secondes.
+> La baseline "classe majoritaire" (toujours prédire Poumon) donne f1_macro ≈ 0.003 — le modèle apprend réellement.
+> Durée d'entraînement (nested CV + tuning) : ~8015 secondes.
 
 ### Performance par type de cancer (Gradient Boosting)
+
+> Les performances globales sont tirées vers le bas par plusieurs classes rares ou sans variant somatique discriminant fort sur ce panel. Le tableau ci-dessous montre la forte disparité entre cancers à signature mutationnelle claire et cancers difficiles.
 
 | Cancer | Précision | Rappel | F1 | N |
 |--------|-----------|--------|----|---|
@@ -118,15 +124,36 @@ Source : **TCGA PanCancer Atlas** via l'API publique **cBioPortal** (https://www
 | Vessie | 0.334 | 0.299 | 0.316 | 345 |
 | Ovaire | 0.233 | 0.449 | 0.307 | 385 |
 | Poumon | 0.605 | 0.238 | 0.342 | 942 |
-| Prostate | 0.097 | 0.323 | 0.150 | 124 |
 | Estomac | 0.393 | 0.173 | 0.240 | 370 |
+| Prostate | 0.097 | 0.323 | 0.150 | 124 |
 | Foie | 0.208 | 0.106 | 0.140 | 208 |
 | Sarcome | 0.081 | 0.142 | 0.103 | 113 |
 | Oesophage | 0.085 | 0.092 | 0.088 | 174 |
 | Lymphome | 0.014 | 0.118 | 0.026 | 17 |
 | Mésotheliome | 0.003 | 0.046 | 0.005 | 22 |
 
-**Interprétation** : Les cancers à signature mutationnelle forte et spécifique (Gliome/IDH1, Thyroïde/BRAF, Côlon/APC+KRAS) atteignent F1 > 0.75. Les cancers sans variant discriminant clairement spécifique sur ce panel de 26 gènes (Mésotheliome, Lymphome, Sarcome) restent difficiles à classifier.
+**Pourquoi certains cancers échouent :**
+- **Mésotheliome / Lymphome** (n=22, n=17) : trop peu d'exemples pour apprendre, absorbés par les classes fréquentes
+- **Oesophage / Foie / Sarcome** : pas de variant somatique discriminant fort sur ce panel de 26 gènes
+- **Prostate** : profil mutationnel diffus sans hotspot dominant dans ces données TCGA
+- **Poumon** (rappel=0.24 malgré n=942) : souvent confondu avec Tête & Cou / Estomac (profils PIK3CA partagés)
+
+> Résultats détaillés et analyse des confusions : voir [results/results_latest.md](results/results_latest.md)
+
+---
+
+## Comparaison à l'état de l'art
+
+| Critère | Ce projet | État de l'art (ex: CPEM, TCGA multi-omics) |
+|---------|-----------|-------------------------------------------|
+| Gènes analysés | 26 | Plusieurs milliers (exome/génome entier) |
+| Omics | SNV somatiques uniquement | SNV + CNA + ARN-seq + méthylation |
+| Patients | 7 089 (TCGA) | Jusqu'à 22 421+ (CPEM) |
+| Validation | Nested CV interne | Cohortes externes indépendantes |
+| AUC (macro) | 0.881 | >0.95 en multi-omics |
+| f1_macro | 0.388 | Non comparable (panel différent) |
+
+Ce projet ne vise pas à rivaliser avec les pipelines multi-omics. Il démontre qu'un **signal biologique exploitable** est extractible depuis un panel restreint de 26 gènes, avec une implémentation complète et reproductible depuis les données TCGA brutes.
 
 ---
 
@@ -152,6 +179,9 @@ dna-cancer-analysis/
 ├── requirements.txt        # Dépendances Python
 ├── INSTRUCTIONS.md         # Guide d'utilisation détaillé
 ├── INFORMATION.md          # État du projet et documentation technique
+│
+├── results/
+│   └── results_latest.md   # Résultats complets du dernier run (versionné)
 │
 ├── data/
 │   ├── real/               # Données TCGA (reference.fasta, known_mutations.json)

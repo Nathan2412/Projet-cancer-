@@ -6,6 +6,7 @@ from collections import defaultdict
 
 import numpy as np
 from sklearn.cluster import KMeans
+from sklearn.decomposition import PCA
 from sklearn.metrics import (
     adjusted_rand_score,
     calinski_harabasz_score,
@@ -28,6 +29,13 @@ SECTORIZATION_FEATURE_WHITELIST = {
     "burden",
     "has_HIGH",
     "snp_ratio",
+    # nouvelles features agrégées
+    "n_multi_hit_genes",
+    "hotspot_ratio",
+    "high_impact_ratio",
+    "pathogenic_ratio",
+    "del_ratio",
+    "ins_ratio",
 }
 
 
@@ -74,8 +82,19 @@ def run_sectorization(X, y_labels, patient_ids, feature_names, random_state=42):
     scaler = StandardScaler()
     Xs = scaler.fit_transform(X_sector)
 
+    # Réduction PCA — conserve 95% de la variance, max 30 composantes
+    n_components = min(30, Xs.shape[1], Xs.shape[0] - 1)
+    if n_components >= 2:
+        pca = PCA(n_components=n_components, random_state=random_state)
+        Xs = pca.fit_transform(Xs)
+        explained = float(np.sum(pca.explained_variance_ratio_))
+    else:
+        explained = 1.0
+
+    # Tester k jusqu'à ~n_classes (22 types de cancer) pour identifier des clusters biologiques
+    n_classes_approx = len(set(y_labels))
     k_min = 2
-    k_max = min(8, max(2, X.shape[0] - 1))
+    k_max = min(max(n_classes_approx, 10), 25, max(2, X.shape[0] - 1))
     if k_max < k_min:
         return None
 
@@ -140,4 +159,6 @@ def run_sectorization(X, y_labels, patient_ids, feature_names, random_state=42):
         "features_used": sector_feature_names,
         "feature_profiles": _cluster_profiles(Xs, labels, sector_feature_names),
         "coherence_with_cancer_labels": coherence,
+        "pca_explained_variance": round(explained, 4),
+        "n_pca_components": Xs.shape[1],
     }

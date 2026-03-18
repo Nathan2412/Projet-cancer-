@@ -192,7 +192,22 @@ def evaluate_models_nested_cv(X, y_enc, class_names, feature_names,
         if verbose:
             print(f"    (repli sur KFold car classes <{n_splits})")
 
-    results = {}
+    # ── Baseline : toujours prédire la classe majoritaire ─────────────────────
+    from collections import Counter as _Counter
+    majority_class = _Counter(y_enc).most_common(1)[0][0]
+    y_pred_baseline = np.full_like(y_enc, majority_class)
+    baseline_result = {
+        "accuracy":           round(float(accuracy_score(y_enc, y_pred_baseline)), 4),
+        "balanced_accuracy":  round(float(balanced_accuracy_score(y_enc, y_pred_baseline)), 4),
+        "f1_macro":           round(float(f1_score(y_enc, y_pred_baseline, average="macro", zero_division=0)), 4),
+        "f1_weighted":        round(float(f1_score(y_enc, y_pred_baseline, average="weighted", zero_division=0)), 4),
+        "top3_accuracy":      None,
+        "roc_auc_weighted":   None,
+        "majority_class":     class_names[majority_class] if majority_class < len(class_names) else str(majority_class),
+        "_model":             None,
+    }
+
+    results = {"Baseline (majority class)": baseline_result}
     best_name = None
     best_acc = -1.0
 
