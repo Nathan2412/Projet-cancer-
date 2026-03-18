@@ -8,7 +8,9 @@
       "Bash(taskkill /F /IM python.exe)",
       "Bash(taskkill /F /IM python.exe /T)",
       "Bash(cmd.exe /c 'taskkill /F /IM python.exe /T')",
-      "Bash(powershell.exe -Command \"Get-Process python | Stop-Process -Force\")"
+      "Bash(powershell.exe -Command \"Get-Process python | Stop-Process -Force\")",
+      "Bash(python -c \"import os; print\\(os.cpu_count\\(\\)\\)\")",
+      "Bash(python main.py --real-data)"
     ]
   }
 }
