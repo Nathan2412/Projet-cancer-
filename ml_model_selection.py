@@ -51,7 +51,7 @@ def get_model_specs(random_state=42):
                     max_iter=1000,
                     random_state=random_state,
                     solver="saga",
-                    n_jobs=-1,
+                    n_jobs=8,
                 )),
             ]),
             "param_grid": {
@@ -62,7 +62,7 @@ def get_model_specs(random_state=42):
         # ── Modèles ensemblistes ──────────────────────────────────────────────
         "Random Forest": {
             "estimator": RandomForestClassifier(
-                class_weight="balanced", random_state=random_state, n_jobs=-1
+                class_weight="balanced", random_state=random_state, n_jobs=8
             ),
             "param_grid": {
                 "model__n_estimators": [150, 250],
@@ -265,7 +265,7 @@ def evaluate_models_nested_cv(X, y_enc, class_names, feature_names,
                     param_grid=spec["param_grid"],
                     scoring="f1_weighted",
                     cv=inner_cv,
-                    n_jobs=-1,
+                    n_jobs=8,
                 )
                 grid.fit(X_train, y_train)
 
@@ -293,7 +293,7 @@ def evaluate_models_nested_cv(X, y_enc, class_names, feature_names,
                 param_grid=spec["param_grid"],
                 scoring="f1_weighted",
                 cv=outer_cv,
-                n_jobs=-1,
+                n_jobs=8,
             )
             grid_full.fit(X_full, y_enc)
             best_model_full = grid_full.best_estimator_

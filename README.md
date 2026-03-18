@@ -12,23 +12,24 @@ Développé dans le cadre d'un projet ING2. L'objectif est de construire un pipe
 
 ### Ce qui a été réalisé
 
-- **Intégration de données réelles TCGA** : 3 674 patients provenant de 12 études TCGA PanCancer Atlas
+- **Intégration de données réelles TCGA** : 7 089 patients provenant de 26 études TCGA PanCancer Atlas, 22 types de cancer, 17 513 mutations
 - **Pipeline d'analyse complet** : téléchargement → annotation → scoring → corrélation → ML → rapports
-- **Machine Learning** : classification multi-classe du type tumoral (Random Forest, HistGradientBoosting avec class_weight, SVM, Logistic Regression comme baseline)
+- **Machine Learning** : classification multi-classe du type tumoral (Gradient Boosting, Random Forest, SVM, Logistic Regression) avec nested cross-validation 5-fold
 - **Variants somatiques discriminants** : identification des mutations caractéristiques de chaque cancer avec critères multi-facteurs (fréquence ≥5%, enrichissement ≥2×, hors-cancer ≤15%)
-- **104 hotspots mutationnels** identifiés automatiquement depuis les données TCGA
+- **34 allèles-signature** identifiés automatiquement depuis les données TCGA
 - **Export CSV** : génération d'un `rapport_cohorte.csv` synthétisant toutes les données
 - **Anti-data-leakage** : les signatures discriminantes sont recalculées uniquement sur les folds d'entraînement (nested CV)
-- **Métriques robustes** : balanced accuracy, macro-F1, F1 par classe, matrice de confusion (pertinent face au déséquilibre Rein=51 vs Sein=669)
+- **Métriques robustes** : f1_macro (critère principal), balanced accuracy, F1 par classe, AUC, top-3 accuracy (pertinent face au déséquilibre Lymphome=17 vs Poumon=942)
 
 ### Positionnement honnête
 
 | Force | Limite |
 |-------|--------|
 | Pipeline complet et interprétable | Panel de 26 gènes (vs milliers en état de l'art) |
-| Vraies données TCGA (3 674 patients) | Pas de données multi-omics (CNA, ARN) |
+| Vraies données TCGA (7 089 patients, 22 cancers) | Pas de données multi-omics (CNA, ARN) |
 | Nested CV sans fuite de données | Pas de validation externe indépendante |
 | Variants somatiques biologiquement plausibles | TMB panel ≠ TMB exome/génome entier |
+| Critère f1_macro (pénalise les classes rares) | Classes très rares (Lymphome=17, Méso=22) difficiles |
 
 ---
 
@@ -36,21 +37,21 @@ Développé dans le cadre d'un projet ING2. L'objectif est de construire un pipe
 
 Source : **TCGA PanCancer Atlas** via l'API publique **cBioPortal** (https://www.cbioportal.org/).
 
-| Type de cancer  | Patients | Étude TCGA |
-|-----------------|----------|------------|
-| Sein            | 669      | brca_tcga_pan_can_atlas_2018 |
-| Colon           | 489      | coadread_tcga_pan_can_atlas_2018 |
-| Poumon          | 469      | luad_tcga_pan_can_atlas_2018 |
-| Ovaire          | 383      | ov_tcga_pan_can_atlas_2018 |
-| Mélanome        | 342      | skcm_tcga_pan_can_atlas_2018 |
-| Thyroïde        | 296      | thca_tcga_pan_can_atlas_2018 |
-| Vessie          | 295      | blca_tcga_pan_can_atlas_2018 |
-| Glioblastome    | 271      | gbm_tcga_pan_can_atlas_2018 |
-| Foie            | 165      | lihc_tcga_pan_can_atlas_2018 |
-| Pancréas        | 135      | paad_tcga_pan_can_atlas_2018 |
-| Prostate        | 109      | prad_tcga_pan_can_atlas_2018 |
-| Rein            | 51       | kirc_tcga_pan_can_atlas_2018 |
-| **Total**       | **3 674**| **12 études** |
+| Type de cancer  | Patients | Type de cancer  | Patients |
+|-----------------|----------|-----------------|----------|
+| Poumon          | 942      | Rein            | 309      |
+| Sein            | 753      | Thyroïde        | 299      |
+| Utérus          | 561      | Glioblastome    | 291      |
+| Gliome          | 485      | Foie            | 208      |
+| Colon           | 492      | Cervical        | 176      |
+| Tête & Cou      | 438      | Oesophage       | 174      |
+| Ovaire          | 385      | Pancréas        | 140      |
+| Mélanome        | 375      | Prostate        | 124      |
+| Estomac         | 370      | Sarcome         | 113      |
+| Vessie          | 345      | Leucémie        | 70       |
+| —               | —        | Mésotheliome    | 22       |
+| —               | —        | Lymphome        | 17       |
+| **Total**       | **7 089**| **22 types — 26 études TCGA PanCancer Atlas** | |
 
 ### 26 gènes analysés (panel MSK-IMPACT + drivers TCGA)
 
@@ -79,6 +80,53 @@ Source : **TCGA PanCancer Atlas** via l'API publique **cBioPortal** (https://www
 | ERBB2 | Récepteur HER2 | Sein HER2+ |
 | ARID1A | Remodelage chromatine | Ovaire, côlon |
 | FBXW7 | Ubiquitine ligase | Côlon, lymphome |
+
+---
+
+## Résultats ML (run complet — 18/03/2026)
+
+**Cohorte** : 7 089 patients TCGA · 22 types de cancer · 107 features · nested CV 5-fold
+
+### Comparaison des modèles
+
+| Modèle | Bal. Acc | **f1_macro** | f1_weighted | Top-3 | AUC |
+|--------|----------|------------|-------------|-------|-----|
+| Logistic Regression | 0.406 | 0.376 | 0.445 | 0.641 | 0.875 |
+| Random Forest | 0.405 | 0.384 | 0.464 | 0.665 | 0.867 |
+| **Gradient Boosting ★** | **0.411** | **0.388** | **0.466** | 0.661 | **0.881** |
+| SVM (RBF) | 0.382 | 0.358 | 0.431 | **0.704** | 0.868 |
+
+> Critère de sélection : **f1_macro** (pénalise les erreurs sur classes rares). Gradient Boosting sélectionné.
+> Durée d'entraînement (nested CV + tuning) : ~6748 secondes.
+
+### Performance par type de cancer (Gradient Boosting)
+
+| Cancer | Précision | Rappel | F1 | N |
+|--------|-----------|--------|----|---|
+| Gliome | 0.913 | 0.841 | **0.876** | 485 |
+| Thyroïde | 0.785 | 0.890 | **0.834** | 299 |
+| Colon | 0.749 | 0.783 | **0.765** | 492 |
+| Rein | 0.813 | 0.563 | 0.665 | 309 |
+| Utérus | 0.697 | 0.638 | 0.666 | 561 |
+| Mélanome | 0.593 | 0.485 | 0.534 | 375 |
+| Pancréas | 0.477 | 0.736 | 0.579 | 140 |
+| Sein | 0.617 | 0.340 | 0.438 | 745 |
+| Glioblastome | 0.354 | 0.505 | 0.416 | 291 |
+| Cervical | 0.284 | 0.534 | 0.371 | 176 |
+| Leucémie | 0.297 | 0.471 | 0.365 | 70 |
+| Tête & Cou | 0.403 | 0.260 | 0.316 | 438 |
+| Vessie | 0.334 | 0.299 | 0.316 | 345 |
+| Ovaire | 0.233 | 0.449 | 0.307 | 385 |
+| Poumon | 0.605 | 0.238 | 0.342 | 942 |
+| Prostate | 0.097 | 0.323 | 0.150 | 124 |
+| Estomac | 0.393 | 0.173 | 0.240 | 370 |
+| Foie | 0.208 | 0.106 | 0.140 | 208 |
+| Sarcome | 0.081 | 0.142 | 0.103 | 113 |
+| Oesophage | 0.085 | 0.092 | 0.088 | 174 |
+| Lymphome | 0.014 | 0.118 | 0.026 | 17 |
+| Mésotheliome | 0.003 | 0.046 | 0.005 | 22 |
+
+**Interprétation** : Les cancers à signature mutationnelle forte et spécifique (Gliome/IDH1, Thyroïde/BRAF, Côlon/APC+KRAS) atteignent F1 > 0.75. Les cancers sans variant discriminant clairement spécifique sur ce panel de 26 gènes (Mésotheliome, Lymphome, Sarcome) restent difficiles à classifier.
 
 ---
 
@@ -127,7 +175,7 @@ cd dna-cancer-analysis
 # Installer les dépendances
 pip install -r requirements.txt
 
-# Télécharger les données réelles TCGA (3 674 patients, nécessite internet)
+# Télécharger les données réelles TCGA (7 089 patients, nécessite internet)
 python download_real_data.py
 
 # Lancer l'analyse complète

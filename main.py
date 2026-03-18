@@ -422,29 +422,13 @@ def run_real_data_analysis(max_patients=None, generate_plots=True, verbose=True)
     mutation_matrix, genes, patients = build_cohort_mutation_matrix(all_results)
     gene_correlations = compute_gene_cancer_correlation(all_results)
 
-    print("\n[5/7] Generation des rapports...")
-    for result in all_results:
-        report = result["risk_report"]
-
-        txt_path, _ = generate_patient_text_report(report)
-        if verbose:
-            print(f"  {result['patient_id']}: rapport texte OK")
+    print("\n[5/7] Preparation des donnees ML...")
 
     # ── ML : prediction de cancer ──
     print("\n[6/7] Machine Learning — Prediction de cancer...")
     ml_output = run_ml_pipeline(all_results, generate_plots=generate_plots, verbose=verbose)
 
-    # Mettre à jour les rapports avec les prédictions ML
-    if ml_output:
-        pred_by_pid = {p["patient_id"]: p for p in ml_output.get("predictions", [])}
-        for result in all_results:
-            report = result["risk_report"]
-            pid = result["patient_id"]
-            ml_pred = pred_by_pid.get(pid)
-            txt_path, _ = generate_patient_text_report(report, ml_prediction=ml_pred)
-        ml_preds = ml_output.get("predictions", [])
-    else:
-        ml_preds = None
+    ml_preds = ml_output.get("predictions", []) if ml_output else None
 
     cohort_path = generate_cohort_summary_report(all_results, ml_predictions=ml_preds)
     print(f"  Rapport de cohorte: {cohort_path}")
