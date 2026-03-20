@@ -379,17 +379,23 @@ def clean_previous_outputs():
             print(f"  Nettoyage: {folder}")
 
 
-def run_real_data_analysis(max_patients=None, generate_plots=True, verbose=True):
+def run_real_data_analysis(generate_plots=True, verbose=True):
     """
-    Pipeline d'analyse utilisant les donnees reelles TCGA.
-    Les mutations sont pre-detectees (pas de traitement FASTQ).
+    Pipeline complet : telecharge si besoin, puis analyse tous les patients reels.
     """
     start_time = time.time()
 
     print("=" * 60)
     print("  PIPELINE D'ANALYSE GENOMIQUE - DONNEES REELLES TCGA")
-    print("  Source: cBioPortal / TCGA PanCancer Atlas")
+    print("  Source: cBioPortal / TCGA PanCancer Atlas + MSK-IMPACT")
     print("=" * 60)
+
+    # ── Telechargement automatique si donnees absentes ────────────────────────
+    patient_list_check = get_patient_list_real()
+    if not patient_list_check:
+        print("\n[PRE] Aucune donnee trouvee — telechargement automatique...")
+        from download_real_data import download_all
+        download_all()
 
     print("\n[0/7] Nettoyage des anciens resultats...")
     clean_previous_outputs()
@@ -409,12 +415,9 @@ def run_real_data_analysis(max_patients=None, generate_plots=True, verbose=True)
     print("\n[2/7] Identification des patients reels...")
     patient_list = get_patient_list_real()
     if not patient_list:
-        print("  ERREUR: Aucun patient reel trouve.")
-        print("  Lancez d'abord: python download_real_data.py")
+        print("  ERREUR: Echec du telechargement. Verifiez votre connexion.")
         return []
 
-    if max_patients:
-        patient_list = patient_list[:max_patients]
     print(f"  {len(patient_list)} patients a analyser")
 
     print("\n[3/7] Chargement de toutes les donnees patients en memoire...")
@@ -497,44 +500,4 @@ def run_real_data_analysis(max_patients=None, generate_plots=True, verbose=True)
 
 
 if __name__ == "__main__":
-    # ── Parse des arguments ──
-    args = sys.argv[1:]
-    mode = "cohort"
-    max_n = None
-    plots = True
-    patient_id = None
-
-    i = 0
-    while i < len(args):
-        a = args[i]
-        if a == "--real-data":
-            mode = "real"
-        elif a == "--patient" and i + 1 < len(args):
-            mode = "single"
-            i += 1
-            patient_id = args[i]
-        elif a == "--max" and i + 1 < len(args):
-            i += 1
-            max_n = int(args[i])
-        elif a == "--no-plots":
-            plots = False
-        elif a == "--help":
-            mode = "help"
-        i += 1
-
-    if mode == "help":
-        print("Usage:")
-        print("  python main.py                     # Analyse complete (donnees synthetiques)")
-        print("  python main.py --real-data          # Analyse avec donnees reelles TCGA")
-        print("  python main.py --real-data --max 10 # Donnees reelles, limiter a N patients")
-        print("  python main.py --patient PAT_0001   # Un seul patient (synthetique)")
-        print("  python main.py --max 5              # Limiter a N patients (synthetique)")
-        print("  python main.py --no-plots           # Sans graphiques")
-    elif mode == "real":
-        run_real_data_analysis(max_patients=max_n, generate_plots=plots)
-    elif mode == "single":
-        run_single_patient_analysis(patient_id, generate_plots=plots)
-    elif max_n is not None or not plots:
-        run_cohort_analysis(max_patients=max_n, generate_plots=plots)
-    else:
-        run_cohort_analysis()
+    run_real_data_analysis()
