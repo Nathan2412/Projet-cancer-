@@ -775,10 +775,116 @@ tr:hover{{background:#f8f9fa}}
 
 
 # ═══════════════════════════════════════════════════════════════════════════
+#  5b. CHARGEMENT DU MODELE SAUVEGARDE
+# ═══════════════════════════════════════════════════════════════════════════
+
+def load_saved_model(models_dir=None):
+    """Charge le meilleur modèle depuis le disque si disponible.
+    Retourne un dict compatible avec ml["_best_model"] ou None si absent/invalide.
+    """
+    try:
+        import joblib
+    except ImportError:
+        return None
+    if models_dir is None:
+        models_dir = os.path.join(os.path.dirname(REPORTS_DIR), "models")
+    model_path = os.path.join(models_dir, "best_model.pkl")
+    if not os.path.exists(model_path):
+        return None
+    try:
+        data = joblib.load(model_path)
+        required = {"model", "label_encoder", "feature_names", "class_names",
+                    "signatures", "best_model_name", "f1_macro"}
+        if not required.issubset(data.keys()):
+            logger.warning("Fichier modèle incomplet, ignoré.")
+            return None
+        logger.info("Modèle chargé depuis %s (f1_macro=%.4f)", model_path, data["f1_macro"])
+        return data
+    except Exception as _e:
+        logger.warning("Impossible de charger le modèle : %s", _e)
+        return None
+
+
+# ═══════════════════════════════════════════════════════════════════════════
+#  5c. ANALYSE SHAP
+# ═══════════════════════════════════════════════════════════════════════════
+
+def _run_shap_analysis(ml, X_labeled, feature_names, max_samples=500, verbose=True):
+    """Génère un graphique SHAP summary pour le meilleur modèle (si shap installé)."""
+    try:
+        import shap
+    except ImportError:
+        if verbose:
+            print("    SHAP non installé — ignoré (pip install shap)")
+        return None
+
+    model = ml.get("_best_model")
+    if model is None:
+        return None
+
+    # Sous-échantillonner si trop de patients (SHAP est coûteux)
+    if X_labeled.shape[0] > max_samples:
+        idx = np.random.choice(X_labeled.shape[0], max_samples, replace=False)
+        X_shap = X_labeled[idx]
+    else:
+        X_shap = X_labeled
+
+    plt = _plt()
+    if plt is None:
+        return None
+
+    try:
+        # Récupérer le modèle de base (hors pipeline sklearn)
+        if hasattr(model, "named_steps") and "model" in model.named_steps:
+            base_model = model.named_steps["model"]
+        else:
+            base_model = model
+
+        if hasattr(base_model, "feature_importances_"):
+            # Tree-based : TreeExplainer (rapide)
+            explainer = shap.TreeExplainer(base_model)
+            shap_values = explainer.shap_values(X_shap)
+        else:
+            # Fallback : KernelExplainer (lent, limiter à 100 échantillons)
+            X_bg = shap.sample(X_shap, min(50, X_shap.shape[0]))
+            explainer = shap.KernelExplainer(
+                lambda x: model.predict_proba(x), X_bg
+            )
+            X_shap = X_shap[:min(100, X_shap.shape[0])]
+            shap_values = explainer.shap_values(X_shap)
+
+        # Pour multi-classe, shap_values est une liste — prendre la moyenne abs
+        if isinstance(shap_values, list):
+            shap_mean = np.abs(np.array(shap_values)).mean(axis=0)
+        else:
+            shap_mean = shap_values
+
+        # Graphique beeswarm summary
+        fig, ax = plt.subplots(figsize=(10, 7))
+        # Utiliser l'API summary_plot en mode matplotlib
+        shap.summary_plot(
+            shap_mean, X_shap,
+            feature_names=feature_names[:shap_mean.shape[1]],
+            show=False, max_display=20, plot_type="bar"
+        )
+        fig = plt.gcf()
+        fig.suptitle(f"SHAP — {ml['best_model_name']}", fontsize=13, y=1.01)
+        path = _save(fig, "ml_shap_summary.png")
+        if verbose:
+            print(f"    SHAP : {path}")
+        return path
+    except Exception as _e:
+        logger.warning("SHAP échoué : %s", _e)
+        if verbose:
+            print(f"    SHAP échoué : {_e}")
+        return None
+
+
+# ═══════════════════════════════════════════════════════════════════════════
 #  6. PIPELINE PRINCIPAL
 # ═══════════════════════════════════════════════════════════════════════════
 
-def run_ml_pipeline(all_results, generate_plots=True, verbose=True):
+def run_ml_pipeline(all_results, generate_plots=True, verbose=True, use_cache=False):
     """Pipeline ML complet :
     1. Signatures d'alleles (patients connus)
     2. Features pour TOUS les patients + allele scores
@@ -905,26 +1011,64 @@ def run_ml_pipeline(all_results, generate_plots=True, verbose=True):
     # -- 4. Entrainement sur patients labellisés --──
     if verbose:
         print(f"\n  [4/7] Entrainement + tuning ({n_labeled} patients labellises)...")
-    # Extraire les features de base (sans allele scores) pour la CV,
-    # afin de recalculer les signatures d'alleles par fold et eviter la fuite de donnees.
-    X_base, _, _, _ = extract_features(all_results, labeled_only=False)
-    X_train_base = X_base[labeled_mask]
-    labeled_results_list = [r for r in all_results
-                            if r.get("metadata", {}).get("cancer_type")]
-    allele_params = dict(
-        min_patients=ALLELE_MIN_PATIENTS,
-        min_frequency=ALLELE_MIN_FREQUENCY,
-        max_outside_frequency=ALLELE_MAX_OUTSIDE_FREQUENCY,
-        min_enrichment=ALLELE_MIN_ENRICHMENT,
-        max_alleles_per_cancer=ALLELE_MAX_PER_CANCER,
-    )
-    y_train = y_all[labeled_mask]
-    ml = train_and_evaluate(
-        X_train_base, y_train, list(FEATURE_NAMES),
-        labeled_results=labeled_results_list,
-        allele_params=allele_params,
-        verbose=verbose,
-    )
+
+    # Tentative de chargement du modèle en cache (use_cache=True)
+    _cached = load_saved_model() if use_cache else None
+    if _cached is not None:
+        if verbose:
+            print(f"    Cache hit : modele '{_cached['best_model_name']}' "
+                  f"(f1_macro={_cached['f1_macro']:.4f}) — entraînement ignoré.")
+        # Reconstituer un objet ml minimal compatible avec le reste du pipeline
+        le = _cached["label_encoder"]
+        y_train = y_all[labeled_mask]
+        from collections import Counter as _C
+        ml = dict(
+            class_names=list(le.classes_),
+            n_samples=int(labeled_mask.sum()),
+            n_features=len(_cached["feature_names"]),
+            feature_names=_cached["feature_names"],
+            class_distribution=dict(_C(y_train)),
+            best_model_name=_cached["best_model_name"],
+            best_f1_macro=_cached["f1_macro"],
+            best_model_balanced_acc=_cached["best_model_name"],
+            _best_model=_cached["model"],
+            _label_encoder=le,
+            _y_encoded=[int(le.transform([c])[0]) for c in y_train],
+            training_time_seconds=0.0,
+            models={_cached["best_model_name"]: {
+                "accuracy": 0.0, "balanced_accuracy": 0.0,
+                "f1_macro": _cached["f1_macro"], "f1_weighted": 0.0,
+                "precision_weighted": 0.0, "recall_weighted": 0.0,
+                "roc_auc_weighted": None, "top3_accuracy": None,
+                "per_class_metrics": {},
+                "feature_importance": {},
+                "confusion_matrix": [],
+                "best_params": {}, "overfit_gap_f1": 0.0, "overfit_gap_balanced": 0.0,
+                "_model": _cached["model"],
+            }},
+        )
+    else:
+        # Extraire les features de base (sans allele scores) pour la CV,
+        # afin de recalculer les signatures d'alleles par fold et eviter la fuite de donnees.
+        X_base, _, _, _ = extract_features(all_results, labeled_only=False)
+        X_train_base = X_base[labeled_mask]
+        labeled_results_list = [r for r in all_results
+                                if r.get("metadata", {}).get("cancer_type")]
+        allele_params = dict(
+            min_patients=ALLELE_MIN_PATIENTS,
+            min_frequency=ALLELE_MIN_FREQUENCY,
+            max_outside_frequency=ALLELE_MAX_OUTSIDE_FREQUENCY,
+            min_enrichment=ALLELE_MIN_ENRICHMENT,
+            max_alleles_per_cancer=ALLELE_MAX_PER_CANCER,
+        )
+        y_train = y_all[labeled_mask]
+        ml = train_and_evaluate(
+            X_train_base, y_train, list(FEATURE_NAMES),
+            labeled_results=labeled_results_list,
+            allele_params=allele_params,
+            verbose=verbose,
+        )
+
     # Le modele de serving utilise les features avec signatures globales
     # (predict_patient ajoute les allele scores via ml["_signatures"])
     ml["sectorization"] = sectorization
@@ -1063,6 +1207,9 @@ def run_ml_pipeline(all_results, generate_plots=True, verbose=True):
         logger.info("Modèle sauvegardé : %s", model_path)
     except Exception as _e:
         logger.warning("Impossible de sauvegarder le modèle : %s", _e)
+
+    # -- Analyse SHAP (interprétabilité) --
+    _run_shap_analysis(ml, X_all[labeled_mask], fnames_aug, verbose=verbose)
 
     if verbose:
         print(f"    TXT  : {txt_path}")

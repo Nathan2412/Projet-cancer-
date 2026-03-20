@@ -10,7 +10,10 @@
       "Bash(cmd.exe /c 'taskkill /F /IM python.exe /T')",
       "Bash(powershell.exe -Command \"Get-Process python | Stop-Process -Force\")",
       "Bash(python -c \"import os; print\\(os.cpu_count\\(\\)\\)\")",
-      "Bash(python main.py --real-data)"
+      "Bash(python main.py --real-data)",
+      "Bash(pip install:*)",
+      "Bash(python -c \"from ml_predictor import load_saved_model, _run_shap_analysis; from ml_model_selection import _apply_smote; print\\(''OK''\\)\")",
+      "Bash(python -c \"import shap; import imblearn; import joblib; print\\(''shap'', shap.__version__\\); print\\(''imblearn'', imblearn.__version__\\); print\\(''joblib'', joblib.__version__\\)\")"
     ]
   }
 }

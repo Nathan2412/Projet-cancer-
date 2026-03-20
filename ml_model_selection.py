@@ -25,6 +25,32 @@ from sklearn.preprocessing import StandardScaler, label_binarize
 from sklearn.svm import SVC
 
 
+def _apply_smote(X_train, y_train, random_state=42):
+    """Applique SMOTE sur les données d'entraînement pour équilibrer les classes rares.
+    Ignore silencieusement si imbalanced-learn n'est pas installé ou si les classes
+    sont trop petites pour SMOTE (< 2 échantillons).
+    """
+    try:
+        from imblearn.over_sampling import SMOTE
+    except ImportError:
+        return X_train, y_train
+
+    from collections import Counter
+    counts = Counter(y_train)
+    min_count = min(counts.values())
+    if min_count < 2:
+        return X_train, y_train
+
+    # k_neighbors doit être < min_class_count
+    k = min(5, min_count - 1)
+    try:
+        smote = SMOTE(random_state=random_state, k_neighbors=k)
+        X_res, y_res = smote.fit_resample(X_train, y_train)
+        return X_res, y_res
+    except Exception:
+        return X_train, y_train
+
+
 def _add_fold_allele_features(X, patient_results, fold_signatures):
     """Ajoute des features allele-score calculees a partir de signatures de fold.
     Retourne X augmente (ou X inchange si pas de signatures)."""
@@ -252,6 +278,9 @@ def evaluate_models_nested_cv(X, y_enc, class_names, feature_names,
                     X_test = _add_fold_allele_features(X_test_base, test_results_fold, fold_sigs)
                 else:
                     X_train, X_test = X_train_base, X_test_base
+
+                # Sur-échantillonnage SMOTE pour les classes rares (fold d'entraînement)
+                X_train, y_train = _apply_smote(X_train, y_train, random_state=random_state)
 
                 inner_min_class = min(Counter(y_train).values())
                 inner_splits = min(3, max(2, inner_min_class))
