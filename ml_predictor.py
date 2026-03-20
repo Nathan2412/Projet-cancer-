@@ -419,6 +419,8 @@ def generate_ml_plots(ml, predictions):
 
     # -- Confusion matrices ──
     for mname, md in ml["models"].items():
+        if "confusion_matrix" not in md:
+            continue
         cm = np.array(md["confusion_matrix"])
         fig, ax = plt.subplots(figsize=(8, 6))
         ax.imshow(cm, cmap="Blues")

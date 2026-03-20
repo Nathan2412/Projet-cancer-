@@ -233,7 +233,8 @@ ALLELE_MIN_PATIENTS = 2
 # Fréquence minimum dans le cancer cible
 ALLELE_MIN_FREQUENCY = 0.05
 
-# Fréquence maximum hors du cancer cible (pour éviter les allèles ubiquitaires)
+# Fréquence maximum hors du cance
+# r cible (pour éviter les allèles ubiquitaires)
 ALLELE_MAX_OUTSIDE_FREQUENCY = 0.15
 
 # Enrichissement minimum (freq_in_cancer / freq_outside_cancer)
