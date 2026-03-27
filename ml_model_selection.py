@@ -19,7 +19,8 @@ from sklearn.metrics import (
     roc_auc_score,
     top_k_accuracy_score,
 )
-from sklearn.model_selection import GridSearchCV, StratifiedKFold
+from sklearn.experimental import enable_halving_search_cv  # noqa: F401
+from sklearn.model_selection import GridSearchCV, StratifiedKFold, HalvingGridSearchCV
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler, label_binarize
 from sklearn.svm import SVC
@@ -66,8 +67,19 @@ def _add_fold_allele_features(X, patient_results, fold_signatures):
     return np.hstack([X, extra])
 
 
+def _try_import_lightgbm():
+    """Importe LightGBM si disponible, sinon retourne None."""
+    try:
+        import lightgbm as lgb
+        return lgb
+    except ImportError:
+        return None
+
+
 def get_model_specs(random_state=42):
-    return {
+    lgb = _try_import_lightgbm()
+
+    specs = {
         # ── Baseline linéaire (référence simple) ──────────────────────────────
         "Logistic Regression": {
             "estimator": Pipeline([
@@ -77,7 +89,7 @@ def get_model_specs(random_state=42):
                     max_iter=1000,
                     random_state=random_state,
                     solver="saga",
-                    n_jobs=8,
+                    n_jobs=-1,
                 )),
             ]),
             "param_grid": {
@@ -120,6 +132,27 @@ def get_model_specs(random_state=42):
             },
         },
     }
+
+    # ── LightGBM (optionnel — pip install lightgbm) ───────────────────────────
+    # Plus rapide que sklearn GB (×3-10), meilleure gestion des classes rares,
+    # support natif des valeurs manquantes. Ajouté si lightgbm est installé.
+    if lgb is not None:
+        specs["LightGBM"] = {
+            "estimator": lgb.LGBMClassifier(
+                class_weight="balanced",
+                random_state=random_state,
+                n_jobs=-1,
+                verbose=-1,
+            ),
+            "param_grid": {
+                "model__n_estimators": [200, 400],
+                "model__learning_rate": [0.05, 0.1],
+                "model__num_leaves": [31, 63],
+                "model__reg_lambda": [0.1, 1.0],
+            },
+        }
+
+    return specs
 
 
 def _strip_model_prefix(params):
@@ -219,8 +252,7 @@ def evaluate_models_nested_cv(X, y_enc, class_names, feature_names,
             print(f"    (repli sur KFold car classes <{n_splits})")
 
     # ── Baseline : toujours prédire la classe majoritaire ─────────────────────
-    from collections import Counter as _Counter
-    majority_class = _Counter(y_enc).most_common(1)[0][0]
+    majority_class = Counter(y_enc).most_common(1)[0][0]
     y_pred_baseline = np.full_like(y_enc, majority_class)
     baseline_result = {
         "accuracy":           round(float(accuracy_score(y_enc, y_pred_baseline)), 4),
@@ -279,9 +311,10 @@ def evaluate_models_nested_cv(X, y_enc, class_names, feature_names,
                 else:
                     X_train, X_test = X_train_base, X_test_base
 
-                # Sur-échantillonnage SMOTE pour les classes rares (fold d'entraînement)
-                X_train, y_train = _apply_smote(X_train, y_train, random_state=random_state)
-
+                # Sélection des hyperparamètres sur données BRUTES (sans SMOTE) pour
+                # éviter la fuite de données : si SMOTE est appliqué avant GridSearchCV,
+                # les échantillons synthétiques du train se retrouvent dans les plis de
+                # validation interne, biaisant la sélection des hyperparamètres.
                 inner_min_class = min(Counter(y_train).values())
                 inner_splits = min(3, max(2, inner_min_class))
                 if inner_min_class >= inner_splits:
@@ -304,17 +337,43 @@ def evaluate_models_nested_cv(X, y_enc, class_names, feature_names,
                 else:
                     pipe = Pipeline([("model", est_clone)])
 
-                grid = GridSearchCV(
-                    estimator=pipe,
-                    param_grid=spec["param_grid"],
-                    scoring="f1_weighted",
-                    cv=inner_cv,
-                    n_jobs=8,
-                )
-                grid.fit(X_train, y_train)
-
-                best_fold_model = grid.best_estimator_
+                # Inner CV : HalvingGridSearchCV (successive halving) au lieu de
+                # GridSearchCV exhaustif — 3 à 5× plus rapide sur grands param_grid.
+                # Principe : les configs les moins prometteuses sont éliminées tôt
+                # avec peu de données ; seules les meilleures reçoivent toutes les données.
+                try:
+                    grid = HalvingGridSearchCV(
+                        estimator=pipe,
+                        param_grid=spec["param_grid"],
+                        scoring="f1_macro",
+                        cv=inner_cv,
+                        n_jobs=-1,
+                        factor=3,
+                        random_state=random_state,
+                        error_score=0.0,
+                    )
+                    grid.fit(X_train, y_train)
+                except Exception:
+                    # Fallback sur GridSearchCV si HalvingGridSearchCV échoue
+                    # (ex: trop peu d'échantillons pour le halving)
+                    grid = GridSearchCV(
+                        estimator=pipe,
+                        param_grid=spec["param_grid"],
+                        scoring="f1_macro",
+                        cv=inner_cv,
+                        n_jobs=-1,
+                    )
+                    grid.fit(X_train, y_train)
                 fold_best_params.append(_strip_model_prefix(grid.best_params_))
+
+                # SMOTE appliqué APRÈS la sélection des hyperparamètres, sur le fold
+                # d'entraînement complet, pour entraîner le modèle final du fold.
+                X_train_smote, y_train_smote = _apply_smote(X_train, y_train, random_state=random_state)
+                est_best = clone(spec["estimator"])
+                pipe_best = est_best if isinstance(est_best, Pipeline) else Pipeline([("model", est_best)])
+                pipe_best.set_params(**grid.best_params_)
+                pipe_best.fit(X_train_smote, y_train_smote)
+                best_fold_model = pipe_best
 
                 y_hat = best_fold_model.predict(X_test)
                 oof_pred[test_idx] = y_hat
@@ -326,19 +385,31 @@ def evaluate_models_nested_cv(X, y_enc, class_names, feature_names,
                     except Exception:
                         pass
 
-                fold_f1.append(f1_score(y_test, y_hat, average="weighted", zero_division=0))
+                fold_f1.append(f1_score(y_test, y_hat, average="macro", zero_division=0))
                 fold_acc.append(accuracy_score(y_test, y_hat))
 
             # Refit global best config for serving/predict + train metrics
             est_full = clone(spec["estimator"])
             pipe_full = est_full if isinstance(est_full, Pipeline) else Pipeline([("model", est_full)])
-            grid_full = GridSearchCV(
-                estimator=pipe_full,
-                param_grid=spec["param_grid"],
-                scoring="f1_weighted",
-                cv=outer_cv,
-                n_jobs=8,
-            )
+            try:
+                grid_full = HalvingGridSearchCV(
+                    estimator=pipe_full,
+                    param_grid=spec["param_grid"],
+                    scoring="f1_macro",
+                    cv=outer_cv,
+                    n_jobs=-1,
+                    factor=3,
+                    random_state=random_state,
+                    error_score=0.0,
+                )
+            except Exception:
+                grid_full = GridSearchCV(
+                    estimator=pipe_full,
+                    param_grid=spec["param_grid"],
+                    scoring="f1_macro",
+                    cv=outer_cv,
+                    n_jobs=-1,
+                )
             grid_full.fit(X_full, y_enc)
             best_model_full = grid_full.best_estimator_
 
@@ -418,7 +489,11 @@ def evaluate_models_nested_cv(X, y_enc, class_names, feature_names,
                 "overfit_gap_accuracy": round(float(train_acc - acc), 4),
                 "overfit_gap_balanced": round(float(train_bal_acc - bal_acc), 4),
                 "overfit_gap_f1": round(float(train_f1 - f1w), 4),
-                "overfit_warning": bool((train_acc - acc) > 0.08 or (train_f1 - f1w) > 0.08),
+                # Détection overfitting sur métriques robustes au déséquilibre de classes
+                # (balanced_accuracy et f1_macro, pas accuracy brute ni f1_weighted).
+                "overfit_warning": bool(
+                    (train_bal_acc - bal_acc) > 0.08 or (train_f1_macro - f1_macro) > 0.08
+                ),
                 "stable_best_params": most_common_params,
             }
 

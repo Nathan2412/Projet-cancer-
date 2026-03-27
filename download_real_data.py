@@ -58,13 +58,22 @@ TCGA_STUDIES = {
     "meso_tcga_pan_can_atlas_2018":    "Mesotheliome",  # ~87 patients
     "ucs_tcga_pan_can_atlas_2018":     "Uterus",        # ~57 (carcinosarcome utérin)
     "kich_tcga_pan_can_atlas_2018":    "Rein",          # ~66 (rein chromophobe)
+    # ── Études TCGA supplémentaires (augmentation dataset) ────────────────────
+    "acc_tcga_pan_can_atlas_2018":     "SurrenaleCorticale",  # ~79 patients
+    "chol_tcga_pan_can_atlas_2018":    "Foie",                # ~36 (cholangiocarcinome)
+    "pcpg_tcga_pan_can_atlas_2018":    "Neuroendocrine",      # ~179 phéochromocytome
+    "tgct_tcga_pan_can_atlas_2018":    "Testicule",           # ~150 tumeurs germinales
+    "thym_tcga_pan_can_atlas_2018":    "Thymome",             # ~124 patients
 }
 
 # =============================================================================
 # Études à cohorte mixte — cancer type extrait des données cliniques par patient
 # =============================================================================
 MIXED_COHORT_STUDIES = {
-    "msk_impact_2017": None,   # 10 945 patients, 341 gènes, Memorial Sloan Kettering
+    # MSK-IMPACT 2017 : 10 945 patients, 341 gènes, Memorial Sloan Kettering.
+    # Le cancer type est extrait des données cliniques par patient (pas fixe par étude).
+    # Augmente massivement les classes rares : Lymphome, Mésotheliome, Sarcome, Leucémie.
+    "msk_impact_2017": None,
 }
 
 # Identifiants Entrez (NCBI) pour tous les gènes cibles

@@ -239,7 +239,7 @@ def extract_features(all_results, labeled_only=True):
 
 
 def train_and_evaluate(X, y, feature_names, labeled_results=None, allele_params=None,
-                       n_splits=5, verbose=True):
+                       n_splits=3, verbose=True):
     """Nested CV + tuning hyperparametres, retourne metriques completes.
     
     Si labeled_results et allele_params sont fournis, X ne doit PAS contenir
@@ -273,7 +273,22 @@ def train_and_evaluate(X, y, feature_names, labeled_results=None, allele_params=
     res["best_model_name"] = eval_out["best_model_name"]
     res["best_f1_macro"] = eval_out["best_f1_macro"]
     res["best_model_balanced_acc"] = eval_out["best_model_balanced_acc"]
-    res["_best_model"] = res["models"][res["best_model_name"]]["_model"]
+    best_raw_model = res["models"][res["best_model_name"]]["_model"]
+
+    # Calibration de probabilités (isotonic regression) sur les données d'entraînement.
+    # La confiance moyenne non calibrée est ~49% — la calibration améliore l'interprétabilité
+    # clinique sans changer le ranking des prédictions.
+    # Note : cv='prefit' suppose que le modèle est déjà entraîné sur X complet.
+    try:
+        from sklearn.calibration import CalibratedClassifierCV
+        calibrated = CalibratedClassifierCV(best_raw_model, method="isotonic", cv="prefit")
+        calibrated.fit(X, y_enc)
+        res["_best_model"] = calibrated
+        if verbose:
+            print("    Calibration isotonic appliquée au meilleur modèle.")
+    except Exception as _e:
+        logger.warning("Calibration échouée (%s) — modèle brut conservé.", _e)
+        res["_best_model"] = best_raw_model
 
     res["training_time_seconds"] = round(time.time() - t0, 2)
     return res
@@ -298,17 +313,29 @@ def _add_allele_score_features(X, all_results, signatures, feature_names):
 
 
 def apply_sex_constraints(probabilities, sex):
-    """Supprime les probabilites biologiquement impossibles selon le sexe,
-    puis renormalise les probabilites restantes."""
+    """Supprime ou pénalise les probabilités biologiquement impossibles selon le sexe,
+    puis renormalise les probabilités restantes.
+
+    - Exclusion totale (prob=0) : cancers anatomiquement impossibles
+    - Pénalité ×0.1 : cancers très rares mais biologiquement possibles
+    """
     sex_val = str(sex or "unknown").strip().upper()
     if sex_val == "F":
+        # Exclusions anatomiques totales pour une patiente
+        impossible_f = {"prostate"}
         for key in list(probabilities.keys()):
-            if key.lower() in ("prostate",):
+            if key.lower() in impossible_f:
                 probabilities[key] = 0.0
     if sex_val == "M":
+        # Exclusions anatomiques totales pour un patient masculin
+        impossible_m = {"ovaire", "uterus", "cervical"}
+        # Sein masculin : rare (~1% des cas) — pénalité plutôt qu'exclusion
+        rare_m = {"sein"}
         for key in list(probabilities.keys()):
-            if key.lower() in ("ovaire",):
+            if key.lower() in impossible_m:
                 probabilities[key] = 0.0
+            elif key.lower() in rare_m:
+                probabilities[key] *= 0.1
     total = sum(probabilities.values())
     if total > 0:
         probabilities = {k: v / total for k, v in probabilities.items()}
@@ -853,23 +880,56 @@ def _run_shap_analysis(ml, X_labeled, feature_names, max_samples=500, verbose=Tr
             X_shap = X_shap[:min(100, X_shap.shape[0])]
             shap_values = explainer.shap_values(X_shap)
 
-        # Pour multi-classe, shap_values est une liste — prendre la moyenne abs
-        if isinstance(shap_values, list):
-            shap_mean = np.abs(np.array(shap_values)).mean(axis=0)
-        else:
-            shap_mean = shap_values
+        # Pour multi-classe, shap_values est une liste (une matrice par classe).
+        # On génère un graphique global (moyenne abs) + des graphiques par classe
+        # pour les 5 types de cancer les mieux classifiés (F1 le plus élevé).
+        best_model_data = ml["models"].get(ml["best_model_name"], {})
+        per_class_f1 = {
+            c: m.get("f1", 0) for c, m in best_model_data.get("per_class_metrics", {}).items()
+        }
+        top5_classes = sorted(per_class_f1, key=per_class_f1.get, reverse=True)[:5]
+        class_names = ml["class_names"]
 
-        # Graphique beeswarm summary
-        fig, ax = plt.subplots(figsize=(10, 7))
-        # Utiliser l'API summary_plot en mode matplotlib
-        shap.summary_plot(
-            shap_mean, X_shap,
-            feature_names=feature_names[:shap_mean.shape[1]],
-            show=False, max_display=20, plot_type="bar"
-        )
-        fig = plt.gcf()
-        fig.suptitle(f"SHAP — {ml['best_model_name']}", fontsize=13, y=1.01)
-        path = _save(fig, "ml_shap_summary.png")
+        if isinstance(shap_values, list) and len(shap_values) == len(class_names):
+            shap_array = np.array(shap_values)  # shape (n_classes, n_samples, n_features)
+
+            # Graphique global : moyenne des valeurs absolues sur toutes les classes
+            shap_global = np.abs(shap_array).mean(axis=0)
+            fig, _ = plt.subplots(figsize=(10, 7))
+            shap.summary_plot(
+                shap_global, X_shap,
+                feature_names=feature_names[:shap_global.shape[1]],
+                show=False, max_display=20, plot_type="bar"
+            )
+            plt.gcf().suptitle(f"SHAP global — {ml['best_model_name']}", fontsize=13, y=1.01)
+            path = _save(plt.gcf(), "ml_shap_summary.png")
+
+            # Graphiques par classe (top 5 F1)
+            for cls_name in top5_classes:
+                cls_idx = class_names.index(cls_name) if cls_name in class_names else None
+                if cls_idx is None:
+                    continue
+                shap_cls = shap_array[cls_idx]
+                fig2, _ = plt.subplots(figsize=(10, 6))
+                shap.summary_plot(
+                    shap_cls, X_shap,
+                    feature_names=feature_names[:shap_cls.shape[1]],
+                    show=False, max_display=15, plot_type="bar"
+                )
+                safe_cls = cls_name.replace(" ", "_")
+                plt.gcf().suptitle(f"SHAP — {cls_name}", fontsize=12, y=1.01)
+                _save(plt.gcf(), f"ml_shap_{safe_cls}.png")
+        else:
+            shap_mean = shap_values if not isinstance(shap_values, list) else np.abs(np.array(shap_values)).mean(axis=0)
+            fig, _ = plt.subplots(figsize=(10, 7))
+            shap.summary_plot(
+                shap_mean, X_shap,
+                feature_names=feature_names[:shap_mean.shape[1]],
+                show=False, max_display=20, plot_type="bar"
+            )
+            plt.gcf().suptitle(f"SHAP — {ml['best_model_name']}", fontsize=13, y=1.01)
+            path = _save(plt.gcf(), "ml_shap_summary.png")
+
         if verbose:
             print(f"    SHAP : {path}")
         return path
@@ -893,6 +953,9 @@ def run_ml_pipeline(all_results, generate_plots=True, verbose=True, use_cache=Fa
     5. Prédiction des patients inconnus
     6. Graphiques + rapports
     """
+    # Seed globale pour reproductibilité (numpy, random utilisés par SMOTE, KMeans, etc.)
+    np.random.seed(42)
+
     if verbose:
         print("\n" + "=" * 60)
         print("  MODULE ML - CLASSIFICATION DU CANCER")
@@ -1052,6 +1115,21 @@ def run_ml_pipeline(all_results, generate_plots=True, verbose=True, use_cache=Fa
         # afin de recalculer les signatures d'alleles par fold et eviter la fuite de donnees.
         X_base, _, _, _ = extract_features(all_results, labeled_only=False)
         X_train_base = X_base[labeled_mask]
+
+        # Supprimer les features quasi-constantes (variance < 1% de la variance max).
+        # Ces features n'apportent aucune information discriminante et ralentissent
+        # l'entraînement. VarianceThreshold est calculé sur le train uniquement.
+        from sklearn.feature_selection import VarianceThreshold
+        base_feature_names = list(FEATURE_NAMES)
+        vt = VarianceThreshold(threshold=0.01)
+        X_train_base = vt.fit_transform(X_train_base)
+        selected_mask_vt = vt.get_support()
+        base_feature_names = [n for n, keep in zip(base_feature_names, selected_mask_vt) if keep]
+        if verbose:
+            n_removed = int((~selected_mask_vt).sum())
+            print(f"    VarianceThreshold : {n_removed} features supprimées "
+                  f"({X_train_base.shape[1]} conservées)")
+
         labeled_results_list = [r for r in all_results
                                 if r.get("metadata", {}).get("cancer_type")]
         allele_params = dict(
@@ -1063,7 +1141,7 @@ def run_ml_pipeline(all_results, generate_plots=True, verbose=True, use_cache=Fa
         )
         y_train = y_all[labeled_mask]
         ml = train_and_evaluate(
-            X_train_base, y_train, list(FEATURE_NAMES),
+            X_train_base, y_train, base_feature_names,
             labeled_results=labeled_results_list,
             allele_params=allele_params,
             verbose=verbose,

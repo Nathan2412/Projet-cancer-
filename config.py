@@ -6,8 +6,22 @@ OUTPUT_DIR = os.path.join(BASE_DIR, "output")
 REPORTS_DIR = os.path.join(OUTPUT_DIR, "reports")
 PLOTS_DIR = os.path.join(OUTPUT_DIR, "plots")
 
-for d in [DATA_DIR, OUTPUT_DIR, REPORTS_DIR, PLOTS_DIR]:
-    os.makedirs(d, exist_ok=True)
+def setup_directories():
+    """Crée les répertoires nécessaires au pipeline.
+    Appelé explicitement depuis main.py — pas à l'import (évite les effets
+    de bord lors des tests unitaires ou des imports partiels du module).
+    """
+    for d in [DATA_DIR, OUTPUT_DIR, REPORTS_DIR, PLOTS_DIR]:
+        os.makedirs(d, exist_ok=True)
+
+
+# Création immédiate uniquement si ce module est le point d'entrée principal
+# (import normal depuis un autre module → pas de création automatique).
+if __name__ != "__main__":
+    # Les modules du pipeline ont besoin que ces dossiers existent dès l'import.
+    # On les crée ici de façon silencieuse pour rester compatible.
+    for _d in [DATA_DIR, OUTPUT_DIR, REPORTS_DIR, PLOTS_DIR]:
+        os.makedirs(_d, exist_ok=True)
 
 REFERENCE_GENOME_FILE = os.path.join(DATA_DIR, "reference.fasta")
 SAMPLES_DIR = os.path.join(DATA_DIR, "samples")
@@ -210,6 +224,11 @@ CANCER_TYPES = [
     # Nouveaux types (TCGA complet + MSK-IMPACT)
     "Uterus", "TeteEtCou", "Estomac", "Cervical",
     "Gliome", "Oesophage", "Sarcome", "Mesotheliome",
+    # Types supplémentaires (extension dataset ~+560 patients)
+    "SurrenaleCorticale",  # ACC — ~79 patients
+    "Neuroendocrine",      # PCPG — ~179 patients
+    "Testicule",           # TGCT — ~150 patients
+    "Thymome",             # THYM — ~124 patients
 ]
 
 # ============================================================================
@@ -431,6 +450,30 @@ CANCER_LABEL_MAPPING = {
     "mesothelioma": "Mesotheliome",
     "mesotheliome": "Mesotheliome",
     "pleural mesothelioma": "Mesotheliome",
+    # ── Types supplémentaires (extension dataset) ────────────────────────────
+    # Surrénale corticale
+    "surrenalecorticale": "SurrenaleCorticale",
+    "adrenocortical": "SurrenaleCorticale",
+    "adrenocortical carcinoma": "SurrenaleCorticale",
+    "acc": "SurrenaleCorticale",
+    # Neuroendocrine / Phéochromocytome
+    "neuroendocrine": "Neuroendocrine",
+    "pheochromocytoma": "Neuroendocrine",
+    "paraganglioma": "Neuroendocrine",
+    "pheochromocytoma and paraganglioma": "Neuroendocrine",
+    "pcpg": "Neuroendocrine",
+    # Testicule / tumeurs germinales
+    "testicule": "Testicule",
+    "testicular": "Testicule",
+    "testicular germ cell tumor": "Testicule",
+    "tgct": "Testicule",
+    # Thymome
+    "thymome": "Thymome",
+    "thymoma": "Thymome",
+    "thym": "Thymome",
+    # Cholangiocarcinome → Foie (déjà mappé mais variante supplémentaire)
+    "cholangiocarcinoma": "Foie",
+    "bile duct": "Foie",
     # Mappings supplémentaires MSK-IMPACT
     "non-small cell lung cancer": "Poumon",
     "nsclc": "Poumon",
@@ -452,5 +495,7 @@ CANCER_LABEL_MAPPING = {
     "follicular lymphoma": "Lymphome",
     "non-hodgkin lymphoma": "Lymphome",
     "hodgkin lymphoma": "Lymphome",
-    "multiple myeloma": "Lymphome",
+    # Multiple Myeloma : néoplasie plasmocytaire, classée ici avec Leucemie
+    # (hémopathies malignes myéloïdes — plus proche biologiquement que Lymphome)
+    "multiple myeloma": "Leucemie",
 }

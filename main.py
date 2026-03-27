@@ -7,8 +7,12 @@ import sys
 import os
 import logging
 import warnings
-os.environ["PYTHONWARNINGS"] = "ignore"
-warnings.filterwarnings("ignore")
+# Filtrage ciblé : on supprime uniquement les warnings verbeux des bibliothèques
+# tierces, pas les warnings ML critiques (convergence, etc.).
+os.environ["PYTHONWARNINGS"] = "default"
+warnings.filterwarnings("ignore", module="matplotlib")
+warnings.filterwarnings("ignore", module="urllib3")
+warnings.filterwarnings("ignore", category=DeprecationWarning, module="sklearn")
 import shutil
 import time
 import json
@@ -166,7 +170,9 @@ def analyze_single_patient_real(patient_id, reference, known_db, verbose=True, p
             if "impact" not in m:
                 m["impact"] = classify_mutation_impact(m)
             if "frequency" not in m:
-                m["frequency"] = 0.3
+                # VAF médiane typique TCGA (WES somatic calls, hétérozygote)
+                # Utilisée uniquement comme imputation si le champ est absent du MAF.
+                m["frequency"] = 0.35
             if "depth" not in m:
                 m["depth"] = 100  # Couverture typique TCGA
 
@@ -420,7 +426,7 @@ def run_real_data_analysis(generate_plots=True, verbose=True):
 
     print(f"  {len(patient_list)} patients a analyser")
 
-    print("\n[3/7] Chargement de toutes les donnees patients en memoire...")
+    print("\n[2b/7] Chargement de toutes les donnees patients en memoire...")
     all_patient_data = {}
     for i, pid in enumerate(patient_list):
         if i % 500 == 0:
