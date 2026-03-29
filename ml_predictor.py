@@ -281,7 +281,9 @@ def train_and_evaluate(X, y, feature_names, labeled_results=None, allele_params=
     # Note : cv='prefit' suppose que le modèle est déjà entraîné sur X complet.
     try:
         from sklearn.calibration import CalibratedClassifierCV
-        calibrated = CalibratedClassifierCV(best_raw_model, method="isotonic", cv="prefit")
+        from sklearn.base import clone
+        # cv='prefit' retiré dans sklearn >= 1.4 — on utilise cv=3 sur un clone frais
+        calibrated = CalibratedClassifierCV(clone(best_raw_model), method="isotonic", cv=3)
         calibrated.fit(X, y_enc)
         res["_best_model"] = calibrated
         if verbose:
@@ -349,6 +351,11 @@ def predict_patient(patient_result, ml):
     X1, _, _, f1 = extract_features([patient_result], labeled_only=False)
     if X1.shape[0] == 0:
         return None
+    # Appliquer le même VarianceThreshold que lors de l'entraînement
+    vt = ml.get("_variance_threshold")
+    if vt is not None:
+        X1 = vt.transform(X1)
+        f1 = [n for n, keep in zip(f1, vt.get_support()) if keep]
     # Ajouter les allele-score features si des signatures existent
     signatures = ml.get("_signatures")
     if signatures:
@@ -1146,6 +1153,8 @@ def run_ml_pipeline(all_results, generate_plots=True, verbose=True, use_cache=Fa
             allele_params=allele_params,
             verbose=verbose,
         )
+        # Sauvegarder le sélecteur pour l'appliquer lors des prédictions
+        ml["_variance_threshold"] = vt
 
     # Le modele de serving utilise les features avec signatures globales
     # (predict_patient ajoute les allele scores via ml["_signatures"])

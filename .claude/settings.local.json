@@ -24,7 +24,11 @@
       "Bash(find /c/Users/natha/OneDrive/ING2/dna-cancer-analysis -name *test* -o -name *spec)",
       "Bash(source .venv/Scripts/activate)",
       "Bash(python -c \"import tqdm\")",
-      "Bash(python -m pytest tests/ -v)"
+      "Bash(python -m pytest tests/ -v)",
+      "Bash(python -c \"import validate_external; print\\(''OK''\\)\")",
+      "Bash(python -c \"import download_real_data; print\\(''SUPPLEMENTARY_STUDIES:'', list\\(download_real_data.SUPPLEMENTARY_STUDIES.keys\\(\\)\\)\\)\")",
+      "Bash(python -m pytest tests/ -q)",
+      "Bash(python -c \"import ml_predictor; print\\(''OK''\\)\")"
     ]
   }
 }
