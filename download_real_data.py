@@ -76,6 +76,35 @@ MIXED_COHORT_STUDIES = {
     "msk_impact_2017": None,
 }
 
+# =============================================================================
+# Études supplémentaires ciblées — cancers sous-représentés (Prostate/Rein/Ovaire)
+#
+# Ces études non-TCGA augmentent les cohortes des 3 cancers avec les F1 les plus
+# faibles : Prostate (F1~0.15), Rein (F1~0.14), Ovaire (F1~0.20).
+# Elles utilisent le même pipeline de téléchargement que les études TCGA.
+# =============================================================================
+SUPPLEMENTARY_STUDIES = {
+    # ── Prostate ──────────────────────────────────────────────────────────────
+    # SU2C/PCF Dream Team 2019 — 101 patients métastatiques résistants à la castration
+    "prad_su2c_2019":       "Prostate",
+    # Broad/Cornell 2013 — 57 patients prostate primaire
+    "prad_broad":           "Prostate",
+    # Nat Genet 2012 — 112 patients prostate
+    "prad_mskcc":           "Prostate",
+
+    # ── Rein ──────────────────────────────────────────────────────────────────
+    # TCGA ccRCC non pan_can (légèrement différent du pan_can_atlas) — ~534 patients
+    "kirc_tcga":            "Rein",
+    # Guo et al. 2012 — 105 patients RCC
+    "rcc_nihmetric_2016":   "Rein",
+
+    # ── Ovaire ────────────────────────────────────────────────────────────────
+    # TCGA ovarian 2011 (original, avant re-analyse pan_can) — 316 patients
+    "ov_tcga_pub":          "Ovaire",
+    # Patch et al. 2015 — 92 patients ovarian
+    "ov_ccle_broad_2012":   "Ovaire",
+}
+
 # Identifiants Entrez (NCBI) pour tous les gènes cibles
 GENE_ENTREZ_IDS = {
     # Gènes originaux
@@ -659,8 +688,9 @@ def download_all():
     exactement là où ça s'était arrêté (étude par étude).
     """
     print("=" * 60)
-    print("  TELECHARGEMENT DONNEES REELLES (TCGA + MSK-IMPACT)")
-    print(f"  {len(TCGA_STUDIES)} etudes TCGA + {len(MIXED_COHORT_STUDIES)} cohorte mixte")
+    print("  TELECHARGEMENT DONNEES REELLES (TCGA + MSK-IMPACT + SUPPLEMENTAIRES)")
+    print(f"  {len(TCGA_STUDIES)} etudes TCGA + {len(MIXED_COHORT_STUDIES)} cohorte mixte"
+          f" + {len(SUPPLEMENTARY_STUDIES)} etudes supplementaires")
     print(f"  {len(GENE_ENTREZ_IDS)} genes cibles")
     print("=" * 60)
 
@@ -679,13 +709,13 @@ def download_all():
     print("  Connexion OK")
 
     # ── Étape 2 : téléchargement par étude avec checkpoint ───────────────────
-    n_total = len(TCGA_STUDIES) + len(MIXED_COHORT_STUDIES)
+    n_total = len(TCGA_STUDIES) + len(MIXED_COHORT_STUDIES) + len(SUPPLEMENTARY_STUDIES)
     print(f"\n[2/5] Telechargement ({n_total} etudes) — reprise automatique activee...")
 
     # Charger les checkpoints déjà existants (reprise après coupure)
     all_patients, all_mutations_by_gene = load_all_checkpoints()
     already_done = {
-        sid for sid in list(TCGA_STUDIES) + list(MIXED_COHORT_STUDIES)
+        sid for sid in list(TCGA_STUDIES) + list(MIXED_COHORT_STUDIES) + list(SUPPLEMENTARY_STUDIES)
         if is_study_done(sid)
     }
     if already_done:
@@ -767,6 +797,41 @@ def download_all():
 
         time.sleep(1.5)
 
+    # ── Études supplémentaires (cancers sous-représentés) ─────────────────────
+    for study_id, cancer_fr in SUPPLEMENTARY_STUDIES.items():
+        study_num += 1
+
+        if is_study_done(study_id):
+            print(f"\n  [{study_num}/{n_total}] {study_id} — DEJA FAIT (checkpoint)")
+            continue
+
+        print(f"\n  [{study_num}/{n_total}] {study_id} ({cancer_fr}) [supplementaire]")
+
+        print(f"    Telechargement des mutations ({len(GENE_ENTREZ_IDS)} genes)...")
+        mutations = fetch_mutations_for_study(study_id, GENE_ENTREZ_IDS)
+        if not mutations:
+            print(f"    Aucune mutation trouvee ou etude indisponible, passe")
+            save_study_checkpoint(study_id, {}, {})
+            continue
+        print(f"    {len(mutations)} mutations brutes telechargees")
+
+        print(f"    Telechargement des donnees cliniques...")
+        clinical_data = fetch_clinical_data(study_id)
+        print(f"    {len(clinical_data)} entrees cliniques")
+
+        patients_dict, muts_by_gene_dict, _ = _process_study_patients(
+            study_id, mutations, clinical_data, cancer_fr_fixed=cancer_fr
+        )
+        print(f"    {len(patients_dict)} patients selectionnes")
+
+        save_study_checkpoint(study_id, patients_dict, muts_by_gene_dict)
+
+        all_patients.update(patients_dict)
+        for gene, muts in muts_by_gene_dict.items():
+            all_mutations_by_gene[gene].extend(muts)
+
+        time.sleep(1.5)
+
     # ── Étape 3 : écriture des fichiers patients ───────────────────────────────
     if not all_patients:
         print("\nERREUR: Aucune donnee patient telechargee.")
@@ -839,7 +904,7 @@ def download_all():
 
     print(f"\n  Patients: {len(cohort_summary)}")
     print(f"  Genes: {len(GENE_ENTREZ_IDS)}")
-    print(f"  Sources: TCGA ({len(TCGA_STUDIES)} etudes) + MSK-IMPACT")
+    print(f"  Sources: TCGA ({len(TCGA_STUDIES)} etudes) + MSK-IMPACT + {len(SUPPLEMENTARY_STUDIES)} etudes supplementaires")
     print(f"  Donnees dans: {REAL_DATA_DIR}")
     print(f"\n  Repartition par cancer ({len(cancer_counts)} types):")
     for cancer, count in sorted(cancer_counts.items(), key=lambda x: -x[1]):

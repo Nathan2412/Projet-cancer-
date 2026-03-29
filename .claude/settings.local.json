@@ -17,7 +17,14 @@
       "Bash(python main.py)",
       "Bash(npm --version)",
       "Bash(npm install:*)",
-      "Bash(claude --version)"
+      "Bash(claude --version)",
+      "Bash(source c:/Users/natha/OneDrive/ING2/dna-cancer-analysis/.venv/Scripts/activate)",
+      "Bash(wc -l /c/Users/natha/OneDrive/ING2/dna-cancer-analysis/*.py)",
+      "Bash(grep -n \"logger\\\\.\" /c/Users/natha/OneDrive/ING2/dna-cancer-analysis/*.py)",
+      "Bash(find /c/Users/natha/OneDrive/ING2/dna-cancer-analysis -name *test* -o -name *spec)",
+      "Bash(source .venv/Scripts/activate)",
+      "Bash(python -c \"import tqdm\")",
+      "Bash(python -m pytest tests/ -v)"
     ]
   }
 }

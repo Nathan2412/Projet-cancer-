@@ -7,6 +7,7 @@ import sys
 import os
 import logging
 import warnings
+import argparse
 # Filtrage ciblé : on supprime uniquement les warnings verbeux des bibliothèques
 # tierces, pas les warnings ML critiques (convergence, etc.).
 os.environ["PYTHONWARNINGS"] = "default"
@@ -17,6 +18,12 @@ import shutil
 import time
 import json
 from collections import defaultdict
+
+try:
+    from tqdm import tqdm
+except ImportError:
+    def tqdm(iterable, **kwargs):
+        return iterable
 
 # ── Logging ──────────────────────────────────────────────────────────────────
 _LOG_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "output", "logs")
@@ -247,7 +254,7 @@ def analyze_single_patient_real(patient_id, reference, known_db, verbose=True, p
     }
 
 
-def run_cohort_analysis(max_patients=None, generate_plots=True, verbose=True):
+def run_cohort_analysis(max_patients=None, generate_plots=True, verbose=True, n_jobs=1, use_cache=False):
     start_time = time.time()
 
     print("=" * 60)
@@ -271,14 +278,17 @@ def run_cohort_analysis(max_patients=None, generate_plots=True, verbose=True):
     print(f"  {len(patient_list)} patients a analyser")
 
     print("\n[3/7] Analyse individuelle des patients...")
-    all_results = []
-    for i, pid in enumerate(patient_list):
-        if verbose:
-            progress = (i + 1) / len(patient_list) * 100
-            print(f"\n  [{i+1}/{len(patient_list)}] ({progress:.0f}%)")
-
-        result = analyze_single_patient(pid, reference, known_db, verbose)
-        all_results.append(result)
+    if n_jobs != 1:
+        from joblib import Parallel, delayed
+        all_results = Parallel(n_jobs=n_jobs)(
+            delayed(analyze_single_patient)(pid, reference, known_db, verbose=False)
+            for pid in tqdm(patient_list, desc="  Patients", unit="p")
+        )
+    else:
+        all_results = []
+        for pid in tqdm(patient_list, desc="  Patients", unit="p"):
+            result = analyze_single_patient(pid, reference, known_db, verbose=False)
+            all_results.append(result)
 
     print("\n\n[4/7] Analyse de cohorte...")
     mutation_matrix, genes, patients = build_cohort_mutation_matrix(all_results)
@@ -294,7 +304,7 @@ def run_cohort_analysis(max_patients=None, generate_plots=True, verbose=True):
 
     # ── ML : prediction de cancer ──
     print("\n[6/7] Machine Learning — Prediction de cancer...")
-    ml_output = run_ml_pipeline(all_results, generate_plots=generate_plots, verbose=verbose)
+    ml_output = run_ml_pipeline(all_results, generate_plots=generate_plots, verbose=verbose, use_cache=use_cache)
 
     # Mettre à jour les rapports avec les prédictions ML
     if ml_output:
@@ -354,15 +364,6 @@ def run_single_patient_analysis(patient_id, generate_plots=True):
     print(f"\nRapport: {txt_path}")
     print(report_text)
 
-    # plots = []
-    # if generate_plots and check_matplotlib():
-    #     plots = generate_all_patient_plots(
-    #         report, result["sequencing"], result["coverage_data"]
-    #     )
-
-    # html_path = generate_patient_html_report(report, plots)
-    # print(f"Rapport HTML: {html_path}")
-
     return result
 
 
@@ -385,7 +386,7 @@ def clean_previous_outputs():
             print(f"  Nettoyage: {folder}")
 
 
-def run_real_data_analysis(generate_plots=True, verbose=True):
+def run_real_data_analysis(generate_plots=True, verbose=True, n_jobs=1, use_cache=False):
     """
     Pipeline complet : telecharge si besoin, puis analyse tous les patients reels.
     """
@@ -438,14 +439,23 @@ def run_real_data_analysis(generate_plots=True, verbose=True):
     print(f"  {len(all_patient_data)} patients charges en memoire")
 
     print("\n[3/7] Analyse individuelle des patients (donnees reelles)...")
-    all_results = []
-    for i, pid in enumerate(patient_list):
-        if (i + 1) % 100 == 0 or i == 0:
-            progress = (i + 1) / len(patient_list) * 100
-            print(f"  [{i+1}/{len(patient_list)}] ({progress:.0f}%)")
-
-        result = analyze_single_patient_real(pid, reference, known_db, verbose=False, patient_data=all_patient_data[pid])
-        all_results.append(result)
+    if n_jobs != 1:
+        from joblib import Parallel, delayed
+        all_results = Parallel(n_jobs=n_jobs)(
+            delayed(analyze_single_patient_real)(
+                pid, reference, known_db, verbose=False,
+                patient_data=all_patient_data[pid]
+            )
+            for pid in tqdm(patient_list, desc="  Patients", unit="p")
+        )
+    else:
+        all_results = []
+        for pid in tqdm(patient_list, desc="  Patients", unit="p"):
+            result = analyze_single_patient_real(
+                pid, reference, known_db, verbose=False,
+                patient_data=all_patient_data[pid]
+            )
+            all_results.append(result)
 
     print("\n\n[4/7] Analyse de cohorte...")
     mutation_matrix, genes, patients = build_cohort_mutation_matrix(all_results)
@@ -455,7 +465,7 @@ def run_real_data_analysis(generate_plots=True, verbose=True):
 
     # ── ML : prediction de cancer ──
     print("\n[6/7] Machine Learning — Prediction de cancer...")
-    ml_output = run_ml_pipeline(all_results, generate_plots=generate_plots, verbose=verbose)
+    ml_output = run_ml_pipeline(all_results, generate_plots=generate_plots, verbose=verbose, use_cache=use_cache)
 
     ml_preds = ml_output.get("predictions", []) if ml_output else None
 
@@ -506,4 +516,49 @@ def run_real_data_analysis(generate_plots=True, verbose=True):
 
 
 if __name__ == "__main__":
-    run_real_data_analysis()
+    parser = argparse.ArgumentParser(
+        description="Pipeline d'analyse genomique ADN -> Mutations -> Cancer"
+    )
+    parser.add_argument(
+        "--mode", choices=["real", "synthetic"], default="real",
+        help="Source de donnees : real (TCGA) ou synthetic (generee). Defaut: real"
+    )
+    parser.add_argument(
+        "--max-patients", type=int, default=None, metavar="N",
+        help="Limiter l'analyse aux N premiers patients (utile pour les tests)"
+    )
+    parser.add_argument(
+        "--no-plots", action="store_true",
+        help="Desactiver la generation des graphiques (plus rapide)"
+    )
+    parser.add_argument(
+        "--quiet", action="store_true",
+        help="Mode silencieux : reduire les messages de progression"
+    )
+    parser.add_argument(
+        "--use-cache", action="store_true",
+        help="Recharger le modele ML sauvegarde si disponible (evite le re-entrainement)"
+    )
+    parser.add_argument(
+        "--jobs", type=int, default=1, metavar="N",
+        help="Nombre de processus paralleles pour l'analyse patient (defaut: 1). "
+             "Utiliser -1 pour tous les CPUs."
+    )
+
+    args = parser.parse_args()
+
+    if args.mode == "real":
+        run_real_data_analysis(
+            generate_plots=not args.no_plots,
+            verbose=not args.quiet,
+            n_jobs=args.jobs,
+            use_cache=args.use_cache,
+        )
+    else:
+        run_cohort_analysis(
+            max_patients=args.max_patients,
+            generate_plots=not args.no_plots,
+            verbose=not args.quiet,
+            n_jobs=args.jobs,
+            use_cache=args.use_cache,
+        )
