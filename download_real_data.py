@@ -103,6 +103,36 @@ SUPPLEMENTARY_STUDIES = {
     "ov_tcga_pub":          "Ovaire",
     # Patch et al. 2015 — 92 patients ovarian
     "ov_ccle_broad_2012":   "Ovaire",
+
+    # ── Mésotheliome — actuellement 22 patients, F1=0.000 ─────────────────────
+    # MSK-IMPACT Mesothelioma 2018 — 72 patients (pleural + péritonéal)
+    "meso_mskcc_2018":      "Mesotheliome",
+
+    # ── Testicule — actuellement 20 patients ──────────────────────────────────
+    # MSK-IMPACT Testicular GCT 2019 — ~180 patients
+    "tgct_msk_2019":        "Testicule",
+
+    # ── Sarcome — actuellement 113 patients, F1=0.037 ─────────────────────────
+    # MSK Sarcoma 2017 — ~100 patients panels NGS multiples sous-types
+    "sarc_mskcc_2017":      "Sarcome",
+
+    # ── Lymphome — actuellement 17 patients, F1=0.046 ─────────────────────────
+    # DLBCL - Broad/MIT 2012 — 55 patients WES
+    "dlbcl_broad_2012":     "Lymphome",
+    # Mantle Cell Lymphoma - IDIBAPS 2017 — 61 patients
+    "mcl_idibips_2017":     "Lymphome",
+
+    # ── Thymome — actuellement 11 patients, F1=0.000 ──────────────────────────
+    # TCGA Thymoma (version non pan_can) — ~124 patients
+    "thym_tcga":            "Thymome",
+
+    # ── Neuroendocrine — actuellement 32 patients ─────────────────────────────
+    # MSK Neuroendocrine Tumors 2019 — ~200 patients (NET gastro-intestinaux, pulmonaires)
+    "neuroendocrine_msk_2019": "Neuroendocrine",
+
+    # ── SurrénaleCorticale — actuellement 27 patients ─────────────────────────
+    # TCGA ACC (version non pan_can) — ~79 patients corticosurrénalome
+    "acc_tcga":             "SurrenaleCorticale",
 }
 
 # Identifiants Entrez (NCBI) pour tous les gènes cibles

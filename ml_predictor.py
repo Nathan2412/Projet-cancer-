@@ -1300,8 +1300,23 @@ def run_ml_pipeline(all_results, generate_plots=True, verbose=True, use_cache=Fa
         logger.warning("Impossible de sauvegarder le modèle : %s", _e)
 
     # -- Analyse SHAP (interprétabilité) --
+    # X_all contient 91 features de base + 26 allele_scores = 117 features,
+    # mais le modèle a été entraîné sur 74 features (après VarianceThreshold) + 26 = 100.
+    # Il faut donc appliquer le VarianceThreshold avant d'ajouter les allele_scores.
     if generate_plots:
-        _run_shap_analysis(ml, X_all[labeled_mask], fnames_aug, verbose=verbose)
+        X_base_shap, _, _, fnames_base_shap = extract_features(all_results, labeled_only=False)
+        vt_shap = ml.get("_variance_threshold")
+        labeled_results_shap = [r for r, m in zip(all_results, labeled_mask) if m]
+        if vt_shap is not None:
+            X_shap_lab = vt_shap.transform(X_base_shap[labeled_mask])
+            fnames_shap = [n for n, keep in zip(fnames_base_shap, vt_shap.get_support()) if keep]
+        else:
+            X_shap_lab = X_base_shap[labeled_mask]
+            fnames_shap = list(fnames_base_shap)
+        X_shap_lab, fnames_shap = _add_allele_score_features(
+            X_shap_lab, labeled_results_shap, signatures, fnames_shap
+        )
+        _run_shap_analysis(ml, X_shap_lab, fnames_shap, verbose=verbose)
 
     if verbose:
         print(f"    TXT  : {txt_path}")
