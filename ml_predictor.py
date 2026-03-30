@@ -279,28 +279,7 @@ def train_and_evaluate(X, y, feature_names, labeled_results=None, allele_params=
     # La confiance moyenne non calibrée est ~49% — la calibration améliore l'interprétabilité
     # clinique sans changer le ranking des prédictions.
     # Note : cv='prefit' suppose que le modèle est déjà entraîné sur X complet.
-    try:
-        from sklearn.calibration import CalibratedClassifierCV
-        from sklearn.base import clone
-        # Le modèle a été entraîné avec allele-score features (ajoutées per-fold dans
-        # evaluate_models_nested_cv). On les ajoute aussi ici pour que le clone reçoive
-        # exactement le même espace de features.
-        X_cal = X
-        feature_names_cal = feature_names
-        if labeled_results is not None and allele_params:
-            signatures = allele_params.get("signatures", {})
-            if signatures:
-                X_cal, feature_names_cal = _add_allele_score_features(
-                    X, labeled_results, signatures, list(feature_names)
-                )
-        calibrated = CalibratedClassifierCV(clone(best_raw_model), method="isotonic", cv=3)
-        calibrated.fit(X_cal, y_enc)
-        res["_best_model"] = calibrated
-        if verbose:
-            print("    Calibration isotonic appliquée au meilleur modèle.")
-    except Exception as _e:
-        logger.warning("Calibration échouée (%s) — modèle brut conservé.", _e)
-        res["_best_model"] = best_raw_model
+    res["_best_model"] = best_raw_model
 
     res["training_time_seconds"] = round(time.time() - t0, 2)
     return res
@@ -1112,6 +1091,8 @@ def run_ml_pipeline(all_results, generate_plots=True, verbose=True, use_cache=Fa
             best_f1_macro=_cached["f1_macro"],
             best_model_balanced_acc=_cached["best_model_name"],
             _best_model=_cached["model"],
+            _variance_threshold=_cached.get("variance_threshold"),
+            _signatures=_cached.get("signatures", {}),
             _label_encoder=le,
             _y_encoded=[int(le.transform([c])[0]) for c in y_train],
             training_time_seconds=0.0,
@@ -1291,13 +1272,14 @@ def run_ml_pipeline(all_results, generate_plots=True, verbose=True, use_cache=Fa
         os.makedirs(models_dir, exist_ok=True)
         model_path = os.path.join(models_dir, "best_model.pkl")
         joblib.dump({
-            "model":          ml["_best_model"],
-            "label_encoder":  ml["_label_encoder"],
-            "feature_names":  ml["feature_names"],
-            "class_names":    ml["class_names"],
-            "signatures":     signatures,
-            "best_model_name": ml["best_model_name"],
-            "f1_macro":       ml["best_f1_macro"],
+            "model":              ml["_best_model"],
+            "label_encoder":      ml["_label_encoder"],
+            "feature_names":      ml["feature_names"],
+            "class_names":        ml["class_names"],
+            "signatures":         signatures,
+            "best_model_name":    ml["best_model_name"],
+            "f1_macro":           ml["best_f1_macro"],
+            "variance_threshold": ml.get("_variance_threshold"),
         }, model_path)
         if verbose:
             print(f"    MODEL: {model_path}")
@@ -1306,7 +1288,8 @@ def run_ml_pipeline(all_results, generate_plots=True, verbose=True, use_cache=Fa
         logger.warning("Impossible de sauvegarder le modèle : %s", _e)
 
     # -- Analyse SHAP (interprétabilité) --
-    _run_shap_analysis(ml, X_all[labeled_mask], fnames_aug, verbose=verbose)
+    if generate_plots:
+        _run_shap_analysis(ml, X_all[labeled_mask], fnames_aug, verbose=verbose)
 
     if verbose:
         print(f"    TXT  : {txt_path}")
