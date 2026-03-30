@@ -282,9 +282,19 @@ def train_and_evaluate(X, y, feature_names, labeled_results=None, allele_params=
     try:
         from sklearn.calibration import CalibratedClassifierCV
         from sklearn.base import clone
-        # cv='prefit' retiré dans sklearn >= 1.4 — on utilise cv=3 sur un clone frais
+        # Le modèle a été entraîné avec allele-score features (ajoutées per-fold dans
+        # evaluate_models_nested_cv). On les ajoute aussi ici pour que le clone reçoive
+        # exactement le même espace de features.
+        X_cal = X
+        feature_names_cal = feature_names
+        if labeled_results is not None and allele_params:
+            signatures = allele_params.get("signatures", {})
+            if signatures:
+                X_cal, feature_names_cal = _add_allele_score_features(
+                    X, labeled_results, signatures, list(feature_names)
+                )
         calibrated = CalibratedClassifierCV(clone(best_raw_model), method="isotonic", cv=3)
-        calibrated.fit(X, y_enc)
+        calibrated.fit(X_cal, y_enc)
         res["_best_model"] = calibrated
         if verbose:
             print("    Calibration isotonic appliquée au meilleur modèle.")
