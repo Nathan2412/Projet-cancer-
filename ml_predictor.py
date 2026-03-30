@@ -337,59 +337,73 @@ def predict_patient(patient_result, ml):
     """Prediction pour un patient unique (connu ou inconnu).
     Retourne le cancer prédit, le top-3, les probabilités et les features responsables.
     """
-    X1, _, _, f1 = extract_features([patient_result], labeled_only=False)
-    if X1.shape[0] == 0:
-        return None
-    # Appliquer le même VarianceThreshold que lors de l'entraînement
+    results = predict_patients_batch([patient_result], ml)
+    return results[0] if results else None
+
+
+def predict_patients_batch(patient_results, ml):
+    """Prediction vectorisée pour une liste de patients — même résultat que
+    predict_patient appelé en boucle, mais un seul appel predict_proba.
+    """
+    X, _, _, f = extract_features(patient_results, labeled_only=False)
+    if X.shape[0] == 0:
+        return []
+
     vt = ml.get("_variance_threshold")
     if vt is not None:
-        X1 = vt.transform(X1)
-        f1 = [n for n, keep in zip(f1, vt.get_support()) if keep]
-    # Ajouter les allele-score features si des signatures existent
+        X = vt.transform(X)
+        f = [n for n, keep in zip(f, vt.get_support()) if keep]
+
     signatures = ml.get("_signatures")
     if signatures:
-        X1, f1 = _add_allele_score_features(X1, [patient_result], signatures, f1)
+        X, f = _add_allele_score_features(X, patient_results, signatures, f)
 
     model = ml["_best_model"]
     le = ml["_label_encoder"]
+    class_names = ml["class_names"]
 
-    probas = {}
+    # Un seul appel predict_proba pour tous les patients
     if hasattr(model, "predict_proba"):
-        for i, c in enumerate(ml["class_names"]):
-            probas[c] = round(float(model.predict_proba(X1)[0][i]), 4)
-
-    # Appliquer les contraintes biologiques selon le sexe
-    sex = patient_result.get("metadata", {}).get("sex", "unknown")
-    if probas:
-        probas = apply_sex_constraints(probas, sex)
-        probas = {k: round(v, 4) for k, v in probas.items()}
-
-    if probas:
-        pred = max(probas, key=lambda c: probas[c])
+        all_probas = model.predict_proba(X)  # shape (n_patients, n_classes)
+        has_proba = True
     else:
-        pred = le.inverse_transform(model.predict(X1))[0]
+        all_probas = None
+        has_proba = False
+        all_preds_enc = model.predict(X)
 
-    # Top-3 cancers probables
-    sorted_probas = sorted(probas.items(), key=lambda x: x[1], reverse=True)
-    top3 = sorted_probas[:3]
+    results = []
+    for i, r in enumerate(patient_results):
+        if has_proba:
+            probas = {c: round(float(all_probas[i, j]), 4) for j, c in enumerate(class_names)}
+            sex = r.get("metadata", {}).get("sex", "unknown")
+            probas = apply_sex_constraints(probas, sex)
+            probas = {k: round(v, 4) for k, v in probas.items()}
+            pred = max(probas, key=lambda c: probas[c])
+        else:
+            probas = {}
+            pred = le.inverse_transform([all_preds_enc[i]])[0]
 
-    # Features responsables de la prédiction (feature importance du modèle)
-    top_features = _get_top_features_for_patient(X1, f1, model, ml, pred)
+        sorted_probas = sorted(probas.items(), key=lambda x: x[1], reverse=True)
+        top3 = sorted_probas[:3]
 
-    actual = patient_result.get("metadata", {}).get("cancer_type")
-    is_known = actual is not None
-    return dict(
-        patient_id=patient_result.get("patient_id"),
-        predicted_cancer=pred,
-        actual_cancer=actual or "Inconnu",
-        correct=(pred == actual) if is_known else None,
-        confidence=probas.get(pred, 0),
-        probabilities=dict(sorted_probas),
-        top3=top3,
-        top_features=top_features,
-        model_used=ml["best_model_name"],
-        is_known=is_known,
-    )
+        X1 = X[i:i+1]
+        top_features = _get_top_features_for_patient(X1, f, model, ml, pred)
+
+        actual = r.get("metadata", {}).get("cancer_type")
+        is_known = actual is not None
+        results.append(dict(
+            patient_id=r.get("patient_id"),
+            predicted_cancer=pred,
+            actual_cancer=actual or "Inconnu",
+            correct=(pred == actual) if is_known else None,
+            confidence=probas.get(pred, 0),
+            probabilities=dict(sorted_probas),
+            top3=top3,
+            top_features=top_features,
+            model_used=ml["best_model_name"],
+            is_known=is_known,
+        ))
+    return results
 
 
 def _get_top_features_for_patient(X1, feature_names, model, ml, predicted_class, top_n=10):
@@ -1160,10 +1174,8 @@ def run_ml_pipeline(all_results, generate_plots=True, verbose=True, use_cache=Fa
         print("\n  [5/7] Predictions (tous les patients)...")
     predictions_known = []
     predictions_unknown = []
-    for r in all_results:
-        p = predict_patient(r, ml)
-        if p is None:
-            continue
+    batch_preds = predict_patients_batch(all_results, ml)
+    for r, p in zip(all_results, batch_preds):
         if p["is_known"]:
             predictions_known.append(p)
         else:
