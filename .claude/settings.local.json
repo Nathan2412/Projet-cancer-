@@ -28,7 +28,15 @@
       "Bash(python -c \"import validate_external; print\\(''OK''\\)\")",
       "Bash(python -c \"import download_real_data; print\\(''SUPPLEMENTARY_STUDIES:'', list\\(download_real_data.SUPPLEMENTARY_STUDIES.keys\\(\\)\\)\\)\")",
       "Bash(python -m pytest tests/ -q)",
-      "Bash(python -c \"import ml_predictor; print\\(''OK''\\)\")"
+      "Bash(python -c \"import ml_predictor; print\\(''OK''\\)\")",
+      "Bash(python -c \":*)",
+      "Bash(ls:*)",
+      "Bash(python3:*)",
+      "Bash(find c:/Users/natha/OneDrive/ING2/dna-cancer-analysis -maxdepth 2 -name *.py)",
+      "Bash(.venv/Scripts/python.exe download_real_data.py)",
+      "Bash(tasklist /FI 'IMAGENAME eq python.exe')",
+      "Bash(.venv/Scripts/python.exe main.py --real-data)",
+      "Bash(.venv/Scripts/python.exe main.py --help)"
     ]
   }
 }

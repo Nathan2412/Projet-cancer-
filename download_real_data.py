@@ -105,30 +105,36 @@ SUPPLEMENTARY_STUDIES = {
     "ov_ccle_broad_2012":   "Ovaire",
 
     # ── Mésotheliome — actuellement 22 patients, F1=0.000 ─────────────────────
-    # MSK-IMPACT Mesothelioma 2018 — 72 patients (pleural + péritonéal)
-    "meso_mskcc_2018":      "Mesotheliome",
+    # Pleural Mesothelioma (MSK, Clin Cancer Res 2024)
+    "plmeso_msk_2024":      "Mesotheliome",
+    # Pleural Mesothelioma (NYU, Cancer Res 2015)
+    "plmeso_nyu_2015":      "Mesotheliome",
 
     # ── Testicule — actuellement 20 patients ──────────────────────────────────
-    # MSK-IMPACT Testicular GCT 2019 — ~180 patients
-    "tgct_msk_2019":        "Testicule",
+    # Testicular Germ Cell Cancer (TCGA, Firehose Legacy)
+    "tgct_tcga":            "Testicule",
 
     # ── Sarcome — actuellement 113 patients, F1=0.037 ─────────────────────────
-    # MSK Sarcoma 2017 — ~100 patients panels NGS multiples sous-types
-    "sarc_mskcc_2017":      "Sarcome",
+    # Adult Soft Tissue Sarcomas (TCGA, Cell 2017)
+    "sarc_tcga_pub":        "Sarcome",
+    # Sarcoma (MSK, Nat Commun 2022)
+    "sarcoma_msk_2022":     "Sarcome",
 
     # ── Lymphome — actuellement 17 patients, F1=0.046 ─────────────────────────
-    # DLBCL - Broad/MIT 2012 — 55 patients WES
-    "dlbcl_broad_2012":     "Lymphome",
-    # Mantle Cell Lymphoma - IDIBAPS 2017 — 61 patients
-    "mcl_idibips_2017":     "Lymphome",
+    # DLBCL (Broad, PNAS 2012) — ID corrigé
+    "dlbc_broad_2012":      "Lymphome",
+    # Mantle Cell Lymphoma (IDIBIPS, PNAS 2013) — ID corrigé
+    "mcl_idibips_2013":     "Lymphome",
 
     # ── Thymome — actuellement 11 patients, F1=0.000 ──────────────────────────
     # TCGA Thymoma (version non pan_can) — ~124 patients
     "thym_tcga":            "Thymome",
 
     # ── Neuroendocrine — actuellement 32 patients ─────────────────────────────
-    # MSK Neuroendocrine Tumors 2019 — ~200 patients (NET gastro-intestinaux, pulmonaires)
-    "neuroendocrine_msk_2019": "Neuroendocrine",
+    # Pancreatic Neuroendocrine Tumors (Multi-Institute, Nature 2017)
+    "panet_arcnet_2017":    "Neuroendocrine",
+    # Pheochromocytoma and Paraganglioma (TCGA, Firehose Legacy)
+    "pcpg_tcga":            "Neuroendocrine",
 
     # ── SurrénaleCorticale — actuellement 27 patients ─────────────────────────
     # TCGA ACC (version non pan_can) — ~79 patients corticosurrénalome
