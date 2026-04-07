@@ -293,6 +293,9 @@ TOP_K_ALLELES = 100
 # Nombre max de gènes discriminants à analyser
 TOP_K_GENES = 50
 
+# Seuil sous lequel la prediction doit etre marquee comme incertaine.
+ML_MIN_CONFIDENCE_FOR_CALL = 0.30
+
 # ============================================================================
 # Rôles biologiques des gènes (pour features et interprétabilité)
 # ============================================================================

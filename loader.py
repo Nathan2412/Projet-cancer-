@@ -8,21 +8,12 @@ import os
 from config import (
     REFERENCE_GENOME_FILE, SAMPLES_DIR, KNOWN_MUTATIONS_FILE,
     REAL_DATA_DIR, REAL_SAMPLES_DIR, REAL_REFERENCE_FILE, REAL_KNOWN_MUTATIONS_FILE,
-    CANCER_LABEL_MAPPING,
 )
-
-
-# Cancers biologiquement impossibles par sexe
-_MALE_ONLY_CANCERS = {"prostate", "testicule"}
-_FEMALE_ONLY_CANCERS = {"sein", "ovaire", "uterus", "endometre", "col utérin", "cervix"}
-
+from clinical_rules import normalize_cancer_label, sex_cancer_status
 
 def harmonize_cancer_label(label):
     """Normalise un label de cancer vers la forme canonique du projet."""
-    if not label:
-        return label
-    key = str(label).strip().lower()
-    return CANCER_LABEL_MAPPING.get(key, label)
+    return normalize_cancer_label(label)
 
 
 def validate_metadata(all_patients_data, verbose=True):
@@ -91,17 +82,16 @@ def validate_metadata(all_patients_data, verbose=True):
 
         # Cohérence sexe/cancer
         if sex and cancer_type:
-            cn = cancer_type.strip().lower()
-            if sex == "M" and cn in _FEMALE_ONLY_CANCERS:
+            status = sex_cancer_status(sex, cancer_type)
+            if status == "excluded":
                 errors_list.append(
-                    f"[{pid}] Incohérence sexe/cancer : patient M avec cancer '{cancer_type}'"
+                    f"[{pid}] Incohérence sexe/cancer : patient {sex} avec cancer '{cancer_type}'"
                 )
                 excluded_ids.append(pid)
-            elif sex == "F" and cn in _MALE_ONLY_CANCERS:
-                errors_list.append(
-                    f"[{pid}] Incohérence sexe/cancer : patient F avec cancer '{cancer_type}'"
+            elif status == "rare":
+                warnings_list.append(
+                    f"[{pid}] Cas rare mais possible : patient {sex} avec cancer '{cancer_type}'"
                 )
-                excluded_ids.append(pid)
 
     n_valid = len(all_patients_data) - len(excluded_ids)
     report = {

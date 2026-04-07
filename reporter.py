@@ -33,12 +33,14 @@ def generate_patient_text_report(patient_report, output_dir=REPORTS_DIR,
     # --- Section Classification ML (priorite 1) ---
     if ml_prediction:
         lines.append("--- CLASSIFICATION ML — CANCER PROBABLE ---")
-        pred_cancer = ml_prediction.get("predicted_cancer", "N/A")
+        pred_cancer = ml_prediction.get("final_call", ml_prediction.get("predicted_cancer", "N/A"))
         confidence = ml_prediction.get("confidence", 0)
         model_used = ml_prediction.get("model_used", "N/A")
         lines.append(f"  Cancer predit:       {pred_cancer}")
         lines.append(f"  Confiance:           {confidence:.2%}")
         lines.append(f"  Modele:              {model_used}")
+        if ml_prediction.get("is_uncertain"):
+            lines.append("  Statut:              prediction incertaine (confiance sous seuil)")
 
         top3 = ml_prediction.get("top3", [])
         if top3:
@@ -158,7 +160,7 @@ def generate_cohort_csv_export(all_patients_results, output_dir=REPORTS_DIR,
         "Total_Mutations", "Densite_Mutationnelle_Panel", "Risque_Global",
         "Cancer_Max_Risque", "Score_Max_Risque", "Niveau_Max_Risque",
         "N_Hotspots", "N_Pathogeniques", "N_Oncogenes", "N_Suppresseurs",
-        "Cancer_ML_Predit", "Confiance_ML", "Top2_Cancer", "Top3_Cancer",
+        "Cancer_ML_Predit", "Cancer_ML_Affiche", "Confiance_ML", "Top2_Cancer", "Top3_Cancer",
         "Cancer_ML_Correct",
     ]
 
@@ -207,6 +209,7 @@ def generate_cohort_csv_export(all_patients_results, output_dir=REPORTS_DIR,
                 pr.get("n_oncogenes_mutated", 0),
                 pr.get("n_suppressors_mutated", 0),
                 mp.get("predicted_cancer", ""),
+                mp.get("final_call", ""),
                 round(mp.get("confidence", 0), 4) if mp else "",
                 top2_cancer,
                 top3_cancer,
@@ -242,7 +245,7 @@ def generate_cohort_summary_report(all_patients_results, output_dir=REPORTS_DIR,
             pid = pr["patient_id"]
             mp = pred_by_pid.get(pid, {})
             cancer_known = meta.get("cancer_type", "-") or "-"
-            pred = mp.get("predicted_cancer", "-")
+            pred = mp.get("final_call", mp.get("predicted_cancer", "-"))
             conf = mp.get("confidence", 0)
             ok = "OK" if mp.get("correct") else ("ERR" if mp.get("correct") is False else "?")
             lines.append(

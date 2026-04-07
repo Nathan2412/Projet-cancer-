@@ -11,6 +11,7 @@ import os
 import sys
 import time
 import random
+import hashlib
 import urllib.request
 import urllib.error
 import urllib.parse
@@ -174,6 +175,53 @@ ENTREZ_TO_GENE = {v: k for k, v in GENE_ENTREZ_IDS.items()}
 REAL_DATA_DIR = os.path.join(DATA_DIR, "real")
 REAL_SAMPLES_DIR = os.path.join(REAL_DATA_DIR, "samples")
 CHECKPOINT_DIR = os.path.join(REAL_DATA_DIR, "checkpoints")
+
+
+def _stable_gene_seed(gene_name):
+    """Seed deterministe entre sessions Python."""
+    digest = hashlib.sha256(gene_name.encode("utf-8")).hexdigest()
+    return int(digest[:16], 16)
+
+
+def build_dataset_manifest(cohort_summary):
+    """Construit un manifeste reproductible des datasets integres."""
+    studies = {}
+    cancer_counts = Counter()
+    severity_counts = Counter()
+
+    for patient in cohort_summary:
+        study_id = patient.get("original_study", "unknown")
+        cancer_type = patient.get("cancer_type", "unknown")
+        severity = patient.get("severity", "unknown")
+        cancer_counts[cancer_type] += 1
+        severity_counts[severity] += 1
+
+        study_info = studies.setdefault(study_id, {
+            "n_patients": 0,
+            "cancer_types": Counter(),
+        })
+        study_info["n_patients"] += 1
+        study_info["cancer_types"][cancer_type] += 1
+
+    manifest_studies = {}
+    for study_id, info in sorted(studies.items()):
+        manifest_studies[study_id] = {
+            "n_patients": info["n_patients"],
+            "cancer_types": dict(sorted(info["cancer_types"].items())),
+        }
+
+    return {
+        "total_patients": len(cohort_summary),
+        "total_genes": len(GENE_ENTREZ_IDS),
+        "study_groups": {
+            "tcga": sorted(TCGA_STUDIES.keys()),
+            "mixed": sorted(MIXED_COHORT_STUDIES.keys()),
+            "supplementary": sorted(SUPPLEMENTARY_STUDIES.keys()),
+        },
+        "studies": manifest_studies,
+        "cancer_type_counts": dict(sorted(cancer_counts.items())),
+        "severity_counts": dict(sorted(severity_counts.items())),
+    }
 
 
 # =============================================================================
@@ -578,8 +626,8 @@ def generate_reference_for_real_data():
         # Pour les tres grands genes, limiter a 20kb (sinon trop lourd)
         gene_length = min(gene_length, 20000)
         # Generer une sequence de reference (simplifiee)
-        random.seed(hash(gene_name))  # Reproductible
-        seq = "".join(random.choice("ATCG") for _ in range(gene_length))
+        rng = random.Random(_stable_gene_seed(gene_name))
+        seq = "".join(rng.choice("ATCG") for _ in range(gene_length))
         sequences[gene_name] = seq
 
     ref_file = os.path.join(REAL_DATA_DIR, "reference.fasta")
@@ -930,6 +978,11 @@ def download_all():
     with open(summary_file, "w") as f:
         json.dump(cohort_summary, f, indent=2)
 
+    manifest = build_dataset_manifest(cohort_summary)
+    manifest_file = os.path.join(REAL_DATA_DIR, "dataset_manifest.json")
+    with open(manifest_file, "w") as f:
+        json.dump(manifest, f, indent=2)
+
     # ── Statistiques finales ──────────────────────────────────────────────────
     print("\n" + "=" * 60)
     print("  TELECHARGEMENT TERMINE")
@@ -942,6 +995,7 @@ def download_all():
     print(f"  Genes: {len(GENE_ENTREZ_IDS)}")
     print(f"  Sources: TCGA ({len(TCGA_STUDIES)} etudes) + MSK-IMPACT + {len(SUPPLEMENTARY_STUDIES)} etudes supplementaires")
     print(f"  Donnees dans: {REAL_DATA_DIR}")
+    print(f"  Manifeste datasets: {manifest_file}")
     print(f"\n  Repartition par cancer ({len(cancer_counts)} types):")
     for cancer, count in sorted(cancer_counts.items(), key=lambda x: -x[1]):
         print(f"    {cancer}: {count}")
@@ -949,7 +1003,7 @@ def download_all():
     for sev, count in sorted(severity_counts.items()):
         print(f"    {sev}: {count}")
     print(f"\n  Pour lancer l'analyse:")
-    print(f"    python main.py --real-data")
+    print(f"    python main.py --mode real")
     print("=" * 60)
 
 

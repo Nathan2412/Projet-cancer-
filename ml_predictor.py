@@ -13,6 +13,7 @@ Architecture :
 import os, json, time, logging
 import numpy as np
 from collections import Counter, defaultdict
+from clinical_rules import sex_cancer_status
 
 logger = logging.getLogger("ml_predictor")
 from config import (
@@ -21,6 +22,7 @@ from config import (
     ALLELE_MAX_OUTSIDE_FREQUENCY, ALLELE_MIN_ENRICHMENT, ALLELE_MAX_PER_CANCER,
     USE_GENE_FEATURES, USE_ALLELE_FEATURES, USE_AGE_FEATURES,
     USE_SEX_FEATURES, USE_HOTSPOT_FEATURES, MIN_ENRICHMENT,
+    ML_MIN_CONFIDENCE_FOR_CALL,
 )
 from ml_model_selection import evaluate_models_nested_cv
 from ml_sectorization import run_sectorization
@@ -310,27 +312,23 @@ def apply_sex_constraints(probabilities, sex):
     - Exclusion totale (prob=0) : cancers anatomiquement impossibles
     - Pénalité ×0.1 : cancers très rares mais biologiquement possibles
     """
-    sex_val = str(sex or "unknown").strip().upper()
-    if sex_val == "F":
-        # Exclusions anatomiques totales pour une patiente
-        impossible_f = {"prostate"}
-        for key in list(probabilities.keys()):
-            if key.lower() in impossible_f:
-                probabilities[key] = 0.0
-    if sex_val == "M":
-        # Exclusions anatomiques totales pour un patient masculin
-        impossible_m = {"ovaire", "uterus", "cervical"}
-        # Sein masculin : rare (~1% des cas) — pénalité plutôt qu'exclusion
-        rare_m = {"sein"}
-        for key in list(probabilities.keys()):
-            if key.lower() in impossible_m:
-                probabilities[key] = 0.0
-            elif key.lower() in rare_m:
-                probabilities[key] *= 0.1
+    for key in list(probabilities.keys()):
+        status = sex_cancer_status(sex, key)
+        if status == "excluded":
+            probabilities[key] = 0.0
+        elif status == "rare":
+            probabilities[key] *= 0.1
     total = sum(probabilities.values())
     if total > 0:
         probabilities = {k: v / total for k, v in probabilities.items()}
     return probabilities
+
+
+def _prediction_call(predicted_cancer, confidence):
+    """Retourne le libelle final de prediction et son statut de confiance."""
+    is_uncertain = confidence < ML_MIN_CONFIDENCE_FOR_CALL
+    label = "Prediction incertaine" if is_uncertain else predicted_cancer
+    return label, is_uncertain
 
 
 def predict_patient(patient_result, ml):
@@ -385,6 +383,8 @@ def predict_patients_batch(patient_results, ml):
 
         sorted_probas = sorted(probas.items(), key=lambda x: x[1], reverse=True)
         top3 = sorted_probas[:3]
+        confidence = probas.get(pred, 0)
+        final_call, is_uncertain = _prediction_call(pred, confidence)
 
         X1 = X[i:i+1]
         top_features = _get_top_features_for_patient(X1, f, model, ml, pred)
@@ -394,14 +394,16 @@ def predict_patients_batch(patient_results, ml):
         results.append(dict(
             patient_id=r.get("patient_id"),
             predicted_cancer=pred,
+            final_call=final_call,
             actual_cancer=actual or "Inconnu",
             correct=(pred == actual) if is_known else None,
-            confidence=probas.get(pred, 0),
+            confidence=confidence,
             probabilities=dict(sorted_probas),
             top3=top3,
             top_features=top_features,
             model_used=ml["best_model_name"],
             is_known=is_known,
+            is_uncertain=is_uncertain,
         ))
     return results
 
@@ -598,6 +600,7 @@ def _report_text(ml, predictions_known, predictions_unknown=None, signatures=Non
         L.append(format_signatures_summary(signatures))
 
     L.append(f"\n  Entrainement : {ml['training_time_seconds']}s")
+    L.append(f"  Seuil prediction certaine : {ML_MIN_CONFIDENCE_FOR_CALL:.2f}")
     L.append(f"  {'Modele':<22} {'Bal.Acc':>8} {'F1-macro':>9} {'F1-w':>7} {'Top-3':>7} {'AUC':>7}")
     L.append("  " + "-" * 72)
     for n, d in ml["models"].items():
@@ -648,8 +651,10 @@ def _report_text(ml, predictions_known, predictions_unknown=None, signatures=Non
             top3 = p.get("top3", [])
             top2_str = f"{top3[1][0]}={top3[1][1]:.2f}" if len(top3) > 1 else ""
             top3_str = f"{top3[2][0]}={top3[2][1]:.2f}" if len(top3) > 2 else ""
-            L.append(f"  {p['patient_id']:<12} {p['predicted_cancer']:<18} "
+            status = "INCERTAIN" if p.get("is_uncertain") else "OK"
+            L.append(f"  {p['patient_id']:<12} {p.get('final_call', p['predicted_cancer']):<18} "
                      f"{p['confidence']:>6.3f} {top2_str:<16} {top3_str}")
+            L.append(f"    -> statut: {status}")
             tf = p.get("top_features", [])
             if tf:
                 feat_str = ", ".join(f"{t['feature']}={t['patient_value']}" for t in tf[:3])
@@ -712,7 +717,7 @@ def _report_html(ml, predictions_known, predictions_unknown=None, signatures=Non
             sym = "&#10003;" if p["correct"] else "&#10007;"
             pred_rows += (
                 f'<tr><td>{p["patient_id"]}</td><td>{p["actual_cancer"]}</td>'
-                f'<td>{p["predicted_cancer"]}</td><td>{p["confidence"]:.3f}</td>'
+                f'<td>{p.get("final_call", p["predicted_cancer"])}</td><td>{p["confidence"]:.3f}</td>'
                 f'<td style="{css};font-weight:bold">{sym}</td></tr>\n')
 
     # Unknown predictions
@@ -726,7 +731,7 @@ def _report_html(ml, predictions_known, predictions_unknown=None, signatures=Non
         cluster = p.get("cluster", "?")
         unknown_rows += (
             f'<tr><td>{p["patient_id"]}</td>'
-            f'<td><b>{p["predicted_cancer"]}</b></td>'
+            f'<td><b>{p.get("final_call", p["predicted_cancer"])}</b></td>'
             f'<td>{p["confidence"]:.3f}</td>'
             f'<td>{cluster}</td>'
             f'<td>{top_as}</td></tr>\n')
@@ -1103,7 +1108,7 @@ def run_ml_pipeline(all_results, generate_plots=True, verbose=True, use_cache=Fa
             class_distribution=dict(_C(y_train)),
             best_model_name=_cached["best_model_name"],
             best_f1_macro=_cached["f1_macro"],
-            best_model_balanced_acc=_cached["best_model_name"],
+            best_model_balanced_acc=None,
             _best_model=_cached["model"],
             _variance_threshold=_cached.get("variance_threshold"),
             _signatures=_cached.get("signatures", {}),
@@ -1232,6 +1237,7 @@ def run_ml_pipeline(all_results, generate_plots=True, verbose=True, use_cache=Fa
         best_model=ml["best_model_name"],
         best_f1_macro=ml["best_f1_macro"],
         best_model_balanced_acc=ml.get("best_model_balanced_acc"),
+        confidence_threshold=ML_MIN_CONFIDENCE_FOR_CALL,
         n_samples_labeled=n_labeled,
         n_samples_total=n_total,
         n_features=ml["n_features"],
@@ -1261,7 +1267,9 @@ def run_ml_pipeline(all_results, generate_plots=True, verbose=True, use_cache=Fa
         predictions_unknown=[
             dict(patient_id=p["patient_id"],
                  predicted_cancer=p["predicted_cancer"],
+                 final_call=p.get("final_call", p["predicted_cancer"]),
                  confidence=p["confidence"],
+                 is_uncertain=p.get("is_uncertain", False),
                  top3=p.get("top3", []),
                  top_features=p.get("top_features", []),
                  cluster=p.get("cluster"),

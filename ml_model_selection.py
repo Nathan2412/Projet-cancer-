@@ -52,6 +52,13 @@ def _apply_smote(X_train, y_train, random_state=42):
         return X_train, y_train
 
 
+def _fit_with_optional_smote(estimator, X_train, y_train, random_state=42):
+    """Entraine l'estimateur avec la meme logique que dans les folds de CV."""
+    X_train_fit, y_train_fit = _apply_smote(X_train, y_train, random_state=random_state)
+    estimator.fit(X_train_fit, y_train_fit)
+    return estimator
+
+
 def _add_fold_allele_features(X, patient_results, fold_signatures):
     """Ajoute des features allele-score calculees a partir de signatures de fold.
     Retourne X augmente (ou X inchange si pas de signatures)."""
@@ -368,11 +375,12 @@ def evaluate_models_nested_cv(X, y_enc, class_names, feature_names,
 
                 # SMOTE appliqué APRÈS la sélection des hyperparamètres, sur le fold
                 # d'entraînement complet, pour entraîner le modèle final du fold.
-                X_train_smote, y_train_smote = _apply_smote(X_train, y_train, random_state=random_state)
                 est_best = clone(spec["estimator"])
                 pipe_best = est_best if isinstance(est_best, Pipeline) else Pipeline([("model", est_best)])
                 pipe_best.set_params(**grid.best_params_)
-                pipe_best.fit(X_train_smote, y_train_smote)
+                pipe_best = _fit_with_optional_smote(
+                    pipe_best, X_train, y_train, random_state=random_state
+                )
                 best_fold_model = pipe_best
 
                 y_hat = best_fold_model.predict(X_test)
@@ -411,7 +419,10 @@ def evaluate_models_nested_cv(X, y_enc, class_names, feature_names,
                     n_jobs=-1,
                 )
             grid_full.fit(X_full, y_enc)
-            best_model_full = grid_full.best_estimator_
+            best_model_full = clone(grid_full.best_estimator_)
+            best_model_full = _fit_with_optional_smote(
+                best_model_full, X_full, y_enc, random_state=random_state
+            )
 
             y_train_pred = best_model_full.predict(X_full)
 

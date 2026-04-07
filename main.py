@@ -16,7 +16,6 @@ warnings.filterwarnings("ignore", module="urllib3")
 warnings.filterwarnings("ignore", category=DeprecationWarning, module="sklearn")
 import shutil
 import time
-import json
 from collections import defaultdict
 
 try:
@@ -27,25 +26,11 @@ except ImportError:
 
 # ── Logging ──────────────────────────────────────────────────────────────────
 _LOG_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "output", "logs")
-os.makedirs(_LOG_DIR, exist_ok=True)
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
-    datefmt="%Y-%m-%d %H:%M:%S",
-    handlers=[
-        logging.FileHandler(os.path.join(_LOG_DIR, "pipeline.log"), encoding="utf-8"),
-        logging.StreamHandler(sys.stdout),
-    ],
-)
-# Réduire le bruit des bibliothèques tierces
-logging.getLogger("sklearn").setLevel(logging.WARNING)
-logging.getLogger("matplotlib").setLevel(logging.WARNING)
-logging.getLogger("urllib3").setLevel(logging.WARNING)
 
 logger = logging.getLogger("main")
-from config import REPORTS_DIR, PLOTS_DIR
+from config import REPORTS_DIR, PLOTS_DIR, setup_directories
 from loader import (
-    load_reference, load_patient_data, load_all_patients,
+    load_reference, load_patient_data,
     load_known_mutations, get_patient_list,
     load_reference_real, load_known_mutations_real,
     get_patient_list_real, load_patient_data_real
@@ -55,18 +40,15 @@ from mutations import (
     analyze_gene_mutations, classify_mutation_impact,
     compute_mutation_spectrum, compute_mutation_density, find_mutation_hotspots
 )
-from annotator import annotate_gene_mutations, summarize_annotations
+from annotator import annotate_gene_mutations
 from correlator import (
     generate_patient_risk_report,
     build_cohort_mutation_matrix,
     compute_gene_cancer_correlation,
-    compute_mutation_signature
 )
 from visualizer import (
-    generate_all_patient_plots,
     plot_cohort_mutation_heatmap,
     plot_impact_distribution,
-    plot_mutation_density,
     check_matplotlib
 )
 from reporter import (
@@ -75,6 +57,24 @@ from reporter import (
     save_json_results
 )
 from ml_predictor import run_ml_pipeline
+
+
+def configure_logging():
+    """Configure le logging sans effet de bord a l'import."""
+    os.makedirs(_LOG_DIR, exist_ok=True)
+    logging.basicConfig(
+        level=logging.INFO,
+        format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
+        datefmt="%Y-%m-%d %H:%M:%S",
+        handlers=[
+            logging.FileHandler(os.path.join(_LOG_DIR, "pipeline.log"), encoding="utf-8"),
+            logging.StreamHandler(sys.stdout),
+        ],
+        force=True,
+    )
+    logging.getLogger("sklearn").setLevel(logging.WARNING)
+    logging.getLogger("matplotlib").setLevel(logging.WARNING)
+    logging.getLogger("urllib3").setLevel(logging.WARNING)
 
 
 def analyze_single_patient(patient_id, reference, known_db, verbose=True):
@@ -515,7 +515,7 @@ def run_real_data_analysis(generate_plots=True, verbose=True, n_jobs=1, use_cach
     return all_results
 
 
-if __name__ == "__main__":
+def parse_args():
     parser = argparse.ArgumentParser(
         description="Pipeline d'analyse genomique ADN -> Mutations -> Cancer"
     )
@@ -544,8 +544,21 @@ if __name__ == "__main__":
         help="Nombre de processus paralleles pour l'analyse patient (defaut: 1). "
              "Utiliser -1 pour tous les CPUs."
     )
+    parser.add_argument(
+        "--real-data", action="store_true",
+        help="Alias de compatibilite pour --mode real."
+    )
 
     args = parser.parse_args()
+    if args.real_data:
+        args.mode = "real"
+    return args
+
+
+if __name__ == "__main__":
+    setup_directories()
+    configure_logging()
+    args = parse_args()
 
     if args.mode == "real":
         run_real_data_analysis(
