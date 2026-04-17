@@ -479,6 +479,7 @@ CANCER_LABEL_MAPPING = {
     "bile duct": "Foie",
     # Mappings supplémentaires MSK-IMPACT
     "non-small cell lung cancer": "Poumon",
+
     "nsclc": "Poumon",
     "colorectal cancer": "Colon",
     "crc": "Colon",
@@ -502,3 +503,81 @@ CANCER_LABEL_MAPPING = {
     # (hémopathies malignes myéloïdes — plus proche biologiquement que Lymphome)
     "multiple myeloma": "Leucemie",
 }
+
+# ============================================================================
+# Hiérarchie des types de cancer — regroupement des classes rares
+#
+# Objectif : les classes avec < MIN_SAMPLES_FOR_STANDALONE patients ne peuvent
+# pas être apprises de façon fiable par le modèle ML (F1 ≈ 0, absorbées par
+# les classes dominantes). On les regroupe en super-classes biologiquement
+# cohérentes pour obtenir un signal apprenable.
+#
+# La hiérarchie est optionnelle : activée via USE_CANCER_HIERARCHY = True.
+# En mode hiérarchique, le modèle prédit d'abord la super-classe, puis un
+# second classifieur (entraîné sur la super-classe uniquement) affine.
+#
+# Structure : { groupe: [types_de_cancer_membres] }
+# ============================================================================
+
+# Seuil minimal de patients pour une classe autonome
+MIN_SAMPLES_FOR_STANDALONE = 50
+
+# Active le regroupement hiérarchique des classes rares (désactivé par défaut)
+USE_CANCER_HIERARCHY = False
+
+# Groupes biologiques cohérents pour les classes rares
+CANCER_HIERARCHY = {
+    # ── Hémopathies malignes ─────────────────────────────────────────────────
+    # IDH1/IDH2, FLT3, NPM1 pour leucémie ; BCL2, MYC pour lymphome.
+    # Regroupés car profil mutationnel similaire sur ce panel.
+    "HematologieMaligne": [
+        "Leucemie",      # AML, CML, CLL
+        "Lymphome",      # DLBCL, MCL, folliculaire
+    ],
+    # ── Tumeurs rares sans signature sur ce panel ────────────────────────────
+    # Ces cancers ont une biologie driver chromosomique (NF2→méso, GTD→thymome)
+    # ou transcriptomique que les 26 gènes du panel ne capturent pas.
+    "TumeursRaresPanelLimite": [
+        "Mesotheliome",        # NF2, BAP1 — absents du panel
+        "Thymome",             # HRAS, GTD — absents du panel
+        "SurrenaleCorticale",  # CTNNB1, TP53 — overlap trop générique
+    ],
+    # ── Tumeurs neuroendocrines ──────────────────────────────────────────────
+    # MEN1, DAXX/ATRX, VHL — présents partiellement dans le panel.
+    "Neuroendocrine": [
+        "Neuroendocrine",  # phéochromocytome, paragangliome, pNET
+    ],
+    # ── Tumeurs germinales ────────────────────────────────────────────────────
+    # KRAS, KIT — profil distinct des autres cancers solides.
+    "TumeursGerminales": [
+        "Testicule",
+    ],
+}
+
+def apply_cancer_hierarchy(cancer_type, min_samples_map=None):
+    """
+    Retourne le groupe hiérarchique d'un type de cancer si USE_CANCER_HIERARCHY
+    est activé ET si le type de cancer est dans un groupe défini.
+
+    Args:
+        cancer_type : le label cancer d'un patient (ex: "Lymphome")
+        min_samples_map : dict {cancer_type: n_patients} pour décider si
+                          la classe est trop petite pour être autonome.
+                          Si None, utilise CANCER_HIERARCHY directement.
+
+    Returns:
+        Le label final (groupé ou original).
+    """
+    if not USE_CANCER_HIERARCHY:
+        return cancer_type
+
+    for group, members in CANCER_HIERARCHY.items():
+        if cancer_type in members:
+            # Si min_samples_map fourni, ne regrouper que si < seuil
+            if min_samples_map is not None:
+                n = min_samples_map.get(cancer_type, 0)
+                if n >= MIN_SAMPLES_FOR_STANDALONE:
+                    return cancer_type   # assez de samples → autonome
+            return group
+
+    return cancer_type

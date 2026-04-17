@@ -524,7 +524,12 @@ def build_patient_metadata(patient_id, clinical_data, cancer_type_fr, mutations)
         "age": age or random.randint(35, 80),
         "sex": sex if sex is not None else "unknown",
         "data_source": "TCGA_PanCancer_Atlas",
-        "is_real_data": True
+        "is_real_data": True,
+        # study_id : identifiant cBioPortal de la cohorte d'origine.
+        # Utilisé par GroupKFold pour éviter que le modèle apprenne
+        # le "style" d'une étude plutôt que le signal tumoral réel.
+        # Renseigné par download_real_data lors de la sauvegarde.
+        "study_id": "",
     }
 
 
@@ -950,6 +955,8 @@ def download_all():
         )
         metadata["original_patient_id"] = patient_data["original_id"]
         metadata["original_study"] = patient_data["study_id"]
+        # study_id : copié dans le champ standard utilisé par GroupKFold.
+        metadata["study_id"] = patient_data["study_id"]
 
         with open(os.path.join(patient_dir, "metadata.json"), "w") as f:
             json.dump(metadata, f, indent=2)

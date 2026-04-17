@@ -166,12 +166,20 @@ def compute_likelihood_profile(all_annotations, gene_specificity_table=None, sex
     if not raw_scores:
         return {}
 
-    # Normaliser en probabilités (softmax simplifié)
-    total = sum(raw_scores.values())
+    # Normalisation softmax : exp(score_i) / Σ exp(score_j)
+    # Avantage vs normalisation proportionnelle (score/total) :
+    #  - amplifie les hauts scores → distribution plus piquée sur le cancer dominant
+    #  - comprime les bas scores → évite que beaucoup de mutations non-spécifiques
+    #    diluent la probabilité du cancer le plus probable.
+    # On centre les scores pour la stabilité numérique (softmax shift-invariant).
+    max_score = max(raw_scores.values())
+    exp_scores = {c: math.exp(s - max_score) for c, s in raw_scores.items()}
+    total_exp = sum(exp_scores.values())
+
     result = {}
     for cancer, score in sorted(raw_scores.items(), key=lambda x: x[1], reverse=True):
         result[cancer] = {
-            "likelihood": round(score / max(total, 1e-9), 4),
+            "likelihood": round(exp_scores[cancer] / max(total_exp, 1e-9), 4),
             "raw_score": round(score, 4),
             "supporting_genes": sorted(supporting_genes[cancer]),
             "supporting_alleles": sorted(
@@ -273,14 +281,17 @@ def compute_gene_cancer_correlation(all_patients_results):
 
     for patient_result in all_patients_results:
         cancer_type = patient_result.get("metadata", {}).get("cancer_type")
-        severity = patient_result.get("metadata", {}).get("severity", "")
         patient_id = patient_result.get("patient_id", "")
 
         for gene_name, analysis in patient_result.get("gene_analyses", {}).items():
             num_mut = analysis.get("total_mutations", 0)
             gene_total_mutations[gene_name] += num_mut
 
-            if cancer_type and severity in ("high", "extreme"):
+            # Inclure tous les patients avec un cancer_type connu.
+            # NOTE : l'ancien filtre `severity in ("high", "extreme")` excluait
+            # tous les patients TCGA réels car ce champ n'existe que dans les
+            # données synthétiques — biais de sélection supprimé.
+            if cancer_type:
                 cancer_patient_totals[cancer_type].add(patient_id)
                 if num_mut > 0:
                     gene_cancer_patients[gene_name][cancer_type].add(patient_id)
@@ -330,34 +341,64 @@ def compute_mutation_signature(all_annotations):
 
 
 def identify_cosmic_signature(spectrum):
-    cosmic_patterns = {
-        "SBS1 (age)": {"C>T": 0.6},
-        "SBS4 (tabac)": {"C>A": 0.4},
-        "SBS6 (MMR deficient)": {"C>T": 0.3, "T>C": 0.3},
-        "SBS7 (UV)": {"C>T": 0.7},
-        "SBS2 (APOBEC)": {"C>T": 0.3, "C>G": 0.3},
-        "SBS13 (APOBEC)": {"C>G": 0.4},
-        "SBS22 (aristolochic acid)": {"T>A": 0.5},
+    """
+    Identifie les signatures SBS COSMIC les plus proches du spectre observé.
+
+    Utilise les 6 types de substitution canoniques normalisés en contexte
+    pyrimidique (C>A, C>G, C>T, T>A, T>C, T>G) — les 96 contextes trinucléotidiques
+    complets nécessiteraient les séquences flanquantes non disponibles ici.
+
+    Les profils de référence sont les proportions attendues de chaque type de
+    substitution d'après les signatures COSMIC v3.3 :
+    https://cancer.sanger.ac.uk/signatures/sbs/
+
+    Chaque signature est représentée par ses 6 composantes normalisées à 1.0.
+    La similarité est calculée par cosinus entre le vecteur observé et le vecteur
+    de référence (plus robuste que la différence absolue composante par composante).
+    """
+    # Les 6 types canoniques (contexte pyrimidique)
+    SBS_TYPES = ["C>A", "C>G", "C>T", "T>A", "T>C", "T>G"]
+
+    # Profils COSMIC v3.3 — proportions des 6 types de substitution
+    # (somme de toutes les composantes trinucléotidiques agrégées par paire de bases)
+    # Source: https://cancer.sanger.ac.uk/signatures/sbs/
+    COSMIC_PROFILES = {
+        "SBS1 (déamination méthylcytosine/âge)": [0.11, 0.02, 0.68, 0.03, 0.11, 0.05],
+        "SBS2 (APOBEC)":                         [0.03, 0.04, 0.71, 0.02, 0.14, 0.06],
+        "SBS4 (tabac/HAP)":                      [0.42, 0.06, 0.13, 0.09, 0.14, 0.16],
+        "SBS6 (déficience MMR)":                 [0.09, 0.07, 0.38, 0.06, 0.28, 0.12],
+        "SBS7a (UV/dommage TT)":                 [0.06, 0.02, 0.78, 0.02, 0.07, 0.05],
+        "SBS13 (APOBEC C>G)":                    [0.05, 0.53, 0.22, 0.04, 0.09, 0.07],
+        "SBS17b (5-FU)":                         [0.04, 0.06, 0.07, 0.10, 0.15, 0.58],
+        "SBS22 (acide aristolochique)":          [0.03, 0.02, 0.07, 0.67, 0.16, 0.05],
+        "SBS29 (tabac/mastication)":             [0.38, 0.05, 0.14, 0.18, 0.13, 0.12],
+        "SBS40 (signature âge ubiquitaire)":     [0.13, 0.05, 0.30, 0.09, 0.32, 0.11],
     }
 
+    # Construire le vecteur observé (6 dimensions)
+    obs_vec = []
+    total_snps = sum(spectrum.get(t, {}).get("count", 0) for t in SBS_TYPES)
+    for t in SBS_TYPES:
+        obs_vec.append(spectrum.get(t, {}).get("frequency", 0.0))
+
+    # Si aucun SNP observé, retourner liste vide
+    obs_norm = sum(v * v for v in obs_vec) ** 0.5
+    if obs_norm < 1e-9:
+        return []
+
     matches = []
-    for sig_name, pattern in cosmic_patterns.items():
-        similarity = 0.0
-        comparisons = 0
+    for sig_name, ref_vec in COSMIC_PROFILES.items():
+        # Similarité cosinus
+        dot = sum(o * r for o, r in zip(obs_vec, ref_vec))
+        ref_norm = sum(r * r for r in ref_vec) ** 0.5
+        cosine_sim = dot / (obs_norm * ref_norm) if ref_norm > 1e-9 else 0.0
 
-        for change, expected_freq in pattern.items():
-            observed = spectrum.get(change, {}).get("frequency", 0)
-            diff = abs(observed - expected_freq)
-            similarity += max(0, 1 - diff * 2)
-            comparisons += 1
-
-        if comparisons > 0:
-            avg_similarity = similarity / comparisons
-            if avg_similarity > 0.3:
-                matches.append({
-                    "signature": sig_name,
-                    "similarity": round(avg_similarity, 3)
-                })
+        if cosine_sim > 0.60:   # seuil conservateur — cosinus > 0.6 = bonne similarité
+            matches.append({
+                "signature": sig_name,
+                "similarity": round(cosine_sim, 3),
+                "profile": dict(zip(SBS_TYPES, [round(v, 3) for v in ref_vec])),
+            })
 
     return sorted(matches, key=lambda x: x["similarity"], reverse=True)
 

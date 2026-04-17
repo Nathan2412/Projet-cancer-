@@ -235,21 +235,46 @@ def _feature_importance_from_pipeline(pipeline, feature_names):
 
 def evaluate_models_nested_cv(X, y_enc, class_names, feature_names,
                                labeled_results=None, allele_params=None,
-                               n_splits=5, random_state=42, verbose=True):
+                               n_splits=5, random_state=42, verbose=True,
+                               group_ids=None):
     """Évalue plusieurs modèles avec nested CV (inner tuning + outer test).
-    
-    Si labeled_results et allele_params sont fournis, les signatures d'alleles
-    sont recalculees dans chaque fold uniquement sur les donnees d'entrainement,
-    evitant ainsi toute fuite de donnees vers le fold de test.
+
+    Args:
+        X, y_enc, class_names, feature_names : données et labels encodés.
+        labeled_results : résultats patients bruts (pour features allele per-fold).
+        allele_params : paramètres build_cancer_allele_signatures.
+        n_splits : nombre de folds outer CV.
+        random_state : graine aléatoire.
+        verbose : affichage progression.
+        group_ids : tableau de même longueur que y_enc contenant l'identifiant
+                    de cohorte/étude par patient (ex: "brca_tcga_pan_can_atlas_2018").
+                    Si fourni, utilise GroupKFold au lieu de StratifiedKFold pour
+                    éviter le biais de cohorte : le modèle ne peut pas apprendre
+                    le "style" d'une étude plutôt que le signal tumoral.
+                    Si None, repli sur StratifiedKFold.
+
+    Note sur la fuite de données :
+        Les signatures d'alleles sont recalculées dans chaque fold uniquement
+        sur les données d'entraînement, évitant toute fuite vers le fold de test.
     """
     from collections import Counter
+    from sklearn.model_selection import GroupKFold
+
     min_class_size = min(Counter(y_enc).values())
     n_splits = min(n_splits, max(2, min_class_size))
     if verbose:
         print(f"    (n_splits ajuste a {n_splits} selon taille min classe={min_class_size})")
 
     specs = get_model_specs(random_state=random_state)
-    if min_class_size >= n_splits:
+
+    # ── Choix du CV outer : GroupKFold > StratifiedKFold > KFold ────────────
+    if group_ids is not None:
+        n_groups = len(set(group_ids))
+        n_splits_group = min(n_splits, n_groups)
+        outer_cv = GroupKFold(n_splits=n_splits_group)
+        if verbose:
+            print(f"    (GroupKFold n_splits={n_splits_group} sur {n_groups} cohortes)")
+    elif min_class_size >= n_splits:
         outer_cv = StratifiedKFold(n_splits=n_splits, shuffle=True, random_state=random_state)
     else:
         from sklearn.model_selection import KFold
@@ -300,7 +325,8 @@ def evaluate_models_nested_cv(X, y_enc, class_names, feature_names,
             fold_f1 = []
             fold_acc = []
 
-            for train_idx, test_idx in outer_cv.split(X, y_enc):
+            split_args = (X, y_enc, group_ids) if group_ids is not None else (X, y_enc)
+            for train_idx, test_idx in outer_cv.split(*split_args):
                 X_train_base, X_test_base = X[train_idx], X[test_idx]
                 y_train, y_test = y_enc[train_idx], y_enc[test_idx]
 
@@ -360,15 +386,22 @@ def evaluate_models_nested_cv(X, y_enc, class_names, feature_names,
                         error_score=0.0,
                     )
                     grid.fit(X_train, y_train)
-                except Exception:
-                    # Fallback sur GridSearchCV si HalvingGridSearchCV échoue
-                    # (ex: trop peu d'échantillons pour le halving)
+                except (ValueError, MemoryError) as _halving_err:
+                    # Fallback sur GridSearchCV uniquement pour les erreurs connues
+                    # de HalvingGridSearchCV (trop peu d'échantillons, OOM).
+                    # Les autres exceptions (bug code, type mismatch) remontent.
+                    import logging as _log
+                    _log.getLogger("ml_model_selection").warning(
+                        "HalvingGridSearchCV échoué pour %s (fold) : %s — "
+                        "fallback sur GridSearchCV", model_name, _halving_err
+                    )
                     grid = GridSearchCV(
                         estimator=pipe,
                         param_grid=spec["param_grid"],
                         scoring="f1_macro",
                         cv=inner_cv,
                         n_jobs=-1,
+                        error_score=0.0,
                     )
                     grid.fit(X_train, y_train)
                 fold_best_params.append(_strip_model_prefix(grid.best_params_))

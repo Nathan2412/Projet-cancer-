@@ -151,26 +151,61 @@ def detect_deletions(reads, reference_seq):
 
 
 def classify_mutation_impact(mutation, gene_info=None):
+    """
+    Classifie l'impact fonctionnel d'une mutation.
+
+    Priorité (ordre décroissant) :
+      1. Indels : frameshift (longueur % 3 != 0) ou grande taille → HIGH
+                  in-frame → MODERATE
+      2. SNP : type cBioPortal (mutationType) si disponible
+      3. SNP : protein_change contenant '*' (STOP) ou 'fs' (frameshift)
+      4. SNP : annotation is_hotspot → HIGH
+      5. SNP : protein_change non-vide → MODERATE (missense probable)
+      6. Défaut → MODIFIER
+
+    NOTE : la fréquence allélique (VAF) n'est PAS utilisée pour classifier
+    l'impact fonctionnel — une mutation à VAF faible peut être très pathogène
+    (ex: KRAS G12D à 5% dans un sous-clone agressif), et une mutation à VAF
+    élevée peut être un polymorphisme bénin.
+    """
     mut_type = mutation.get("type", "")
 
-    if mut_type == "DEL" and mutation.get("length", 0) % 3 != 0:
-        return "HIGH"
-    if mut_type == "INS" and mutation.get("length", 0) % 3 != 0:
-        return "HIGH"
-
-    if mut_type == "DEL" and mutation.get("length", 0) > 10:
-        return "HIGH"
-    if mut_type == "INS" and mutation.get("length", 0) > 10:
-        return "HIGH"
+    # ── Indels : frameshift et grandes délétions → impact élevé ─────────────
+    if mut_type in ("DEL", "INS"):
+        length = mutation.get("length", 1)
+        if length % 3 != 0:   # décalage du cadre de lecture
+            return "HIGH"
+        if length > 10:        # grande délétion/insertion in-frame
+            return "HIGH"
+        return "MODERATE"      # in-frame court : perte d'un acide aminé
 
     if mut_type == "SNP":
-        freq = mutation.get("frequency", 0)
-        if freq > 0.5:
+        # ── Priorité 1 : type de mutation cBioPortal (si données MAF réelles) ─
+        cbio_type = mutation.get("mutationType", "")
+        if cbio_type in ("Nonsense_Mutation", "Frame_Shift_Del", "Frame_Shift_Ins",
+                         "Splice_Site", "Nonstop_Mutation", "Translation_Start_Site"):
             return "HIGH"
-        elif freq > 0.2:
-            return "MODERATE"
-        else:
+        if cbio_type in ("Missense_Mutation", "In_Frame_Del", "In_Frame_Ins"):
+            fis = mutation.get("functionalImpactScore", "")
+            return "HIGH" if fis == "H" else "MODERATE"
+        if cbio_type == "Silent":
             return "LOW"
+
+        # ── Priorité 2 : protein_change — recherche de stop codon ou frameshift ─
+        protein_change = (mutation.get("protein_change", "") or
+                          mutation.get("hotspot_change", "")).strip()
+        if protein_change:
+            p_upper = protein_change.upper()
+            if "*" in p_upper or "FS" in p_upper or "EXT" in p_upper:
+                return "HIGH"   # codon stop, frameshift, extension C-terminale
+            return "MODERATE"   # missense
+
+        # ── Priorité 3 : hotspot connu → très probablement impactant ────────
+        if mutation.get("is_hotspot", False):
+            return "HIGH"
+
+        # ── Défaut SNP sans information : MODIFIER (inconnu, pas LOW ni HIGH) ─
+        return "MODIFIER"
 
     return "MODIFIER"
 

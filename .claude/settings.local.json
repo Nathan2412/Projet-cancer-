@@ -36,7 +36,18 @@
       "Bash(.venv/Scripts/python.exe download_real_data.py)",
       "Bash(tasklist /FI 'IMAGENAME eq python.exe')",
       "Bash(.venv/Scripts/python.exe main.py --real-data)",
-      "Bash(.venv/Scripts/python.exe main.py --help)"
+      "Bash(.venv/Scripts/python.exe main.py --help)",
+      "Bash(grep -E \"\\(src/|\\\\.py$|\\\\.ipynb$\\)\")",
+      "Bash(wc -l \"c:\\\\Users\\\\natha\\\\OneDrive\\\\ING2\\\\dna-cancer-analysis\"/*.py)",
+      "Bash(find \"c:\\\\Users\\\\natha\\\\OneDrive\\\\ING2\\\\dna-cancer-analysis\" -name \"*.py\" -type f ! -path \"*/.venv/*\" -exec grep -l \"class\\\\|def \" {} \\\\;)",
+      "Bash(xargs grep:*)",
+      "Bash(grep -n \"hardcoded\\\\|magic\\\\|TODO\\\\|FIXME\\\\|XXX\\\\|BUG\\\\|HACK\" /c/Users/natha/OneDrive/ING2/dna-cancer-analysis/ml_*.py)",
+      "Bash(grep -n \"p.value\\\\|pvalue\\\\|significance\\\\|alpha\\\\|corrected\" /c/Users/natha/OneDrive/ING2/dna-cancer-analysis/*.py)",
+      "Bash(grep -n \"zero_division\\\\|division\\\\|inf\\\\|nan\\\\|NaN\" /c/Users/natha/OneDrive/ING2/dna-cancer-analysis/ml_*.py)",
+      "Bash(python -c ':*)",
+      "Bash(.venv/Scripts/python.exe -m pytest tests/ -q --tb=short)",
+      "Bash(xargs wc:*)",
+      "Bash(.venv/Scripts/python.exe -m pytest tests/ -x -q)"
     ]
   }
 }

@@ -242,11 +242,25 @@ def score_patient_against_signatures(
     """
     Pour un patient, calcule un score de ressemblance à chaque signature cancer.
 
+    Score pondéré par l'enrichissement (au lieu du Jaccard brut matched/total) :
+
+        score = Σ enrichissement(variant_matché) / Σ enrichissement(tous_variants_signature)
+
+    Avantage vs Jaccard brut (matched / n_sig_keys) :
+      - Un cancer avec 1 variant très spécifique (enrichissement 200×) ne domine
+        plus automatiquement un cancer avec 5 variants modérément spécifiques (20×).
+      - Un patient qui matche 3 variants colon sur 5 à enrichissement 50×, 20×, 10×
+        score plus haut qu'un patient thyroïde avec 1 variant à enrichissement 30×.
+      - La taille de la signature n'est plus un biais — la richesse biologique est
+        récompensée.
+
     Retourne :
         {cancer_type: {
-            "score": float (Jaccard-like),
+            "score": float (0–1, pondéré par enrichissement),
             "matched_alleles": int,
             "total_signature_alleles": int,
+            "matched_enrichment": float (somme enrichissements matchés),
+            "total_enrichment": float (somme enrichissements signature),
             "matched_keys": [str, ...]
         }}
     """
@@ -254,24 +268,36 @@ def score_patient_against_signatures(
     scores: dict[str, dict] = {}
 
     for cancer, sig in signatures.items():
-        sig_keys = set(sig["alleles"].keys())
-        if not sig_keys:
+        sig_alleles = sig["alleles"]
+        if not sig_alleles:
             scores[cancer] = {
                 "score": 0.0,
                 "matched_alleles": 0,
                 "total_signature_alleles": 0,
+                "matched_enrichment": 0.0,
+                "total_enrichment": 0.0,
                 "matched_keys": [],
             }
             continue
 
-        matched = patient_alleles & sig_keys
-        # Score = proportion d'alleles signature retrouvés chez le patient
-        score = len(matched) / len(sig_keys)
+        total_enrichment = sum(
+            info.get("enrichment", 1.0) for info in sig_alleles.values()
+        )
+        matched_keys = patient_alleles & set(sig_alleles.keys())
+        matched_enrichment = sum(
+            sig_alleles[k].get("enrichment", 1.0) for k in matched_keys
+        )
+
+        # Score pondéré par enrichissement — normalisé entre 0 et 1
+        score = matched_enrichment / max(total_enrichment, 1e-9)
+
         scores[cancer] = {
             "score": round(score, 4),
-            "matched_alleles": len(matched),
-            "total_signature_alleles": len(sig_keys),
-            "matched_keys": sorted(matched),
+            "matched_alleles": len(matched_keys),
+            "total_signature_alleles": len(sig_alleles),
+            "matched_enrichment": round(matched_enrichment, 2),
+            "total_enrichment": round(total_enrichment, 2),
+            "matched_keys": sorted(matched_keys),
         }
 
     return dict(sorted(scores.items(), key=lambda x: x[1]["score"], reverse=True))
