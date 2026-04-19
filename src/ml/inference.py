@@ -12,7 +12,11 @@ import logging
 from config import ML_MIN_CONFIDENCE_FOR_CALL
 from clinical_rules import sex_cancer_status
 from src.ml.features import extract_features, _add_allele_score_features
-from src.ml.explainability import _get_top_features_for_patient
+from src.ml.explainability import (
+    _get_top_features_for_patient,
+    _compute_shap_batch,
+    _top_features_from_shap_cache,
+)
 
 logger = logging.getLogger("ml_predictor")
 
@@ -34,6 +38,25 @@ def apply_sex_constraints(probabilities, sex):
     if total > 0:
         probabilities = {k: v / total for k, v in probabilities.items()}
     return probabilities
+
+
+def _fallback_top_features(patient_values, feature_names, fi_dict, top_n=10):
+    """Fallback quand SHAP indisponible : importance globale × (val != 0)."""
+    if not fi_dict:
+        return []
+    contributions = []
+    for i, fname in enumerate(feature_names):
+        importance = fi_dict.get(fname, 0.0)
+        val = float(patient_values[i]) if i < len(patient_values) else 0.0
+        if val != 0 and importance > 0:
+            contributions.append({
+                "feature": fname,
+                "importance": round(importance, 6),
+                "patient_value": round(val, 4),
+                "contribution": round(importance, 6),
+                "method": "feature_importance",
+            })
+    return sorted(contributions, key=lambda x: x["contribution"], reverse=True)[:top_n]
 
 
 def _prediction_call(predicted_cancer, confidence):
@@ -80,6 +103,14 @@ def predict_patients_batch(patient_results, ml):
         has_proba = False
         all_preds_enc = model.predict(X)
 
+    # SHAP batch : un seul appel shap_values(X) plutôt que N appels patient
+    # par patient. Pour un modèle à arbres sur 10k patients, c'est un gain
+    # ×50–100. Cache None si modèle non-arbre (fallback feature_importance).
+    shap_cache, _ = _compute_shap_batch(X, model)
+    le_classes = list(le.classes_) if le is not None else []
+    best_md = ml.get("models", {}).get(ml.get("best_model_name", ""), {})
+    fi_dict = best_md.get("feature_importance", {})
+
     results = []
     for i, r in enumerate(patient_results):
         if has_proba:
@@ -97,8 +128,14 @@ def predict_patients_batch(patient_results, ml):
         confidence = probas.get(pred, 0)
         final_call, is_uncertain = _prediction_call(pred, confidence)
 
-        X1 = X[i:i+1]
-        top_features = _get_top_features_for_patient(X1, f, model, ml, pred)
+        if shap_cache is not None:
+            class_idx = le_classes.index(pred) if pred in le_classes else 0
+            top_features = _top_features_from_shap_cache(
+                shap_cache, i, X[i], f, class_idx
+            )
+        else:
+            # Fallback : importance globale pondérée par valeur patient.
+            top_features = _fallback_top_features(X[i], f, fi_dict)
 
         actual = r.get("metadata", {}).get("cancer_type")
         is_known = actual is not None

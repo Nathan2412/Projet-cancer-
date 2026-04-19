@@ -40,6 +40,67 @@ def _save(fig, name, out=PLOTS_DIR):
     return path
 
 
+def _compute_shap_batch(X, model):
+    """Calcule les valeurs SHAP pour TOUS les patients en un seul appel
+    (bien plus rapide que N appels individuels dans la boucle d'inférence).
+
+    Retourne un tuple (shap_array, shape) où shap_array est un ndarray
+    de forme (n_classes, n_samples, n_features) — uniforme pour faciliter
+    l'indexation par classe ensuite — ou (None, None) si SHAP indisponible.
+    """
+    try:
+        import shap
+    except ImportError:
+        return None, None
+
+    inner_model = model
+    if hasattr(model, "named_steps") and "model" in model.named_steps:
+        inner_model = model.named_steps["model"]
+
+    if not hasattr(inner_model, "feature_importances_"):
+        return None, None
+
+    try:
+        explainer = shap.TreeExplainer(
+            inner_model, feature_perturbation="tree_path_dependent"
+        )
+        shap_vals = explainer.shap_values(X)
+
+        if isinstance(shap_vals, list):
+            arr = np.array(shap_vals)  # (n_classes, n_samples, n_features)
+        elif hasattr(shap_vals, "ndim") and shap_vals.ndim == 3:
+            # shap >= 0.44 renvoie (n_samples, n_features, n_classes)
+            arr = np.transpose(shap_vals, (2, 0, 1))
+        else:
+            # Binaire ou mono-classe : (n_samples, n_features) → (1, n, f)
+            arr = np.array(shap_vals)[None, ...]
+        return arr, arr.shape
+    except Exception:
+        return None, None
+
+
+def _top_features_from_shap_cache(shap_cache, patient_idx, patient_values,
+                                  feature_names, class_idx, top_n=10):
+    """Extrait les top features pour un patient à partir d'un cache SHAP batch."""
+    sv = shap_cache[class_idx, patient_idx] if shap_cache.shape[0] > class_idx \
+        else shap_cache[0, patient_idx]
+    contributions = []
+    for i, fname in enumerate(feature_names):
+        if i >= len(sv):
+            continue
+        shap_val = float(sv[i])
+        pat_val = float(patient_values[i]) if i < len(patient_values) else 0.0
+        if abs(shap_val) > 1e-8:
+            contributions.append({
+                "feature": fname,
+                "shap_value": round(shap_val, 6),
+                "patient_value": round(pat_val, 4),
+                "contribution": round(abs(shap_val), 6),
+                "method": "SHAP",
+            })
+    return sorted(contributions, key=lambda x: x["contribution"], reverse=True)[:top_n]
+
+
 def _get_top_features_for_patient(X1, feature_names, model, ml, predicted_class, top_n=10):
     """
     Retourne les top features contribuant à la prédiction pour ce patient.

@@ -47,7 +47,12 @@
       "Bash(python -c ':*)",
       "Bash(.venv/Scripts/python.exe -m pytest tests/ -q --tb=short)",
       "Bash(xargs wc:*)",
-      "Bash(.venv/Scripts/python.exe -m pytest tests/ -x -q)"
+      "Bash(.venv/Scripts/python.exe -m pytest tests/ -x -q)",
+      "Bash(python -c \"import ast; [ast.parse\\(open\\(f\\).read\\(\\)\\) for f in ['main.py', 'ml_model_selection.py', 'src/ml/train.py', 'src/ml/inference.py', 'src/ml/explainability.py']]; print\\('OK — syntaxe valide'\\)\")",
+      "Bash(python -c \"import ast; [ast.parse\\(open\\(f, encoding='utf-8'\\).read\\(\\)\\) for f in ['main.py', 'ml_model_selection.py', 'src/ml/train.py', 'src/ml/inference.py', 'src/ml/explainability.py']]; print\\('OK'\\)\")",
+      "Bash(python -m pytest tests/ -x -q --timeout=60)",
+      "Bash(python -m pytest tests/ -x -q)",
+      "Bash(python -c \"import ast; ast.parse\\(open\\('ml_model_selection.py', encoding='utf-8'\\).read\\(\\)\\); print\\('OK'\\)\")"
     ]
   }
 }

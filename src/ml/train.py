@@ -159,12 +159,17 @@ def run_ml_pipeline(all_results, generate_plots=True, verbose=True, use_cache=Fa
     # Calcul de la médiane d'âge réelle une seule fois
     age_median = compute_global_age_median(all_results)
 
-    X_all, y_all, pids_all, fnames = extract_features(
+    # extract_features itère sur TOUS les patients et est coûteux — on le
+    # calcule UNE fois et on réutilise `X_base_all` pour le training et le
+    # SHAP plus bas (évite 2 re-extractions identiques).
+    X_base_all, y_all, pids_all, fnames_base = extract_features(
         all_results, labeled_only=False, age_median=age_median
     )
-    n_total = X_all.shape[0]
+    n_total = X_base_all.shape[0]
 
-    X_all, fnames_aug = _add_allele_score_features(X_all, all_results, signatures, fnames)
+    X_all, fnames_aug = _add_allele_score_features(
+        X_base_all, all_results, signatures, fnames_base
+    )
 
     labeled_mask = np.array([lab != "" for lab in y_all])
     unlabeled_mask = ~labeled_mask
@@ -250,12 +255,10 @@ def run_ml_pipeline(all_results, generate_plots=True, verbose=True, use_cache=Fa
             }},
         )
     else:
-        X_base, _, _, _ = extract_features(
-            all_results, labeled_only=False, age_median=age_median
-        )
-        X_train_base = X_base[labeled_mask]
+        # Réutilise X_base_all calculé plus haut — plus d'extraction redondante.
+        X_train_base = X_base_all[labeled_mask]
 
-        base_feature_names = list(FEATURE_NAMES)
+        base_feature_names = list(fnames_base)
         vt = VarianceThreshold(threshold=0.01)
         X_train_base = vt.fit_transform(X_train_base)
         selected_mask_vt = vt.get_support()
@@ -420,17 +423,15 @@ def run_ml_pipeline(all_results, generate_plots=True, verbose=True, use_cache=Fa
 
     # -- Analyse SHAP (interprétabilité) --
     if generate_plots:
-        X_base_shap, _, _, fnames_base_shap = extract_features(
-            all_results, labeled_only=False, age_median=age_median
-        )
+        # Réutilise X_base_all calculé tout en haut — plus d'extraction redondante.
         vt_shap = ml.get("_variance_threshold")
         labeled_results_shap = [r for r, m in zip(all_results, labeled_mask) if m]
         if vt_shap is not None:
-            X_shap_lab = vt_shap.transform(X_base_shap[labeled_mask])
-            fnames_shap = [n for n, keep in zip(fnames_base_shap, vt_shap.get_support()) if keep]
+            X_shap_lab = vt_shap.transform(X_base_all[labeled_mask])
+            fnames_shap = [n for n, keep in zip(fnames_base, vt_shap.get_support()) if keep]
         else:
-            X_shap_lab = X_base_shap[labeled_mask]
-            fnames_shap = list(fnames_base_shap)
+            X_shap_lab = X_base_all[labeled_mask]
+            fnames_shap = list(fnames_base)
         X_shap_lab, fnames_shap = _add_allele_score_features(
             X_shap_lab, labeled_results_shap, signatures, fnames_shap
         )

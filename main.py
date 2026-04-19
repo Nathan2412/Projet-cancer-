@@ -75,6 +75,10 @@ def configure_logging():
     logging.getLogger("sklearn").setLevel(logging.WARNING)
     logging.getLogger("matplotlib").setLevel(logging.WARNING)
     logging.getLogger("urllib3").setLevel(logging.WARNING)
+    # SHAP et LightGBM loggent des milliers de matrices phi en INFO — on les
+    # bâillonne pour éviter de saturer pipeline.log (et l'I/O qui va avec).
+    logging.getLogger("shap").setLevel(logging.WARNING)
+    logging.getLogger("lightgbm").setLevel(logging.WARNING)
 
 
 def analyze_single_patient(patient_id, reference, known_db, verbose=True):
@@ -428,14 +432,24 @@ def run_real_data_analysis(generate_plots=True, verbose=True, n_jobs=1, use_cach
     print(f"  {len(patient_list)} patients a analyser")
 
     print("\n[2b/7] Chargement de toutes les donnees patients en memoire...")
-    all_patient_data = {}
-    for i, pid in enumerate(patient_list):
-        if i % 500 == 0:
-            print(f"  Chargement {i}/{len(patient_list)}...")
+
+    def _safe_load(pid):
         try:
-            all_patient_data[pid] = load_patient_data_real(pid)
+            return pid, load_patient_data_real(pid)
         except Exception:
-            all_patient_data[pid] = {"patient_id": pid, "reads": {}, "mutations": [], "metadata": {}}
+            return pid, {"patient_id": pid, "reads": {}, "mutations": [], "metadata": {}}
+
+    # I/O-bound (lecture de 2 JSON par patient) → threads + tqdm.
+    # On évite joblib/loky ici car le pickling des résultats coûte plus que le gain.
+    from concurrent.futures import ThreadPoolExecutor
+    max_workers = min(32, (os.cpu_count() or 4) * 4)
+    all_patient_data = {}
+    with ThreadPoolExecutor(max_workers=max_workers) as ex:
+        for pid, data in tqdm(
+            ex.map(_safe_load, patient_list),
+            total=len(patient_list), desc="  Chargement", unit="p"
+        ):
+            all_patient_data[pid] = data
     print(f"  {len(all_patient_data)} patients charges en memoire")
 
     print("\n[3/7] Analyse individuelle des patients (donnees reelles)...")
@@ -540,9 +554,9 @@ def parse_args():
         help="Recharger le modele ML sauvegarde si disponible (evite le re-entrainement)"
     )
     parser.add_argument(
-        "--jobs", type=int, default=1, metavar="N",
-        help="Nombre de processus paralleles pour l'analyse patient (defaut: 1). "
-             "Utiliser -1 pour tous les CPUs."
+        "--jobs", type=int, default=-1, metavar="N",
+        help="Nombre de processus paralleles pour l'analyse patient (defaut: -1 = tous les CPUs). "
+             "Mettre 1 pour désactiver le parallélisme."
     )
     parser.add_argument(
         "--real-data", action="store_true",

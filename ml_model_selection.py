@@ -95,8 +95,10 @@ def get_model_specs(random_state=42):
                     class_weight="balanced",
                     max_iter=1000,
                     random_state=random_state,
-                    solver="saga",
-                    n_jobs=-1,
+                    # saga supporte l1/elasticnet mais le param_grid n'utilise
+                    # que penalty="l2" → lbfgs est 3-5× plus rapide en L2.
+                    solver="lbfgs",
+                    n_jobs=1,
                 )),
             ]),
             "param_grid": {
@@ -106,8 +108,11 @@ def get_model_specs(random_state=42):
         },
         # ── Modèles ensemblistes ──────────────────────────────────────────────
         "Random Forest": {
+            # n_jobs=1 (pas 8 ni -1) : HalvingGridSearchCV(n_jobs=-1) lance déjà
+            # les folds en parallèle, donc mettre l'estimateur à n_jobs>1 crée
+            # une explosion de threads (oversubscription) qui RALENTIT la CV.
             "estimator": RandomForestClassifier(
-                class_weight="balanced", random_state=random_state, n_jobs=8
+                class_weight="balanced", random_state=random_state, n_jobs=1
             ),
             "param_grid": {
                 "model__n_estimators": [150, 250],
@@ -145,10 +150,13 @@ def get_model_specs(random_state=42):
     # support natif des valeurs manquantes. Ajouté si lightgbm est installé.
     if lgb is not None:
         specs["LightGBM"] = {
+            # n_jobs=1 pour la même raison que RandomForest : éviter que
+            # LightGBM lance un pool de threads dans chaque fit de fold,
+            # alors que HalvingGridSearchCV(n_jobs=-1) les lance déjà en parallèle.
             "estimator": lgb.LGBMClassifier(
                 class_weight="balanced",
                 random_state=random_state,
-                n_jobs=-1,
+                n_jobs=1,
                 verbose=-1,
             ),
             "param_grid": {
@@ -429,32 +437,33 @@ def evaluate_models_nested_cv(X, y_enc, class_names, feature_names,
                 fold_f1.append(f1_score(y_test, y_hat, average="macro", zero_division=0))
                 fold_acc.append(accuracy_score(y_test, y_hat))
 
-            # Refit global best config for serving/predict + train metrics
+            # Refit global pour serving/predict + train metrics.
+            # Au lieu de relancer un HalvingGridSearchCV complet (qui double
+            # le coût de tuning), on réutilise les best_params déjà trouvés
+            # par la nested CV — le choix le plus fréquent entre folds, gage
+            # de stabilité. Même signal, moitié du temps de calcul.
+            param_counter = Counter(tuple(sorted(d.items())) for d in fold_best_params)
+            most_common_params = (
+                dict(param_counter.most_common(1)[0][0]) if param_counter else {}
+            )
+
             est_full = clone(spec["estimator"])
             pipe_full = est_full if isinstance(est_full, Pipeline) else Pipeline([("model", est_full)])
-            try:
-                grid_full = HalvingGridSearchCV(
-                    estimator=pipe_full,
-                    param_grid=spec["param_grid"],
-                    scoring="f1_macro",
-                    cv=outer_cv,
-                    n_jobs=-1,
-                    factor=3,
-                    random_state=random_state,
-                    error_score=0.0,
-                )
-            except Exception:
-                grid_full = GridSearchCV(
-                    estimator=pipe_full,
-                    param_grid=spec["param_grid"],
-                    scoring="f1_macro",
-                    cv=outer_cv,
-                    n_jobs=-1,
-                )
-            grid_full.fit(X_full, y_enc)
-            best_model_full = clone(grid_full.best_estimator_)
+            if most_common_params:
+                pipe_full.set_params(**{f"model__{k}": v for k, v in most_common_params.items()})
+
+            # Refit final : on n'est plus dans HalvingGridSearchCV, donc plus
+            # de risque d'oversubscription. On rend tous les CPUs à l'estimateur
+            # (gros gain pour RF avec n_estimators=250 et pour LightGBM).
+            inner_est = pipe_full.named_steps["model"] if isinstance(pipe_full, Pipeline) else pipe_full
+            if hasattr(inner_est, "n_jobs"):
+                try:
+                    inner_est.set_params(n_jobs=-1)
+                except Exception:
+                    pass
+
             best_model_full = _fit_with_optional_smote(
-                best_model_full, X_full, y_enc, random_state=random_state
+                pipe_full, X_full, y_enc, random_state=random_state
             )
 
             y_train_pred = best_model_full.predict(X_full)
@@ -498,9 +507,6 @@ def evaluate_models_nested_cv(X, y_enc, class_names, feature_names,
                     "roc_auc": roc_cls.get(c),
                 }
 
-            param_counter = Counter(tuple(sorted(d.items())) for d in fold_best_params)
-            most_common_params = dict(param_counter.most_common(1)[0][0]) if param_counter else {}
-
             model_result = {
                 "accuracy": round(float(acc), 4),
                 # balanced_accuracy est la métrique principale pour données déséquilibrées
@@ -522,7 +528,7 @@ def evaluate_models_nested_cv(X, y_enc, class_names, feature_names,
                 "y_pred": oof_pred.tolist(),
                 "y_proba": y_prob.tolist() if y_prob is not None else None,
                 "_model": best_model_full,
-                "best_params": _strip_model_prefix(grid_full.best_params_),
+                "best_params": most_common_params,
                 "fold_best_params": fold_best_params,
                 "cv_f1_mean": round(float(np.mean(fold_f1)), 4),
                 "cv_acc_mean": round(float(np.mean(fold_acc)), 4),
