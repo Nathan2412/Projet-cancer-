@@ -137,6 +137,10 @@ def get_model_specs(random_state=42):
                 class_weight="balanced",
                 probability=True,
                 random_state=random_state,
+                # cache_size=2000 MB : garde plus de la matrice noyau en RAM.
+                # Le défaut (200 MB) est minuscule pour 11k patients → énorme
+                # thrashing. Avec 2 GB, gain typique -30% sur le temps SVM.
+                cache_size=2000,
             ),
             "param_grid": {
                 "model__C": [1, 10, 30],
@@ -321,10 +325,21 @@ def evaluate_models_nested_cv(X, y_enc, class_names, feature_names,
             cancer_types_sorted = sorted(global_sigs.keys())
             feature_names_full += [f"allele_score_{ct}" for ct in cancer_types_sorted]
 
-        for model_name, spec in specs.items():
-            if verbose:
-                print(f"    [{model_name}] nested CV + tuning...", end=" ", flush=True)
+        # ── Budget CPU partagé entre les N modèles lancés en parallèle ──
+        # Le but : les 5 modèles tournent simultanément pour que les plus rapides
+        # (LR) libèrent les CPUs tandis que SVM continue. Chaque HalvingGridSearchCV
+        # prend `halving_n_jobs` CPUs au lieu de -1, évitant l'oversubscription.
+        import os as _os
+        from joblib import Parallel, delayed
+        n_cpu = _os.cpu_count() or 4
+        n_models = len(specs)
+        halving_n_jobs = max(1, n_cpu // n_models)
+        if verbose:
+            print(f"    (parallélisation : {n_models} modèles × {halving_n_jobs} CPUs "
+                  f"= {n_models * halving_n_jobs}/{n_cpu} CPUs)")
 
+        def _evaluate_one(model_name, spec, halving_n_jobs):
+            """Évalue un modèle via nested CV. Retourne (model_name, result, log_line)."""
             oof_pred = np.zeros_like(y_enc)
             oof_prob = np.zeros((len(y_enc), len(class_names)), dtype=float)
             has_prob = False
@@ -388,10 +403,14 @@ def evaluate_models_nested_cv(X, y_enc, class_names, feature_names,
                         param_grid=spec["param_grid"],
                         scoring="f1_macro",
                         cv=inner_cv,
-                        n_jobs=-1,
+                        n_jobs=halving_n_jobs,
                         factor=3,
                         random_state=random_state,
                         error_score=0.0,
+                        # refit=False : on ne garde que les best_params_, pas
+                        # le modèle refitté. On refit ensuite avec SMOTE sur
+                        # le fold complet — le refit automatique serait gâché.
+                        refit=False,
                     )
                     grid.fit(X_train, y_train)
                 except (ValueError, MemoryError) as _halving_err:
@@ -408,8 +427,9 @@ def evaluate_models_nested_cv(X, y_enc, class_names, feature_names,
                         param_grid=spec["param_grid"],
                         scoring="f1_macro",
                         cv=inner_cv,
-                        n_jobs=-1,
+                        n_jobs=halving_n_jobs,
                         error_score=0.0,
+                        refit=False,
                     )
                     grid.fit(X_train, y_train)
                 fold_best_params.append(_strip_model_prefix(grid.best_params_))
@@ -547,17 +567,26 @@ def evaluate_models_nested_cv(X, y_enc, class_names, feature_names,
                 "stable_best_params": most_common_params,
             }
 
+            log_line = (
+                f"acc={acc:.3f} bal_acc={bal_acc:.3f} "
+                f"f1_macro={f1_macro:.3f} f1_w={f1w:.3f} "
+                f"(train-cv gap={train_f1 - f1w:+.3f})"
+            )
+            return model_name, model_result, log_line
+
+        # ── Lancement parallèle des 5 modèles ──────────────────────────────
+        # backend="threading" : évite de pickle X / labeled_results (gros).
+        # Les fits sklearn libèrent le GIL → vraie parallélisation.
+        outputs = Parallel(n_jobs=n_models, backend="threading")(
+            delayed(_evaluate_one)(name, spec, halving_n_jobs)
+            for name, spec in specs.items()
+        )
+
+        for model_name, model_result, log_line in outputs:
             results[model_name] = model_result
-
             if verbose:
-                print(
-                    f"acc={acc:.3f} bal_acc={bal_acc:.3f} "
-                    f"f1_macro={f1_macro:.3f} f1_w={f1w:.3f} "
-                    f"(train-cv gap={train_f1 - f1w:+.3f})"
-                )
-
-            # Sélection principale sur f1_macro (pénalise les erreurs sur petites classes)
-            # balanced_accuracy est gardée comme critère secondaire dans les résultats
+                print(f"    [{model_name}] {log_line}")
+            f1_macro = model_result["f1_macro"]
             if f1_macro > best_acc:
                 best_acc = float(f1_macro)
                 best_name = model_name
