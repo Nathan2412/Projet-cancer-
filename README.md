@@ -28,7 +28,7 @@ Les etudes sont telechargees via l'API publique de cBioPortal.
 - cBioPortal API: https://www.cbioportal.org/api/swagger-ui/index.html
 - TCGA: https://www.cancer.gov/ccg/research/genome-sequencing/tcga
 
-Les etudes integrees sont declarees dans [download_real_data.py](C:/Users/natha/OneDrive/ING2/dna-cancer-analysis/download_real_data.py).
+Les etudes integrees sont declarees dans [download_real_data.py](download_real_data.py).
 Le projet inclut:
 
 - cohortes TCGA PanCancer Atlas
@@ -58,18 +58,18 @@ Options utiles:
 
 ## Structure
 
-- [main.py](C:/Users/natha/OneDrive/ING2/dna-cancer-analysis/main.py): point d'entree et orchestration
-- [download_real_data.py](C:/Users/natha/OneDrive/ING2/dna-cancer-analysis/download_real_data.py): ingestion des cohortes publiques
-- [loader.py](C:/Users/natha/OneDrive/ING2/dna-cancer-analysis/loader.py): chargement patients, references et validation metadata
-- [clinical_rules.py](C:/Users/natha/OneDrive/ING2/dna-cancer-analysis/clinical_rules.py): regles cliniques partagees
-- [ml_predictor.py](C:/Users/natha/OneDrive/ING2/dna-cancer-analysis/ml_predictor.py): features, prediction, rapports ML
-- [ml_model_selection.py](C:/Users/natha/OneDrive/ING2/dna-cancer-analysis/ml_model_selection.py): nested CV et selection de modeles
-- [allele_analyzer.py](C:/Users/natha/OneDrive/ING2/dna-cancer-analysis/allele_analyzer.py): signatures d'alleles discriminants
-- [docs/DATASETS.md](C:/Users/natha/OneDrive/ING2/dna-cancer-analysis/docs/DATASETS.md): inventaire et rationale des cohortes publiques
-- [docs/ARCHITECTURE.md](C:/Users/natha/OneDrive/ING2/dna-cancer-analysis/docs/ARCHITECTURE.md): vue d'ensemble du pipeline et des responsabilites
-- [docs/INTENDED_USE.md](C:/Users/natha/OneDrive/ING2/dna-cancer-analysis/docs/INTENDED_USE.md): claim recommandee et limites
-- [docs/VALIDATION_PLAN.md](C:/Users/natha/OneDrive/ING2/dna-cancer-analysis/docs/VALIDATION_PLAN.md): trajectoire de validation
-- [docs/RISK_REGISTER.md](C:/Users/natha/OneDrive/ING2/dna-cancer-analysis/docs/RISK_REGISTER.md): registre de risques initial
+- [main.py](main.py): point d'entree et orchestration
+- [download_real_data.py](download_real_data.py): ingestion des cohortes publiques
+- [loader.py](loader.py): chargement patients, references et validation metadata
+- [clinical_rules.py](clinical_rules.py): regles cliniques partagees
+- [ml_predictor.py](ml_predictor.py): features, prediction, rapports ML
+- [ml_model_selection.py](ml_model_selection.py): nested CV et selection de modeles
+- [allele_analyzer.py](allele_analyzer.py): signatures d'alleles discriminants
+- [docs/DATASETS.md](docs/DATASETS.md): inventaire et rationale des cohortes publiques
+- [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md): vue d'ensemble du pipeline et des responsabilites
+- [docs/INTENDED_USE.md](docs/INTENDED_USE.md): claim recommandee et limites
+- [docs/VALIDATION_PLAN.md](docs/VALIDATION_PLAN.md): trajectoire de validation
+- [docs/RISK_REGISTER.md](docs/RISK_REGISTER.md): registre de risques initial
 
 ## Etat actuel
 

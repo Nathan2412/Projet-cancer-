@@ -4,7 +4,7 @@ Compare les reads aux sequences de reference pour identifier les variants.
 """
 
 from collections import defaultdict, Counter
-from config import NUCLEOTIDES, MUTATION_FREQ_THRESHOLD, DEFAULT_DETECT_INDELS
+from config import MUTATION_FREQ_THRESHOLD, DEFAULT_DETECT_INDELS
 
 
 def detect_snps(reads, reference_seq):

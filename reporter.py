@@ -44,13 +44,13 @@ def generate_patient_text_report(patient_report, output_dir=REPORTS_DIR,
 
         top3 = ml_prediction.get("top3", [])
         if top3:
-            lines.append(f"  Top-3 cancers probables:")
+            lines.append("  Top-3 cancers probables:")
             for rank, (cancer, prob) in enumerate(top3, 1):
                 lines.append(f"    {rank}. {cancer:<20} {prob:.2%}")
 
         top_features = ml_prediction.get("top_features", [])
         if top_features:
-            lines.append(f"  Features determinantes:")
+            lines.append("  Features determinantes:")
             for feat in top_features[:5]:
                 lines.append(
                     f"    - {feat['feature']:<35} importance={feat['importance']:.4f} "

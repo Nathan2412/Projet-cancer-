@@ -7,7 +7,7 @@ import json
 import os
 from config import (
     REFERENCE_GENOME_FILE, SAMPLES_DIR, KNOWN_MUTATIONS_FILE,
-    REAL_DATA_DIR, REAL_SAMPLES_DIR, REAL_REFERENCE_FILE, REAL_KNOWN_MUTATIONS_FILE,
+    REAL_SAMPLES_DIR, REAL_REFERENCE_FILE, REAL_KNOWN_MUTATIONS_FILE,
 )
 from clinical_rules import normalize_cancer_label, sex_cancer_status
 

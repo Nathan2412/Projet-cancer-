@@ -32,12 +32,19 @@ def load_saved_model(models_dir=None):
 
     if models_dir is None:
         models_dir = os.path.join(os.path.dirname(REPORTS_DIR), "models")
+    # Modèle historique (best single model)
     model_path = os.path.join(models_dir, "best_model.pkl")
-    if not os.path.exists(model_path):
+    # Nouvel artefact ensemble
+    ensemble_path = os.path.join(models_dir, "ensemble_model.pkl")
+
+    if not os.path.exists(model_path) and not os.path.exists(ensemble_path):
         return None
 
+    # Priorité : ensemble si présent (plus robuste, anti-biais)
+    chosen_path = ensemble_path if os.path.exists(ensemble_path) else model_path
+
     try:
-        data = joblib.load(model_path)
+        data = joblib.load(chosen_path)
         required = {"model", "label_encoder", "feature_names", "class_names",
                     "signatures", "best_model_name", "f1_macro"}
         if not required.issubset(data.keys()):
@@ -71,7 +78,7 @@ def load_saved_model(models_dir=None):
         git_hash = data.get("git_commit", "inconnu")
         logger.info(
             "Modèle chargé : %s (f1_macro=%.4f, git=%s, sauvé le %s)",
-            model_path, data["f1_macro"], git_hash, saved_at
+            chosen_path, data["f1_macro"], git_hash, saved_at
         )
         return data
     except Exception as _e:
@@ -100,7 +107,16 @@ def save_model(ml, signatures, n_labeled, models_dir=None, verbose=True):
     if models_dir is None:
         models_dir = os.path.join(os.path.dirname(REPORTS_DIR), "models")
     os.makedirs(models_dir, exist_ok=True)
-    model_path = os.path.join(models_dir, "best_model.pkl")
+
+    # Deux sorties possibles :
+    # - best_model.pkl : modèle unique historique
+    # - ensemble_model.pkl : artefact ensemble (fold/vote/stack)
+    # Détection d'un artefact ensemble (dataclass) vs modèle sklearn classique.
+    # L'artefact ensemble défini dans src/ml/ensemble.py expose .strategy.
+    if hasattr(ml.get("_best_model"), "strategy"):
+        model_path = os.path.join(models_dir, "ensemble_model.pkl")
+    else:
+        model_path = os.path.join(models_dir, "best_model.pkl")
 
     feature_schema_hash = hashlib.md5(
         "|".join(ml["feature_names"]).encode()

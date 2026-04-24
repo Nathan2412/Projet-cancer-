@@ -397,7 +397,6 @@ def compute_allele_discriminant_table(all_patients_results):
     Retourne une liste de dicts triée par enrichissement décroissant.
     """
     from collections import defaultdict
-    import math
 
     allele_cancer_hits = defaultdict(lambda: defaultdict(int))
     cancer_totals = defaultdict(int)

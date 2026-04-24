@@ -4,7 +4,6 @@ Genere des graphiques de qualite, mutations, couverture et risques.
 """
 
 import os
-import json
 from collections import defaultdict
 from config import PLOTS_DIR
 
@@ -171,7 +170,7 @@ def plot_cancer_risk_profile(risk_profile, patient_id, output_dir=PLOTS_DIR):
     ax.set_title(f"Profil de risque cancer - {patient_id}")
     ax.invert_yaxis()
 
-    patches = [mpatches.Patch(color=c, label=l) for l, c in level_colors.items()]
+    patches = [mpatches.Patch(color=color, label=label) for label, color in level_colors.items()]
     ax.legend(handles=patches, loc="lower right", fontsize=8)
 
     plt.tight_layout()

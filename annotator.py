@@ -4,7 +4,7 @@ Croise les mutations avec la base de donnees de mutations connues
 pour identifier les variants associes aux cancers.
 """
 
-from config import CANCER_GENES, IMPACT_LEVELS, GENE_ROLES
+from config import CANCER_GENES, GENE_ROLES
 
 
 def annotate_with_known_db(mutations, known_db, gene_name):

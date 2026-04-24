@@ -15,7 +15,7 @@ from collections import defaultdict
 
 import numpy as np
 
-from config import PLOTS_DIR, REPORTS_DIR
+from config import PLOTS_DIR
 
 logger = logging.getLogger("ml_predictor")
 

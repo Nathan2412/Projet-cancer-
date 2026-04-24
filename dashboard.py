@@ -420,9 +420,9 @@ with tab4:
     if sel_sexes:
         fdf = fdf[fdf["Sexe"].isin(sel_sexes)]
     if correct_opt == "Correctes ✅":
-        fdf = fdf[fdf["Cancer_ML_Correct"] == True]
+        fdf = fdf[fdf["Cancer_ML_Correct"]]
     elif correct_opt == "Incorrectes ❌":
-        fdf = fdf[fdf["Cancer_ML_Correct"] == False]
+        fdf = fdf[~fdf["Cancer_ML_Correct"]]
     fdf = fdf[fdf["Confiance_ML"].between(conf_min, conf_max, inclusive="both")]
     if risk_opts:
         fdf = fdf[fdf["Risque_Global"].isin(risk_opts)]

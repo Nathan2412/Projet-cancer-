@@ -8,37 +8,28 @@ import os
 import logging
 import warnings
 import argparse
-# Filtrage ciblé : on supprime uniquement les warnings verbeux des bibliothèques
-# tierces, pas les warnings ML critiques (convergence, etc.).
-os.environ["PYTHONWARNINGS"] = "default"
-warnings.filterwarnings("ignore", module="matplotlib")
-warnings.filterwarnings("ignore", module="urllib3")
-warnings.filterwarnings("ignore", category=DeprecationWarning, module="sklearn")
 import shutil
 import time
 from collections import defaultdict
 
-try:
-    from tqdm import tqdm
-except ImportError:
-    def tqdm(iterable, **kwargs):
-        return iterable
-
-# ── Logging ──────────────────────────────────────────────────────────────────
-_LOG_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "output", "logs")
-
-logger = logging.getLogger("main")
 from config import REPORTS_DIR, PLOTS_DIR, setup_directories
 from loader import (
-    load_reference, load_patient_data,
-    load_known_mutations, get_patient_list,
-    load_reference_real, load_known_mutations_real,
-    get_patient_list_real, load_patient_data_real
+    load_reference,
+    load_patient_data,
+    load_known_mutations,
+    get_patient_list,
+    load_reference_real,
+    load_known_mutations_real,
+    get_patient_list_real,
+    load_patient_data_real,
 )
 from sequencer import analyze_gene_sequencing, compute_per_position_coverage
 from mutations import (
-    analyze_gene_mutations, classify_mutation_impact,
-    compute_mutation_spectrum, compute_mutation_density, find_mutation_hotspots
+    analyze_gene_mutations,
+    classify_mutation_impact,
+    compute_mutation_spectrum,
+    compute_mutation_density,
+    find_mutation_hotspots,
 )
 from annotator import annotate_gene_mutations
 from correlator import (
@@ -49,14 +40,33 @@ from correlator import (
 from visualizer import (
     plot_cohort_mutation_heatmap,
     plot_impact_distribution,
-    check_matplotlib
+    check_matplotlib,
 )
 from reporter import (
     generate_patient_text_report,
     generate_cohort_summary_report,
-    save_json_results
+    save_json_results,
 )
 from ml_predictor import run_ml_pipeline
+
+# Filtrage ciblé : on supprime uniquement les warnings verbeux des bibliothèques
+# tierces, pas les warnings ML critiques (convergence, etc.).
+os.environ["PYTHONWARNINGS"] = "default"
+warnings.filterwarnings("ignore", module="matplotlib")
+warnings.filterwarnings("ignore", module="urllib3")
+warnings.filterwarnings("ignore", category=DeprecationWarning, module="sklearn")
+
+try:
+    from tqdm import tqdm
+except ImportError:
+
+    def tqdm(iterable, **kwargs):
+        return iterable
+
+# ── Logging ──────────────────────────────────────────────────────────────────
+_LOG_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "output", "logs")
+
+logger = logging.getLogger("main")
 
 
 def configure_logging():
@@ -258,7 +268,8 @@ def analyze_single_patient_real(patient_id, reference, known_db, verbose=True, p
     }
 
 
-def run_cohort_analysis(max_patients=None, generate_plots=True, verbose=True, n_jobs=1, use_cache=False):
+def run_cohort_analysis(max_patients=None, generate_plots=True, verbose=True, n_jobs=1,
+                       use_cache=False, ensemble_strategy=None):
     start_time = time.time()
 
     print("=" * 60)
@@ -308,7 +319,13 @@ def run_cohort_analysis(max_patients=None, generate_plots=True, verbose=True, n_
 
     # ── ML : prediction de cancer ──
     print("\n[6/7] Machine Learning — Prediction de cancer...")
-    ml_output = run_ml_pipeline(all_results, generate_plots=generate_plots, verbose=verbose, use_cache=use_cache)
+    ml_output = run_ml_pipeline(
+        all_results,
+        generate_plots=generate_plots,
+        verbose=verbose,
+        use_cache=use_cache,
+        ensemble_strategy=ensemble_strategy,
+    )
 
     # Mettre à jour les rapports avec les prédictions ML
     if ml_output:
@@ -390,7 +407,8 @@ def clean_previous_outputs():
             print(f"  Nettoyage: {folder}")
 
 
-def run_real_data_analysis(generate_plots=True, verbose=True, n_jobs=1, use_cache=False):
+def run_real_data_analysis(generate_plots=True, verbose=True, n_jobs=1, use_cache=False,
+                        ensemble_strategy=None):
     """
     Pipeline complet : telecharge si besoin, puis analyse tous les patients reels.
     """
@@ -479,7 +497,13 @@ def run_real_data_analysis(generate_plots=True, verbose=True, n_jobs=1, use_cach
 
     # ── ML : prediction de cancer ──
     print("\n[6/7] Machine Learning — Prediction de cancer...")
-    ml_output = run_ml_pipeline(all_results, generate_plots=generate_plots, verbose=verbose, use_cache=use_cache)
+    ml_output = run_ml_pipeline(
+        all_results,
+        generate_plots=generate_plots,
+        verbose=verbose,
+        use_cache=use_cache,
+        ensemble_strategy=ensemble_strategy,
+    )
 
     ml_preds = ml_output.get("predictions", []) if ml_output else None
 
@@ -503,7 +527,7 @@ def run_real_data_analysis(generate_plots=True, verbose=True, n_jobs=1, use_cach
     elapsed = time.time() - start_time
     print("\n" + "=" * 60)
     print(f"  ANALYSE TERMINEE en {elapsed:.1f}s")
-    print(f"  Source: DONNEES REELLES (TCGA PanCancer Atlas)")
+    print("  Source: DONNEES REELLES (TCGA PanCancer Atlas)")
     print(f"  Patients: {len(all_results)}")
     total_muts = sum(r.get("total_mutations_detected", 0) for r in all_results)
     print(f"  Mutations totales: {total_muts}")
@@ -515,7 +539,7 @@ def run_real_data_analysis(generate_plots=True, verbose=True, n_jobs=1, use_cach
         if ct:
             cancer_counts[ct] += 1
     if cancer_counts:
-        print(f"  Cancers representes:")
+        print("  Cancers representes:")
         for cancer, count in sorted(cancer_counts.items()):
             print(f"    {cancer}: {count} patients")
 
@@ -554,6 +578,15 @@ def parse_args():
         help="Recharger le modele ML sauvegarde si disponible (evite le re-entrainement)"
     )
     parser.add_argument(
+        "--ensemble", choices=["fold", "vote", "stack"], default=None,
+        help=(
+            "Activer un ensemble anti-biais (GroupKFold si possible). "
+            "fold=moyenne proba des modèles (bagging) par fold/seed; "
+            "vote=comme fold mais pondéré selon performance OOF; "
+            "stack=stacking (meta-modèle sur OOF probas)."
+        )
+    )
+    parser.add_argument(
         "--jobs", type=int, default=-1, metavar="N",
         help="Nombre de processus paralleles pour l'analyse patient (defaut: -1 = tous les CPUs). "
              "Mettre 1 pour désactiver le parallélisme."
@@ -580,6 +613,7 @@ if __name__ == "__main__":
             verbose=not args.quiet,
             n_jobs=args.jobs,
             use_cache=args.use_cache,
+            ensemble_strategy=args.ensemble,
         )
     else:
         run_cohort_analysis(
@@ -588,4 +622,5 @@ if __name__ == "__main__":
             verbose=not args.quiet,
             n_jobs=args.jobs,
             use_cache=args.use_cache,
+            ensemble_strategy=args.ensemble,
         )

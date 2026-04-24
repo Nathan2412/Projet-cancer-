@@ -377,7 +377,6 @@ def identify_cosmic_signature(spectrum):
 
     # Construire le vecteur observé (6 dimensions)
     obs_vec = []
-    total_snps = sum(spectrum.get(t, {}).get("count", 0) for t in SBS_TYPES)
     for t in SBS_TYPES:
         obs_vec.append(spectrum.get(t, {}).get("frequency", 0.0))
 

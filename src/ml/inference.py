@@ -13,7 +13,6 @@ from config import ML_MIN_CONFIDENCE_FOR_CALL
 from clinical_rules import sex_cancer_status
 from src.ml.features import extract_features, _add_allele_score_features
 from src.ml.explainability import (
-    _get_top_features_for_patient,
     _compute_shap_batch,
     _top_features_from_shap_cache,
 )
@@ -95,7 +94,14 @@ def predict_patients_batch(patient_results, ml):
     le = ml["_label_encoder"]
     class_names = ml["class_names"]
 
-    if hasattr(model, "predict_proba"):
+    # Ensemble support
+    is_ensemble = hasattr(model, "strategy") and hasattr(model, "base_models")
+
+    if is_ensemble:
+        from src.ml.ensemble import ensemble_predict_proba
+        all_probas = ensemble_predict_proba(model, X)
+        has_proba = True
+    elif hasattr(model, "predict_proba"):
         all_probas = model.predict_proba(X)
         has_proba = True
     else:
@@ -106,7 +112,11 @@ def predict_patients_batch(patient_results, ml):
     # SHAP batch : un seul appel shap_values(X) plutôt que N appels patient
     # par patient. Pour un modèle à arbres sur 10k patients, c'est un gain
     # ×50–100. Cache None si modèle non-arbre (fallback feature_importance).
-    shap_cache, _ = _compute_shap_batch(X, model)
+    # SHAP n'est pas supporté pour un "ensemble" (plusieurs modèles). On garde
+    # le fallback feature_importance pour éviter une interprétation trompeuse.
+    shap_cache = None
+    if not is_ensemble:
+        shap_cache, _ = _compute_shap_batch(X, model)
     le_classes = list(le.classes_) if le is not None else []
     best_md = ml.get("models", {}).get(ml.get("best_model_name", ""), {})
     fi_dict = best_md.get("feature_importance", {})

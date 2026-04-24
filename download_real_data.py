@@ -17,8 +17,7 @@ import urllib.error
 import urllib.parse
 from collections import defaultdict, Counter
 from config import (
-    DATA_DIR, SAMPLES_DIR, KNOWN_MUTATIONS_FILE,
-    REFERENCE_GENOME_FILE, CANCER_GENES, CANCER_LABEL_MAPPING
+    DATA_DIR, CANCER_GENES, CANCER_LABEL_MAPPING
 )
 
 # =============================================================================
@@ -285,14 +284,14 @@ def api_post(endpoint, body):
                 try:
                     error_body = e.read().decode("utf-8")
                     print(f"  [ERREUR HTTP 400] {error_body[:200]}")
-                except:
+                except Exception:
                     pass
                 return None
             print(f"  [ERREUR HTTP {e.code}] {url}")
             try:
                 error_body = e.read().decode("utf-8")
                 print(f"  Detail: {error_body[:200]}")
-            except:
+            except Exception:
                 pass
             return None
         except (urllib.error.URLError, OSError, TimeoutError) as e:
@@ -583,7 +582,7 @@ def build_known_mutations_db(all_mutations_by_gene):
                 match = re.search(r'(\d+)', change)
                 if match:
                     codon_num = int(match.group(1))
-            except:
+            except Exception:
                 pass
 
             frequency = round(count / max(len(mutations), 1), 4)
@@ -825,13 +824,13 @@ def download_all():
         print(f"    Telechargement des mutations ({len(GENE_ENTREZ_IDS)} genes)...")
         mutations = fetch_mutations_for_study(study_id, GENE_ENTREZ_IDS)
         if not mutations:
-            print(f"    Aucune mutation trouvee, passe")
+            print("    Aucune mutation trouvee, passe")
             # Sauvegarder un checkpoint vide pour ne pas retélécharger
             save_study_checkpoint(study_id, {}, {})
             continue
         print(f"    {len(mutations)} mutations brutes telechargees")
 
-        print(f"    Telechargement des donnees cliniques...")
+        print("    Telechargement des donnees cliniques...")
         clinical_data = fetch_clinical_data(study_id)
         print(f"    {len(clinical_data)} entrees cliniques")
 
@@ -863,12 +862,12 @@ def download_all():
         print(f"    Telechargement des mutations ({len(GENE_ENTREZ_IDS)} genes)...")
         mutations = fetch_mutations_for_study(study_id, GENE_ENTREZ_IDS)
         if not mutations:
-            print(f"    Aucune mutation trouvee, passe")
+            print("    Aucune mutation trouvee, passe")
             save_study_checkpoint(study_id, {}, {})
             continue
         print(f"    {len(mutations)} mutations brutes telechargees")
 
-        print(f"    Telechargement des donnees cliniques...")
+        print("    Telechargement des donnees cliniques...")
         clinical_data = fetch_clinical_data(study_id)
         print(f"    {len(clinical_data)} entrees cliniques")
 
@@ -899,12 +898,12 @@ def download_all():
         print(f"    Telechargement des mutations ({len(GENE_ENTREZ_IDS)} genes)...")
         mutations = fetch_mutations_for_study(study_id, GENE_ENTREZ_IDS)
         if not mutations:
-            print(f"    Aucune mutation trouvee ou etude indisponible, passe")
+            print("    Aucune mutation trouvee ou etude indisponible, passe")
             save_study_checkpoint(study_id, {}, {})
             continue
         print(f"    {len(mutations)} mutations brutes telechargees")
 
-        print(f"    Telechargement des donnees cliniques...")
+        print("    Telechargement des donnees cliniques...")
         clinical_data = fetch_clinical_data(study_id)
         print(f"    {len(clinical_data)} entrees cliniques")
 
@@ -1006,11 +1005,11 @@ def download_all():
     print(f"\n  Repartition par cancer ({len(cancer_counts)} types):")
     for cancer, count in sorted(cancer_counts.items(), key=lambda x: -x[1]):
         print(f"    {cancer}: {count}")
-    print(f"\n  Repartition par severite:")
+    print("\n  Repartition par severite:")
     for sev, count in sorted(severity_counts.items()):
         print(f"    {sev}: {count}")
-    print(f"\n  Pour lancer l'analyse:")
-    print(f"    python main.py --mode real")
+    print("\n  Pour lancer l'analyse:")
+    print("    python main.py --mode real")
     print("=" * 60)
 
 

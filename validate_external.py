@@ -16,23 +16,25 @@ qui n'ont pas servi à l'entraînement.
 """
 
 import os
-import sys
 import json
 import time
 import logging
 
-logger = logging.getLogger("validate_external")
-logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
-
-from config import DATA_DIR, CANCER_GENES, CANCER_LABEL_MAPPING
+from config import DATA_DIR
 
 # Réutilise le pipeline de téléchargement existant
 from download_real_data import (
-    api_get, api_post, fetch_mutations_for_study, fetch_clinical_data,
-    _process_study_patients, process_mutations_for_patient,
-    build_patient_metadata, generate_reference_for_real_data,
-    GENE_ENTREZ_IDS, ENTREZ_TO_GENE, REAL_DATA_DIR,
+    api_get,
+    fetch_mutations_for_study,
+    fetch_clinical_data,
+    _process_study_patients,
+    process_mutations_for_patient,
+    build_patient_metadata,
+    GENE_ENTREZ_IDS,
 )
+
+logger = logging.getLogger("validate_external")
+logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 
 # ── Études de validation (non utilisées en entraînement) ─────────────────────
 # Ces études ne font partie ni de TCGA_STUDIES, ni de MIXED_COHORT_STUDIES,
@@ -84,7 +86,7 @@ def download_validation_data(force=False):
 
         mutations = fetch_mutations_for_study(study_id, GENE_ENTREZ_IDS)
         if not mutations:
-            print(f"    Étude indisponible ou aucune mutation, passe")
+            print("    Étude indisponible ou aucune mutation, passe")
             continue
         print(f"    {len(mutations)} mutations")
 
@@ -290,8 +292,7 @@ def run_external_validation(force_download=False, verbose=True):
         return None
 
     # Calcul des métriques
-    import numpy as np
-    from collections import defaultdict, Counter
+    from collections import defaultdict
     from sklearn.metrics import (
         accuracy_score, balanced_accuracy_score,
         f1_score, classification_report,
@@ -318,8 +319,6 @@ def run_external_validation(force_download=False, verbose=True):
         per_cancer[p["actual_cancer"]]["n"] += 1
         if p["correct"]:
             per_cancer[p["actual_cancer"]]["ok"] += 1
-
-    cancer_dist = Counter(y_true)
 
     # ── Rapport ──
     sep = "=" * 64

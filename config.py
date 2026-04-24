@@ -475,7 +475,6 @@ CANCER_LABEL_MAPPING = {
     "thymoma": "Thymome",
     "thym": "Thymome",
     # Cholangiocarcinome → Foie (déjà mappé mais variante supplémentaire)
-    "cholangiocarcinoma": "Foie",
     "bile duct": "Foie",
     # Mappings supplémentaires MSK-IMPACT
     "non-small cell lung cancer": "Poumon",
@@ -483,12 +482,10 @@ CANCER_LABEL_MAPPING = {
     "nsclc": "Poumon",
     "colorectal cancer": "Colon",
     "crc": "Colon",
-    "breast cancer": "Sein",
     "invasive breast carcinoma": "Sein",
     "renal cell carcinoma": "Rein",
     "kidney renal papillary cell carcinoma": "Rein",
     "kidney chromophobe": "Rein",
-    "hepatocellular carcinoma": "Foie",
     "cholangiocarcinoma": "Foie",
     "intrahepatic cholangiocarcinoma": "Foie",
     "acute myeloid leukemia": "Leucemie",

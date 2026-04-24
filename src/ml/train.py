@@ -11,7 +11,7 @@ import os
 import json
 import time
 import logging
-from collections import Counter, defaultdict
+from collections import Counter
 
 import numpy as np
 from sklearn.preprocessing import LabelEncoder
@@ -31,13 +31,11 @@ from allele_analyzer import (
     score_patient_against_signatures,
     build_allele_matrix,
     format_signatures_summary,
-    compute_allele_discriminant_table,
     get_top_discriminant_alleles_per_cancer,
 )
 from correlator import compute_gene_specificity_table
 
 from src.ml.features import (
-    FEATURE_NAMES,
     extract_features,
     _add_allele_score_features,
     compute_global_age_median,
@@ -95,7 +93,8 @@ def train_and_evaluate(X, y, feature_names, labeled_results=None, allele_params=
     return res
 
 
-def run_ml_pipeline(all_results, generate_plots=True, verbose=True, use_cache=False):
+def run_ml_pipeline(all_results, generate_plots=True, verbose=True, use_cache=False,
+                    ensemble_strategy=None):
     """Pipeline ML complet :
     1. Signatures d'allèles (patients connus)
     2. Features pour TOUS les patients + allele scores
@@ -184,7 +183,7 @@ def run_ml_pipeline(all_results, generate_plots=True, verbose=True, use_cache=Fa
         print("    WARN: pas assez de patients labellises (<4) — ML impossible")
         return None
     if len(set(y_all[labeled_mask])) < 2:
-        print(f"    WARN: une seule classe — ML impossible")
+        print("    WARN: une seule classe — ML impossible")
         return None
 
     # -- 3. Sectorisation (ALL patients) --
@@ -218,10 +217,14 @@ def run_ml_pipeline(all_results, generate_plots=True, verbose=True, use_cache=Fa
 
     # -- 4. Entraînement sur patients labellisés --──
     if verbose:
-        print(f"\n  [4/7] Entrainement + tuning ({n_labeled} patients labellises)...")
+        if ensemble_strategy:
+            print(f"\n  [4/7] Entrainement — ensemble='{ensemble_strategy}' ({n_labeled} patients labellises)...")
+        else:
+            print(f"\n  [4/7] Entrainement + tuning ({n_labeled} patients labellises)...")
 
     _cached = load_saved_model() if use_cache else None
-    if _cached is not None:
+    if _cached is not None and not ensemble_strategy:
+        # Cache uniquement pour le mode "best_model" historique.
         if verbose:
             print(f"    Cache hit : modele '{_cached['best_model_name']}' "
                   f"(f1_macro={_cached['f1_macro']:.4f}) — entraînement ignoré.")
@@ -268,8 +271,7 @@ def run_ml_pipeline(all_results, generate_plots=True, verbose=True, use_cache=Fa
             print(f"    VarianceThreshold : {n_removed} features supprimées "
                   f"({X_train_base.shape[1]} conservées)")
 
-        labeled_results_list = [r for r in all_results
-                                 if r.get("metadata", {}).get("cancer_type")]
+        labeled_results_list = [r for r in all_results if r.get("metadata", {}).get("cancer_type")]
         allele_params = dict(
             min_patients=ALLELE_MIN_PATIENTS,
             min_frequency=ALLELE_MIN_FREQUENCY,
@@ -280,28 +282,117 @@ def run_ml_pipeline(all_results, generate_plots=True, verbose=True, use_cache=Fa
         y_train = y_all[labeled_mask]
 
         group_ids_train = None
-        study_ids_raw = [
-            r.get("metadata", {}).get("study_id", "")
-            for r in labeled_results_list
-        ]
+        study_ids_raw = [r.get("metadata", {}).get("study_id", "") for r in labeled_results_list]
         if any(s for s in study_ids_raw):
             group_ids_train = study_ids_raw
             n_groups = len(set(group_ids_train))
             if verbose:
-                print(f"    GroupKFold activé : {n_groups} cohortes distinctes "
-                      f"(évite le biais de cohorte)")
+                print(f"    GroupKFold activé : {n_groups} cohortes distinctes (évite le biais de cohorte)")
         else:
             if verbose:
                 print("    GroupKFold non disponible (study_id absent) — StratifiedKFold")
 
-        ml = train_and_evaluate(
-            X_train_base, y_train, base_feature_names,
-            labeled_results=labeled_results_list,
-            allele_params=allele_params,
-            verbose=verbose,
-            group_ids=group_ids_train,
-        )
-        ml["_variance_threshold"] = vt
+        if ensemble_strategy:
+            from sklearn.preprocessing import LabelEncoder
+            from sklearn.base import clone
+            from sklearn.pipeline import Pipeline
+
+            from src.ml.ensemble import train_ensemble
+            from ml_model_selection import get_model_specs
+
+            le = LabelEncoder()
+            y_enc = le.fit_transform(y_train)
+            classes = list(le.classes_)
+
+            # Réduit le zoo : on garde 2-3 familles max.
+            specs_all = get_model_specs(random_state=42)
+            keep = ["Logistic Regression", "LightGBM", "Random Forest"]
+            specs = {k: v for k, v in specs_all.items() if k in keep}
+            if "LightGBM" not in specs:
+                # LightGBM optionnel : si absent, on garde 2 modèles.
+                keep = ["Logistic Regression", "Random Forest", "Gradient Boosting"]
+                specs = {k: v for k, v in specs_all.items() if k in keep}
+
+            # Les estimators doivent être compatibles avec les features finales.
+            # On entraîne sur X_train (features base + allele-score), donc on wrappe
+            # les estimators dans un Pipeline("model", est) quand nécessaire.
+            model_specs = {}
+            for name, spec in specs.items():
+                est = clone(spec["estimator"])
+                if isinstance(est, Pipeline):
+                    model_specs[name] = {"estimator": est}
+                else:
+                    model_specs[name] = {"estimator": Pipeline([( "model", est)])}
+
+            # IMPORTANT: entraîner l'ensemble sur les mêmes features que l'inférence.
+            # On applique d'abord VarianceThreshold sur les features de base,
+            # puis on ajoute les features allele_score (qui n'existent pas au
+            # moment du fit vt). L'inférence suit le même ordre.
+            X_train = X_train_base
+            fnames_train = list(base_feature_names)
+
+            X_train, fnames_train = _add_allele_score_features(
+                X_train, labeled_results_list, signatures, fnames_train
+            )
+
+            ensemble_artifact, ensemble_metrics = train_ensemble(
+                X=X_train,
+                y_enc=y_enc,
+                class_names=classes,
+                feature_names=fnames_train,
+                model_specs=model_specs,
+                strategy=ensemble_strategy,
+                n_splits=5,
+                seeds=[42, 43, 44],
+                group_ids=group_ids_train,
+                verbose=verbose,
+            )
+
+            # Emballe en structure "ml" compatible avec le reste du pipeline.
+            ensemble_artifact.label_encoder = le
+            ensemble_artifact.variance_threshold = vt
+            ml = dict(
+                class_names=classes,
+                n_samples=int(labeled_mask.sum()),
+                n_features=len(fnames_train),
+                feature_names=fnames_train,
+                class_distribution=dict(Counter(y_train)),
+                best_model_name=f"Ensemble[{ensemble_strategy}]",
+                best_f1_macro=float(ensemble_metrics["f1_macro"]),
+                best_model_balanced_acc=None,
+                _best_model=ensemble_artifact,
+                _variance_threshold=vt,
+                _signatures=signatures,
+                _label_encoder=le,
+                training_time_seconds=0.0,
+                models={f"Ensemble[{ensemble_strategy}]": {
+                    "accuracy": ensemble_metrics["accuracy"],
+                    "balanced_accuracy": ensemble_metrics["balanced_accuracy"],
+                    "f1_macro": ensemble_metrics["f1_macro"],
+                    "f1_weighted": ensemble_metrics["f1_weighted"],
+                    "precision_weighted": 0.0,
+                    "recall_weighted": 0.0,
+                    "roc_auc_weighted": None,
+                    "top3_accuracy": None,
+                    "per_class_metrics": {},
+                    "feature_importance": {},
+                    "confusion_matrix": ensemble_metrics.get("confusion_matrix", []),
+                    "best_params": {},
+                    "overfit_gap_f1": 0.0,
+                    "overfit_gap_balanced": 0.0,
+                    "_model": ensemble_artifact,
+                }},
+                ensemble_metrics=ensemble_metrics,
+            )
+        else:
+            ml = train_and_evaluate(
+                X_train_base, y_train, base_feature_names,
+                labeled_results=labeled_results_list,
+                allele_params=allele_params,
+                verbose=verbose,
+                group_ids=group_ids_train,
+            )
+            ml["_variance_threshold"] = vt
 
     ml["sectorization"] = sectorization
     ml["_signatures"] = signatures
@@ -353,7 +444,7 @@ def run_ml_pipeline(all_results, generate_plots=True, verbose=True, use_cache=Fa
     plot_paths = []
     if generate_plots:
         if verbose:
-            print(f"\n  [6/7] Graphiques...")
+            print("\n  [6/7] Graphiques...")
         plot_paths = generate_ml_plots(ml, predictions_known)
         if verbose:
             print(f"    {len(plot_paths)} graphiques generes")
@@ -516,7 +607,7 @@ def _report_text(ml, predictions_known, predictions_unknown=None, signatures=Non
         L.append(f"\n  Score de resubstitution (entrainement, BIAISE) : "
                  f"{ok}/{len(predictions_known)} correctes "
                  f"({ok / len(predictions_known) * 100:.1f}%)")
-        L.append(f"  [Utiliser le score de validation croisee (CV) comme metrique principale]")
+        L.append("  [Utiliser le score de validation croisee (CV) comme metrique principale]")
         L.append(f"  Confiance moy : "
                  f"{np.mean([p['confidence'] for p in predictions_known]):.3f}")
 

@@ -4,7 +4,6 @@ import sys
 import os
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-import pytest
 from config import (
     CANCER_GENES, CANCER_TYPES, GENE_ROLES, CANCER_LABEL_MAPPING,
     MUTATION_TYPES, IMPACT_LEVELS, NUCLEOTIDES,

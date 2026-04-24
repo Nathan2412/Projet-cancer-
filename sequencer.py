@@ -113,8 +113,8 @@ def compute_read_length_distribution(reads):
         return {"mean": 0, "min": 0, "max": 0, "distribution": {}}
 
     distribution = defaultdict(int)
-    for l in lengths:
-        distribution[l] += 1
+    for length in lengths:
+        distribution[length] += 1
 
     return {
         "mean": round(statistics.mean(lengths), 1),
