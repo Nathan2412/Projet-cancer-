@@ -6,6 +6,23 @@ et d'alleles discriminants aident a reconnaitre le type tumoral d'un patient.
 Ce projet reste une preuve de concept de recherche. Il ne doit pas etre utilise
 comme outil de diagnostic ou de depistage medical.
 
+## Mise à jour — évolution du projet · 19 novembre 2026
+
+L’atlas somatique permet de rechercher un variant et de comparer les types de
+tumeurs dans lesquels il a été observé. Le dernier inventaire contient
+**84 catalogues et 76 496 libellés de variants protéiques** sur **50 gènes**.
+Les **136 096 inscriptions patient–catalogue** ne sont pas 136 096 personnes
+distinctes : un patient peut être présent dans plusieurs catalogues.
+
+Le classificateur a aussi été réentraîné, indépendamment de l’index Streamlit :
+**48 165 profils** d’entraînement, contre **29 554** avec MSK seul. Sur les mêmes
+**5 464 patients OrigiMed**, laissés hors entraînement, le **F1 macro passe de
+40,76 % à 41,90 %** (+1,14 point) pour les 11 types tumoraux étudiés. Le gain est
+modeste et hétérogène. Il ne démontre ni une performance clinique ni une capacité
+à anticiper un cancer.
+
+[Lire le rapport : méthode, résultats par classe et prochaines étapes](docs/EVOLUTION_PROJET.md).
+
 ## Objectif
 
 L'idee centrale est simple:
@@ -21,8 +38,9 @@ de genes connus ?"
 
 ## Sources de donnees
 
-Le pipeline s'appuie sur des donnees publiques issues de cBioPortal et de TCGA.
-Les etudes sont telechargees via l'API publique de cBioPortal.
+L’atlas utilise des données ouvertes de cBioPortal (dont TCGA et MSK), du
+[NCI Genomic Data Commons](https://gdc.cancer.gov/access-data/gdc-data-portal) et
+de l’[archive ICGC 25K](https://docs.icgc-argo.org/docs/data-access/icgc-25k-data).
 
 - cBioPortal: https://www.cbioportal.org/
 - cBioPortal API: https://www.cbioportal.org/api/swagger-ui/index.html
@@ -80,10 +98,61 @@ sont comptés une fois par combinaison de variant
 et de type tumoral. `python allele_atlas.py --source local` crée une deuxième source
 depuis les dossiers locaux ; les sources restent séparées, car elles peuvent se chevaucher.
 
+### Étendre et comparer les cohortes
+
+`python import_public_atlas.py all` importe les cohortes ouvertes sélectionnées,
+dont OrigiMed (Chine), TCGA PanCancer Atlas, PCAWG, METABRIC et plusieurs études
+spécialisées. Pour n’importer que certaines sources : `python import_public_atlas.py origimed tcga metabric`.
+Chaque catalogue conserve les effectifs propres à la source et sa provenance ;
+**Comparer les cohortes** dans Streamlit n’additionne pas les patients.
+Un même patient peut apparaître dans des cohortes différentes (notamment TCGA/PCAWG
+ou les cohortes locales). Les appels explicitement non somatiques sont exclus ;
+certaines sources tumorales ne renseignent pas le statut, ce qui est indiqué.
+
+### Autres sources sans compte
+
+- `python import_gdc_atlas.py all` importe les projets NCI sélectionnés, dont
+  CCDI-MCI, CPTAC, MP2PRT, ALCHEMIST et CoMMpass. L’index croise les cas liés à un
+  fichier MAF somatique ouvert avec les occurrences publiques sur les 50 gènes.
+- `python import_msk_legacy.py` ajoute le complément de MSK-CHORD, MetTropism et
+  MSK-IMPACT 2017 dont les identifiants patients ne figurent pas dans MSK-50K.
+  Les identifiants servent uniquement à la déduplication en mémoire.
+- `python import_icgc_atlas.py all` importe une sélection de l’archive ICGC 25K
+  (release 28). Les fragments sont lus sans conserver les identifiants patients
+  sur disque. Le catalogue retient les substitutions protéiques annotées sur un
+  transcript canonique du panel ; il ne représente pas la totalité de l’archive.
+- Ces catalogues n’utilisent ni Synapse ni compte. Ils peuvent recouper certaines
+  études déjà présentes. L’interface affiche les effectifs par catalogue, pas
+  un nombre global de patients uniques.
+
+L’onglet **Cohorte et modèles → Test externe** peut être reconstruit par
+`python retrain_multicohort.py --jobs 8`. Il recharge les profils individuels
+en mémoire, sans les enregistrer, puis compare une régression logistique MSK seule
+et une régression élargie sur les mêmes patients OrigiMed. Les entrées sont des
+présences de variants protéiques parmi 50 gènes, et les 11 classes sont harmonisées.
+Les patients aux étiquettes discordantes, les classes hors périmètre et les
+compilations aux recoupements connus non résolus ne sont pas utilisés.
+Les patients sont dédupliqués dans un même réseau d’identifiants, pas entre toutes
+les sources. Ce protocole mesure le transfert après diagnostic, pas le dépistage.
+`python validate_public_atlas.py` reste disponible pour reproduire l’ancien test.
+
+[AACR Project GENIE](https://aacrprojectgenie.org/data/) donne accès, via inscription
+et acceptation des conditions, à plus de 242 000 patients (version 20.0-public).
+**GENIE n’est pas inclus dans le run publié.** Une fois les fichiers de la même
+version obtenus officiellement, importez-les en local :
+
+```powershell
+python import_genie_atlas.py --release 20.0-public --clinical data_clinical_sample.txt --mutations data_mutations_extended.txt
+```
+
+Les fichiers peuvent être compressés en `.gz`. Ne les placez pas dans le dépôt Git et
+ne publiez pas les catalogues dérivés sans vérifier les conditions de la source.
+
 Pour alimenter l’onglet **Cohorte et modèles**, utilisez
-`python main.py --mode real --quick --no-plots`. Ce run historique local reste distinct
-de l’index MSK : les scores ML ne sont pas recalculés sur MSK. Aucune requête externe
-ni aucun entraînement n’est déclenché lorsque l’écran Streamlit est ouvert.
+`python main.py --mode real --quick --no-plots` pour les sections **Cohorte**,
+**Modèles** et **Variants** de l’analyse historique. Le **Test externe** est
+indépendant et lit le rapport produit par le réentraînement multi-cohortes.
+Ouvrir Streamlit ne déclenche ni requête externe ni entraînement.
 
 Pour isoler un run des sorties historiques, définissez `$env:CANCER_OUTPUT_DIR`
 sur le même dossier avant de lancer le pipeline **et** Streamlit. Ce mode ne
@@ -153,8 +222,7 @@ pytest -q
 
 ## Prochaines ameliorations recommandees
 
-- ajouter une validation externe hors TCGA
-- enrichir le panel de genes ou passer a des features multi-omics
-- calibrer les probabilites de prediction
-- introduire des tests d'integration sur un mini dataset fixe
-- isoler encore davantage la config, la logique metier et le serving
+- Évaluer un modèle figé sur une nouvelle cohorte indépendante ; OrigiMed est déjà utilisé pour la comparaison actuelle.
+- Distinguer « gène non séquencé » de « variant non observé » et harmoniser les annotations entre centres.
+- Analyser les erreurs par classe et mesurer l’incertitude des écarts avec des intervalles de confiance.
+- Pour étudier le risque avant diagnostic, définir une tâche et un jeu longitudinal séparés.

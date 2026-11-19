@@ -48,8 +48,9 @@ class AlleleAtlas:
         if gene and protein:
             self.carriers[f"{gene.upper()} {protein}"][cancer].add(subject)
 
-    def payload(self, *, source, source_url=None, sequenced_samples=None, missing_labels=0, is_limited=False):
-        return {
+    def payload(self, *, source, source_url=None, sequenced_samples=None, missing_labels=0,
+                is_limited=False, provenance=None):
+        payload = {
             "schema_version": SCHEMA_VERSION,
             "source": source,
             "source_url": source_url,
@@ -66,6 +67,9 @@ class AlleleAtlas:
                 for name, groups in sorted(self.carriers.items())
             },
         }
+        if provenance is not None:
+            payload["provenance"] = provenance
+        return payload
 
     def export(self, path, **kwargs):
         return write_atlas(path, self.payload(**kwargs))
