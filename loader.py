@@ -289,19 +289,17 @@ def load_patient_data_real(patient_id):
 
     data = {
         "patient_id": patient_id,
-        "reads": {},  # Vide - pas de FASTQ pour les donnees reelles
+        "reads": {},
         "mutations": [],
         "metadata": {}
     }
 
     meta_file = os.path.join(patient_dir, "metadata.json")
-    if os.path.exists(meta_file):
-        with open(meta_file) as f:
-            data["metadata"] = json.load(f)
+    with open(meta_file, encoding="utf-8") as f:
+        data["metadata"] = json.load(f)
 
     mut_file = os.path.join(patient_dir, "detected_mutations.json")
-    if os.path.exists(mut_file):
-        with open(mut_file) as f:
-            data["mutations"] = json.load(f)
+    with open(mut_file, encoding="utf-8") as f:
+        data["mutations"] = json.load(f)
 
     return data

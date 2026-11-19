@@ -1,0 +1,38 @@
+body h1, body h2, body h3 { text-wrap: balance; }
+[data-testid="stMetricValue"] { font-variant-numeric: tabular-nums; }
+.stMainBlockContainer { max-width: 73rem; padding-top: 2.5rem; }
+.atlas-banner {
+    background: radial-gradient(ellipse at 95% 12%, #4b466d 0%, transparent 56%), #172940;
+    border: 1px solid #394766;
+    border-radius: 1.1rem;
+    color: #f4f7fc;
+    padding: clamp(1.2rem, 3vw, 1.7rem);
+}
+.atlas-banner h1 {
+    color: #fff;
+    font-family: Georgia, serif;
+    font-size: clamp(2rem, 5vw, 3.25rem);
+    font-weight: 400;
+    line-height: 1.05;
+    margin: .3rem 0 .6rem;
+    padding: 0;
+}
+.atlas-banner p { color: #daebf2; margin: 0 0 .6rem; }
+.atlas-banner .atlas-brand {
+    color: #92ead5;
+    font-size: .75rem;
+    font-weight: 750;
+    letter-spacing: .16em;
+}
+.atlas-brand span { margin: 0 .3em; }
+.atlas-note {
+    color: #ffe9b9;
+    display: inline-block;
+    font-size: .82rem;
+    margin-top: .25rem;
+}
+.st-key-variant_toolbar { background: #f1f5fb; border-radius: .6rem; }
+.st-key-variant_detail { background: #e9f6f2; border-radius: .6rem; }
+.st-key-variant_shortcuts button { color: #3e3373; border-color: #c9c2e6; background: #f2edf9; }
+.st-key-variant_shortcuts button:hover { color: #29204c; border-color: #6552ac; background: #e9e1f6; }
+.st-key-variant_toolbar button, .st-key-variant_shortcuts button { min-height: 2.5rem; }

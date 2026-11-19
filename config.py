@@ -2,7 +2,7 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR = os.path.join(BASE_DIR, "data")
-OUTPUT_DIR = os.path.join(BASE_DIR, "output")
+OUTPUT_DIR = os.path.abspath(os.environ.get("CANCER_OUTPUT_DIR") or os.path.join(BASE_DIR, "output"))
 REPORTS_DIR = os.path.join(OUTPUT_DIR, "reports")
 PLOTS_DIR = os.path.join(OUTPUT_DIR, "plots")
 

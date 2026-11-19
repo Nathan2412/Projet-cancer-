@@ -12,7 +12,7 @@ import shutil
 import time
 from collections import defaultdict
 
-from config import REPORTS_DIR, PLOTS_DIR, setup_directories
+from config import OUTPUT_DIR, REPORTS_DIR, PLOTS_DIR, setup_directories
 from loader import (
     load_reference,
     load_patient_data,
@@ -28,8 +28,6 @@ from mutations import (
     analyze_gene_mutations,
     classify_mutation_impact,
     compute_mutation_spectrum,
-    compute_mutation_density,
-    find_mutation_hotspots,
 )
 from annotator import annotate_gene_mutations
 from correlator import (
@@ -64,7 +62,7 @@ except ImportError:
         return iterable
 
 # ── Logging ──────────────────────────────────────────────────────────────────
-_LOG_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "output", "logs")
+_LOG_DIR = os.path.join(OUTPUT_DIR, "logs")
 
 logger = logging.getLogger("main")
 
@@ -170,8 +168,6 @@ def analyze_single_patient_real(patient_id, reference, known_db, verbose=True, p
 
     gene_analyses = {}
     all_annotations = []
-    coverage_data = {}
-    sequencing_results = {}
 
     for gene_name in reference:
         ref_seq = reference[gene_name]
@@ -180,71 +176,38 @@ def analyze_single_patient_real(patient_id, reference, known_db, verbose=True, p
         if verbose:
             print(f"  [{gene_name}] {len(gene_mutations)} mutations reelles...", end=" ")
 
-        # Construire le resultat d'analyse gene (compatible avec le pipeline)
-        # Classifier les mutations par type
-        snps = [m for m in gene_mutations if m.get("type") == "SNP"]
-        insertions = [m for m in gene_mutations if m.get("type") == "INS"]
-        deletions = [m for m in gene_mutations if m.get("type") == "DEL"]
-
-        # Ajouter impact si manquant
+        snps = []
+        insertions = 0
+        deletions = 0
+        impact_counts = defaultdict(int)
         for m in gene_mutations:
             if "impact" not in m:
                 m["impact"] = classify_mutation_impact(m)
-            if "frequency" not in m:
-                # VAF médiane typique TCGA (WES somatic calls, hétérozygote)
-                # Utilisée uniquement comme imputation si le champ est absent du MAF.
-                m["frequency"] = 0.35
-            if "depth" not in m:
-                m["depth"] = 100  # Couverture typique TCGA
-
-        # Spectrum mutationnel
-        spectrum = compute_mutation_spectrum(snps)
-        density = compute_mutation_density(gene_mutations, len(ref_seq))
-        hotspots = find_mutation_hotspots(gene_mutations)
-
-        impact_counts = defaultdict(int)
-        for m in gene_mutations:
             impact_counts[m.get("impact", "MODIFIER")] += 1
+            mutation_type = m.get("type")
+            if mutation_type == "SNP":
+                snps.append(m)
+            elif mutation_type == "INS":
+                insertions += 1
+            elif mutation_type == "DEL":
+                deletions += 1
 
         gene_analyses[gene_name] = {
             "gene": gene_name,
             "total_mutations": len(gene_mutations),
             "snps": len(snps),
-            "insertions": len(insertions),
-            "deletions": len(deletions),
+            "insertions": insertions,
+            "deletions": deletions,
             "mutations": gene_mutations,
-            "spectrum": spectrum,
-            "density": density,
-            "hotspots": hotspots,
+            "spectrum": compute_mutation_spectrum(snps) if snps else {},
             "impact_distribution": dict(impact_counts),
             "mutation_rate": round(len(gene_mutations) / max(len(ref_seq), 1) * 1000, 4),
             "reference_length": len(ref_seq)
         }
 
-        # Sequencing simulé (pas de FASTQ reels)
-        sequencing_results[gene_name] = {
-            "gene": gene_name,
-            "reference_length": len(ref_seq),
-            "quality": {"mean": 35, "median": 36, "min": 20, "max": 41,
-                        "std": 3.0, "total_reads": 0, "total_bases": 0},
-            "passed_reads": 0,
-            "failed_reads": 0,
-            "pass_rate": 100.0,
-            "gc_content": 0.45,
-            "mean_coverage": 100,  # Couverture typique TCGA WES
-            "low_coverage_regions": [],
-            "read_lengths": {"mean": 150, "min": 100, "max": 200, "distribution": {}},
-            "coverage_adequate": True,
-            "note": "Donnees TCGA - metriques de sequencage non disponibles"
-        }
-
-        coverage_data[gene_name] = []
-
-        # Annotation
-        annotated = annotate_gene_mutations(
-            gene_mutations, known_db, gene_name
-        )
-        all_annotations.append(annotated)
+        annotated = annotate_gene_mutations(gene_mutations, known_db, gene_name) if gene_mutations else []
+        if annotated:
+            all_annotations.append(annotated)
 
         if verbose:
             n_known = sum(1 for a in annotated if a.get("known"))
@@ -258,10 +221,10 @@ def analyze_single_patient_real(patient_id, reference, known_db, verbose=True, p
         "patient_id": patient_id,
         "metadata": metadata,
         "gene_analyses": gene_analyses,
-        "sequencing": sequencing_results,
+        "sequencing": {},
         "annotations": all_annotations,
         "risk_report": risk_report,
-        "coverage_data": coverage_data,
+        "coverage_data": {},
         "total_mutations_detected": risk_report.get("total_mutations_detected", 0),
         "risk_summary": risk_report.get("risk_summary", {}),
         "data_source": "TCGA_real"
@@ -408,11 +371,15 @@ def clean_previous_outputs():
 
 
 def run_real_data_analysis(generate_plots=True, verbose=True, n_jobs=1, use_cache=False,
-                        ensemble_strategy=None):
+                           ensemble_strategy=None, max_patients=None, quick=False):
     """
     Pipeline complet : telecharge si besoin, puis analyse tous les patients reels.
     """
-    start_time = time.time()
+    from concurrent.futures import ThreadPoolExecutor
+    from run_results import publish_run_summary
+
+    setup_directories()
+    start_time = time.perf_counter()
 
     print("=" * 60)
     print("  PIPELINE D'ANALYSE GENOMIQUE - DONNEES REELLES TCGA")
@@ -420,14 +387,14 @@ def run_real_data_analysis(generate_plots=True, verbose=True, n_jobs=1, use_cach
     print("=" * 60)
 
     # ── Telechargement automatique si donnees absentes ────────────────────────
-    patient_list_check = get_patient_list_real()
-    if not patient_list_check:
+    patient_list = get_patient_list_real()
+    if not patient_list:
         print("\n[PRE] Aucune donnee trouvee — telechargement automatique...")
         from download_real_data import download_all
         download_all()
-
-    print("\n[0/7] Nettoyage des anciens resultats...")
-    clean_previous_outputs()
+        patient_list = get_patient_list_real()
+    if not patient_list:
+        raise RuntimeError("Aucun patient disponible après le téléchargement.")
 
     print("\n[1/7] Chargement des references (donnees reelles)...")
     reference = load_reference_real()
@@ -442,55 +409,41 @@ def run_real_data_analysis(generate_plots=True, verbose=True, n_jobs=1, use_cach
             print(f"    {gene}: {n_hotspots} hotspots, {n_total} mutations TCGA")
 
     print("\n[2/7] Identification des patients reels...")
-    patient_list = get_patient_list_real()
-    if not patient_list:
-        print("  ERREUR: Echec du telechargement. Verifiez votre connexion.")
-        return []
-
+    patient_list = patient_list[:max_patients]
     print(f"  {len(patient_list)} patients a analyser")
 
-    print("\n[2b/7] Chargement de toutes les donnees patients en memoire...")
-
-    def _safe_load(pid):
-        try:
-            return pid, load_patient_data_real(pid)
-        except Exception:
-            return pid, {"patient_id": pid, "reads": {}, "mutations": [], "metadata": {}}
-
-    # I/O-bound (lecture de 2 JSON par patient) → threads + tqdm.
-    # On évite joblib/loky ici car le pickling des résultats coûte plus que le gain.
-    from concurrent.futures import ThreadPoolExecutor
-    max_workers = min(32, (os.cpu_count() or 4) * 4)
-    all_patient_data = {}
-    with ThreadPoolExecutor(max_workers=max_workers) as ex:
-        for pid, data in tqdm(
-            ex.map(_safe_load, patient_list),
-            total=len(patient_list), desc="  Chargement", unit="p"
-        ):
-            all_patient_data[pid] = data
-    print(f"  {len(all_patient_data)} patients charges en memoire")
-
     print("\n[3/7] Analyse individuelle des patients (donnees reelles)...")
-    if n_jobs != 1:
-        from joblib import Parallel, delayed
-        all_results = Parallel(n_jobs=n_jobs)(
-            delayed(analyze_single_patient_real)(
-                pid, reference, known_db, verbose=False,
-                patient_data=all_patient_data[pid]
-            )
-            for pid in tqdm(patient_list, desc="  Patients", unit="p")
-        )
-    else:
-        all_results = []
-        for pid in tqdm(patient_list, desc="  Patients", unit="p"):
-            result = analyze_single_patient_real(
-                pid, reference, known_db, verbose=False,
-                patient_data=all_patient_data[pid]
-            )
-            all_results.append(result)
+    workers = min(8, os.cpu_count() or 1) if n_jobs == -1 else n_jobs
+    all_results = []
+    with ThreadPoolExecutor(max_workers=workers) as pool:
+        batches = tqdm(range(0, len(patient_list), 128), desc="  Lots", disable=not verbose)
+        for start in batches:
+            batch = patient_list[start:start + 128]
+            loaded = map(load_patient_data_real, batch) if workers == 1 else pool.map(load_patient_data_real, batch)
+            for patient_id, patient_data in zip(batch, loaded, strict=True):
+                all_results.append(analyze_single_patient_real(
+                    patient_id, reference, known_db, verbose=False, patient_data=patient_data,
+                ))
 
     print("\n\n[4/7] Analyse de cohorte...")
     mutation_matrix, genes, patients = build_cohort_mutation_matrix(all_results)
+    preparation_seconds = time.perf_counter() - start_time
+    print(f"  Préparation: {preparation_seconds:.1f}s", flush=True)
+
+    if quick:
+        from src.ml.exploration import evaluate_exploratory
+
+        print("\n[5/7] Validation exploratoire hors échantillon...", flush=True)
+        evaluation = evaluate_exploratory(all_results, genes, mutation_matrix, jobs=workers)
+        report_path = publish_run_summary(
+            all_results, genes, mutation_matrix, evaluation,
+            preparation_seconds=preparation_seconds,
+            elapsed_seconds=time.perf_counter() - start_time,
+            is_limited=max_patients is not None,
+        )
+        print(f"  Rapport agrégé: {report_path}", flush=True)
+        return all_results
+
     gene_correlations = compute_gene_cancer_correlation(all_results)
 
     print("\n[5/7] Preparation des donnees ML...")
@@ -524,7 +477,7 @@ def run_real_data_analysis(generate_plots=True, verbose=True, n_jobs=1, use_cach
     else:
         print("\n[7/7] Graphiques ignores (matplotlib non disponible)")
 
-    elapsed = time.time() - start_time
+    elapsed = time.perf_counter() - start_time
     print("\n" + "=" * 60)
     print(f"  ANALYSE TERMINEE en {elapsed:.1f}s")
     print("  Source: DONNEES REELLES (TCGA PanCancer Atlas)")
@@ -595,10 +548,20 @@ def parse_args():
         "--real-data", action="store_true",
         help="Alias de compatibilite pour --mode real."
     )
+    parser.add_argument(
+        "--quick", action="store_true",
+        help="Validation exploratoire sans tuning et export agrégé pour Streamlit (mode réel).",
+    )
 
     args = parser.parse_args()
     if args.real_data:
         args.mode = "real"
+    if args.max_patients is not None and args.max_patients < 1:
+        parser.error("--max-patients doit être strictement positif.")
+    if args.jobs != -1 and args.jobs < 1:
+        parser.error("--jobs doit être -1 ou un entier strictement positif.")
+    if args.quick and (args.mode != "real" or args.use_cache or args.ensemble):
+        parser.error("--quick requiert le mode réel et est incompatible avec --use-cache et --ensemble.")
     return args
 
 
@@ -614,6 +577,8 @@ if __name__ == "__main__":
             n_jobs=args.jobs,
             use_cache=args.use_cache,
             ensemble_strategy=args.ensemble,
+            max_patients=args.max_patients,
+            quick=args.quick,
         )
     else:
         run_cohort_analysis(

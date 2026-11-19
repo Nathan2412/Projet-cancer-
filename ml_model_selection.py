@@ -318,12 +318,24 @@ def evaluate_models_nested_cv(X, y_enc, class_names, feature_names,
 
         X_full = X
         feature_names_full = list(feature_names)
-        if labeled_results is not None and allele_params is not None:
+        use_signatures = labeled_results is not None and allele_params is not None
+        if use_signatures:
             from allele_analyzer import build_cancer_allele_signatures
             global_sigs = build_cancer_allele_signatures(labeled_results, **allele_params)
             X_full = _add_fold_allele_features(X, labeled_results, global_sigs)
             cancer_types_sorted = sorted(global_sigs.keys())
             feature_names_full += [f"allele_score_{ct}" for ct in cancer_types_sorted]
+
+        folds = []
+        for train_idx, test_idx in outer_cv.split(X, y_enc, group_ids):
+            X_train, X_test = X[train_idx], X[test_idx]
+            if use_signatures:
+                train_rows = [labeled_results[index] for index in train_idx]
+                test_rows = [labeled_results[index] for index in test_idx]
+                fold_signatures = build_cancer_allele_signatures(train_rows, **allele_params)
+                X_train = _add_fold_allele_features(X_train, train_rows, fold_signatures)
+                X_test = _add_fold_allele_features(X_test, test_rows, fold_signatures)
+            folds.append((train_idx, test_idx, X_train, X_test))
 
         # ── Budget CPU partagé entre les N modèles lancés en parallèle ──
         # Le but : les 5 modèles tournent simultanément pour que les plus rapides
@@ -348,24 +360,8 @@ def evaluate_models_nested_cv(X, y_enc, class_names, feature_names,
             fold_f1 = []
             fold_acc = []
 
-            split_args = (X, y_enc, group_ids) if group_ids is not None else (X, y_enc)
-            for train_idx, test_idx in outer_cv.split(*split_args):
-                X_train_base, X_test_base = X[train_idx], X[test_idx]
+            for train_idx, test_idx, X_train, X_test in folds:
                 y_train, y_test = y_enc[train_idx], y_enc[test_idx]
-
-                # Calcul des signatures d'alleles uniquement sur le fold d'entrainement
-                # pour eviter toute fuite de donnees vers le fold de test.
-                if labeled_results is not None and allele_params is not None:
-                    from allele_analyzer import build_cancer_allele_signatures
-                    train_results_fold = [labeled_results[i] for i in train_idx]
-                    test_results_fold = [labeled_results[i] for i in test_idx]
-                    fold_sigs = build_cancer_allele_signatures(
-                        train_results_fold, **allele_params
-                    )
-                    X_train = _add_fold_allele_features(X_train_base, train_results_fold, fold_sigs)
-                    X_test = _add_fold_allele_features(X_test_base, test_results_fold, fold_sigs)
-                else:
-                    X_train, X_test = X_train_base, X_test_base
 
                 # Sélection des hyperparamètres sur données BRUTES (sans SMOTE) pour
                 # éviter la fuite de données : si SMOTE est appliqué avant GridSearchCV,
@@ -449,7 +445,7 @@ def evaluate_models_nested_cv(X, y_enc, class_names, feature_names,
 
                 if hasattr(best_fold_model, "predict_proba"):
                     try:
-                        oof_prob[test_idx] = best_fold_model.predict_proba(X_test)
+                        oof_prob[np.ix_(test_idx, best_fold_model.classes_)] = best_fold_model.predict_proba(X_test)
                         has_prob = True
                     except Exception:
                         pass
@@ -472,15 +468,9 @@ def evaluate_models_nested_cv(X, y_enc, class_names, feature_names,
             if most_common_params:
                 pipe_full.set_params(**{f"model__{k}": v for k, v in most_common_params.items()})
 
-            # Refit final : on n'est plus dans HalvingGridSearchCV, donc plus
-            # de risque d'oversubscription. On rend tous les CPUs à l'estimateur
-            # (gros gain pour RF avec n_estimators=250 et pour LightGBM).
             inner_est = pipe_full.named_steps["model"] if isinstance(pipe_full, Pipeline) else pipe_full
             if hasattr(inner_est, "n_jobs"):
-                try:
-                    inner_est.set_params(n_jobs=-1)
-                except Exception:
-                    pass
+                inner_est.set_params(n_jobs=halving_n_jobs)
 
             best_model_full = _fit_with_optional_smote(
                 pipe_full, X_full, y_enc, random_state=random_state
